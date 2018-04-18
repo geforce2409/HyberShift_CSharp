@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HyberShift_CSharp.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,8 +24,8 @@ namespace HyberShift_CSharp
         public MainWindow()
         {
             InitializeComponent();
-
-            //test
+            SocketAPI socketAPI = SocketAPI.GetInstance();
+            socketAPI.Connect();
         }
     }
 }
