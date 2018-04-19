@@ -64,5 +64,16 @@ namespace HyberShift_CSharp.Utilities
                 Debug.Log("Client disconnected to server");
             });
         }
+
+        // delegate to create event
+        //public void AddEvent(string eventName, Action method)
+        //{
+        //    socket.On(eventName, method);
+        //}
+
+        //public void AddEvent(string eventName, Action<object> method)
+        //{
+        //    socket.On(eventName, method);
+        //}
     }
 }
