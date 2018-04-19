@@ -10,6 +10,13 @@ namespace HyberShift_CSharp.Model
     {
         UserInfo userinfo;
 
+        // constructor
+        public RegisterModel()
+        {
+            userinfo = new UserInfo();
+        }
+
+        // getter and setter
         public UserInfo Info
         {
             get { return userinfo; }
