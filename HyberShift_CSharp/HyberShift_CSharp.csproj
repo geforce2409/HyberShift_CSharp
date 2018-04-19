@@ -91,6 +91,8 @@
     <Compile Include="Utilities\Debug.cs" />
     <Compile Include="Utilities\SocketAPI.cs" />
     <Compile Include="ViewModel\FooViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="View\Foo.xaml.cs">
       <DependentUpon>Foo.xaml</DependentUpon>
     </Compile>

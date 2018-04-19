@@ -16,13 +16,13 @@ namespace HyberShift_CSharp.Model
         private string avatarRef;
 
         // getter and setter
-        private string UserId
+        public string UserId
         {
             get { return userid; }
             set { userid = value; }
         }
 
-        private string Email
+        public string Email
         {
             get { return email; }
             set { email = value; }
