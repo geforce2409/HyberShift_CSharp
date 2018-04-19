@@ -4,32 +4,51 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
-using HyberShift_CSharp.Model;  // import namespace of model
+using HyberShift_CSharp.Model;
 using Prism.Commands;
+using HyberShift_CSharp.Utilities;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    class LoginViewModel : INotifyPropertyChanged // this interface is for automatically change property on the view
+    class LoginViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private LoginModel obj;
+        private LoginModel loginModel;
         private DelegateCommand objCommand;
 
         // constructor
         public LoginViewModel()
         {
-            obj = new LoginModel();
-            objCommand = new DelegateCommand(obj.Authentication, obj.IsValidLogin);  // delegate to Method1 as Execute() and IsValidAttribute1 as CanExecute()
+            loginModel = new LoginModel();
+            objCommand = new DelegateCommand(this.Login);
         }
 
-        // For example, this method is invoked by a button from view
-        // and use Method1 of obj (from Model)
-        public void Authentication()
+        // getter and setter
+        public string TxtEmail
         {
-            obj.Authentication();
+            get { return loginModel.InputEmail.ToString(); }
+            set { loginModel.InputEmail = Convert.ToString(value); }
+        }
+
+        public string TxtPassword
+        {
+            get { return loginModel.InputPassword.ToString(); }
+            set { loginModel.InputPassword = Convert.ToString(value); }
+        }
+
+        public DelegateCommand Command
+        {
+            get { return objCommand; }
+            set { objCommand = value; }
+        }
+
+        public void Login()
+        {
+            loginModel.Authentication();
+
             if (PropertyChanged != null)
             {
-                PropertyChanged(this, new PropertyChangedEventArgs("label1"));  // this will automatically update label1
+                //PropertyChanged(this, new PropertyChangedEventArgs("attributeX"));  // this will automatically update attributeX
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HyberShift_CSharp.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,13 @@ namespace HyberShift_CSharp.Model
     {
         private string inputEmail;
         private string inputPassword;
+
+        // constructor
+        public LoginModel()
+        {
+            inputEmail = "";
+            inputPassword = "";
+        }
 
         // getter and setter
         public string InputEmail
@@ -55,6 +63,10 @@ namespace HyberShift_CSharp.Model
 
         public void Authentication()
         {
+
+            //test
+            Debug.Log("Button login clicked. " + "Email = " + InputEmail + " Password = " + InputPassword);
+
             ////Convert to JSONObject
             //JSONObject userjson = new JSONObject();
             //try
