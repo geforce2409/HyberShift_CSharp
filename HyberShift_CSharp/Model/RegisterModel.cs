@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using HyberShift_CSharp.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Quobject.SocketIoClientDotNet.Client;
 
 namespace HyberShift_CSharp.Model
 {
@@ -13,7 +14,7 @@ namespace HyberShift_CSharp.Model
     {
         UserInfo userinfo;
         private string confirmPassword;
-        SocketAPI socket = SocketAPI.GetInstance();
+        Socket socket = SocketAPI.GetInstance().GetSocket();
 
         // constructor
         public RegisterModel()
@@ -73,7 +74,7 @@ namespace HyberShift_CSharp.Model
                 userjson.Add("phone", userinfo.Phone);
                 userjson.Add("avatarstring", userinfo.AvatarRef);
 
-                socket.GetSocket().Emit("register", userjson);
+                socket.Emit("register", userjson);
 
             }
             catch (JsonException e)
