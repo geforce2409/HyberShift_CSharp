@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace HyberShift_CSharp.Model
 {
@@ -11,6 +13,8 @@ namespace HyberShift_CSharp.Model
     {
         private string inputEmail;
         private string inputPassword;
+
+        SocketAPI socket = SocketAPI.GetInstance();
 
         // constructor
         public LoginModel()
@@ -52,11 +56,11 @@ namespace HyberShift_CSharp.Model
 
         public bool IsValidLogin()
         {
-            //if (InputEmail.Trim().Length == 0)
-            //    return false;
+            if (InputEmail.Trim().Length == 0)
+                return false;
 
-            //if (inputPassword.Trim().Length == 0)
-            //    return false;
+            if (inputPassword.Trim().Length < 6)
+                return false;
 
             return true;
         }
@@ -67,21 +71,21 @@ namespace HyberShift_CSharp.Model
             //test
             Debug.Log("Button login clicked. " + "Email = " + InputEmail + " Password = " + InputPassword);
 
-            ////Convert to JSONObject
-            //JSONObject userjson = new JSONObject();
-            //try
-            //{
-            //    userjson.put("email", InputEmail);
-            //    userjson.put("password", inputPassword);
+            //Convert to JSONObject
+            JObject userjson = new JObject();
+            try
+            {
+                userjson.Add("email", InputEmail);
+                userjson.Add("password", inputPassword);
 
-            //}
-            //catch (JSONException e)
-            //{
-            //    // TODO Auto-generated catch block
-            //    e.printStackTrace();
-            //}
+            }
+            catch (JsonException e)
+            {
+                // TODO Auto-generated catch block
+                Debug.Log(e.ToString());
+            }
 
-            //socket.emit("authentication", userjson);
+            socket.GetSocket().Emit("authentication", userjson);
         }
     }
 }
