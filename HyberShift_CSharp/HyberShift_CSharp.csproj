@@ -101,9 +101,22 @@
     </ApplicationDefinition>
     <Compile Include="Domain\NotEmptyValidationRule.cs" />
     <Compile Include="Model\FooModel.cs" />
+    <Compile Include="DataObject\FriendInfo.cs" />
+    <Compile Include="DataObject\Journal.cs" />
+    <Compile Include="DataObject\ListFriendInfo.cs" />
+    <Compile Include="DataObject\ListJournal.cs" />
+    <Compile Include="DataObject\ListMessage.cs" />
+    <Compile Include="DataObject\ListNotitification.cs" />
+    <Compile Include="DataObject\ListOnline.cs" />
+    <Compile Include="DataObject\ListRoom.cs" />
     <Compile Include="Model\LoginModel.cs" />
+    <Compile Include="DataObject\Message.cs" />
+    <Compile Include="DataObject\Notification.cs" />
     <Compile Include="Model\RegisterModel.cs" />
+    <Compile Include="DataObject\Room.cs" />
+    <Compile Include="DataObject\SenderTyping.cs" />
     <Compile Include="Model\UserInfo.cs" />
+    <Compile Include="DataObject\UserOnline.cs" />
     <Compile Include="Utilities\Debug.cs" />
     <Compile Include="Utilities\MarginSetter.cs" />
     <Compile Include="Utilities\SocketAPI.cs" />
