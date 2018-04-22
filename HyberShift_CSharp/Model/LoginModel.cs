@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Quobject.SocketIoClientDotNet.Client;
 
 namespace HyberShift_CSharp.Model
 {
@@ -11,6 +14,8 @@ namespace HyberShift_CSharp.Model
     {
         private string inputEmail;
         private string inputPassword;
+
+        Socket socket = SocketAPI.GetInstance().GetSocket();
 
         // constructor
         public LoginModel()
@@ -52,11 +57,11 @@ namespace HyberShift_CSharp.Model
 
         public bool IsValidLogin()
         {
-            //if (InputEmail.Trim().Length == 0)
-            //    return false;
+            if (InputEmail.Trim().Length == 0)
+                return false;
 
-            //if (inputPassword.Trim().Length == 0)
-            //    return false;
+            if (inputPassword.Trim().Length < 6)
+                return false;
 
             return true;
         }
@@ -64,24 +69,49 @@ namespace HyberShift_CSharp.Model
         public void Authentication()
         {
 
-            //test
-            Debug.Log("Button login clicked. " + "Email = " + InputEmail + " Password = " + InputPassword);
+            //Convert to JSONObject
+            JObject userjson = new JObject();
+            try
+            {
+                userjson.Add("email", InputEmail);
+                userjson.Add("password", inputPassword);
 
-            ////Convert to JSONObject
-            //JSONObject userjson = new JSONObject();
-            //try
-            //{
-            //    userjson.put("email", InputEmail);
-            //    userjson.put("password", inputPassword);
+            }
+            catch (JsonException e)
+            {
+                Debug.Log(e.ToString());
+            }
 
-            //}
-            //catch (JSONException e)
-            //{
-            //    // TODO Auto-generated catch block
-            //    e.printStackTrace();
-            //}
+            socket.Emit("authentication", userjson);         
 
-            //socket.emit("authentication", userjson);
+            // [SAMPLE] Method for receiving event from socket server
+            HandleOnSocketEvent();
+        }
+
+        //[SAMPLE] Method handle "On" event from socket server
+        public void HandleOnSocketEvent()
+        {
+            socket.On("<event_name_1>", () => {
+                Debug.Log("Received response 1 of socket");
+
+                // NOTICE: SOME EVENT NEED TO BE RUNNED ON ANOTHER THREAD
+                // Start a new thread in java (old project):
+            //    Platform.runLater(new Runnable(){
+            //                @Override
+
+            //                public void run()
+            //                {
+            //                    ...
+            //                }
+            //    });
+
+                // In C# ???
+                
+            });
+
+            socket.On("<event_name_2>", () => {
+                Debug.Log("Received response 2 of socket");
+            });
         }
     }
 }

@@ -26,7 +26,8 @@ namespace HyberShift_CSharp
             InitializeComponent();
             SocketAPI socketAPI = SocketAPI.GetInstance();
             socketAPI.Connect();
-            
         }
+
+        
     }
 }

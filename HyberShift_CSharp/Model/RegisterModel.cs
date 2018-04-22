@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HyberShift_CSharp.Utilities;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Quobject.SocketIoClientDotNet.Client;
 
 namespace HyberShift_CSharp.Model
 {
     public class RegisterModel
     {
         UserInfo userinfo;
+        private string confirmPassword;
+        Socket socket = SocketAPI.GetInstance().GetSocket();
 
         // constructor
         public RegisterModel()
         {
             userinfo = new UserInfo();
+            confirmPassword = "";
         }
 
         // getter and setter
@@ -23,9 +30,15 @@ namespace HyberShift_CSharp.Model
             set { userinfo = value; }
         }
 
+        public String ConfirmPassword
+        {
+            get { return confirmPassword; }
+            set { confirmPassword = value; }
+        }
+
         public bool Register()
         {
-            if (userinfo.isValid())
+            if (IsValidRegister())
             {
                 // TO-DO: using socket to register with server here
 
@@ -41,51 +54,51 @@ namespace HyberShift_CSharp.Model
 
         public void PushData()
         {
-            //userinfo.Email = tfEmail.getText().toString();
-            //userinfo.Password = tfPassword.getText().toString();
-            //userinfo.Phone = tfPhoneNumber.getText().toString();
-            //userinfo.FullName = tfName.getText().toString();
-            //if (userinfo.AvatarRef != null)
-            //    userinfo.AvatarRef = ImageUtils.encodeFileToBase64Binary(userinfo.AvatarRef);
+            //Info.Email = tfEmail.getText().toString();
+            //Info.Password = tfPassword.getText().toString();
+            //Info.Phone = tfPhoneNumber.getText().toString();
+            //Info.FullName = tfName.getText().toString();
+            //if (Info.AvatarRef != null)
+            //    Info.AvatarRef = ImageUtils.encodeFileToBase64Binary(userinfo.AvatarRef);
             //else
-            //    userinfo.AvatarRef = "null";
+            //    Info.AvatarRef = "null";
 
-            ////Convert to JSONObject
-            //JSONObject userjson = new JSONObject();
-            //try
-            //{
-            //    //userjson.put("userid", userInfo.getUserid());
-            //    userjson.put("email", userinfo.Email);
-            //    userjson.put("fullname", userinfo.FullName);
-            //    userjson.put("password", userinfo.Password);
-            //    userjson.put("phone", userinfo.Phone);
-            //    userjson.put("avatarstring", userinfo.AvatarRef);
+            //Convert to JSONObject
+            JObject userjson = new JObject();
+            try
+            {
+                //userjson.put("userid", userInfo.getUserid());
+                userjson.Add("email", userinfo.Email);
+                userjson.Add("fullname", userinfo.FullName);
+                userjson.Add("password", userinfo.Password);
+                userjson.Add("phone", userinfo.Phone);
+                userjson.Add("avatarstring", userinfo.AvatarRef);
 
-            //    socket.emit("register", userjson);
+                socket.Emit("register", userjson);
 
-            //}
-            //catch (JSONException e)
-            //{
-            //    // TODO Auto-generated catch block
-            //    e.printStackTrace();
-            //}
+            }
+            catch (JsonException e)
+            {
+                // TODO Auto-generated catch block
+                Debug.Log(e.ToString());
+            }
         }
 
         public bool IsValidRegister()
         {
-            //Console.WriteLine(userinfo.Email.Trim().Length);
-            //if (userinfo.Email.Trim().Length == 0)
-            //    return false;
-            //if (userinfo.FullName.Trim().Length == 0)
-            //    return false;
-            //if (userinfo.Password.Trim().Length == 0)
-            //    return false;
-            //if (userinfo.ConfirmPassword.Trim().Length == 0)
-            //    return false;
-            //if (userinfo.Phone.Trim().Length == 0)
-            //    return false;
-            //if (userinfo.Password != userinfo.ConfirmPassword)
-            //    return false;
+            Console.WriteLine(userinfo.Email.Trim().Length);
+            if (userinfo.Email.Trim().Length == 0)
+                return false;
+            if (userinfo.FullName.Trim().Length == 0)
+                return false;
+            if (userinfo.Password.Trim().Length < 6)
+                return false;
+            if (ConfirmPassword.Trim().Length < 6)
+                return false;
+            if (userinfo.Phone.Trim().Length == 0)
+                return false;
+            if (userinfo.Password != ConfirmPassword)
+                return false;
             return true;
         }
     }
