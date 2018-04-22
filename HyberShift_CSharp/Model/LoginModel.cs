@@ -1,9 +1,4 @@
 ﻿using HyberShift_CSharp.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;
@@ -12,30 +7,19 @@ namespace HyberShift_CSharp.Model
 {
     public class LoginModel
     {
-        private string inputEmail;
-        private string inputPassword;
-
-        Socket socket = SocketAPI.GetInstance().GetSocket();
+        private readonly Socket socket = SocketAPI.GetInstance().GetSocket();
 
         // constructor
         public LoginModel()
         {
-            inputEmail = "";
-            inputPassword = "";
+            InputEmail = "";
+            InputPassword = "";
         }
 
         // getter and setter
-        public string InputEmail
-        {
-            get { return inputEmail; }
-            set { inputEmail = value; }
-        }
+        public string InputEmail { get; set; }
 
-        public string InputPassword
-        {
-            get { return inputPassword; }
-            set { inputPassword = value; }
-        }
+        public string InputPassword { get; set; }
 
         public bool LogIn()
         {
@@ -49,10 +33,8 @@ namespace HyberShift_CSharp.Model
             }
 
             // else return false
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public bool IsValidLogin()
@@ -60,7 +42,7 @@ namespace HyberShift_CSharp.Model
             if (InputEmail.Trim().Length == 0)
                 return false;
 
-            if (inputPassword.Trim().Length < 6)
+            if (InputPassword.Trim().Length < 6)
                 return false;
 
             return true;
@@ -68,21 +50,19 @@ namespace HyberShift_CSharp.Model
 
         public void Authentication()
         {
-
             //Convert to JSONObject
-            JObject userjson = new JObject();
+            var userjson = new JObject();
             try
             {
                 userjson.Add("email", InputEmail);
-                userjson.Add("password", inputPassword);
-
+                userjson.Add("password", InputPassword);
             }
             catch (JsonException e)
             {
                 Debug.Log(e.ToString());
             }
 
-            socket.Emit("authentication", userjson);         
+            socket.Emit("authentication", userjson);
 
             // [SAMPLE] Method for receiving event from socket server
             HandleOnSocketEvent();
@@ -91,27 +71,25 @@ namespace HyberShift_CSharp.Model
         //[SAMPLE] Method handle "On" event from socket server
         public void HandleOnSocketEvent()
         {
-            socket.On("<event_name_1>", () => {
+            socket.On("<event_name_1>", () =>
+            {
                 Debug.Log("Received response 1 of socket");
 
                 // NOTICE: SOME EVENT NEED TO BE RUNNED ON ANOTHER THREAD
                 // Start a new thread in java (old project):
-            //    Platform.runLater(new Runnable(){
-            //                @Override
+                //    Platform.runLater(new Runnable(){
+                //                @Override
 
-            //                public void run()
-            //                {
-            //                    ...
-            //                }
-            //    });
+                //                public void run()
+                //                {
+                //                    ...
+                //                }
+                //    });
 
                 // In C# ???
-                
             });
 
-            socket.On("<event_name_2>", () => {
-                Debug.Log("Received response 2 of socket");
-            });
+            socket.On("<event_name_2>", () => { Debug.Log("Received response 2 of socket"); });
         }
     }
 }

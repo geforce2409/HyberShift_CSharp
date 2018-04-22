@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace HyberShift_CSharp.Utilities
 {
-    class MarginSetter
+    internal class MarginSetter
     {
+        // Using a DependencyProperty as the backing store for Margin.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty MarginProperty =
+            DependencyProperty.RegisterAttached("Margin", typeof(Thickness), typeof(MarginSetter),
+                new UIPropertyMetadata(new Thickness(), MarginChangedCallback));
+
         public static Thickness GetMargin(DependencyObject obj)
         {
             return (Thickness) obj.GetValue(MarginProperty);
@@ -20,11 +20,6 @@ namespace HyberShift_CSharp.Utilities
             obj.SetValue(MarginProperty, value);
         }
 
-        // Using a DependencyProperty as the backing store for Margin.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty MarginProperty =
-            DependencyProperty.RegisterAttached("Margin", typeof(Thickness), typeof(MarginSetter),
-                new UIPropertyMetadata(new Thickness(), MarginChangedCallback));
-
         public static void MarginChangedCallback(object sender, DependencyPropertyChangedEventArgs e)
         {
             // Make sure this is put on a panel
@@ -33,10 +28,10 @@ namespace HyberShift_CSharp.Utilities
             if (panel == null) return;
 
 
-            panel.Loaded += new RoutedEventHandler(panel_Loaded);
+            panel.Loaded += panel_Loaded;
         }
 
-        static void panel_Loaded(object sender, RoutedEventArgs e)
+        private static void panel_Loaded(object sender, RoutedEventArgs e)
         {
             var panel = sender as Panel;
 
@@ -47,7 +42,7 @@ namespace HyberShift_CSharp.Utilities
 
                 if (fe == null) continue;
 
-                fe.Margin = MarginSetter.GetMargin(panel);
+                fe.Margin = GetMargin(panel);
             }
         }
     }
