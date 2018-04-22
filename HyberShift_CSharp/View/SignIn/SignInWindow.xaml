@@ -71,7 +71,7 @@
                     materialDesign:HintAssist.Hint="Email"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     <TextBox.Text>
-                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                             </Binding.ValidationRules>

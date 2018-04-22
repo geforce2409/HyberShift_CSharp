@@ -7,15 +7,13 @@ namespace HyberShift_CSharp.Model
 {
     public class LoginModel
     {
-        private readonly Socket socket = SocketAPI.GetInstance().GetSocket();
-
         private readonly Socket socket;
 
         // constructor
         public LoginModel()
         {
-            inputEmail = "";
-            inputPassword = "";
+            InputEmail = "";
+            InputPassword = "";
             socket = SocketAPI.GetInstance().GetSocket();
 
             //socket.On(Socket.EVENT_CONNECT, () => {
@@ -103,11 +101,6 @@ namespace HyberShift_CSharp.Model
                 //    });
 
                 // In C# ???
-<<<<<<<<< Temporary merge branch 1
-
-                
-=========
->>>>>>>>> Temporary merge branch 2
             });
 
             socket.On("<event_name_2>", () => { Debug.Log("Received response 2 of socket"); });
