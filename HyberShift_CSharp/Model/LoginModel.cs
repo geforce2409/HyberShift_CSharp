@@ -15,13 +15,27 @@ namespace HyberShift_CSharp.Model
         private string inputEmail;
         private string inputPassword;
 
-        Socket socket = SocketAPI.GetInstance().GetSocket();
+        Socket socket;
 
         // constructor
         public LoginModel()
         {
             inputEmail = "";
             inputPassword = "";
+            socket = SocketAPI.GetInstance().GetSocket();
+
+            //socket.On(Socket.EVENT_CONNECT, () => {
+            //    public void call(Object...args)
+            //    {
+            //        Console.WriteLine("Client connected to server");
+            //    }
+            //}).on(Socket.EVENT_DISCONNECT, () => {
+            //    public void call(Object...args)
+            //    {
+            //        Console.WriteLine("Client disconnected to server");
+            //    }
+            //    socket.Connect();
+            //});
         }
 
         // getter and setter
@@ -106,6 +120,7 @@ namespace HyberShift_CSharp.Model
             //    });
 
                 // In C# ???
+
                 
             });
 
