@@ -99,11 +99,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Domain\NotEmptyValidationRule.cs" />
     <Compile Include="Model\FooModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\RegisterModel.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="Utilities\Debug.cs" />
+    <Compile Include="Utilities\MarginSetter.cs" />
     <Compile Include="Utilities\SocketAPI.cs" />
     <Compile Include="ViewModel\FooViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
