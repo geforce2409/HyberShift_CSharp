@@ -1,16 +1,13 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
 
 namespace HyberShift_CSharp.Model
 {
     public class ListRoom
     {
         private static ListRoom instance;
-        private List<Room> list;
+        private readonly List<Room> list;
 
         public ListRoom()
         {
@@ -26,63 +23,59 @@ namespace HyberShift_CSharp.Model
 
         public List<Room> getListRoom()
         {
-            return this.list;
+            return list;
         }
 
         public ArrayList getListRoomName()
         {
-            ArrayList lst = new ArrayList();
-            for (int i = 0; i < list.Count(); i++)
-            {
-                lst.Add(list.ElementAt(i).Name);
-            }
+            var lst = new ArrayList();
+            for (var i = 0; i < list.Count(); i++) lst.Add(list.ElementAt(i).Name);
 
             return lst;
         }
 
-        public ArrayList getMembersFrom(String roomName)
+        public ArrayList getMembersFrom(string roomName)
         {
-            for (int i = 0; i < list.Count(); i++)
-            {
+            for (var i = 0; i < list.Count(); i++)
                 if (list.ElementAt(i).Name.Equals(roomName))
-                {
                     return list.ElementAt(i).Members;
-                }
-            }
 
             return new ArrayList();
         }
 
-        public Room getRoomFromName(String roomName)
+        public Room getRoomFromName(string roomName)
         {
-            for (int i = 0; i < list.Count(); i++)
+            for (var i = 0; i < list.Count(); i++)
             {
-                Room tempRoom = list.ElementAt(i);
+                var tempRoom = list.ElementAt(i);
                 if (tempRoom.Name.Equals(roomName))
                     return tempRoom;
             }
+
             return null;
         }
 
-        public Room getRoomById(String id)
+        public Room getRoomById(string id)
         {
-            for (int i = 0; i < list.Count(); i++)
+            for (var i = 0; i < list.Count(); i++)
             {
-                Room tempRoom = list.ElementAt(i);
+                var tempRoom = list.ElementAt(i);
                 if (tempRoom.ID.Equals(id))
                     return tempRoom;
             }
+
             return null;
         }
 
-        public int getIndexOfRoom(String id)
+        public int getIndexOfRoom(string id)
         {
-            for (int i = 0; i < list.Count(); i++)
+            for (var i = 0; i < list.Count(); i++)
             {
-                Room tempRoom = list.ElementAt(i);
+                var tempRoom = list.ElementAt(i);
                 if (tempRoom.ID.Equals(id))
                     return i;
             }
+
             return -1;
         }
 
@@ -97,11 +90,10 @@ namespace HyberShift_CSharp.Model
         public void addRoom(Room room)
         {
             //Kiểm tra trÃ¹ng trÆ°á»›c khi add
-            for (int i = 0; i < list.Count(); i++)
-            {
+            for (var i = 0; i < list.Count(); i++)
                 if (list.ElementAt(i).Name.Equals(room.Name))
                     return;
-            }
+
             list.Add(room);
         }
 
@@ -116,17 +108,11 @@ namespace HyberShift_CSharp.Model
         //    return FXCollections.observableArrayList(this.list);
         //}
 
-        public void setNewMessageAtRoom(String roomId, bool value)
+        public void setNewMessageAtRoom(string roomId, bool value)
         {
-            for (int i = 0; i < list.Count(); i++)
-            {
+            for (var i = 0; i < list.Count(); i++)
                 if (list.ElementAt(i).ID.Equals(roomId))
-                {
                     list.ElementAt(i).HasNewMessage.Equals(value);
-                }
-            }
         }
-
     }
-
 }

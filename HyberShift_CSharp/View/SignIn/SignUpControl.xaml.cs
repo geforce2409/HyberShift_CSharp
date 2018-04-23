@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HyberShift_CSharp.View
+namespace HyberShift_CSharp.View.SignIn
 {
     /// <summary>
-    /// Interaction logic for SignInWindow.xaml
+    /// Interaction logic for SignUpControl.xaml
     /// </summary>
-    public partial class SignInWindow : Window
+    public partial class SignUpControl : UserControl
     {
-        public SignInWindow()
+        public SignUpControl()
         {
             InitializeComponent();
         }

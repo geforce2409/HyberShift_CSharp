@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
 
 namespace HyberShift_CSharp.Model
 {
@@ -11,77 +7,42 @@ namespace HyberShift_CSharp.Model
 
     public class Journal
     {
-        private String id;
-        private String work;
-        private List<String> listPerformer;    // nhá»¯ng ngÆ°á»�i thá»±c hiá»‡n (name)
-        private bool isDone;                             // dành cho checkbox
-        private String startDay;
-        private String endDay;
-
         public Journal()
         {
-            listPerformer = new List<String>();
+            ListPerformer = new List<string>();
         }
 
-        public Journal(String id, String work, List<String> listPerformer, bool isDone, String startDay, String endDay)
+        public Journal(string id, string work, List<string> listPerformer, bool isDone, string startDay, string endDay)
         {
-            listPerformer = new List<String>();
-            this.id = id;
-            this.work = work;
-            this.listPerformer = listPerformer;
-            this.isDone = isDone;
-            this.startDay = startDay;
-            this.endDay = endDay;
+            listPerformer = new List<string>();
+            ID = id;
+            Work = work;
+            ListPerformer = listPerformer;
+            IsDone = isDone;
+            StartDay = startDay;
+            EndDay = endDay;
         }
 
-        public string ID
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        public string ID { get; set; }
 
-        public string Work
-        {
-            get { return work; }
-            set { work = value; }
-        }
+        public string Work { get; set; }
 
-        public List<String> ListPerformer
-        {
-            get { return listPerformer; }
-            set { listPerformer = value; }
-        }
+        public List<string> ListPerformer { get; set; }
 
-        public bool IsDone
-        {
-            get { return isDone; }
-            set { isDone = value; }
-        }
+        public bool IsDone { get; set; }
 
-        public string StartDay
-        {
-            get { return startDay; }
-            set { startDay = value; }
-        }
+        public string StartDay { get; set; }
 
-        public string EndDay
-        {
-            get { return endDay; }
-            set { endDay = value; }
-        }
+        public string EndDay { get; set; }
 
-        public void addPerformer(String name)
+        public void addPerformer(string name)
         {
-
             //check
-            for (int i = 0; i < listPerformer.Count(); i++)
-            {
-                if (listPerformer.ElementAt(i).Equals(name))
+            for (var i = 0; i < ListPerformer.Count(); i++)
+                if (ListPerformer.ElementAt(i).Equals(name))
                     return;
-            }
 
-            listPerformer.Add(name);
+            ListPerformer.Add(name);
         }
     }
-
 }

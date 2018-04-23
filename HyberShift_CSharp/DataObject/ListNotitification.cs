@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HyberShift_CSharp.Model
 {
     public class ListNotification
     {
-        private static ListNotification instance = null;
-        private List<Notification> list;
+        private static ListNotification instance;
+        private readonly List<Notification> list;
 
         public ListNotification()
         {
@@ -25,7 +22,7 @@ namespace HyberShift_CSharp.Model
 
         public List<Notification> getNotificationList()
         {
-            return this.list;
+            return list;
         }
 
         public void clear()
@@ -36,11 +33,9 @@ namespace HyberShift_CSharp.Model
         public void addNotification(Notification notification)
         {
             //check
-            for (int i = 0; i < list.Count(); i++)
-            {
+            for (var i = 0; i < list.Count(); i++)
                 if (notification.Equals(list.ElementAt(i)))
                     return;
-            }
 
             list.Add(notification);
         }
@@ -50,5 +45,4 @@ namespace HyberShift_CSharp.Model
         //    return FXCollections.observableArrayList(this.list);
         //}
     }
-
 }

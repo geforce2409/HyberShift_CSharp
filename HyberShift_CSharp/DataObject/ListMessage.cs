@@ -1,9 +1,6 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
 
 namespace HyberShift_CSharp.Model
 {
@@ -17,7 +14,7 @@ namespace HyberShift_CSharp.Model
             list = new List<Message>();
         }
 
-        static public ListMessage getInstance()
+        public static ListMessage getInstance()
         {
             if (instance == null)
                 instance = new ListMessage();
@@ -27,46 +24,45 @@ namespace HyberShift_CSharp.Model
         public void addMessage(Message msg)
         {
             //check exist
-            for (int i = 0; i < list.Count(); i++)
-            {
+            for (var i = 0; i < list.Count(); i++)
                 if (list.ElementAt(i).TimeStamp == msg.TimeStamp)
                     return;
-            }
+
             list.Add(msg);
         }
 
-        public void setListMessage(List<Message> list) { this.list = list; }
+        public void setListMessage(List<Message> list)
+        {
+            this.list = list;
+        }
 
-        public List<Message> getList() { return list; }
+        public List<Message> getList()
+        {
+            return list;
+        }
 
         public ArrayList getListMessage()
         {
-            ArrayList result = new ArrayList();
-            for (int i = 0; i < list.Count(); i++)
-            {
-                result.Add(list.ElementAt(i).MessageContent);
-            }
+            var result = new ArrayList();
+            for (var i = 0; i < list.Count(); i++) result.Add(list.ElementAt(i).MessageContent);
 
             return result;
         }
 
         public ArrayList getListSender()
         {
-            ArrayList result = new ArrayList();
-            for (int i = 0; i < list.Count(); i++)
-            {
-                result.Add(list.ElementAt(i).Sender);
-            }
+            var result = new ArrayList();
+            for (var i = 0; i < list.Count(); i++) result.Add(list.ElementAt(i).Sender);
 
             return result;
         }
 
 
-        public Message getMessageFromId(String id)
+        public Message getMessageFromId(string id)
         {
-            for (int i = 0; i < list.Count(); i++)
+            for (var i = 0; i < list.Count(); i++)
             {
-                Message temp = list.ElementAt(i);
+                var temp = list.ElementAt(i);
                 if (temp.ID.Equals(id))
                     return temp;
             }
@@ -74,11 +70,11 @@ namespace HyberShift_CSharp.Model
             return null;
         }
 
-        public Message getMessageFromSender(String sender)
+        public Message getMessageFromSender(string sender)
         {
-            for (int i = 0; i < list.Count(); i++)
+            for (var i = 0; i < list.Count(); i++)
             {
-                Message temp = list.ElementAt(i);
+                var temp = list.ElementAt(i);
                 if (temp.Sender.Equals(sender))
                     return temp;
             }
@@ -108,6 +104,5 @@ namespace HyberShift_CSharp.Model
         //    ObservableList<String> olist = FXCollections.observableArrayList(msgList);
         //    return olist;
         //}
-
     }
 }

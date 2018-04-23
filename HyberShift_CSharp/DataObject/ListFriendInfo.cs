@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
-using System.Collections.ObjectModel;
 
 namespace HyberShift_CSharp.Model
 {
     public class ListFriendInfo
     {
+        private static ListFriendInfo instance;
+        private readonly List<FriendInfo> list;
 
-        private static ListFriendInfo instance = null;
-        private List<FriendInfo> list;
+        public ListFriendInfo()
+        {
+            list = new List<FriendInfo>();
+        }
 
         public static ListFriendInfo getInstance()
         {
@@ -21,18 +20,11 @@ namespace HyberShift_CSharp.Model
             return instance;
         }
 
-        public ListFriendInfo()
-        {
-            list = new List<FriendInfo>();
-        }
-
         public void addFriendInfo(FriendInfo info)
         {
-            for (int i = 0; i < list.Count(); i++)
-            {
+            for (var i = 0; i < list.Count(); i++)
                 if (list.ElementAt(i).Equals(info))
                     return;
-            }
 
             list.Add(info);
         }

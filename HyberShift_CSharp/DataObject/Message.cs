@@ -1,61 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HyberShift_CSharp.Model
+﻿namespace HyberShift_CSharp.Model
 {
     public class Message
     {
-        private String id;
-        private String message;
-        private String sender;  // name of sender
-        private String imgstring;   //image string of sender (base64)
-        private int timestamp;
-
         public Message()
         {
-
         }
 
-        public Message(String id, String message, String sender, String imgstring, int timestamp)
+        public Message(string id, string message, string sender, string imgstring, int timestamp)
         {
-            this.id = id;
-            this.message = message;
-            this.sender = sender;
-            this.timestamp = timestamp;
-            this.imgstring = imgstring;
+            ID = id;
+            MessageContent = message;
+            Sender = sender;
+            TimeStamp = timestamp;
+            ImgString = imgstring;
         }
 
-        public string ID
-        {
-            get { return id; }
-            set { id = value; }
-        }
+        public string ID { get; set; }
 
-        public string MessageContent
-        {
-            get { return message; }
-            set { message = value; }
-        }
+        public string MessageContent { get; set; }
 
-        public string Sender
-        {
-            get { return sender; }
-            set { sender = value; }
-        }
+        public string Sender { get; set; }
 
-        public int TimeStamp
-        {
-            get { return timestamp; }
-            set { timestamp = value; }
-        }
+        public int TimeStamp { get; set; }
 
-        public string ImgString
-        {
-            get { return imgstring; }
-            set { imgstring = value; }
-        }
+        public string ImgString { get; set; }
     }
 }

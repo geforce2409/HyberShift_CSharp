@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Quobject.SocketIoClientDotNet.Client;
+﻿using Quobject.SocketIoClientDotNet.Client;
 
 // SocketAPI class
 // Created: TM Quan 19/4
@@ -41,7 +36,7 @@ namespace HyberShift_CSharp.Utilities
             {
                 socket.Connect();
                 isConnected = true;
-                this.EstablishConnection();
+                EstablishConnection();
             }
         }
 
@@ -56,13 +51,8 @@ namespace HyberShift_CSharp.Utilities
 
         public void EstablishConnection()
         {
-            socket.On(Socket.EVENT_CONNECT, () =>
-            {
-                Debug.Log("Client connected to server");
-            }).On(Socket.EVENT_DISCONNECT, () =>
-            {
-                Debug.Log("Client disconnected to server");
-            });
+            socket.On(Socket.EVENT_CONNECT, () => { Debug.Log("Client connected to server"); })
+                .On(Socket.EVENT_DISCONNECT, () => { Debug.Log("Client disconnected to server"); });
         }
 
         // delegate to create event

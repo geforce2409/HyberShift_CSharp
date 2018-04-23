@@ -1,16 +1,18 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
 
 namespace HyberShift_CSharp.Model
 {
     public class ListJournal
     {
-        private static ListJournal instance = null;
-        List<Journal> list;
+        private static ListJournal instance;
+        private readonly List<Journal> list;
+
+        public ListJournal()
+        {
+            list = new List<Journal>();
+        }
 
         public static ListJournal getInstance()
         {
@@ -20,11 +22,6 @@ namespace HyberShift_CSharp.Model
             return instance;
         }
 
-        public ListJournal()
-        {
-            list = new List<Journal>();
-        }
-
         public List<Journal> getList()
         {
             return list;
@@ -32,11 +29,8 @@ namespace HyberShift_CSharp.Model
 
         public ArrayList getListWork()
         {
-            ArrayList result = new ArrayList();
-            for (int i = 0; i < list.Count(); i++)
-            {
-                result.Add(list.ElementAt(i).Work);
-            }
+            var result = new ArrayList();
+            for (var i = 0; i < list.Count(); i++) result.Add(list.ElementAt(i).Work);
 
             return result;
         }
@@ -44,11 +38,9 @@ namespace HyberShift_CSharp.Model
         public void addJournal(Journal journal)
         {
             //check
-            for (int i = 0; i < list.Count(); i++)
-            {
+            for (var i = 0; i < list.Count(); i++)
                 if (list.ElementAt(i).Equals(journal))
                     return;
-            }
 
             list.Add(journal);
         }
@@ -65,5 +57,4 @@ namespace HyberShift_CSharp.Model
         //    return olist;
         //}
     }
-
 }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HyberShift_CSharp.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -12,29 +8,19 @@ namespace HyberShift_CSharp.Model
 {
     public class RegisterModel
     {
-        UserInfo userinfo;
-        private string confirmPassword;
-        Socket socket = SocketAPI.GetInstance().GetSocket();
+        private readonly Socket socket = SocketAPI.GetInstance().GetSocket();
 
         // constructor
         public RegisterModel()
         {
-            userinfo = new UserInfo();
-            confirmPassword = "";
+            Info = new UserInfo();
+            ConfirmPassword = "";
         }
 
         // getter and setter
-        public UserInfo Info
-        {
-            get { return userinfo; }
-            set { userinfo = value; }
-        }
+        public UserInfo Info { get; set; }
 
-        public String ConfirmPassword
-        {
-            get { return confirmPassword; }
-            set { confirmPassword = value; }
-        }
+        public string ConfirmPassword { get; set; }
 
         public bool Register()
         {
@@ -64,18 +50,17 @@ namespace HyberShift_CSharp.Model
             //    Info.AvatarRef = "null";
 
             //Convert to JSONObject
-            JObject userjson = new JObject();
+            var userjson = new JObject();
             try
             {
                 //userjson.put("userid", userInfo.getUserid());
-                userjson.Add("email", userinfo.Email);
-                userjson.Add("fullname", userinfo.FullName);
-                userjson.Add("password", userinfo.Password);
-                userjson.Add("phone", userinfo.Phone);
-                userjson.Add("avatarstring", userinfo.AvatarRef);
+                userjson.Add("email", Info.Email);
+                userjson.Add("fullname", Info.FullName);
+                userjson.Add("password", Info.Password);
+                userjson.Add("phone", Info.Phone);
+                userjson.Add("avatarstring", Info.AvatarRef);
 
                 socket.Emit("register", userjson);
-
             }
             catch (JsonException e)
             {
@@ -86,18 +71,18 @@ namespace HyberShift_CSharp.Model
 
         public bool IsValidRegister()
         {
-            Console.WriteLine(userinfo.Email.Trim().Length);
-            if (userinfo.Email.Trim().Length == 0)
+            Console.WriteLine(Info.Email.Trim().Length);
+            if (Info.Email.Trim().Length == 0)
                 return false;
-            if (userinfo.FullName.Trim().Length == 0)
+            if (Info.FullName.Trim().Length == 0)
                 return false;
-            if (userinfo.Password.Trim().Length < 6)
+            if (Info.Password.Trim().Length < 6)
                 return false;
             if (ConfirmPassword.Trim().Length < 6)
                 return false;
-            if (userinfo.Phone.Trim().Length == 0)
+            if (Info.Phone.Trim().Length == 0)
                 return false;
-            if (userinfo.Password != ConfirmPassword)
+            if (Info.Password != ConfirmPassword)
                 return false;
             return true;
         }

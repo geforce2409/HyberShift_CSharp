@@ -1,59 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections;
+﻿using System.Collections;
 
 namespace HyberShift_CSharp.Model
 {
     public class Room
     {
-        private String id;
-        private String name;
-        private ArrayList members;  //list of name of users in room
-        private bool hasNewMessage;
-
         public Room()
         {
-            members = new ArrayList();
+            Members = new ArrayList();
             //hasNewMessage = false;
         }
 
-        public Room(String id, String name, ArrayList members)
+        public Room(string id, string name, ArrayList members)
         {
-            this.id = id;
-            this.name = name;
-            this.members = members;
+            ID = id;
+            Name = name;
+            Members = members;
         }
 
-        public string ID
+        public string ID { get; set; }
+
+        public string Name { get; set; }
+
+        public ArrayList Members { get; set; }
+
+        public bool HasNewMessage { get; set; }
+
+        public void AddMemebers(string member)
         {
-            get { return id; }
-            set { id = value; }
+            Members.Add(member);
         }
 
-        public string Name
+        public int GetMemebersCount()
         {
-            get { return name; }
-            set { name = value; }
+            return Members.Count;
         }
-
-        public ArrayList Members
-        {
-            get { return members; }
-            set { members = value; }
-        }
-
-        public bool HasNewMessage
-        {
-            get { return hasNewMessage; }
-            set { hasNewMessage = value; }
-        }
-
-        public void AddMemebers(String member) { members.Add(member); }
-        public int GetMemebersCount() { return members.Count; }
-
     }
-
 }
