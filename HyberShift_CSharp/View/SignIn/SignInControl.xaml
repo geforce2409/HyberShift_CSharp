@@ -6,8 +6,8 @@
     <!--Grid.Column="1"
     Grid.Row="1"-->
     <materialDesign:Card
-            Background="White"
-            UniformCornerRadius="6" VerticalAlignment="Stretch">
+        Background="White"
+        UniformCornerRadius="6" VerticalAlignment="Stretch">
 
         <Grid>
             <Grid.ColumnDefinitions>
@@ -23,22 +23,22 @@
             </Grid.RowDefinitions>
 
             <materialDesign:Card Grid.Row="0" Grid.ColumnSpan="2" Height="40" Padding="8,12,0,0"
-                                     Background="White"
-                                     materialDesign:ShadowAssist.ShadowDepth="Depth1"
-                                     materialDesign:ShadowAssist.ShadowEdges="Bottom">
+                                 Background="White"
+                                 materialDesign:ShadowAssist.ShadowDepth="Depth1"
+                                 materialDesign:ShadowAssist.ShadowEdges="Bottom">
                 <Label
-                        FontWeight="Bold" Foreground="{DynamicResource HighlightBrush}" FontSize="9"
-                        HorizontalAlignment="Left" Content="ALREADY A MEMBER" />
+                    FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" FontSize="9"
+                    HorizontalAlignment="Left" Content="ALREADY A MEMBER" />
             </materialDesign:Card>
 
             <materialDesign:PackIcon
-                    Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="10,16,0,0"
-                    Kind="Account" Foreground="{Binding BorderBrush, ElementName=TxtEmail}" Padding="-1,0,0,0" />
+                Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="10,16,0,0"
+                Kind="Account" Foreground="{Binding BorderBrush, ElementName=TxtEmail}" Padding="-1,0,0,0" />
             <TextBox
-                    x:Name="TxtEmail"
-                    Grid.Row="1" Grid.Column="1" Margin="8,16,11,8"
-                    materialDesign:HintAssist.Hint="Email"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                x:Name="TxtEmail"
+                Grid.Row="1" Grid.Column="1" Margin="8,16,11,8"
+                materialDesign:HintAssist.Hint="Email"
+                Style="{StaticResource TxtBox}">
                 <TextBox.Text>
                     <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
@@ -49,13 +49,13 @@
             </TextBox>
 
             <materialDesign:PackIcon
-                    Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,14,0,0"
-                    Kind="Key" Foreground="{Binding ElementName=FloatingPasswordBox, Path=BorderBrush}" />
+                Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,14,0,0"
+                Kind="Key" Foreground="{Binding ElementName=FloatingPasswordBox, Path=BorderBrush}" />
             <PasswordBox
-                    x:Name="FloatingPasswordBox"
-                    Grid.Row="2" Grid.Column="1" Margin="8,8,11,8"
-                    materialDesign:HintAssist.Hint="Password"
-                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
+                x:Name="FloatingPasswordBox"
+                Grid.Row="2" Grid.Column="1" Margin="8,8,11,8"
+                materialDesign:HintAssist.Hint="Password"
+                Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" />
 
             <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="10">
                 <Grid.ColumnDefinitions>
@@ -64,16 +64,16 @@
                 </Grid.ColumnDefinitions>
 
                 <Button
-                        Margin="0,0,4,0"
-                        Grid.Column="0"
-                        Style="{StaticResource GhostButton}">
+                    Margin="0,0,4,0"
+                    Grid.Column="0"
+                    Style="{StaticResource GhostButton}">
                     CREATE
                 </Button>
 
                 <Button
-                        Margin="4,0,0,0"
-                        Grid.Column="1"
-                        Style="{StaticResource RaisedButton}">
+                    Margin="4,0,0,0"
+                    Grid.Column="1"
+                    Style="{StaticResource RaisedButton}">
                     SIGN IN
                 </Button>
             </Grid>
