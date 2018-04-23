@@ -1,0 +1,39 @@
+﻿<Window x:Class="HyberShift_CSharp.View.SignIn.SignInPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:domain="clr-namespace:HyberShift_CSharp.Domain"
+        mc:Ignorable="d"
+        Title="SignIn" Height="484.971" Width="597.455"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:signIn="clr-namespace:HyberShift_CSharp.View.SignIn"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="12"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="119*" />
+            <RowDefinition Height="216*" />
+            <RowDefinition Height="119*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="353*" />
+            <ColumnDefinition Width="209*" />
+            <ColumnDefinition Width="66*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="/HyberShift_CSharp;component/Res/login_page.png" Stretch="UniformToFill" />
+        </Grid.Background>
+
+        <signIn:SignInControl
+            Grid.Column="1"
+            Grid.Row="1"/>
+
+    </Grid>
+</Window>

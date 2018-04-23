@@ -117,6 +117,9 @@
     <Compile Include="DataObject\SenderTyping.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="DataObject\UserOnline.cs" />
+    <Compile Include="View\SignIn\SignInControl.xaml.cs">
+      <DependentUpon>SignInControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\Debug.cs" />
     <Compile Include="Utilities\MarginSetter.cs" />
     <Compile Include="Utilities\SocketAPI.cs" />
@@ -126,9 +129,13 @@
     <Compile Include="View\Foo.xaml.cs">
       <DependentUpon>Foo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SignIn\SignInWindow.xaml.cs">
-      <DependentUpon>SignInWindow.xaml</DependentUpon>
+    <Compile Include="View\SignIn\SignInPage.xaml.cs">
+      <DependentUpon>SignInPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\SignIn\SignInControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -145,7 +152,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SignIn\SignInWindow.xaml">
+    <Page Include="View\SignIn\SignInPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
