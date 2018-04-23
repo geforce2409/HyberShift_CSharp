@@ -1,19 +1,65 @@
-﻿namespace HyberShift_CSharp.Model
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HyberShift_CSharp.Model
 {
     public class UserInfo
     {
+        private string userid;
+        private string email;
+        private string password;
+        private string phone;
+        private string fullName;
+        private string avatarRef;
+        private static UserInfo instance = null;
+
+        public static UserInfo getInstance()
+        {
+            if (instance == null)
+                instance = new UserInfo();
+
+            return instance;
+        }
+
         // getter and setter
-        public string UserId { get; set; }
+        public string UserId
+        {
+            get { return userid; }
+            set { userid = value; }
+        }
 
-        public string Email { get; set; }
+        public string Email
+        {
+            get { return email; }
+            set { email = value; }
+        }
 
-        public string Password { get; set; }
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
+        }
 
-        public string Phone { get; set; }
+        public string Phone
+        {
+            get { return phone; }
+            set { phone = value; }
+        }
 
-        public string FullName { get; set; }
+        public string FullName
+        {
+            get { return fullName; }
+            set { fullName = value; }
+        }
 
-        public string AvatarRef { get; set; }
+        public string AvatarRef
+        {
+            get { return avatarRef; }
+            set { avatarRef = value; }
+        }
 
         public bool isValid()
         {

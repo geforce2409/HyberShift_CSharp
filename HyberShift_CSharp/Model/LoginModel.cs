@@ -1,4 +1,9 @@
 ﻿using HyberShift_CSharp.Utilities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;
@@ -7,33 +12,43 @@ namespace HyberShift_CSharp.Model
 {
     public class LoginModel
     {
-        private readonly Socket socket;
+        private string inputEmail;
+        private string inputPassword;
+
+        UserInfo userInfo = UserInfo.getInstance();
+
+        Socket socket;
 
         // constructor
         public LoginModel()
         {
-            InputEmail = "";
-            InputPassword = "";
+            inputEmail = "";
+            inputPassword = "";
             socket = SocketAPI.GetInstance().GetSocket();
 
-            //socket.On(Socket.EVENT_CONNECT, () => {
-            //    public void call(Object...args)
-            //    {
-            //        Console.WriteLine("Client connected to server");
-            //    }
-            //}).on(Socket.EVENT_DISCONNECT, () => {
-            //    public void call(Object...args)
-            //    {
-            //        Console.WriteLine("Client disconnected to server");
-            //    }
-            //    socket.Connect();
-            //});
+            socket.On(Socket.EVENT_CONNECT, () =>
+            {
+                Debug.Log("Client connected to server");
+            }).On(Socket.EVENT_DISCONNECT, () =>
+            {
+                Debug.Log("Client disconnected to server");
+            });
+
+            socket.Connect();
         }
 
         // getter and setter
-        public string InputEmail { get; set; }
+        public string InputEmail
+        {
+            get { return inputEmail; }
+            set { inputEmail = value; }
+        }
 
-        public string InputPassword { get; set; }
+        public string InputPassword
+        {
+            get { return inputPassword; }
+            set { inputPassword = value; }
+        }
 
         public bool LogIn()
         {
@@ -47,8 +62,10 @@ namespace HyberShift_CSharp.Model
             }
 
             // else return false
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         public bool IsValidLogin()
@@ -64,19 +81,21 @@ namespace HyberShift_CSharp.Model
 
         public void Authentication()
         {
+            
             //Convert to JSONObject
-            var userjson = new JObject();
+            JObject userjson = new JObject();
             try
             {
                 userjson.Add("email", InputEmail);
                 userjson.Add("password", InputPassword);
+
             }
             catch (JsonException e)
             {
                 Debug.Log(e.ToString());
             }
-
-            socket.Emit("authentication", userjson);
+            Debug.Log(InputEmail + " " + inputPassword);
+            socket.Emit("authentication", userjson);         
 
             // [SAMPLE] Method for receiving event from socket server
             HandleOnSocketEvent();
@@ -85,25 +104,36 @@ namespace HyberShift_CSharp.Model
         //[SAMPLE] Method handle "On" event from socket server
         public void HandleOnSocketEvent()
         {
-            socket.On("<event_name_1>", () =>
+            socket.On("authentication_result", () =>
             {
+                if (LogIn())
+                    Debug.Log("Authentication successed");
+                else
+                    Debug.Log("Authentication failed");
+            });
+
+            socket.On("<event_name_1>", () => {
                 Debug.Log("Received response 1 of socket");
 
                 // NOTICE: SOME EVENT NEED TO BE RUNNED ON ANOTHER THREAD
                 // Start a new thread in java (old project):
-                //    Platform.runLater(new Runnable(){
-                //                @Override
+            //    Platform.runLater(new Runnable(){
+            //                @Override
 
-                //                public void run()
-                //                {
-                //                    ...
-                //                }
-                //    });
+            //                public void run()
+            //                {
+            //                    ...
+            //                }
+            //    });
 
                 // In C# ???
+
+                
             });
 
-            socket.On("<event_name_2>", () => { Debug.Log("Received response 2 of socket"); });
+            socket.On("<event_name_2>", () => {
+                Debug.Log("Received response 2 of socket");
+            });
         }
     }
 }

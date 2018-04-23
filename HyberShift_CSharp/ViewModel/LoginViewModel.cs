@@ -19,14 +19,18 @@ namespace HyberShift_CSharp.ViewModel
         // getter and setter
         public string TxtEmail
         {
-            get => loginModel.InputEmail;
-            set => loginModel.InputEmail = Convert.ToString(value);
+            get { return loginModel.InputEmail; }
+            set { loginModel.InputEmail = Convert.ToString(value); }
+            //get => loginModel.InputEmail;
+            //set => loginModel.InputEmail = Convert.ToString(value);
         }
 
-        public string TxtPassword
+        public string FloatingPasswordBox
         {
-            get => loginModel.InputPassword;
-            set => loginModel.InputPassword = Convert.ToString(value);
+            get { return loginModel.InputPassword; }
+            set { loginModel.InputPassword = Convert.ToString(value); }
+            //get => loginModel.InputPassword;
+            //set => loginModel.InputPassword = Convert.ToString(value);
         }
 
         public DelegateCommand Command { get; set; }
@@ -36,7 +40,6 @@ namespace HyberShift_CSharp.ViewModel
         public void Login()
         {
             loginModel.Authentication();
-
             if (PropertyChanged != null)
             {
                 //PropertyChanged(this, new PropertyChangedEventArgs("attributeX"));  // this will automatically update attributeX
