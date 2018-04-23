@@ -30,7 +30,7 @@ namespace HyberShift_CSharp.ViewModel
             set { loginModel.InputEmail = Convert.ToString(value); }
         }
 
-        public string TxtPassword
+        public string FloatingPasswordBox
         {
             get { return loginModel.InputPassword.ToString(); }
             set { loginModel.InputPassword = Convert.ToString(value); }
@@ -45,7 +45,6 @@ namespace HyberShift_CSharp.ViewModel
         public void Login()
         {
             loginModel.Authentication();
-
             if (PropertyChanged != null)
             {
                 //PropertyChanged(this, new PropertyChangedEventArgs("attributeX"));  // this will automatically update attributeX

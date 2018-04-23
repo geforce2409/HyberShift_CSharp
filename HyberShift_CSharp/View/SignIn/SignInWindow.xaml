@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:domain="clr-namespace:HyberShift_CSharp.Domain"
+        xmlns:viewmodel="clr-namespace:HyberShift_CSharp.ViewModel"
         mc:Ignorable="d"
         Title="SignInWindow" Height="484.971" Width="597.455"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -15,6 +16,10 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
+    <Window.Resources>
+        <viewmodel:LoginViewModel x:Key="loginViewModel"/>
+        
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="119*" />
@@ -68,9 +73,12 @@
                     x:Name="TxtEmail"
                     Grid.Row="1" Grid.Column="1" Margin="8,16,8,8"
                     materialDesign:HintAssist.Hint="Email"
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
                     <TextBox.Text>
-                        <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Source="{StaticResource loginViewModel}"
+                             Path="TxtEmail"
+                             UpdateSourceTrigger="PropertyChanged"
+                             NotifyOnValidationError="True">
                             <Binding.ValidationRules>
                                 <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                             </Binding.ValidationRules>
@@ -81,7 +89,7 @@
                 <materialDesign:PackIcon 
                     Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Margin="8,14,0,0" 
                     Kind="Key" Foreground="{Binding ElementName=FloatingPasswordBox, Path=BorderBrush}" />
-                <PasswordBox
+                <PasswordBox            
                     x:Name="FloatingPasswordBox"
                     Grid.Row="2" Grid.Column="1" Margin="8"
                     materialDesign:HintAssist.Hint="Password"
@@ -92,7 +100,10 @@
                         SIGN UP
                     </Button>
 
-                    <Button Style="{StaticResource RaisedButton}" Margin="0,8" Width="81" HorizontalContentAlignment="Center" HorizontalAlignment="Right">
+                    <Button 
+                        x:Name="btnSignIn"
+                        Style="{StaticResource RaisedButton}" Margin="0,8" Width="81" HorizontalContentAlignment="Center" HorizontalAlignment="Right"
+                        Command="{Binding Command, Source={StaticResource loginViewModel}}">
                         SIGN IN
                     </Button>
                 </DockPanel>

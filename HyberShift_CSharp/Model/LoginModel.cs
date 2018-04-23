@@ -15,6 +15,8 @@ namespace HyberShift_CSharp.Model
         private string inputEmail;
         private string inputPassword;
 
+        UserInfo userInfo = UserInfo.getInstance();
+
         Socket socket;
 
         // constructor
@@ -24,18 +26,15 @@ namespace HyberShift_CSharp.Model
             inputPassword = "";
             socket = SocketAPI.GetInstance().GetSocket();
 
-            //socket.On(Socket.EVENT_CONNECT, () => {
-            //    public void call(Object...args)
-            //    {
-            //        Console.WriteLine("Client connected to server");
-            //    }
-            //}).on(Socket.EVENT_DISCONNECT, () => {
-            //    public void call(Object...args)
-            //    {
-            //        Console.WriteLine("Client disconnected to server");
-            //    }
-            //    socket.Connect();
-            //});
+            socket.On(Socket.EVENT_CONNECT, () =>
+            {
+                Debug.Log("Client connected to server");
+            }).On(Socket.EVENT_DISCONNECT, () =>
+            {
+                Debug.Log("Client disconnected to server");
+            });
+
+            socket.Connect();
         }
 
         // getter and setter
@@ -74,7 +73,7 @@ namespace HyberShift_CSharp.Model
             if (InputEmail.Trim().Length == 0)
                 return false;
 
-            if (inputPassword.Trim().Length < 6)
+            if (InputPassword.Trim().Length < 6)
                 return false;
 
             return true;
@@ -82,20 +81,20 @@ namespace HyberShift_CSharp.Model
 
         public void Authentication()
         {
-
+            
             //Convert to JSONObject
             JObject userjson = new JObject();
             try
             {
                 userjson.Add("email", InputEmail);
-                userjson.Add("password", inputPassword);
+                userjson.Add("password", InputPassword);
 
             }
             catch (JsonException e)
             {
                 Debug.Log(e.ToString());
             }
-
+            Debug.Log(InputEmail + " " + inputPassword);
             socket.Emit("authentication", userjson);         
 
             // [SAMPLE] Method for receiving event from socket server
@@ -105,6 +104,14 @@ namespace HyberShift_CSharp.Model
         //[SAMPLE] Method handle "On" event from socket server
         public void HandleOnSocketEvent()
         {
+            socket.On("authentication_result", () =>
+            {
+                if (LogIn())
+                    Debug.Log("Authentication successed");
+                else
+                    Debug.Log("Authentication failed");
+            });
+
             socket.On("<event_name_1>", () => {
                 Debug.Log("Received response 1 of socket");
 

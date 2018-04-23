@@ -101,5 +101,17 @@ namespace HyberShift_CSharp.Model
                 return false;
             return true;
         }
+
+        public void HandleOnSocketEvent()
+        {
+            socket.On("register_result", () =>
+            {
+                if (Register())
+                    //userinfo.UserId = ...;
+                    Debug.Log("Register successed");
+                else
+                    Debug.Log("Register failed");
+            });
+        }
     }
 }

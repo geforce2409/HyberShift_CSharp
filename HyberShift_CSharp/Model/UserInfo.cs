@@ -14,6 +14,15 @@ namespace HyberShift_CSharp.Model
         private string phone;
         private string fullName;
         private string avatarRef;
+        private static UserInfo instance = null;
+
+        public static UserInfo getInstance()
+        {
+            if (instance == null)
+                instance = new UserInfo();
+
+            return instance;
+        }
 
         // getter and setter
         public string UserId
