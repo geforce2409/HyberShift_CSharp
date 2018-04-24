@@ -30,7 +30,7 @@ namespace HyberShift_CSharp.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string TxtEmail
+        public string Email
         {
             get => loginModel.InputEmail;
             set => loginModel.InputEmail = Convert.ToString(value);

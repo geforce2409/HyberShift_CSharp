@@ -9,7 +9,7 @@
              Name="This">
 
     <UserControl.Resources>
-        <viewModel:LoginViewModel x:Key="loginViewModel" />
+        <viewModel:LoginViewModel x:Key="LoginViewModel" />
     </UserControl.Resources>
 
     <!--Grid.Column="1"
@@ -41,15 +41,16 @@
             </materialDesign:Card>
 
             <materialDesign:PackIcon
-                Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="10,16,0,0"
-                Kind="Account" Foreground="{Binding BorderBrush, ElementName=TxtEmail}" Padding="-1,0,0,0" />
+                Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="10,10,0,0"
+                Kind="Account" Foreground="{Binding BorderBrush, ElementName=EmailTextBox}" Padding="-1,0,0,0" />
             <TextBox
-                Grid.Row="1" Grid.Column="1" Margin="8,16,11,8"
+                x:Name="EmailTextBox"
+                Grid.Row="1" Grid.Column="1" Margin="8,16,11,16"
                 materialDesign:HintAssist.Hint="Email"
                 Style="{StaticResource TxtBox}">
                 <TextBox.Text>
-                    <Binding Source="{StaticResource loginViewModel}"
-                             Path="TxtEmail"
+                    <Binding Source="{StaticResource LoginViewModel}"
+                             Path="Email"
                              UpdateSourceTrigger="PropertyChanged"
                              NotifyOnValidationError="True" >
                         <Binding.ValidationRules>
@@ -60,16 +61,24 @@
             </TextBox>
 
             <materialDesign:PackIcon
-                Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,14,0,0"
+                Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,6,0,0"
                 Kind="Key" Foreground="{Binding ElementName=FloatingPasswordBox, Path=BorderBrush}" />
 
             <PasswordBox
                 Name="FloatingPasswordBox"     
-                Grid.Row="2" Grid.Column="1" Margin="8,8,11,8"
+                Grid.Row="2" Grid.Column="1" Margin="8,8,11,16"
                 materialDesign:HintAssist.Hint="Password"
-                Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                <!--<PasswordBox.PasswordChar>
+                    <Binding Path="Password" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </PasswordBox.PasswordChar>-->
+            </PasswordBox>
 
-            <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="10">
+            <Grid Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="10,16,10,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="1*" />
@@ -79,7 +88,7 @@
                     Margin="0,0,4,0"
                     Grid.Column="0"
                     Style="{StaticResource GhostButton}"
-                    Command="{Binding RegisterCommand, Source={StaticResource loginViewModel}}">
+                    Command="{Binding RegisterCommand, Source={StaticResource LoginViewModel}}">
                     CREATE
                 </Button>
 
@@ -87,7 +96,7 @@
                     Margin="4,0,0,0"
                     Grid.Column="1"
                     Style="{StaticResource RaisedButton}"
-                    Command="{Binding LoginCommand, Source={StaticResource loginViewModel}}"
+                    Command="{Binding LoginCommand, Source={StaticResource LoginViewModel}}"
                     CommandParameter="{Binding ElementName=This}">
                     SIGN IN
                 </Button>
