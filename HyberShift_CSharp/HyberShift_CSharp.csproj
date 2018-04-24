@@ -100,6 +100,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Domain\NotEmptyValidationRule.cs" />
+    <Compile Include="IHavePassword.cs" />
     <Compile Include="Model\FooModel.cs" />
     <Compile Include="DataObject\FriendInfo.cs" />
     <Compile Include="DataObject\Journal.cs" />

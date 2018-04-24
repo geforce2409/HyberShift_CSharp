@@ -15,8 +15,6 @@ namespace HyberShift_CSharp.Model
         private string inputEmail;
         private string inputPassword;
 
-        UserInfo userInfo = UserInfo.getInstance();
-
         Socket socket;
 
         // constructor
@@ -94,7 +92,7 @@ namespace HyberShift_CSharp.Model
             {
                 Debug.Log(e.ToString());
             }
-            Debug.Log(InputEmail + " " + inputPassword);
+            Debug.Log("Email:" + InputEmail + " Password:" + InputPassword);
             socket.Emit("authentication", userjson);         
 
             // [SAMPLE] Method for receiving event from socket server

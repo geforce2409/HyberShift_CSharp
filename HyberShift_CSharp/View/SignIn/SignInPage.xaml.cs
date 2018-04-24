@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using HyberShift_CSharp.Utilities;
+using HyberShift_CSharp.ViewModel;
 
 namespace HyberShift_CSharp.View.SignIn
 {
@@ -10,6 +12,8 @@ namespace HyberShift_CSharp.View.SignIn
         public SignInPage()
         {
             InitializeComponent();
+            var socketAPI = SocketAPI.GetInstance();
+            socketAPI.Connect();
         }
     }
 }

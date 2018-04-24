@@ -8,6 +8,8 @@
         Title="SignIn" Height="484.971" Width="597.455"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:signIn="clr-namespace:HyberShift_CSharp.View.SignIn"
+        xmlns:hyberShiftCSharp="clr-namespace:HyberShift_CSharp"
+        xmlns:viewModel="clr-namespace:HyberShift_CSharp.ViewModel"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="12"
@@ -15,6 +17,8 @@
         TextOptions.TextRenderingMode="Auto"
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
+
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="119*" />
@@ -35,5 +39,8 @@
             Grid.Column="1"
             Grid.Row="1"/>
 
+        <!--<signIn:SignUpControl
+            Grid.Column="1"
+            Grid.Row="1"/>-->
     </Grid>
 </Window>
