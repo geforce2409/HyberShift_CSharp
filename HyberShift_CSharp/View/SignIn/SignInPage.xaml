@@ -22,8 +22,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="119*" />
-            <RowDefinition Height="216*" />
-            <RowDefinition Height="119*" />
+            <RowDefinition Height="231*" />
+            <RowDefinition Height="104*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="353*" />
@@ -35,12 +35,12 @@
             <ImageBrush ImageSource="/HyberShift_CSharp;component/Res/login_page.png" Stretch="UniformToFill" />
         </Grid.Background>
 
-        <signIn:SignInControl
-            Grid.Column="1"
-            Grid.Row="1"/>
-
-        <!--<signIn:SignUpControl
+        <!--<signIn:SignInControl
             Grid.Column="1"
             Grid.Row="1"/>-->
+
+        <signIn:SignUpControl
+            Grid.Column="1"
+            Grid.Row="1"/>
     </Grid>
 </Window>

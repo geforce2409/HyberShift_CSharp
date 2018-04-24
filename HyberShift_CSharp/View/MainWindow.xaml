@@ -8,24 +8,24 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <viewmodel:LoginViewModel x:Key="loginViewModel" />
+        <viewmodel:LoginViewModel x:Key="LoginViewModel" />
     </Window.Resources>
     <Grid>
         <!--Test-->
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <Label>Email</Label>
-                <TextBox x:Name="txtEmail" Width="200"
-                         Text="{Binding TxtEmail, Source={StaticResource loginViewModel}}" />
+                <TextBox x:Name="TxtEmail" Width="200"
+                         Text="{Binding Email, Source={StaticResource LoginViewModel}}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <Label>Password</Label>
-                <TextBox x:Name="txtPassword" Width="200"
-                         Text="{Binding TxtPassword,Source={StaticResource loginViewModel}}" />
+                <TextBox x:Name="TxtPassword" Width="200"
+                         Text="{Binding TxtPassword,Source={StaticResource LoginViewModel}}" />
             </StackPanel>
 
-            <Button x:Name="btnLogin" Command="{Binding Command, Source={StaticResource loginViewModel}}">Login</Button>
+            <Button x:Name="BtnLogin" Command="{Binding Command, Source={StaticResource LoginViewModel}}">Login</Button>
         </StackPanel>
 
     </Grid>
