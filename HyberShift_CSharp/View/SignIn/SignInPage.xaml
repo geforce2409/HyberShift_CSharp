@@ -38,14 +38,16 @@
             <ColumnDefinition Width="66*" />
         </Grid.ColumnDefinitions>
 
-        <signIn:SignInControl
+        <!--<signIn:SignInControl
             Visibility="{Binding SignInVisible, Source={StaticResource RegisterViewModel}}"
             Grid.Column="1"
-            Grid.Row="1"/>
+            Grid.Row="1"/>-->
 
         <signIn:SignUpControl
-            Visibility="{Binding SignUpVisibile, Source={StaticResource LoginViewModel}}"
+            Visibility="Visible"
             Grid.Column="1"
             Grid.Row="1"/>
+        <!--Visibility="{Binding SignUpVisibile, Source={StaticResource LoginViewModel}}"-->
+
     </Grid>
 </Window>

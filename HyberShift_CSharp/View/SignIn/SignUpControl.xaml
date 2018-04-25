@@ -36,6 +36,7 @@
             </materialDesign:Card>
 
             <ScrollViewer
+                Style="{StaticResource CustomScrollViewer}"
                 VerticalScrollBarVisibility="Auto"
                 Grid.Row="1">
                 <Grid>
