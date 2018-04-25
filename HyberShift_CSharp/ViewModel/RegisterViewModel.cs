@@ -9,14 +9,32 @@ namespace HyberShift_CSharp.ViewModel
     {
         private readonly RegisterModel registerModel;
 
+        private string signInVisible;
+
+        private static RegisterViewModel instance;
         // constructor
         public RegisterViewModel()
         {
             registerModel = new RegisterModel();
-            Command = new DelegateCommand(Register);
+            RegisterCommand = new DelegateCommand(Register);
+            ChangeLoginViewCommand = new DelegateCommand(ChangeLoginView);
+            signInVisible = "visible";
+        }
+
+        public static RegisterViewModel GetInstance()
+        {
+            if (instance == null)
+                instance = new RegisterViewModel();
+            return instance;
         }
 
         // getter and setter
+        public string SignInVisible
+        {
+            get => signInVisible;
+            set => signInVisible = value;
+        }
+
         public string TxtEmail
         {
             get => registerModel.Info.Email;
@@ -53,7 +71,9 @@ namespace HyberShift_CSharp.ViewModel
             set => registerModel.Info.AvatarRef = Convert.ToString(value);
         }
 
-        public DelegateCommand Command { get; set; }
+        public DelegateCommand RegisterCommand { get; set; }
+
+        public DelegateCommand ChangeLoginViewCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -64,6 +84,17 @@ namespace HyberShift_CSharp.ViewModel
             if (PropertyChanged != null)
             {
                 //PropertyChanged(this, new PropertyChangedEventArgs("attributeX"));  // this will automatically update attributeX
+            }
+        }
+
+        public void ChangeLoginView()
+        {
+            LoginViewModel.GetInstance().SignUpVisibile = "collapsed";
+            SignInVisible = "visible";
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("SignUpVisibile"));
+                PropertyChanged(this, new PropertyChangedEventArgs("SignInVisible")); 
             }
         }
     }
