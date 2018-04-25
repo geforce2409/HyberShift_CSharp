@@ -82,5 +82,11 @@ namespace HyberShift_CSharp.ViewModel
                 Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
             }
         }
+
+        private void NotifyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
