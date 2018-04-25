@@ -18,6 +18,10 @@
         Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}">
 
+    <Window.Resources>
+        <viewModel:LoginViewModel x:Key="loginViewModel" />
+        <viewModel:RegisterViewModel x:Key="registerViewModel" />
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -35,12 +39,14 @@
             <ImageBrush ImageSource="/HyberShift_CSharp;component/Res/login_page.png" Stretch="UniformToFill" />
         </Grid.Background>
 
-        <!--<signIn:SignInControl
+        <signIn:SignInControl
+            Visibility="{Binding SignInVisible, Source={StaticResource registerViewModel}}"
             Grid.Column="1"
-            Grid.Row="1"/>-->
+            Grid.Row="1"/>
 
         <signIn:SignUpControl
-            Grid.Column="1"
+            Visibility="{Binding SignUpVisibile, Source={StaticResource loginViewModel}}"
+            Grid.Column="0"
             Grid.Row="1"/>
     </Grid>
 </Window>
