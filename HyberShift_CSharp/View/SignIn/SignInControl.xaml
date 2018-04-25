@@ -37,7 +37,7 @@
                                  materialDesign:ShadowAssist.ShadowEdges="Bottom">
                 <Label
                     FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" FontSize="9"
-                    HorizontalAlignment="Left" Content="ALREADY A MEMBER" />
+                    HorizontalAlignment="Left" Content="ALREADY A MEMBER" Padding="5,3,5,0" />
             </materialDesign:Card>
 
             <materialDesign:PackIcon

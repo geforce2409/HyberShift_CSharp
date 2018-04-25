@@ -23,9 +23,9 @@
                                  Background="White"
                                  materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                  materialDesign:ShadowAssist.ShadowEdges="Bottom">
-                <Label
-                    FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" FontSize="9"
-                    HorizontalAlignment="Left" Content="&lt; CREATE ACCOUNT" />
+                <Button
+                    Style="{StaticResource MaterialDesignFlatButton}" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" FontSize="9"
+                    HorizontalAlignment="Left" Content="&lt; CREATE ACCOUNT" Padding="5,0" Margin="0,-7,0,3" />
             </materialDesign:Card>
 
             <ScrollViewer
