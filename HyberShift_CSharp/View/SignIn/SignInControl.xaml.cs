@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Security;
+using System.Windows.Controls;
 using HyberShift_CSharp.ViewModel;
 using Newtonsoft.Json;
 
@@ -22,5 +23,7 @@ namespace HyberShift_CSharp.View.SignIn
                 return FloatingPasswordBox.SecurePassword;
             }
         }
+
+        public SecureString ConfirmPassword { get; }
     }
 }

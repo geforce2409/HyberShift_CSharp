@@ -9,5 +9,6 @@ namespace HyberShift_CSharp
     public interface IHavePassword
     {
         System.Security.SecureString Password { get; }
+        System.Security.SecureString ConfirmPassword { get; }
     }
 }
