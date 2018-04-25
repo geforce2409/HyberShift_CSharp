@@ -5,36 +5,13 @@ using Prism.Commands;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    internal class RegisterViewModel : INotifyPropertyChanged
+    public class RegisterViewModel : ViewModelBase
     {
+        private readonly Action<object> navigate;
+
         private readonly RegisterModel registerModel;
 
-        private string signInVisible;
-
-        private static RegisterViewModel instance;
-        // constructor
-        public RegisterViewModel()
-        {
-            registerModel = new RegisterModel();
-            RegisterCommand = new DelegateCommand(Register);
-            ChangeLoginViewCommand = new DelegateCommand(ChangeLoginView);
-            signInVisible = "visible";
-        }
-
-        public static RegisterViewModel GetInstance()
-        {
-            if (instance == null)
-                instance = new RegisterViewModel();
-            return instance;
-        }
-
         // getter and setter
-        public string SignInVisible
-        {
-            get => signInVisible;
-            set => signInVisible = value;
-        }
-
         public string TxtEmail
         {
             get => registerModel.Info.Email;
@@ -71,31 +48,32 @@ namespace HyberShift_CSharp.ViewModel
             set => registerModel.Info.AvatarRef = Convert.ToString(value);
         }
 
+        public DelegateCommand NavigateCommand { get; set; }
+
+        // constructor
+        public RegisterViewModel()
+        {
+            registerModel = new RegisterModel();
+            RegisterCommand = new DelegateCommand(Register);
+        }
+
+        public RegisterViewModel(Action<object> navigate):this()
+        {
+            this.navigate = navigate;
+            NavigateCommand = new DelegateCommand(Navigate);
+        }
+
         public DelegateCommand RegisterCommand { get; set; }
-
-        public DelegateCommand ChangeLoginViewCommand { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public void Register()
         {
             registerModel.PushData();
-
-            if (PropertyChanged != null)
-            {
-                //PropertyChanged(this, new PropertyChangedEventArgs("attributeX"));  // this will automatically update attributeX
-            }
+            //NotifyChanged("attributeX");  // this will automatically update attributeX  
         }
 
-        public void ChangeLoginView()
+        public void Navigate()
         {
-            LoginViewModel.GetInstance().SignUpVisibile = "collapsed";
-            SignInVisible = "visible";
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs("SignUpVisibile"));
-                PropertyChanged(this, new PropertyChangedEventArgs("SignInVisible")); 
-            }
+            navigate.Invoke("LoginViewModel");
         }
     }
 }

@@ -12,7 +12,7 @@ namespace HyberShift_CSharp.View.SignIn
         public SignInControl()
         {
             InitializeComponent();
-            DataContext = new LoginViewModel();
+            //DataContext = new LoginViewModel();
         }
 
         public System.Security.SecureString Password

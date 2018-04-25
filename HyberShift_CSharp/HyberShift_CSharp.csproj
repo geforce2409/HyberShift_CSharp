@@ -118,6 +118,8 @@
     <Compile Include="DataObject\SenderTyping.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="DataObject\UserOnline.cs" />
+    <Compile Include="ViewModel\SignInPageViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\SignIn\SignInControl.xaml.cs">
       <DependentUpon>SignInControl.xaml</DependentUpon>
     </Compile>

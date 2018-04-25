@@ -24,5 +24,6 @@ namespace HyberShift_CSharp.View.SignIn
         {
             InitializeComponent();
         }
+
     }
 }

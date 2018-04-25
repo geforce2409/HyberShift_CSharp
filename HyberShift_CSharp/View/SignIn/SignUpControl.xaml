@@ -12,7 +12,7 @@
     Grid.Row="1"-->
 
     <UserControl.Resources>
-        <viewModel:RegisterViewModel x:Key="registerViewModel" />
+        <viewModel:RegisterViewModel x:Key="RegisterViewModel" />
     </UserControl.Resources>
 
     <materialDesign:Card
@@ -30,9 +30,9 @@
                                  materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                  materialDesign:ShadowAssist.ShadowEdges="Bottom">
                 <Button
-                    Command="{Binding ChangeLoginViewCommand, Source={StaticResource registerViewModel}}"
                     Style="{StaticResource MaterialDesignFlatButton}" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" FontSize="9"
-                    HorizontalAlignment="Left" Content="&lt; CREATE ACCOUNT" Padding="5,5,5,0" Margin="0,-7,0,3" />
+                    HorizontalAlignment="Left" Content="&lt; CREATE ACCOUNT" Padding="5,5,5,0" Margin="0,-7,0,3" 
+                    Command="{Binding NavigateCommand}" />
             </materialDesign:Card>
 
             <ScrollViewer
@@ -141,7 +141,7 @@
 
                         <Button
                         Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="10"
-                        Style="{StaticResource RaisedButton}" Padding="16,4">
+                        Style="{StaticResource RaisedButton}" Padding="16,4" Command="{Binding RegisterCommand, Source={StaticResource RegisterViewModel}}">
                             CREATE
                         </Button>
                     </Grid>

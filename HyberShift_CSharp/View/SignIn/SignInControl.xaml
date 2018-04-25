@@ -89,7 +89,7 @@
                     Margin="0,0,4,0"
                     Grid.Column="0"
                     Style="{StaticResource GhostButton}"
-                    Command="{Binding ChangeRegisterViewCommand, Source={StaticResource LoginViewModel}}">
+                    Command="{Binding NavigateCommand}">
                     CREATE
                 </Button>
 

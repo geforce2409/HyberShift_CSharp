@@ -11,41 +11,14 @@ using Prism.Commands;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    public class LoginViewModel : INotifyPropertyChanged
+    public class LoginViewModel : ViewModelBase
     {
+        private readonly Action<object> navigate;
         private readonly LoginModel loginModel;
 
-        private string signUpVisibile;
-
-        private static LoginViewModel instance;
-        // constructor
-        public LoginViewModel()
-        {
-            loginModel = new LoginModel();
-            LoginCommand = new DelegateCommand<object>(Login);
-            ChangeRegisterViewCommand = new DelegateCommand(ChangeRegisterView);
-            signUpVisibile = "collapsed";
-        }
-
-        public static LoginViewModel GetInstance()
-        {
-            if (instance == null)
-                instance = new LoginViewModel();
-            return instance;
-        }
-
         // getter and setter
-        public string SignUpVisibile
-        {
-            get => signUpVisibile;
-            set => signUpVisibile = value;
-        }
-
         public DelegateCommand<object> LoginCommand { get; set; }
-
-        public DelegateCommand ChangeRegisterViewCommand { get; set; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        public DelegateCommand NavigateCommand { get; set; }
 
         public string Email
         {
@@ -59,6 +32,18 @@ namespace HyberShift_CSharp.ViewModel
             set => loginModel.InputPassword = Convert.ToString(value);
         }
 
+        // constructor
+        public LoginViewModel()
+        {
+            loginModel = new LoginModel();
+            LoginCommand = new DelegateCommand<object>(Login);
+        }
+
+        public LoginViewModel(Action<object> navigate):this()
+        {
+            this.navigate = navigate;
+            NavigateCommand = new DelegateCommand(Navigate);
+        }
 
         public void Login(object parameter)
         {
@@ -70,21 +55,12 @@ namespace HyberShift_CSharp.ViewModel
             }
 
             loginModel.Authentication();
-            if (PropertyChanged != null)
-            {
-                //PropertyChanged(this, new PropertyChangedEventArgs("attributeX"));  // this will automatically update attributeX
-            }
+            //NotifyChanged("attributeX");  // this will automatically update attributeX  
         }
 
-        public void ChangeRegisterView()
+        public void Navigate()
         {
-            RegisterViewModel.GetInstance().SignInVisible = "collapsed";
-            SignUpVisibile = "visible";
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs("SignInVisible"));
-                PropertyChanged(this, new PropertyChangedEventArgs("SignUpVisibile")); 
-            }
+            navigate.Invoke("RegisterViewModel");
         }
 
         private string ConvertToUnsecureString(SecureString securePassword)
@@ -104,12 +80,6 @@ namespace HyberShift_CSharp.ViewModel
             {
                 Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
             }
-        }
-
-        private void NotifyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

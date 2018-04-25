@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:domain="clr-namespace:HyberShift_CSharp.Domain"
+
         mc:Ignorable="d"
         Title="SignIn" Height="584" Width="720"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -22,8 +23,20 @@
     </Window.Background>
 
     <Window.Resources>
-        <viewModel:LoginViewModel x:Key="LoginViewModel" />
-        <viewModel:RegisterViewModel x:Key="RegisterViewModel" />
+        <!--<viewModel:LoginViewModel x:Key="LoginViewModel" />
+        <viewModel:RegisterViewModel x:Key="RegisterViewModel" />-->
+        
+        <!--TMQ-->
+        <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
+            <signIn:SignInControl/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModel:RegisterViewModel}">
+            <signIn:SignUpControl/>
+        </DataTemplate>
+
+        <viewModel:SignInPageViewModel x:Key="SignInPageViewModel"/>
+
     </Window.Resources>
 
     <Grid>
@@ -38,15 +51,21 @@
             <ColumnDefinition Width="66*" />
         </Grid.ColumnDefinitions>
 
+        <!--TMQ-->
+        <ContentControl x:Name="Pages" 
+                        Grid.Column="1" 
+                        Grid.Row="1" 
+                        Content="{Binding SelectedViewModel, Source={StaticResource SignInPageViewModel}}"/>
+        
         <!--<signIn:SignInControl
             Visibility="{Binding SignInVisible, Source={StaticResource RegisterViewModel}}"
             Grid.Column="1"
             Grid.Row="1"/>-->
 
-        <signIn:SignUpControl
+        <!--<signIn:SignUpControl
             Visibility="Visible"
             Grid.Column="1"
-            Grid.Row="1"/>
+            Grid.Row="1"/>-->
         <!--Visibility="{Binding SignUpVisibile, Source={StaticResource LoginViewModel}}"-->
 
     </Grid>
