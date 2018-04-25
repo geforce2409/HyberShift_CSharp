@@ -22,15 +22,15 @@
     </Window.Background>
 
     <Window.Resources>
-        <viewModel:LoginViewModel x:Key="loginViewModel" />
-        <viewModel:RegisterViewModel x:Key="registerViewModel" />
+        <viewModel:LoginViewModel x:Key="LoginViewModel" />
+        <viewModel:RegisterViewModel x:Key="RegisterViewModel" />
     </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="119*" />
-            <RowDefinition Height="231*" />
-            <RowDefinition Height="104*" />
+            <RowDefinition Height="145*" />
+            <RowDefinition Height="242*" />
+            <RowDefinition Height="166*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="353*" />
@@ -38,18 +38,14 @@
             <ColumnDefinition Width="66*" />
         </Grid.ColumnDefinitions>
 
-        <Grid.Background>
-            <ImageBrush ImageSource="/HyberShift_CSharp;component/Res/login_page.png" Stretch="UniformToFill" />
-        </Grid.Background>
-
         <signIn:SignInControl
-            Visibility="{Binding SignInVisible, Source={StaticResource registerViewModel}}"
+            Visibility="{Binding SignInVisible, Source={StaticResource RegisterViewModel}}"
             Grid.Column="1"
             Grid.Row="1"/>
 
         <signIn:SignUpControl
-            Visibility="{Binding SignUpVisibile, Source={StaticResource loginViewModel}}"
-            Grid.Column="0"
+            Visibility="{Binding SignUpVisibile, Source={StaticResource LoginViewModel}}"
+            Grid.Column="1"
             Grid.Row="1"/>
     </Grid>
 </Window>
