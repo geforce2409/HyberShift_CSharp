@@ -15,7 +15,7 @@
     <!--Grid.Column="1"
     Grid.Row="1"-->
     <materialDesign:Card
-        Background="White"
+        Background="{StaticResource MaterialDesignPaper}"
         UniformCornerRadius="6" VerticalAlignment="Stretch">
 
         <Grid>
@@ -30,9 +30,10 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+            
 
             <materialDesign:Card Grid.Row="0" Grid.ColumnSpan="2" Height="40" Padding="8,12,0,0"
-                                 Background="White"
+                                 Background="{StaticResource MaterialDesignPaper}"
                                  materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                  materialDesign:ShadowAssist.ShadowEdges="Bottom">
                 <Label
@@ -88,7 +89,7 @@
                     Margin="0,0,4,0"
                     Grid.Column="0"
                     Style="{StaticResource GhostButton}"
-                    Command="{Binding RegisterCommand, Source={StaticResource LoginViewModel}}">
+                    Command="{Binding ChangeRegisterViewCommand, Source={StaticResource LoginViewModel}}">
                     CREATE
                 </Button>
 

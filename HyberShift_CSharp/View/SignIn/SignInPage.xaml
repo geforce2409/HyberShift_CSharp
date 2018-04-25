@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:domain="clr-namespace:HyberShift_CSharp.Domain"
         mc:Ignorable="d"
-        Title="SignIn" Height="484.971" Width="597.455"
+        Title="SignIn" Height="584" Width="720"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:signIn="clr-namespace:HyberShift_CSharp.View.SignIn"
         xmlns:hyberShiftCSharp="clr-namespace:HyberShift_CSharp"
@@ -15,15 +15,22 @@
         TextElement.FontSize="12"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignPaper}"
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        SnapsToDevicePixels="True">
+    <Window.Background>
+        <ImageBrush ImageSource="/HyberShift_CSharp;component/Res/login_page.png" Stretch="UniformToFill" />
+    </Window.Background>
 
+    <Window.Resources>
+        <viewModel:LoginViewModel x:Key="LoginViewModel" />
+        <viewModel:RegisterViewModel x:Key="RegisterViewModel" />
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="119*" />
-            <RowDefinition Height="231*" />
-            <RowDefinition Height="104*" />
+            <RowDefinition Height="145*" />
+            <RowDefinition Height="242*" />
+            <RowDefinition Height="166*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="353*" />
@@ -31,16 +38,16 @@
             <ColumnDefinition Width="66*" />
         </Grid.ColumnDefinitions>
 
-        <Grid.Background>
-            <ImageBrush ImageSource="/HyberShift_CSharp;component/Res/login_page.png" Stretch="UniformToFill" />
-        </Grid.Background>
-
         <!--<signIn:SignInControl
+            Visibility="{Binding SignInVisible, Source={StaticResource RegisterViewModel}}"
             Grid.Column="1"
             Grid.Row="1"/>-->
 
         <signIn:SignUpControl
+            Visibility="Visible"
             Grid.Column="1"
             Grid.Row="1"/>
+        <!--Visibility="{Binding SignUpVisibile, Source={StaticResource LoginViewModel}}"-->
+
     </Grid>
 </Window>

@@ -15,18 +15,35 @@ namespace HyberShift_CSharp.ViewModel
     {
         private readonly LoginModel loginModel;
 
+        private string signUpVisibile;
+
+        private static LoginViewModel instance;
         // constructor
         public LoginViewModel()
         {
             loginModel = new LoginModel();
             LoginCommand = new DelegateCommand<object>(Login);
-            RegisterCommand = new DelegateCommand(ChangeRegisterView);
+            ChangeRegisterViewCommand = new DelegateCommand(ChangeRegisterView);
+            signUpVisibile = "collapsed";
+        }
+
+        public static LoginViewModel GetInstance()
+        {
+            if (instance == null)
+                instance = new LoginViewModel();
+            return instance;
         }
 
         // getter and setter
+        public string SignUpVisibile
+        {
+            get => signUpVisibile;
+            set => signUpVisibile = value;
+        }
+
         public DelegateCommand<object> LoginCommand { get; set; }
 
-        public DelegateCommand RegisterCommand { get; set; }
+        public DelegateCommand ChangeRegisterViewCommand { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -61,7 +78,13 @@ namespace HyberShift_CSharp.ViewModel
 
         public void ChangeRegisterView()
         {
-
+            RegisterViewModel.GetInstance().SignInVisible = "collapsed";
+            SignUpVisibile = "visible";
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("SignInVisible"));
+                PropertyChanged(this, new PropertyChangedEventArgs("SignUpVisibile")); 
+            }
         }
 
         private string ConvertToUnsecureString(SecureString securePassword)
