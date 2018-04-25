@@ -41,6 +41,8 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
                     <materialDesign:PackIcon
@@ -79,10 +81,44 @@
 
                     <materialDesign:PackIcon
                         Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,6,0,0"
+                        Kind="Key" Foreground="{Binding ElementName=FloatingConfirmPasswordBox, Path=BorderBrush}" />
+                    <PasswordBox
+                        x:Name="FloatingConfirmPasswordBox"
+                        Grid.Row="2" Grid.Column="1" Margin="8,8,11,16"
+                        materialDesign:HintAssist.Hint="Confirm Password"
+                        Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                        <!--<PasswordBox.PasswordChar>
+                            <Binding Path="ConfirmPassword" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </PasswordBox.PasswordChar>-->
+                    </PasswordBox>
+
+                    <materialDesign:PackIcon
+                        Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,6,0,0"
+                        Kind="AccountCardDetails" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
+                    <TextBox
+                        x:Name="NameTextBox"
+                        Grid.Row="3" Grid.Column="1" Margin="8,8,11,16"
+                        materialDesign:HintAssist.Hint="Name"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        <TextBox.Text>
+                            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+
+                    <materialDesign:PackIcon
+                        Grid.Row="4" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,6,0,0"
                         Kind="Phone" Foreground="{Binding ElementName=PhoneTextBox, Path=BorderBrush}" />
                     <TextBox
                         x:Name="PhoneTextBox"
-                        Grid.Row="2" Grid.Column="1" Margin="8,8,11,16"
+                        Grid.Row="4" Grid.Column="1" Margin="8,8,11,16"
                         materialDesign:HintAssist.Hint="Phone"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                         <TextBox.Text>
@@ -95,7 +131,7 @@
                     </TextBox>
 
                     <Button
-                        Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Margin="10"
+                        Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="10"
                         Style="{StaticResource RaisedButton}" Padding="16,4">
                         CREATE
                     </Button>
