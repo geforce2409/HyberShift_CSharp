@@ -10,132 +10,133 @@
     <!--Grid.Column="1"
     Grid.Row="1"-->
     <materialDesign:Card
-        Background="White"
+        Background="{StaticResource MaterialDesignPaper}"
         UniformCornerRadius="6" VerticalAlignment="Stretch">
 
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <materialDesign:Card Grid.Row="0" Grid.ColumnSpan="2" Height="40" Padding="8,12,0,0"
-                                 Background="White"
+                                 Background="{StaticResource MaterialDesignPaper}"
                                  materialDesign:ShadowAssist.ShadowDepth="Depth1"
                                  materialDesign:ShadowAssist.ShadowEdges="Bottom">
                 <Button
                     Style="{StaticResource MaterialDesignFlatButton}" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" FontSize="9"
-                    HorizontalAlignment="Left" Content="&lt; CREATE ACCOUNT" Padding="5,0" Margin="0,-7,0,3" />
+                    HorizontalAlignment="Left" Content="&lt; CREATE ACCOUNT" Padding="5,5,5,0" Margin="0,-7,0,3" />
             </materialDesign:Card>
 
             <ScrollViewer
+                VerticalScrollBarVisibility="Auto"
                 Grid.Row="1">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
 
-                    <materialDesign:PackIcon
+                        <materialDesign:PackIcon
                         Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Margin="10,10,0,0"
                         Kind="Account" Foreground="{Binding BorderBrush, ElementName=EmailTextBox}" Padding="-1,0,0,0" />
-                    <TextBox
+                        <TextBox
                         x:Name="EmailTextBox"
                         Grid.Row="0" Grid.Column="1" Margin="8,16,11,16"
                         materialDesign:HintAssist.Hint="Email"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                        <TextBox.Text>
-                            <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                            <TextBox.Text>
+                                <Binding Path="Email" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
 
-                    <materialDesign:PackIcon
+                        <materialDesign:PackIcon
                         Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,6,0,0"
                         Kind="Key" Foreground="{Binding ElementName=FloatingPasswordBox, Path=BorderBrush}" />
-                    <PasswordBox
+                        <PasswordBox
                         x:Name="FloatingPasswordBox"
                         Grid.Row="1" Grid.Column="1" Margin="8,8,11,16"
                         materialDesign:HintAssist.Hint="Password"
                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
-                        <!--<PasswordBox.PasswordChar>
+                            <!--<PasswordBox.PasswordChar>
                             <Binding Path="Password" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </PasswordBox.PasswordChar>-->
-                    </PasswordBox>
+                        </PasswordBox>
 
-                    <materialDesign:PackIcon
+                        <materialDesign:PackIcon
                         Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,6,0,0"
                         Kind="Key" Foreground="{Binding ElementName=FloatingConfirmPasswordBox, Path=BorderBrush}" />
-                    <PasswordBox
+                        <PasswordBox
                         x:Name="FloatingConfirmPasswordBox"
                         Grid.Row="2" Grid.Column="1" Margin="8,8,11,16"
                         materialDesign:HintAssist.Hint="Confirm Password"
                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
-                        <!--<PasswordBox.PasswordChar>
+                            <!--<PasswordBox.PasswordChar>
                             <Binding Path="ConfirmPassword" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                                 </Binding.ValidationRules>
                             </Binding>
                         </PasswordBox.PasswordChar>-->
-                    </PasswordBox>
+                        </PasswordBox>
 
-                    <materialDesign:PackIcon
+                        <materialDesign:PackIcon
                         Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,6,0,0"
                         Kind="AccountCardDetails" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
-                    <TextBox
+                        <TextBox
                         x:Name="NameTextBox"
                         Grid.Row="3" Grid.Column="1" Margin="8,8,11,16"
                         materialDesign:HintAssist.Hint="Name"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                        <TextBox.Text>
-                            <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                            <TextBox.Text>
+                                <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
 
-                    <materialDesign:PackIcon
+                        <materialDesign:PackIcon
                         Grid.Row="4" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,6,0,0"
                         Kind="Phone" Foreground="{Binding ElementName=PhoneTextBox, Path=BorderBrush}" />
-                    <TextBox
+                        <TextBox
                         x:Name="PhoneTextBox"
                         Grid.Row="4" Grid.Column="1" Margin="8,8,11,16"
                         materialDesign:HintAssist.Hint="Phone"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                        <TextBox.Text>
-                            <Binding Path="Phone" UpdateSourceTrigger="PropertyChanged">
-                                <Binding.ValidationRules>
-                                    <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                            <TextBox.Text>
+                                <Binding Path="Phone" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
 
-                    <Button
+                        <Button
                         Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="10"
                         Style="{StaticResource RaisedButton}" Padding="16,4">
-                        CREATE
-                    </Button>
-                </Grid>
+                            CREATE
+                        </Button>
+                    </Grid>
             </ScrollViewer>
         </Grid>
     </materialDesign:Card>
