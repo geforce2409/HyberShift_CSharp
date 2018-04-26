@@ -10,7 +10,7 @@ using Prism.Commands;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : BaseViewModel
     {
         private readonly MainModel mainModel;
         private readonly Guid _viewId;

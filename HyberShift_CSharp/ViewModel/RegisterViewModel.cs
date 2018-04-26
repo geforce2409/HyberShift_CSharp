@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Windows;
-using System.Windows.Forms;
 using HyberShift_CSharp.Model;
 using HyberShift_CSharp.Utilities;
 using Prism.Commands;
