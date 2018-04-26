@@ -110,6 +110,7 @@
     <Compile Include="DataObject\ListNotitification.cs" />
     <Compile Include="DataObject\ListOnline.cs" />
     <Compile Include="DataObject\ListRoom.cs" />
+    <Compile Include="Model\List\BaseList.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="DataObject\Message.cs" />
     <Compile Include="DataObject\Notification.cs" />
