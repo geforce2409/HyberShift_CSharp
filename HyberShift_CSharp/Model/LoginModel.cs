@@ -92,7 +92,7 @@ namespace HyberShift_CSharp.Model
             {
                 Debug.Log(e.ToString());
             }
-            Debug.Log("Email:" + InputEmail + " Password:" + InputPassword);
+            Debug.Log("Email: " + InputEmail + ", Password: " + InputPassword);
             socket.Emit("authentication", userjson);         
 
             // [SAMPLE] Method for receiving event from socket server

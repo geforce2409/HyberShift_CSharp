@@ -9,18 +9,23 @@ namespace HyberShift_CSharp.Model
     public class RegisterModel
     {
         private readonly Socket socket = SocketAPI.GetInstance().GetSocket();
+        private string confirmPassword;
 
         // constructor
         public RegisterModel()
         {
             Info = new UserInfo();
-            ConfirmPassword = "";
+            confirmPassword = "";
         }
 
         // getter and setter
         public UserInfo Info { get; set; }
 
-        public string ConfirmPassword { get; set; }
+        public string ConfirmPassword
+        {
+            get { return confirmPassword; }
+            set { confirmPassword = value; }
+        }
 
         public bool Register()
         {
@@ -67,6 +72,9 @@ namespace HyberShift_CSharp.Model
                 // TODO Auto-generated catch block
                 Debug.Log(e.ToString());
             }
+
+            Debug.Log("Email: " + Info.Email + ", Password: " + Info.Password + ", ConfirmPassword: " +
+                      ConfirmPassword + ", Name: " + Info.FullName + ", Phone: " + Info.Phone);
         }
 
         public bool IsValidRegister()
