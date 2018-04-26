@@ -11,7 +11,7 @@ using MessageBox = System.Windows.MessageBox;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    public class RegisterViewModel : ViewModelBase
+    public class RegisterViewModel : BaseViewModel
     {
         private readonly Action<object> navigate;
         private readonly RegisterModel registerModel;

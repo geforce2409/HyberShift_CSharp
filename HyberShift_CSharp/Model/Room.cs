@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.ObjectModel;
 
 namespace HyberShift_CSharp.Model
 {
@@ -6,11 +7,11 @@ namespace HyberShift_CSharp.Model
     {
         public Room()
         {
-            Members = new ArrayList();
+            Members = new ObservableCollection<string>();
             //hasNewMessage = false;
         }
 
-        public Room(string id, string name, ArrayList members)
+        public Room(string id, string name, ObservableCollection<string> members)
         {
             ID = id;
             Name = name;
@@ -21,7 +22,7 @@ namespace HyberShift_CSharp.Model
 
         public string Name { get; set; }
 
-        public ArrayList Members { get; set; }
+        public ObservableCollection<string> Members { get; set; }
 
         public bool HasNewMessage { get; set; }
 

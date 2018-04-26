@@ -30,18 +30,18 @@ namespace HyberShift_CSharp.Model
         {
             var lst = new ArrayList();
             for (var i = 0; i < list.Count(); i++) lst.Add(list.ElementAt(i).Name);
-
+            
             return lst;
         }
 
-        public ArrayList getMembersFrom(string roomName)
-        {
-            for (var i = 0; i < list.Count(); i++)
-                if (list.ElementAt(i).Name.Equals(roomName))
-                    return list.ElementAt(i).Members;
+        //public ArrayList getMembersFrom(string roomName)
+        //{
+        //    for (var i = 0; i < list.Count(); i++)
+        //        if (list.ElementAt(i).Name.Equals(roomName))
+        //            return list.ElementAt(i).Members;
 
-            return new ArrayList();
-        }
+        //    return new ArrayList();
+        //}
 
         public Room getRoomFromName(string roomName)
         {
@@ -79,13 +79,13 @@ namespace HyberShift_CSharp.Model
             return -1;
         }
 
-        public ArrayList getMembersFrom(int indexRoom)
-        {
-            if (indexRoom >= list.Count())
-                return new ArrayList();
+        //public ArrayList getMembersFrom(int indexRoom)
+        //{
+        //    if (indexRoom >= list.Count())
+        //        return new ArrayList();
 
-            return list.ElementAt(indexRoom).Members;
-        }
+        //    return list.ElementAt(indexRoom).Members;
+        //}
 
         public void addRoom(Room room)
         {
