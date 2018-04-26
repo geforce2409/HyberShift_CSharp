@@ -11,10 +11,11 @@ using Prism.Commands;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : ViewModelBase, IRequireViewIdentification
     {
         private readonly Action<object> navigate;
         private readonly LoginModel loginModel;
+        private readonly Guid _viewId;
 
         // getter and setter
         public DelegateCommand<object> LoginCommand { get; set; }
@@ -32,11 +33,17 @@ namespace HyberShift_CSharp.ViewModel
             set => loginModel.InputPassword = Convert.ToString(value);
         }
 
+        public Guid ViewID
+        {
+            get { return _viewId; }
+        }
+
         // constructor
         public LoginViewModel()
         {
             loginModel = new LoginModel();
             LoginCommand = new DelegateCommand<object>(Login);
+            _viewId = Guid.NewGuid();
         }
 
         public LoginViewModel(Action<object> navigate):this()
@@ -54,7 +61,17 @@ namespace HyberShift_CSharp.ViewModel
                 FloatingPasswordBox = ConvertToUnsecureString(secureString);
             }
 
-            loginModel.Authentication();
+            if (loginModel.LogIn())
+            {
+                loginModel.Authentication();
+                //CloseWindowManager.CloseLoginWindow(ViewID);
+                //TO-DO: Open Main Window
+            }
+            else
+            {
+                MessageBoxResult result1 = MessageBox.Show("Email or Password is wrong. Please check again", "ERROR", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+
             //NotifyChanged("attributeX");  // this will automatically update attributeX  
         }
 

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
-        <viewmodel:LoginViewModel x:Key="LoginViewModel" />
+        <viewmodel:MainViewModel x:Key="MainViewModel" />
     </Window.Resources>
     <Grid>
         <!--Test-->
@@ -16,16 +16,16 @@
             <StackPanel Orientation="Horizontal">
                 <Label>Email</Label>
                 <TextBox x:Name="TxtEmail" Width="200"
-                         Text="{Binding Email, Source={StaticResource LoginViewModel}}" />
+                         Text="Hello" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal">
                 <Label>Password</Label>
                 <TextBox x:Name="TxtPassword" Width="200"
-                         Text="{Binding TxtPassword,Source={StaticResource LoginViewModel}}" />
+                         Text="World" />
             </StackPanel>
 
-            <Button x:Name="BtnLogin" Command="{Binding Command, Source={StaticResource LoginViewModel}}">Login</Button>
+            <Button x:Name="BtnSignOut" Command="{Binding SignOutCommand, Source={StaticResource MainViewModel}}">SIGN OUT</Button>
         </StackPanel>
 
     </Grid>

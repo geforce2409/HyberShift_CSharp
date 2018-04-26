@@ -3,9 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Quobject.EngineIoClientDotNet.ComponentEmitter;
 using Quobject.SocketIoClientDotNet.Client;
 
 namespace HyberShift_CSharp.Model
@@ -68,12 +70,10 @@ namespace HyberShift_CSharp.Model
 
         public bool IsValidLogin()
         {
-            if (InputEmail.Trim().Length == 0)
+            if (!IsValidInput.isValidEmail(InputEmail))
                 return false;
-
-            if (InputPassword.Trim().Length < 6)
+            if (!IsValidInput.IsValidPassword(InputPassword))
                 return false;
-
             return true;
         }
 
@@ -102,35 +102,34 @@ namespace HyberShift_CSharp.Model
         //[SAMPLE] Method handle "On" event from socket server
         public void HandleOnSocketEvent()
         {
-            socket.On("authentication_result", () =>
+            socket.On("authentication_result", new Action<object>(args =>
             {
-                if (LogIn())
+                JObject data = (JObject) args;
+                if (data != null)
+                {
                     Debug.Log("Authentication successed");
+                    Debug.Log(data.ToString());
+                }
                 else
                     Debug.Log("Authentication failed");
-            });
+            }));
 
-            socket.On("<event_name_1>", () => {
+            socket.On("<event_name_1>", () =>
+            {
                 Debug.Log("Received response 1 of socket");
 
                 // NOTICE: SOME EVENT NEED TO BE RUNNED ON ANOTHER THREAD
                 // Start a new thread in java (old project):
-            //    Platform.runLater(new Runnable(){
-            //                @Override
+                //    Platform.runLater(new Runnable(){
+                //                @Override
 
-            //                public void run()
-            //                {
-            //                    ...
-            //                }
-            //    });
+                //                public void run()
+                //                {
+                //                    ...
+                //                }
+                //    });
 
                 // In C# ???
-
-                
-            });
-
-            socket.On("<event_name_2>", () => {
-                Debug.Log("Received response 2 of socket");
             });
         }
     }

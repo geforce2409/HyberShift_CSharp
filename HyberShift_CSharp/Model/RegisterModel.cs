@@ -15,6 +15,14 @@ namespace HyberShift_CSharp.Model
         public RegisterModel()
         {
             Info = new UserInfo();
+            Info.Email = "";
+            Info.Password = "";
+            Info.Phone = "";
+            Info.FullName = "";
+            //if (Info.AvatarRef != null)
+            //    Info.AvatarRef = ImageUtils.encodeFileToBase64Binary(Info.AvatarRef);
+            //else
+            Info.AvatarRef = "null";
             confirmPassword = "";
         }
 
@@ -35,7 +43,7 @@ namespace HyberShift_CSharp.Model
 
                 // if success then return true
 
-                PushData();
+                //PushData();
 
                 return true;
             }
@@ -45,10 +53,6 @@ namespace HyberShift_CSharp.Model
 
         public void PushData()
         {
-            //Info.Email = tfEmail.getText().toString();
-            //Info.Password = tfPassword.getText().toString();
-            //Info.Phone = tfPhoneNumber.getText().toString();
-            //Info.FullName = tfName.getText().toString();
             //if (Info.AvatarRef != null)
             //    Info.AvatarRef = ImageUtils.encodeFileToBase64Binary(userinfo.AvatarRef);
             //else
@@ -69,26 +73,27 @@ namespace HyberShift_CSharp.Model
             }
             catch (JsonException e)
             {
-                // TODO Auto-generated catch block
                 Debug.Log(e.ToString());
             }
 
             Debug.Log("Email: " + Info.Email + ", Password: " + Info.Password + ", ConfirmPassword: " +
-                      ConfirmPassword + ", Name: " + Info.FullName + ", Phone: " + Info.Phone);
+                      ConfirmPassword + ", Name: " + Info.FullName + ", Phone: " + Info.Phone + 
+                      ", AvatarString: " + Info.AvatarRef);
+
+            HandleOnSocketEvent();
         }
 
         public bool IsValidRegister()
         {
-            Console.WriteLine(Info.Email.Trim().Length);
-            if (Info.Email.Trim().Length == 0)
+            if (!IsValidInput.isValidEmail(Info.Email))
                 return false;
-            if (Info.FullName.Trim().Length == 0)
+            if (!IsValidInput.IsValidPassword(Info.Password))
                 return false;
-            if (Info.Password.Trim().Length < 6)
+            if (!IsValidInput.IsValidPassword(ConfirmPassword))
                 return false;
-            if (ConfirmPassword.Trim().Length < 6)
+            if (!IsValidInput.IsValidFullName(Info.FullName))
                 return false;
-            if (Info.Phone.Trim().Length == 0)
+            if (!IsValidInput.IsValidPhone(Info.Phone)) 
                 return false;
             if (Info.Password != ConfirmPassword)
                 return false;
@@ -97,14 +102,18 @@ namespace HyberShift_CSharp.Model
 
         public void HandleOnSocketEvent()
         {
-            socket.On("register_result", () =>
+            socket.On("register_result", new Action<object>(args =>
             {
-                if (Register())
-                    //userinfo.UserId = ...;
+                string data = (string) args;
+                if (data != null)
+                {
+                    Info.UserId = data;
+                    Debug.Log(data.ToString());
                     Debug.Log("Register successed");
+                }
                 else
                     Debug.Log("Register failed");
-            });
+            }));
         }
     }
 }

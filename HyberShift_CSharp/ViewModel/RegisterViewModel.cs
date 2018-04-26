@@ -2,9 +2,12 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Windows;
+using System.Windows.Forms;
 using HyberShift_CSharp.Model;
 using HyberShift_CSharp.Utilities;
 using Prism.Commands;
+using MessageBox = System.Windows.MessageBox;
 
 namespace HyberShift_CSharp.ViewModel
 {
@@ -78,7 +81,15 @@ namespace HyberShift_CSharp.ViewModel
                 FloatingConfirmPasswordBox = ConvertToUnsecureString(secureStringConfirmPassword);
             }
 
-            registerModel.PushData();
+            if (registerModel.Register())
+            {
+                registerModel.PushData();
+                MessageBox.Show("Your account is created!", "Congrats!", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                MessageBox.Show("Something is wrong. Please check again", "ERROR",MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
             //NotifyChanged("attributeX");  // this will automatically update attributeX  
         }
 
