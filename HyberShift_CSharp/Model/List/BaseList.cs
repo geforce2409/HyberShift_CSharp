@@ -49,6 +49,25 @@ namespace HyberShift_CSharp.Model.List
         }
 
         /// <summary>
+        ///  Lấy ra đối tượng đầu tiên thõa mãn giá trị cho trước thông qua một thuộc tính
+        /// Vd: list chứa thông tin của những UserOnline, 
+        /// UserOnline gồm các thuộc thuộc tính Name, Email 
+        /// => GetCollectionOfField("Name", "Tran Minh Quan") trả về một đối tượng UserOnline có Name là "Tran Minh Quan" của list
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public T GetFirstObjectByValue(string fieldName, dynamic value)
+        {
+            foreach (T obj in list)
+            {
+                if (BaseList<T>.GetPropertyValue(obj, fieldName) == value)
+                    return obj;
+            }
+            return default(T);
+        }
+
+        /// <summary>
         /// Lấy ra một collections chứa các giá trị của một thuộc tính
         /// Vd: list chứa thông tin của những UserOnline, 
         /// UserOnline gồm các thuộc thuộc tính Name, Email 
@@ -72,18 +91,54 @@ namespace HyberShift_CSharp.Model.List
         /// UserOnline gồm các thuộc thuộc tính Name, Email 
         /// => GetCollectionOfFieldByValue("Name", "Tran Minh Quan") trả về một collection chứa các Name của list có giá trị là "Tran Minh Quan"
         /// </summary>
-        /// <param name="fieldName"></param>
-        /// <param name="value"></param>
+        /// <param name="fieldNameToGet">tên thuộc tính cần lấy</param>
+        /// <param name="fieldNameToCompare">tên thuộc tính cần đối chiếu</param>
+        /// <param name="value">giá trị thuộc tính cần đối chiếu</param>
         /// <returns></returns>
-        public ObservableCollection<dynamic> GetCollectionOfFieldByValue(string fieldName, dynamic value)
+        public ObservableCollection<dynamic> GetCollectionOfFieldByValue(string fieldNameToGet, string fieldNameToCompare, dynamic value)
         {
             ObservableCollection<dynamic> result = new ObservableCollection<dynamic>();
             foreach (T obj in list)
             {
-                if (BaseList<T>.GetPropertyValue(obj, fieldName) == value)
-                    result.Add(BaseList<T>.GetPropertyValue(obj, fieldName));
+                if (BaseList<T>.GetPropertyValue(obj, fieldNameToCompare) == value)
+                    result.Add(BaseList<T>.GetPropertyValue(obj, fieldNameToGet));
             }
             return result;
+        }
+
+        /// <summary>
+        /// Lấy ra một đối tượng chứa các giá trị của một thuộc tính nếu thõa mãn giá trị value
+        /// Vd: list chứa thông tin của những UserOnline, 
+        /// UserOnline gồm các thuộc thuộc tính Name, Email 
+        /// => GetCollectionOfFieldByValue("Name", "Tran Minh Quan") trả về một đối tượng chứa các Name của list có giá trị là "Tran Minh Quan"
+        /// </summary>
+        /// <param name="fieldNameToGet"></param>
+        /// <param name="fieldNameToCompare"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public dynamic GetFirstObjectOfFieldByValue(string fieldNameToGet, string fieldNameToCompare, dynamic value)
+        {
+            foreach (T obj in list)
+            {
+                if (BaseList<T>.GetPropertyValue(obj, fieldNameToCompare) == value)
+                    return obj;
+            }
+            return null;
+        }
+
+        public int GetIndexByValue(string fieldNameToCompare, dynamic value)
+        {
+            for(int i=0; i<list.Count; i++)
+            {
+                if (BaseList<T>.GetPropertyValue(list[i], fieldNameToCompare) == value)
+                    return i;
+            }
+            return -1;
+        }
+
+        public dynamic GetFieldValueByIndex(string fieldNameToGet, int index)
+        {
+            return BaseList<T>.GetPropertyValue(list[index], fieldNameToGet);
         }
 
         /// <summary>

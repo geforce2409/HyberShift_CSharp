@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    public class SignInPageViewModel: ViewModelBase
+    public class SignInPageViewModel: BaseViewModel
     {
         public LoginViewModel LoginVM { get; set; }
         public RegisterViewModel RegisterVM { get; set; }

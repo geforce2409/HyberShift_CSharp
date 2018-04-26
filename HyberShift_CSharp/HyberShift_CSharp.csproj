@@ -111,16 +111,19 @@
     <Compile Include="DataObject\ListOnline.cs" />
     <Compile Include="DataObject\ListRoom.cs" />
     <Compile Include="Model\List\BaseList.cs" />
+    <Compile Include="Model\List\ListRoomModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="DataObject\Message.cs" />
     <Compile Include="DataObject\Notification.cs" />
     <Compile Include="Model\RegisterModel.cs" />
-    <Compile Include="DataObject\Room.cs" />
+    <Compile Include="Model\Room.cs" />
     <Compile Include="DataObject\SenderTyping.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="DataObject\UserOnline.cs" />
+    <Compile Include="ViewModel\CreateRoomViewModel.cs" />
+    <Compile Include="ViewModel\ListRoomViewModel.cs" />
     <Compile Include="ViewModel\SignInPageViewModel.cs" />
-    <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="View\SignIn\SignInControl.xaml.cs">
       <DependentUpon>SignInControl.xaml</DependentUpon>
     </Compile>

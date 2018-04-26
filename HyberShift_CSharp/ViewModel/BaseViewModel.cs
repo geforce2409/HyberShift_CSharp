@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    public abstract class ViewModelBase : INotifyPropertyChanged
+    public abstract class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

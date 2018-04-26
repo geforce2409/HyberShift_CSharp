@@ -11,7 +11,7 @@ using Prism.Commands;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : BaseViewModel
     {
         private readonly Action<object> navigate;
         private readonly LoginModel loginModel;
