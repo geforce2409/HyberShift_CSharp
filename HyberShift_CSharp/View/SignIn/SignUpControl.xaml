@@ -32,7 +32,7 @@
                                  materialDesign:ShadowAssist.ShadowEdges="Bottom">
                 <Button
                     Style="{StaticResource MaterialDesignFlatButton}" FontWeight="Bold" Foreground="{DynamicResource AccentBrush}" FontSize="9"
-                    HorizontalAlignment="Left" Content="&lt; CREATE ACCOUNT" Padding="5,5,5,0" Margin="0,-7,0,3" 
+                    HorizontalAlignment="Left" Content="&lt; CREATE ACCOUNT" Padding="5,0" Margin="0,-7,0,3" 
                     Command="{Binding NavigateCommand}" />
             </materialDesign:Card>
 
