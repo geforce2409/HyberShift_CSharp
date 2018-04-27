@@ -1,54 +1,31 @@
 ﻿using HyberShift_CSharp.Utilities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Quobject.EngineIoClientDotNet.ComponentEmitter;
 using Quobject.SocketIoClientDotNet.Client;
 
 namespace HyberShift_CSharp.Model
 {
     public class LoginModel
     {
-        private string inputEmail;
-        private string inputPassword;
-
-        Socket socket;
+        private readonly Socket socket;
 
         // constructor
         public LoginModel()
         {
-            inputEmail = "";
-            inputPassword = "";
+            InputEmail = "";
+            InputPassword = "";
             socket = SocketAPI.GetInstance().GetSocket();
 
-            socket.On(Socket.EVENT_CONNECT, () =>
-            {
-                Debug.Log("Client connected to server");
-            }).On(Socket.EVENT_DISCONNECT, () =>
-            {
-                Debug.Log("Client disconnected to server");
-            });
+            socket.On(Socket.EVENT_CONNECT, () => { Debug.Log("Client connected to server"); })
+                .On(Socket.EVENT_DISCONNECT, () => { Debug.Log("Client disconnected to server"); });
 
             socket.Connect();
         }
 
         // getter and setter
-        public string InputEmail
-        {
-            get { return inputEmail; }
-            set { inputEmail = value; }
-        }
+        public string InputEmail { get; set; }
 
-        public string InputPassword
-        {
-            get { return inputPassword; }
-            set { inputPassword = value; }
-        }
+        public string InputPassword { get; set; }
 
         public bool LogIn()
         {
@@ -62,10 +39,8 @@ namespace HyberShift_CSharp.Model
             }
 
             // else return false
-            else
-            {
-                return false;
-            }
+
+            return false;
         }
 
         public bool IsValidLogin()
@@ -79,21 +54,20 @@ namespace HyberShift_CSharp.Model
 
         public void Authentication()
         {
-            
             //Convert to JSONObject
-            JObject userjson = new JObject();
+            var userjson = new JObject();
             try
             {
                 userjson.Add("email", InputEmail);
                 userjson.Add("password", InputPassword);
-
             }
             catch (JsonException e)
             {
                 Debug.Log(e.ToString());
             }
+
             Debug.Log("Email: " + InputEmail + ", Password: " + InputPassword);
-            socket.Emit("authentication", userjson);         
+            socket.Emit("authentication", userjson);
 
             // [SAMPLE] Method for receiving event from socket server
             HandleOnSocketEvent();
@@ -102,17 +76,19 @@ namespace HyberShift_CSharp.Model
         //[SAMPLE] Method handle "On" event from socket server
         public void HandleOnSocketEvent()
         {
-            socket.On("authentication_result", new Action<object>(args =>
+            socket.On("authentication_result", args =>
             {
-                JObject data = (JObject) args;
+                var data = (JObject) args;
                 if (data != null)
                 {
                     Debug.Log("Authentication successed");
                     Debug.Log(data.ToString());
                 }
                 else
+                {
                     Debug.Log("Authentication failed");
-            }));
+                }
+            });
 
             socket.On("<event_name_1>", () =>
             {

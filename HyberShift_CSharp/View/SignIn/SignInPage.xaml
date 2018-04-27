@@ -25,17 +25,17 @@
     <Window.Resources>
         <!--<viewModel:LoginViewModel x:Key="LoginViewModel" />
         <viewModel:RegisterViewModel x:Key="RegisterViewModel" />-->
-        
+
         <!--TMQ-->
         <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
-            <signIn:SignInControl/>
+            <signIn:SignInControl />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type viewModel:RegisterViewModel}">
-            <signIn:SignUpControl/>
+            <signIn:SignUpControl />
         </DataTemplate>
 
-        <viewModel:SignInPageViewModel x:Key="SignInPageViewModel"/>
+        <viewModel:SignInPageViewModel x:Key="SignInPageViewModel" />
 
     </Window.Resources>
 
@@ -52,11 +52,11 @@
         </Grid.ColumnDefinitions>
 
         <!--TMQ-->
-        <ContentControl x:Name="Pages" 
-                        Grid.Column="1" 
-                        Grid.Row="1" 
-                        Content="{Binding SelectedViewModel, Source={StaticResource SignInPageViewModel}}"/>
-        
+        <ContentControl x:Name="Pages"
+                        Grid.Column="1"
+                        Grid.Row="1"
+                        Content="{Binding SelectedViewModel, Source={StaticResource SignInPageViewModel}}" />
+
         <!--<signIn:SignInControl
             Visibility="{Binding SignInVisible, Source={StaticResource RegisterViewModel}}"
             Grid.Column="1"

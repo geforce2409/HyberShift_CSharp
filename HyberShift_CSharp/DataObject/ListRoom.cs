@@ -30,7 +30,7 @@ namespace HyberShift_CSharp.Model
         {
             var lst = new ArrayList();
             for (var i = 0; i < list.Count(); i++) lst.Add(list.ElementAt(i).Name);
-            
+
             return lst;
         }
 

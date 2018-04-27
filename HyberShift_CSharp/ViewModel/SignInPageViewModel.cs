@@ -1,29 +1,8 @@
-﻿using Prism.Commands;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HyberShift_CSharp.ViewModel
+﻿namespace HyberShift_CSharp.ViewModel
 {
-    public class SignInPageViewModel: BaseViewModel
+    public class SignInPageViewModel : BaseViewModel
     {
-        public LoginViewModel LoginVM { get; set; }
-        public RegisterViewModel RegisterVM { get; set; }
-
         private object selectedViewModel;
-
-        public object SelectedViewModel
-        {
-            get { return selectedViewModel; }
-            set
-            {
-                selectedViewModel = value;
-                NotifyChanged("SelectedViewModel");
-            }
-        }
 
         public SignInPageViewModel()
         {
@@ -31,17 +10,23 @@ namespace HyberShift_CSharp.ViewModel
             //SelectedViewModel = new RegisterViewModel(RegisterVMNavigator);
         }
 
-        public void ViewModelNavigator(object obj)
+        public LoginViewModel LoginVM { get; set; }
+        public RegisterViewModel RegisterVM { get; set; }
+
+        public object SelectedViewModel
         {
-            if (obj.ToString() == "RegisterViewModel")
+            get => selectedViewModel;
+            set
             {
-                SelectedViewModel = new RegisterViewModel(ViewModelNavigator);
-            }
-            if (obj.ToString() == "LoginViewModel")
-            {
-                SelectedViewModel = new LoginViewModel(ViewModelNavigator);
+                selectedViewModel = value;
+                NotifyChanged("SelectedViewModel");
             }
         }
 
+        public void ViewModelNavigator(object obj)
+        {
+            if (obj.ToString() == "RegisterViewModel") SelectedViewModel = new RegisterViewModel(ViewModelNavigator);
+            if (obj.ToString() == "LoginViewModel") SelectedViewModel = new LoginViewModel(ViewModelNavigator);
+        }
     }
 }

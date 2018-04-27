@@ -1,12 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Windows;
 using HyberShift_CSharp.Model;
-using HyberShift_CSharp.Utilities;
 using Prism.Commands;
-using MessageBox = System.Windows.MessageBox;
 
 namespace HyberShift_CSharp.ViewModel
 {
@@ -14,6 +11,19 @@ namespace HyberShift_CSharp.ViewModel
     {
         private readonly Action<object> navigate;
         private readonly RegisterModel registerModel;
+
+        // constructor
+        public RegisterViewModel()
+        {
+            registerModel = new RegisterModel();
+            RegisterCommand = new DelegateCommand<object>(Register);
+        }
+
+        public RegisterViewModel(Action<object> navigate) : this()
+        {
+            this.navigate = navigate;
+            NavigateCommand = new DelegateCommand(Navigate);
+        }
 
         // getter and setter
         public DelegateCommand NavigateCommand { get; set; }
@@ -54,19 +64,6 @@ namespace HyberShift_CSharp.ViewModel
             set => registerModel.Info.AvatarRef = Convert.ToString(value);
         }
 
-        // constructor
-        public RegisterViewModel()
-        {
-            registerModel = new RegisterModel();
-            RegisterCommand = new DelegateCommand<object>(Register);
-        }
-
-        public RegisterViewModel(Action<object> navigate):this()
-        {
-            this.navigate = navigate;
-            NavigateCommand = new DelegateCommand(Navigate);
-        }
-
         public DelegateCommand<object> RegisterCommand { get; set; }
 
         public void Register(object parameter)
@@ -83,12 +80,15 @@ namespace HyberShift_CSharp.ViewModel
             if (registerModel.Register())
             {
                 registerModel.PushData();
-                MessageBox.Show("Your account is created!", "Congrats!", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Your account is created!", "Congrats!", MessageBoxButton.OK,
+                    MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("Something is wrong. Please check again", "ERROR",MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Something is wrong. Please check again", "ERROR", MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
             }
+
             //NotifyChanged("attributeX");  // this will automatically update attributeX  
         }
 
@@ -99,12 +99,9 @@ namespace HyberShift_CSharp.ViewModel
 
         private string ConvertToUnsecureString(SecureString securePassword)
         {
-            if (securePassword == null)
-            {
-                return string.Empty;
-            }
+            if (securePassword == null) return string.Empty;
 
-            IntPtr unmanagedString = IntPtr.Zero;
+            var unmanagedString = IntPtr.Zero;
             try
             {
                 unmanagedString = Marshal.SecureStringToGlobalAllocUnicode(securePassword);

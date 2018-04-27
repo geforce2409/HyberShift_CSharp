@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security;
 
 namespace HyberShift_CSharp
 {
     public interface IHavePassword
     {
-        System.Security.SecureString Password { get; }
-        System.Security.SecureString ConfirmPassword { get; }
+        SecureString Password { get; }
+        SecureString ConfirmPassword { get; }
     }
 }

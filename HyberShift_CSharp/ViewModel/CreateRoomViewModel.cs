@@ -1,16 +1,16 @@
 ﻿using HyberShift_CSharp.Model;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    class CreateRoomViewModel: BaseViewModel
+    internal class CreateRoomViewModel : BaseViewModel
     {
-        Room room;
+        private readonly Room room;
+
+        // constructor
+        public CreateRoomViewModel()
+        {
+            room = new Room();
+        }
 
         // getter and setter
         //public string ID
@@ -20,28 +20,18 @@ namespace HyberShift_CSharp.ViewModel
         //}
         public string TxtRoomName
         {
-            get { return room.Name; }
-            set { room.Name = value; NotifyChanged("TxtRoomName"); }
-        }
-        public string TxtRoomMember
-        {
-            get
-            {
-                // TO-DO: Lấy từ list members của room ghép lại thành chuỗi
-
-                return null;    // temp
-            }
+            get => room.Name;
             set
             {
-                // TO-DO: Tách từ input string (value) được ngăn cách bởi dấu ; thành mảng các members rồi gán cho room
-                NotifyChanged("TxtRoomMember");
+                room.Name = value;
+                NotifyChanged("TxtRoomName");
             }
         }
 
-        // constructor
-        public CreateRoomViewModel(): base()
+        public string TxtRoomMember
         {
-            room = new Room();
+            get => null;
+            set => NotifyChanged("TxtRoomMember");
         }
 
         // method or command

@@ -1,5 +1,4 @@
-﻿using System;
-using HyberShift_CSharp.Utilities;
+﻿using HyberShift_CSharp.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;
@@ -9,7 +8,6 @@ namespace HyberShift_CSharp.Model
     public class RegisterModel
     {
         private readonly Socket socket = SocketAPI.GetInstance().GetSocket();
-        private string confirmPassword;
 
         // constructor
         public RegisterModel()
@@ -23,30 +21,17 @@ namespace HyberShift_CSharp.Model
             //    Info.AvatarRef = ImageUtils.encodeFileToBase64Binary(Info.AvatarRef);
             //else
             Info.AvatarRef = "null";
-            confirmPassword = "";
+            ConfirmPassword = "";
         }
 
         // getter and setter
         public UserInfo Info { get; set; }
 
-        public string ConfirmPassword
-        {
-            get { return confirmPassword; }
-            set { confirmPassword = value; }
-        }
+        public string ConfirmPassword { get; set; }
 
         public bool Register()
         {
-            if (IsValidRegister())
-            {
-                // TO-DO: using socket to register with server here
-
-                // if success then return true
-
-                //PushData();
-
-                return true;
-            }
+            if (IsValidRegister()) return true;
 
             return false;
         }
@@ -77,7 +62,7 @@ namespace HyberShift_CSharp.Model
             }
 
             Debug.Log("Email: " + Info.Email + ", Password: " + Info.Password + ", ConfirmPassword: " +
-                      ConfirmPassword + ", Name: " + Info.FullName + ", Phone: " + Info.Phone + 
+                      ConfirmPassword + ", Name: " + Info.FullName + ", Phone: " + Info.Phone +
                       ", AvatarString: " + Info.AvatarRef);
 
             HandleOnSocketEvent();
@@ -93,7 +78,7 @@ namespace HyberShift_CSharp.Model
                 return false;
             if (!IsValidInput.IsValidFullName(Info.FullName))
                 return false;
-            if (!IsValidInput.IsValidPhone(Info.Phone)) 
+            if (!IsValidInput.IsValidPhone(Info.Phone))
                 return false;
             if (Info.Password != ConfirmPassword)
                 return false;
@@ -102,9 +87,9 @@ namespace HyberShift_CSharp.Model
 
         public void HandleOnSocketEvent()
         {
-            socket.On("register_result", new Action<object>(args =>
+            socket.On("register_result", args =>
             {
-                string data = (string) args;
+                var data = (string) args;
                 if (data != null)
                 {
                     Info.UserId = data;
@@ -112,8 +97,10 @@ namespace HyberShift_CSharp.Model
                     Debug.Log("Register successed");
                 }
                 else
+                {
                     Debug.Log("Register failed");
-            }));
+                }
+            });
         }
     }
 }

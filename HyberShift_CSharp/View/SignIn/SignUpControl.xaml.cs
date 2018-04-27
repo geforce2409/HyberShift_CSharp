@@ -1,11 +1,10 @@
-﻿using System.Windows.Controls;
-using HyberShift_CSharp.ViewModel;
-using Newtonsoft.Json;
+﻿using System.Security;
+using System.Windows.Controls;
 
 namespace HyberShift_CSharp.View.SignIn
 {
     /// <summary>
-    /// Interaction logic for SignUpControl.xaml
+    ///     Interaction logic for SignUpControl.xaml
     /// </summary>
     public partial class SignUpControl : UserControl, IHavePassword
     {
@@ -14,20 +13,8 @@ namespace HyberShift_CSharp.View.SignIn
             InitializeComponent();
         }
 
-        public System.Security.SecureString Password
-        {
-            get
-            {
-                return FloatingPasswordBox.SecurePassword;
-            }
-        }
+        public SecureString Password => FloatingPasswordBox.SecurePassword;
 
-        public System.Security.SecureString ConfirmPassword
-        {
-            get
-            {
-                return FloatingConfirmPasswordBox.SecurePassword;
-            }
-        }
+        public SecureString ConfirmPassword => FloatingConfirmPasswordBox.SecurePassword;
     }
 }
