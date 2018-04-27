@@ -56,8 +56,9 @@ namespace HyberShift_CSharp.ViewModel
             if (loginModel.LogIn())
             {
                 loginModel.Authentication();
-                //CloseWindowManager.CloseLoginWindow(ViewID);
-                //TO-DO: Open Main Window
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
+                CloseWindowManager.CloseLoginWindow(ViewID);
             }
             else
             {
