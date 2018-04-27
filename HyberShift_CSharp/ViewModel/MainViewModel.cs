@@ -6,6 +6,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using HyberShift_CSharp.Model;
+using HyberShift_CSharp.View.SignIn;
 using Prism.Commands;
 
 namespace HyberShift_CSharp.ViewModel
@@ -34,7 +35,10 @@ namespace HyberShift_CSharp.ViewModel
         public void SignOut()
         {
             // TO-DO: Xử lý quay lại màn hình Login
-            //CloseWindowManager.CloseMainWindow(ViewID);
+            SignInPage signInPage = new SignInPage();
+            signInPage.Show();
+            CloseWindowManager.CloseMainWindow(ViewID);
+
         }  
     }
 }

@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace HyberShift_CSharp
 {
-    public static class WindowManager
+    public static class CloseWindowManager
     {
         public static void CloseLoginWindow(Guid id)
         {

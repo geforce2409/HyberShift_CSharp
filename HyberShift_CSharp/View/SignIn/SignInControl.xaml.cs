@@ -16,7 +16,7 @@ namespace HyberShift_CSharp.View.SignIn
             //DataContext = new LoginViewModel();
         }
 
-        public System.Security.SecureString Password
+        public SecureString Password
         {
             get
             {
