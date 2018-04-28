@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using HyberShift_CSharp.Model;
 using HyberShift_CSharp.Model.List;
 
@@ -6,25 +7,26 @@ namespace HyberShift_CSharp.ViewModel
 {
     public class ListRoomViewModel : BaseViewModel
     {
-        private readonly ListRoomModel model;
+        private readonly ListRoomModel roomModel;
 
         // constructor
         public ListRoomViewModel()
         {
-            model = new ListRoomModel();
+            roomModel = new ListRoomModel();
         }
 
         // getter and setter
         public ObservableCollection<Room> List
         {
-            get => model.List;
+            get => roomModel.List;
             set
             {
-                model.List = value;
+                roomModel.List = value;
                 NotifyChanged("List");
             }
         }
 
         // method
+ 
     }
 }

@@ -14,31 +14,22 @@ namespace HyberShift_CSharp.ViewModel
     public class MainViewModel : BaseViewModel
     {
         private readonly MainModel mainModel;
-        private readonly Guid _viewId;
 
         // getter and setter
         public DelegateCommand SignOutCommand { get; set; }
 
-        public Guid ViewID
-        {
-            get { return _viewId; }
-        }
 
         // constructor
         public MainViewModel()
         {
             mainModel = new MainModel();
             SignOutCommand = new DelegateCommand(SignOut);
-            _viewId = Guid.NewGuid();
         }
 
         public void SignOut()
         {
             // TO-DO: Xử lý quay lại màn hình Login
-            SignInPage signInPage = new SignInPage();
-            signInPage.Show();
-            CloseWindowManager.CloseMainWindow(ViewID);
-
+            mainModel.SignOut();
         }  
     }
 }

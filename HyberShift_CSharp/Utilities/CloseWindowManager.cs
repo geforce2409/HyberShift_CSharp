@@ -5,22 +5,24 @@ namespace HyberShift_CSharp
 {
     public static class CloseWindowManager
     {
-        public static void CloseLoginWindow(Guid id)
+        public static void CloseLoginWindow()
         {
             foreach (Window window in Application.Current.Windows)
                 if (window.Title == "SignIn")
                     window.Close();
-            //var w_id = window.DataContext as IRequireViewIdentification;
-            //if (w_id != null && w_id.ViewID.Equals(id))
-            //{
-            //    window.Close();
-            //}
         }
 
-        public static void CloseMainWindow(Guid id)
+        public static void CloseMainWindow()
         {
             foreach (Window window in Application.Current.Windows)
                 if (window.Title == "MainWindow")
+                    window.Close();
+        }
+
+        public static void CloseCreateRoomWindow()
+        {
+            foreach (Window window in Application.Current.Windows)
+                if (window.Title == "CreateRoom")
                     window.Close();
         }
     }

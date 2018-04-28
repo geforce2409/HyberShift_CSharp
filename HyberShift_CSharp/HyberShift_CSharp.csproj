@@ -100,8 +100,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Domain\NotEmptyValidationRule.cs" />
-    <Compile Include="Utilities\IRequireViewIdentification.cs" />
     <Compile Include="Domain\IsValidInput.cs" />
+    <Compile Include="Model\CreateRoomModel.cs" />
     <Compile Include="Utilities\IHavePassword.cs" />
     <Compile Include="Model\FooModel.cs" />
     <Compile Include="DataObject\FriendInfo.cs" />
