@@ -1,4 +1,10 @@
-﻿using HyberShift_CSharp.Utilities;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using HyberShift_CSharp.Utilities;
+using HyberShift_CSharp.View;
+using MaterialDesignThemes.Wpf;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;
@@ -83,6 +89,17 @@ namespace HyberShift_CSharp.Model
                 {
                     Debug.Log("Authentication successed");
                     Debug.Log(data.ToString());
+
+                    Application.Current.Dispatcher.Invoke((Action)delegate {
+                        // your code
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show();
+
+                        CreateRoom a = new CreateRoom();
+                        a.Show();
+                        CloseWindowManager.CloseLoginWindow();
+                    });
+                    return;
                 }
                 else
                 {

@@ -1,12 +1,25 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using HyberShift_CSharp.Utilities;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Quobject.SocketIoClientDotNet.Client;
 
 namespace HyberShift_CSharp.Model.List
 {
     public class ListRoomModel : BaseList<Room>
     {
         private static ListRoomModel instance;
+        private readonly ObservableCollection<Room> list;
+
+        private ListRoomModel listRoomModel;
 
         // constructor
+        public ListRoomModel()
+        {
+
+        }
 
         // getter and setter
         public ObservableCollection<object> IDList => GetCollectionOfField("ID");
@@ -47,6 +60,6 @@ namespace HyberShift_CSharp.Model.List
         public ObservableCollection<string> GetMembersFrom(int indexRoom)
         {
             return GetFieldValueByIndex("Members", indexRoom);
-        }
+        }   
     }
 }
