@@ -1,32 +1,57 @@
-﻿<Window x:Class="HyberShift_CSharp.MainWindow"
+﻿<fluentWpf:AcrylicWindow x:Class="HyberShift_CSharp.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HyberShift_CSharp"
         xmlns:viewmodel="clr-namespace:HyberShift_CSharp.ViewModel"
+        xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        TintColor="#10FFFFFF">
     <Window.Resources>
         <viewmodel:MainViewModel x:Key="MainViewModel" />
+
+        <system:Double x:Key="CollasedMenu">50</system:Double>
+        <system:Double x:Key="ExpandedMenu">200</system:Double>
+
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="{StaticResource CollasedMenu}"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="{StaticResource ExpandedMenu}"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="{StaticResource ExpandedMenu}"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="{StaticResource CollasedMenu}"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
     </Window.Resources>
-    <Grid>
-        <!--Test-->
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-                <Label>Email</Label>
-                <TextBox x:Name="TxtEmail" Width="200"
-                         Text="Hello" />
-            </StackPanel>
 
-            <StackPanel Orientation="Horizontal">
-                <Label>Password</Label>
-                <TextBox x:Name="TxtPassword" Width="200"
-                         Text="World" />
-            </StackPanel>
+    <Grid Background="#42AAAAAA">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-            <Button x:Name="BtnSignOut" Command="{Binding SignOutCommand, Source={StaticResource MainViewModel}}">SIGN OUT</Button>
-        </StackPanel>
+        <Grid x:Name="GridMenu" Width="{StaticResource CollasedMenu}"
+              Column="0" VerticalAlignment="Top"
+              fluentWpf:PointerTracker.Enabled="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
+            <ToggleButton x:Name="ButtonMenu"
+                          Style="{DynamicResource MaterialDesignHamburgerToggleButton}"
+                          HorizontalAlignment="Left" Width="30" Height="30"
+                          Click="ButtonMenu_OnClick" Margin="9,9,0,0"/>
+        </Grid>
+
+        <Grid Column="1" Background="White"></Grid>
     </Grid>
-</Window>
+</fluentWpf:AcrylicWindow>
