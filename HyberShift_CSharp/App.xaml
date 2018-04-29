@@ -28,7 +28,6 @@
             <SolidColorBrush x:Key="PrimaryBrush" Color="#1a535c" />
             <SolidColorBrush x:Key="AccentBrush" Color="#ffc146" />
 
-
             <Style x:Key="RaisedButton" BasedOn="{StaticResource MaterialDesignRaisedButton}"
                    TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="#1a535c" />
@@ -62,7 +61,6 @@
             </Style>
 
             <!--#region ios ScrollViewer-->
-
             <Style x:Key="CustomScrollbarStyle"
                    TargetType="{x:Type ScrollBar}">
                 <Setter Property="Stylus.IsFlicksEnabled"
