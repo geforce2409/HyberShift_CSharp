@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
-namespace HyberShift_CSharp
+namespace HyberShift_CSharp.Utilities
 {
     public static class CloseWindowManager
     {

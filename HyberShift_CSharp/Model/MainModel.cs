@@ -1,4 +1,5 @@
-﻿using HyberShift_CSharp.View.SignIn;
+﻿using HyberShift_CSharp.Utilities;
+using HyberShift_CSharp.View.SignIn;
 
 namespace HyberShift_CSharp.Model
 {

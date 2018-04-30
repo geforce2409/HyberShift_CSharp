@@ -66,13 +66,12 @@
         <Grid Column="2" Background="#FFE2E2E2"></Grid>
     </Grid>-->
 
-    <!--Left Panel-->
     <Grid Background="#42AAAAAA">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-
+        <!--Left Panel-->
         <!--Example in Material Design - List-->
         <!--<ItemsControl
             ItemsSource="{Binding Items2}" Grid.IsSharedSizeScope="True">
@@ -102,5 +101,16 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>-->
 
+        <!--Right Panel-->
+        <Grid Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+
+
+
+        </Grid>
     </Grid>
 </fluentWpf:AcrylicWindow>
