@@ -1,4 +1,7 @@
-﻿using HyberShift_CSharp.Model;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
+using HyberShift_CSharp.Model;
 using HyberShift_CSharp.View;
 using Prism.Commands;
 
@@ -8,7 +11,7 @@ namespace HyberShift_CSharp.ViewModel
     {
         private readonly Room room;
         private readonly CreateRoomModel createRoomModel;
-
+        private string[] separators = { ",", "!", "?", ";", ":", " " };
         // constructor
         public CreateRoomViewModel()
         {
@@ -27,29 +30,50 @@ namespace HyberShift_CSharp.ViewModel
         //}
         public string RoomName
         {
-            get => room.Name;
+            get
+            {
+                return createRoomModel.InputRoomName;
+                //room.Name;
+            } 
             set
             {
-                room.Name = value;
+                createRoomModel.InputRoomName = value;
+                //room.Name = value;
                 NotifyChanged("RoomName");
             }
         }
 
         public string Email { get; set; }
+
         //public string Email
         //{
         //    // TO-DO: Lấy từ list members của room ghép lại thành chuỗi
-        //    get => room.Members.ToString();
+        //    get => createRoomModel.InputRoomName;
+        //    //get => createRoomModel.InputEmailMember;
+        //    //return room.Members.ToString();
 
-        //    // TO-DO: Tách từ input string (value) được ngăn cách bởi dấu ; thành mảng các members rồi gán cho room
-        //    set => NotifyChanged("Email");
+        //    // TO-DO: Tách từ input string (value) được ngăn cách bởi dấu ; thành mảng các members rồi gán cho room           
+        //    set
+        //    {
+        //        createRoomModel.InputEmailMember = Email.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+        //        //for (int i = 0; i < createRoomModel.InputEmailMember.Length; i++)
+        //        //    createRoomModel.InputEmailMember[i] = value;
+        //        NotifyChanged("Email");
+        //    }
         //}
 
         // method or command
-        // ...
-        public void CreateRoom()
-        {           
-            createRoomModel.CreateRoom();
+    // ...
+    public void CreateRoom()
+        {
+            createRoomModel.InputEmailMember = Email.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            if (createRoomModel.isValidCreateRoom())
+                createRoomModel.CreateRoom();
+            else
+            {
+                MessageBox.Show("Something is wrong. Please try again", "ERROR",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
             //NotifyChanged("attributeX");  // this will automatically update attributeX  
         }
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using HyberShift_CSharp.Model.List;
 using HyberShift_CSharp.Utilities;
 using HyberShift_CSharp.View;
 using Newtonsoft.Json;
@@ -13,6 +15,8 @@ namespace HyberShift_CSharp.Model
 {
     public class CreateRoomModel
     {
+        private ListRoomModel listRoomModel;
+
         //Socket
         private readonly Socket socket;
 
@@ -22,9 +26,7 @@ namespace HyberShift_CSharp.Model
         // constructor
         public CreateRoomModel()
         {
-            InputRoomName = "";
-            InputEmailMember = "";
-
+            listRoomModel = new ListRoomModel();
             userInfo = UserInfo.getInstance();
             socket = SocketAPI.GetInstance().GetSocket();
         }
@@ -32,7 +34,7 @@ namespace HyberShift_CSharp.Model
         // getter and setter
         public string InputRoomName { get; set; }
 
-        public string InputEmailMember { get; set; }
+        public string[] InputEmailMember { get; set; }
 
         // method
 
@@ -41,21 +43,25 @@ namespace HyberShift_CSharp.Model
             //Convert to JSONObject
             var roomjson = new JObject();
 
+            JArray jarrayMember = new JArray();
+            foreach (string member in InputEmailMember)
+            {
+                jarrayMember.Add(member);
+            }
+
             try
             {
                 roomjson.Add("room_name", InputRoomName);
                 roomjson.Add("creator_name", userInfo.FullName);
                 roomjson.Add("creator_email", userInfo.Email);
-
-                for (int i = 0; i < InputEmailMember.Length; i++)
-                    roomjson.Add("members", InputEmailMember[i]);
+                roomjson.Add("members", jarrayMember);
             }
             catch (JsonException e)
             {
                 Debug.Log(e.ToString());
             }
 
-            Debug.Log("Room Name: " + InputRoomName + ", Email members: " + InputEmailMember);
+            Debug.Log("Creator_name: " + userInfo.FullName + ", Creator_email: " + userInfo.Email + ", Room Name: " + InputRoomName + ", Email members: " + jarrayMember);
             socket.Emit("create_room", roomjson);
 
             // [SAMPLE] Method for receiving event from socket server
@@ -73,22 +79,39 @@ namespace HyberShift_CSharp.Model
 
                 try
                 {
-                    //invalid = jsoninfo.getJSONArray("invalid");
-                    //jsarrMembers = jsoninfo.getJSONArray("members");
-                    //Room room = new Room();
-                    //for (int i = 0; i < jsarrMembers.Count; i++)
-                    //{
-                    //    room.AddMemebers(jsarrMembers.ElementAt(i).ToString());
-                    //}
+                    invalid = (JArray) jsoninfo.GetValue("invalid");
+                    jsarrMembers = (JArray) jsoninfo.GetValue("members");
+                    Room room = new Room();
+                    for (int i = 0; i < jsarrMembers.Count; i++)
+                    {
+                        room.AddMemebers(jsarrMembers.ElementAt(i).ToString());
+                    }
 
-                    //if (invalid.Count == 0)
-                    //{
-                    //    CloseWindowManager.CloseCreateRoomWindow();
-                    //}
-                    MainWindow mainWindow = new MainWindow();
-                    mainWindow.Show();
-                    CloseWindowManager.CloseCreateRoomWindow();
+                    //Add to listRoom
+                    room.Name =  jsoninfo.GetValue("room_name").ToString();
+                    room.ID = jsoninfo.GetValue("room_id").ToString();
+                    listRoomModel.Add(room);
 
+                    if (invalid.Count == 0)
+                    {
+                        MessageBox.Show("Create room successfully!", null, MessageBoxButton.OK,
+                            MessageBoxImage.Information);
+                        CloseWindowManager.CloseCreateRoomWindow();
+                    }
+                    //else
+                    //{
+                    //    MessageBox.Show("Create room successfully, emails " + invalid + " is not valid.", null, MessageBoxButton.OK,
+                    //        MessageBoxImage.Warning);
+                    //    return;
+                    //}
+                    Application.Current.Dispatcher.Invoke((Action)delegate {
+                        // your code
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show();
+                        CloseWindowManager.CloseCreateRoomWindow();
+                        return;
+                    });
+                    //return;
                 }
                 catch (JsonException e)
                 {
@@ -99,11 +122,11 @@ namespace HyberShift_CSharp.Model
                 var data = (JObject)args;
                 try
                 {
-                    //string roomId = data.getString("room_id");
-                    //string roomName = data.getString("room_name");
-                    //Debug.Log("roomName: " + roomName);
-                    //listRoomModel.AddRoom(new Room(roomId, roomName, null));
-                    //Debug.Log("Create room from: " + listRoomModel.NameList);
+                    string roomId = data.GetValue("room_id").ToString();
+                    string roomName = data.GetValue("room_name").ToString();
+                    Debug.Log("roomID: " + roomId + ", roomName: " + roomName);
+                    listRoomModel.Add(new Room(roomId, roomName, null));
+                    Debug.Log("Create room from: " + listRoomModel.NameList);
                 }
                 catch (JsonException e)
                 {
@@ -112,7 +135,7 @@ namespace HyberShift_CSharp.Model
             });
         }
 
-        private bool isValidCreateRoom()
+        public bool isValidCreateRoom()
         {
             if (InputRoomName.Trim().Length == 0)
                 return false;
