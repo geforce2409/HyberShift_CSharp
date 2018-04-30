@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.Windows;
 using HyberShift_CSharp.Model;
+using HyberShift_CSharp.Utilities;
 using Prism.Commands;
 
 namespace HyberShift_CSharp.ViewModel

@@ -1,6 +1,6 @@
 ﻿using System.Security;
 
-namespace HyberShift_CSharp
+namespace HyberShift_CSharp.Utilities
 {
     public interface IHavePassword
     {
