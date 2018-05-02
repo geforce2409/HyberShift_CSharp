@@ -8,11 +8,14 @@ namespace HyberShift_CSharp.Utilities
 {
     public static class Debug
     {
-        //private static StringBuilder sb = new StringBuilder();
-
         public static void Log(string content)
         {
             File.AppendAllText("log.txt", DateTime.Now + ": " + content + Environment.NewLine);
+        }
+
+        public static void LogOutput(string content)
+        {
+            System.Diagnostics.Debug.WriteLine(content);
         }
     }
 }
