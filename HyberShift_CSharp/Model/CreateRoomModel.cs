@@ -27,7 +27,7 @@ namespace HyberShift_CSharp.Model
         public CreateRoomModel()
         {
             listRoomModel = new ListRoomModel();
-            userInfo = UserInfo.getInstance();
+            userInfo = UserInfo.GetInstance();
             socket = SocketAPI.GetInstance().GetSocket();
         }
 
@@ -135,7 +135,7 @@ namespace HyberShift_CSharp.Model
             });
         }
 
-        public bool isValidCreateRoom()
+        public bool IsValidCreateRoom()
         {
             if (InputRoomName.Trim().Length == 0)
                 return false;

@@ -17,7 +17,7 @@
 
         public string AvatarRef { get; set; }
 
-        public static UserInfo getInstance()
+        public static UserInfo GetInstance()
         {
             if (instance == null)
                 instance = new UserInfo();

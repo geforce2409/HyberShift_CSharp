@@ -67,11 +67,11 @@ namespace HyberShift_CSharp.ViewModel
     public void CreateRoom()
         {
             createRoomModel.InputEmailMember = Email.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-            if (createRoomModel.isValidCreateRoom())
+            if (createRoomModel.IsValidCreateRoom())
                 createRoomModel.CreateRoom();
             else
             {
-                MessageBox.Show("Something is wrong. Please try again", "ERROR",
+                MessageBox.Show("Something is wrong. Please try again", "Create room failed",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             //NotifyChanged("attributeX");  // this will automatically update attributeX  

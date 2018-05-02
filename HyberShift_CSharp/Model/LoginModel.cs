@@ -18,6 +18,7 @@ namespace HyberShift_CSharp.Model
     {
         private readonly Socket socket;
         ListRoomModel listRoomModel = ListRoomModel.GetInstance();
+        UserInfo userInfo = UserInfo.GetInstance();
         // constructor
         public LoginModel()
         {
@@ -92,6 +93,12 @@ namespace HyberShift_CSharp.Model
                 {
                     Debug.Log("Authentication successed");
                     Debug.Log(data.ToString());
+
+                    // [IMPORTANT] set info for userinfo
+                    userInfo.AvatarRef = data.GetValue("avatarstring").ToString();
+                    userInfo.FullName = data.GetValue("fullname").ToString();
+                    userInfo.Email = data.GetValue("email").ToString();
+                    userInfo.Phone = data.GetValue("phone").ToString();
 
                     Application.Current.Dispatcher.Invoke((Action) delegate
                     {
