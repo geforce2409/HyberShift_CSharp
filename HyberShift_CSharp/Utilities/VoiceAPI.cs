@@ -1,4 +1,5 @@
 ﻿using NAudio.Wave;
+using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;
 using System;
 using System.Collections.Generic;
@@ -33,20 +34,36 @@ namespace HyberShift_CSharp.Utilities
             return instance;
         }
 
+        //getter and setter
+        public string ID { get; set; }
+
         // constructor
         public VoiceAPI()
         {
             socket = SocketAPI.GetInstance().GetSocket();
+        }
 
+        public VoiceAPI(string id): this()
+        {
+            ID = id;
         }
 
         #region Send
-        public void Send()
+        public void Send(string id)
         {
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(500);
-            timer.Tick += TimerTick;
+            timer.Tick += (sender, e) =>
+            {
+                this.Dispose();
+                SendBytes(id);
+            };
             Recordwav();
+        }
+
+        public void StopSending()
+        {
+            this.Dispose();
         }
 
         private void Recordwav()
@@ -78,16 +95,26 @@ namespace HyberShift_CSharp.Utilities
             waveWriter.Flush();
         }
 
-        private void TimerTick(object sender, EventArgs e)
-        {
-            this.Dispose();
-            SendBytes();
-        }
+        //private void TimerTick(object sender, EventArgs e)
+        //{
+        //    this.Dispose();
+        //    SendBytes();
+        //}
 
-        private void SendBytes()
+        private void SendBytes(string id)
         {
+            // if id=null, emit to "public" client
             dataArray = File.ReadAllBytes(path);
-            socket.Emit("stream_audio", dataArray);
+            // TO-DO: add JSONObject here
+            if (id == null)
+                socket.Emit("stream_audio", dataArray);
+            else
+            {
+                JObject audio = new JObject();
+                audio.Add("id", id);
+                audio.Add("content", dataArray);
+                socket.Emit("stream_audio", audio);
+            }
             Recordwav();
         }
 

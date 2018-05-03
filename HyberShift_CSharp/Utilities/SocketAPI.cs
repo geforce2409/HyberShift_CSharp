@@ -51,8 +51,19 @@ namespace HyberShift_CSharp.Utilities
 
         public void EstablishConnection()
         {
-            socket.On(Socket.EVENT_CONNECT, () => { Debug.Log("Client connected to server"); })
-                .On(Socket.EVENT_DISCONNECT, () => { Debug.Log("Client disconnected to server"); });
+            socket.
+                On(Socket.EVENT_CONNECT, () => 
+                {
+                    Debug.Log("Client connected to server");                  
+                }).
+                
+                On(Socket.EVENT_DISCONNECT, () => 
+                {
+                    Debug.Log("Client disconnected to server");
+                    socket.Disconnect();
+                    socket.Close();
+                    Debug.LogOutput("Client disconnected to server. Closed the socket");
+                });
         }
 
         // delegate to create event
