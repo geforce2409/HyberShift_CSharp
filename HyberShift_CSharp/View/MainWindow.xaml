@@ -7,6 +7,7 @@
                          xmlns:viewmodel="clr-namespace:HyberShift_CSharp.ViewModel"
                          xmlns:fluentWpf="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
                          xmlns:system="clr-namespace:System;assembly=mscorlib"
+                         xmlns:view="clr-namespace:HyberShift_CSharp.View"
                          mc:Ignorable="d"
                          Title="MainWindow" Height="584" Width="720"
                          WindowStartupLocation="CenterScreen"
@@ -66,12 +67,12 @@
         <Grid Column="2" Background="#FFE2E2E2"></Grid>
     </Grid>-->
 
-    <Grid Background="#42AAAAAA">
+    <!--<Grid Background="#42AAAAAA">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <!--Left Panel-->
+        --><!--Left Panel-->
         <!--Example in Material Design - List-->
         <!--<ItemsControl
             ItemsSource="{Binding Items2}" Grid.IsSharedSizeScope="True">
@@ -101,7 +102,7 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>-->
 
-        <!--Right Panel-->
+        <!--Right Panel--><!--
         <Grid Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
@@ -112,5 +113,7 @@
 
 
         </Grid>
-    </Grid>
+    </Grid>-->
+    
+    <view:ChatViewControl/>
 </fluentWpf:AcrylicWindow>
