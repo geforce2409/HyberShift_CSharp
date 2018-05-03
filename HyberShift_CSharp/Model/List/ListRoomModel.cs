@@ -8,17 +8,17 @@ using Quobject.SocketIoClientDotNet.Client;
 
 namespace HyberShift_CSharp.Model.List
 {
-    public class ListRoomModel : BaseList<Room>
+    public class ListRoomModel : BaseList<RoomModel>
     {
         private static ListRoomModel instance;
-        private readonly ObservableCollection<Room> list;
+        private ObservableCollection<RoomModel> list;
 
-        private ListRoomModel listRoomModel;
+        //private ListRoomModel listRoomModel;
 
         // constructor
         public ListRoomModel()
         {
-
+            list = new ObservableCollection<RoomModel>();
         }
 
         // getter and setter
@@ -27,6 +27,12 @@ namespace HyberShift_CSharp.Model.List
         public ObservableCollection<object> NameList => GetCollectionOfField("Name");
 
         public ObservableCollection<object> MemberList => GetCollectionOfField("Members");
+
+        public ObservableCollection<RoomModel> ListRoom
+        {
+            get { return list; }
+            set { list = value; }
+        }
 
         // singleton method
         public static ListRoomModel GetInstance()
@@ -37,7 +43,7 @@ namespace HyberShift_CSharp.Model.List
         }
 
         //method
-        public Room GetRoomFromName(string roomName)
+        public RoomModel GetRoomFromName(string roomName)
         {
             return GetFirstObjectByValue("Name", roomName);
         }
@@ -47,7 +53,7 @@ namespace HyberShift_CSharp.Model.List
             return GetCollectionOfFieldByValue("Members", "Name", roomName);
         }
 
-        public Room GetRoomById(string id)
+        public RoomModel GetRoomById(string id)
         {
             return GetFirstObjectByValue("ID", id);
         }
@@ -60,6 +66,11 @@ namespace HyberShift_CSharp.Model.List
         public ObservableCollection<string> GetMembersFrom(int indexRoom)
         {
             return GetFieldValueByIndex("Members", indexRoom);
-        }   
+        }
+
+        public void Add(RoomModel element)
+        {
+            list.Add(element);
+        }
     }
 }

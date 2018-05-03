@@ -103,8 +103,8 @@ namespace HyberShift_CSharp.Model
                     Application.Current.Dispatcher.Invoke((Action) delegate
                     {
                         // your code
-                        //MainWindow mainWindow = new MainWindow();
-                        //mainWindow.Show();
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show();
 
                         CreateRoom a = new CreateRoom();
                         a.Show();
@@ -129,32 +129,13 @@ namespace HyberShift_CSharp.Model
                     for (int i = 0; i < listjson.Count; i++)
                         members.Add(listjson.ElementAt(i).ToString());
 
-                    listRoomModel.Add(new Room(roomId, roomName, members));
+                    listRoomModel.Add(new RoomModel(roomId, roomName, members));
                     Debug.Log("Register form: " + listRoomModel.NameList);
                 }
                 catch (JsonException e)
                 {
                     Debug.Log(e.ToString());
                 }
-            });
-        
-
-        socket.On("<event_name_1>", () =>
-            {
-                Debug.Log("Received response 1 of socket");
-
-                // NOTICE: SOME EVENT NEED TO BE RUNNED ON ANOTHER THREAD
-                // Start a new thread in java (old project):
-                //    Platform.runLater(new Runnable(){
-                //                @Override
-
-                //                public void run()
-                //                {
-                //                    ...
-                //                }
-                //    });
-
-                // In C# ???
             });
         }
     }

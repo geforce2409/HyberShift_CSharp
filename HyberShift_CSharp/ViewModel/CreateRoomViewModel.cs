@@ -9,14 +9,16 @@ namespace HyberShift_CSharp.ViewModel
 {
     internal class CreateRoomViewModel : BaseViewModel
     {
-        private readonly Room room;
+        private readonly RoomModel room;
         private readonly CreateRoomModel createRoomModel;
-        private string[] separators = { ",", "!", "?", ";", ":", " " };
+
+        private string[] separators = {",", "!", "?", ";", ":", " "};
+
         // constructor
         public CreateRoomViewModel()
         {
             createRoomModel = new CreateRoomModel();
-            room = new Room();
+            room = new RoomModel();
             CreateRoomCommand = new DelegateCommand(CreateRoom);
         }
 
@@ -30,41 +32,19 @@ namespace HyberShift_CSharp.ViewModel
         //}
         public string RoomName
         {
-            get
-            {
-                return createRoomModel.InputRoomName;
-                //room.Name;
-            } 
+            get { return createRoomModel.InputRoomName; }
             set
             {
                 createRoomModel.InputRoomName = value;
-                //room.Name = value;
                 NotifyChanged("RoomName");
             }
         }
 
         public string Email { get; set; }
 
-        //public string Email
-        //{
-        //    // TO-DO: Lấy từ list members của room ghép lại thành chuỗi
-        //    get => createRoomModel.InputRoomName;
-        //    //get => createRoomModel.InputEmailMember;
-        //    //return room.Members.ToString();
-
-        //    // TO-DO: Tách từ input string (value) được ngăn cách bởi dấu ; thành mảng các members rồi gán cho room           
-        //    set
-        //    {
-        //        createRoomModel.InputEmailMember = Email.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-        //        //for (int i = 0; i < createRoomModel.InputEmailMember.Length; i++)
-        //        //    createRoomModel.InputEmailMember[i] = value;
-        //        NotifyChanged("Email");
-        //    }
-        //}
-
         // method or command
-    // ...
-    public void CreateRoom()
+
+        public void CreateRoom()
         {
             createRoomModel.InputEmailMember = Email.Split(separators, StringSplitOptions.RemoveEmptyEntries);
             if (createRoomModel.IsValidCreateRoom())
@@ -74,7 +54,6 @@ namespace HyberShift_CSharp.ViewModel
                 MessageBox.Show("Something is wrong. Please try again", "Create room failed",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
             }
-            //NotifyChanged("attributeX");  // this will automatically update attributeX  
         }
 
     }

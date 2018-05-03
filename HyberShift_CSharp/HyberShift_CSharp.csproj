@@ -136,7 +136,7 @@
     <Compile Include="DataObject\Notification.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\RegisterModel.cs" />
-    <Compile Include="Model\Room.cs" />
+    <Compile Include="Model\RoomModel.cs" />
     <Compile Include="DataObject\SenderTyping.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="DataObject\UserOnline.cs" />
@@ -144,6 +144,7 @@
     <Compile Include="ViewModel\CreateRoomViewModel.cs" />
     <Compile Include="ViewModel\ListRoomViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\RoomViewModel.cs" />
     <Compile Include="ViewModel\SignInPageViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="View\ChatViewControl.xaml.cs">
@@ -151,6 +152,9 @@
     </Compile>
     <Compile Include="View\CreateRoom.xaml.cs">
       <DependentUpon>CreateRoom.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RoomItem.xaml.cs">
+      <DependentUpon>RoomItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SignIn\SignInControl.xaml.cs">
       <DependentUpon>SignInControl.xaml</DependentUpon>
@@ -176,6 +180,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\CreateRoom.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RoomItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

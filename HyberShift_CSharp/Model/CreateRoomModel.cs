@@ -81,10 +81,10 @@ namespace HyberShift_CSharp.Model
                 {
                     invalid = (JArray) jsoninfo.GetValue("invalid");
                     jsarrMembers = (JArray) jsoninfo.GetValue("members");
-                    Room room = new Room();
+                    RoomModel room = new RoomModel();
                     for (int i = 0; i < jsarrMembers.Count; i++)
                     {
-                        room.AddMemebers(jsarrMembers.ElementAt(i).ToString());
+                        room.AddMembers(jsarrMembers.ElementAt(i).ToString());
                     }
 
                     //Add to listRoom
@@ -111,7 +111,6 @@ namespace HyberShift_CSharp.Model
                         CloseWindowManager.CloseCreateRoomWindow();
                         return;
                     });
-                    //return;
                 }
                 catch (JsonException e)
                 {
@@ -125,7 +124,7 @@ namespace HyberShift_CSharp.Model
                     string roomId = data.GetValue("room_id").ToString();
                     string roomName = data.GetValue("room_name").ToString();
                     Debug.Log("roomID: " + roomId + ", roomName: " + roomName);
-                    listRoomModel.Add(new Room(roomId, roomName, null));
+                    listRoomModel.Add(new RoomModel(roomId, roomName, null));
                     Debug.Log("Create room from: " + listRoomModel.NameList);
                 }
                 catch (JsonException e)

@@ -2,15 +2,15 @@
 
 namespace HyberShift_CSharp.Model
 {
-    public class Room
+    public class RoomModel
     {
-        public Room()
+        public RoomModel()
         {
             Members = new ObservableCollection<string>();
             //hasNewMessage = false;
         }
 
-        public Room(string id, string name, ObservableCollection<string> members)
+        public RoomModel(string id, string name, ObservableCollection<string> members)
         {
             ID = id;
             Name = name;
@@ -25,7 +25,7 @@ namespace HyberShift_CSharp.Model
 
         public bool HasNewMessage { get; set; }
 
-        public void AddMemebers(string member)
+        public void AddMembers(string member)
         {
             Members.Add(member);
         }

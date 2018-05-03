@@ -14,7 +14,7 @@ namespace HyberShift_CSharp.Model
     {
         //list room
         ListRoomModel listRoomModel = ListRoomModel.GetInstance();
-        Room currRoom; // current Room
+        RoomModel currRoom; // current Room
 
         private readonly Socket socket;
 
@@ -49,7 +49,7 @@ namespace HyberShift_CSharp.Model
                     for (int i = 0; i < listjson.Count; i++)
                         members.Add(listjson.ElementAt(i).ToString());
 
-                    listRoomModel.Add(new Room(roomId, roomName, members));
+                    listRoomModel.Add(new RoomModel(roomId, roomName, members));
                     Debug.Log("Register form: " + listRoomModel.NameList);
                     //TO-DO: Cập nhật list view
                 }

@@ -7,11 +7,11 @@ namespace HyberShift_CSharp.Model
     public class ListRoom
     {
         private static ListRoom instance;
-        private readonly List<Room> list;
+        private readonly List<RoomModel> list;
 
         public ListRoom()
         {
-            list = new List<Room>();
+            list = new List<RoomModel>();
         }
 
         public static ListRoom getInstance()
@@ -21,7 +21,7 @@ namespace HyberShift_CSharp.Model
             return instance;
         }
 
-        public List<Room> getListRoom()
+        public List<RoomModel> getListRoom()
         {
             return list;
         }
@@ -43,7 +43,7 @@ namespace HyberShift_CSharp.Model
         //    return new ArrayList();
         //}
 
-        public Room getRoomFromName(string roomName)
+        public RoomModel getRoomFromName(string roomName)
         {
             for (var i = 0; i < list.Count(); i++)
             {
@@ -55,7 +55,7 @@ namespace HyberShift_CSharp.Model
             return null;
         }
 
-        public Room getRoomById(string id)
+        public RoomModel getRoomById(string id)
         {
             for (var i = 0; i < list.Count(); i++)
             {
@@ -87,7 +87,7 @@ namespace HyberShift_CSharp.Model
         //    return list.ElementAt(indexRoom).Members;
         //}
 
-        public void addRoom(Room room)
+        public void addRoom(RoomModel room)
         {
             //Kiểm tra trÃ¹ng trÆ°á»›c khi add
             for (var i = 0; i < list.Count(); i++)

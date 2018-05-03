@@ -7,9 +7,12 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:utilities="clr-namespace:HyberShift_CSharp.Utilities"
+             xmlns:viewModel="clr-namespace:HyberShift_CSharp.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
+        <viewModel:ListRoomViewModel x:Key="ListRoomViewModel" />
+        <viewModel:RoomViewModel x:Key="RoomViewModel" />
         <Style x:Key="SendButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -272,12 +275,26 @@
 
         <Border Grid.RowSpan="2" BorderThickness="0,0,1,0" SnapsToDevicePixels="True"
                 BorderBrush="{DynamicResource MaterialDesignDivider}">
-            <ListBox ItemsSource="{Binding Participants}" 
-                     ItemTemplate="{DynamicResource ParticipantsDataTemplate}"
+            <ListBox x:Name="ListBoxRoom" ItemsSource = "{Binding ListRoom, Source={StaticResource ListRoomViewModel}}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <local:RoomItem></local:RoomItem>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+                <!--ItemTemplate="{DynamicResource ParticipantsDataTemplate}"
                      ItemContainerStyle="{DynamicResource ParticipantsListBoxItemStyle}"
                      SelectedItem="{Binding SelectedParticipant}"                     
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                     ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+                     ScrollViewer.VerticalScrollBarVisibility="Auto">-->
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction 
+                            Command="{Binding ItemSelectedCommand, Source={StaticResource ListRoomViewModel}}" 
+                            CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </ListBox>
         </Border>
 
         <!--Messages-->
