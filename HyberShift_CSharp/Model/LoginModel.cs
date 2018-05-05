@@ -106,8 +106,8 @@ namespace HyberShift_CSharp.Model
                         MainWindow mainWindow = new MainWindow();
                         mainWindow.Show();
 
-                        CreateRoom a = new CreateRoom();
-                        a.Show();
+                        //CreateRoom a = new CreateRoom();
+                        //a.Show();
                         CloseWindowManager.CloseLoginWindow();
                     });
                     return;
@@ -121,8 +121,8 @@ namespace HyberShift_CSharp.Model
                 var data = (JObject) args;
                 try
                 {
-                    string roomId = data.Values("room_id").ToString();
-                    string roomName = data.Values("room_name").ToString();
+                    string roomId = data.GetValue("room_id").ToString();
+                    string roomName = data.GetValue("room_name").ToString();
                     JArray listjson = (JArray) data.GetValue("members");
 
                     ObservableCollection<string> members = new ObservableCollection<string>();

@@ -20,11 +20,12 @@ namespace HyberShift_CSharp.ViewModel
         {
             listRoomModel = new ListRoomModel();
 
-            listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 1", Members = new ObservableCollection<string>() { "AAA", "BBB" } });
-            listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 2", Members = new ObservableCollection<string>() { "CCC", "BBB" } });
-            listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 3", Members = new ObservableCollection<string>() { "AAA", "CCC" } });
-            listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 4", Members = new ObservableCollection<string>() { "BBB", "CCC" } });
-            listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 5", Members = new ObservableCollection<string>() { "CCC", "AAA" } });
+            //List này bỏ cmt thì sẽ add trực tiếp lên listBox
+            //listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 1", Members = new ObservableCollection<string>() { "AAA", "BBB" } });
+            //listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 2", Members = new ObservableCollection<string>() { "CCC", "BBB" } });
+            //listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 3", Members = new ObservableCollection<string>() { "AAA", "CCC" } });
+            //listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 4", Members = new ObservableCollection<string>() { "BBB", "CCC" } });
+            //listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 5", Members = new ObservableCollection<string>() { "CCC", "AAA" } });
 
             ItemSelectedCommand = new DelegateCommand<RoomModel>(HandleSelectedItem);
         }
@@ -81,7 +82,7 @@ namespace HyberShift_CSharp.ViewModel
         private void HandleSelectedItem(RoomModel obj)
         {
             CurrentSelected = obj.Name;
-
+            Debug.LogOutput(CurrentSelected);
             ////get room by name
             //currRoom = listRoomModel.GetRoomById(ItemSelected.ID);
             //Debug.LogOutput("Current room: " + currRoom.Name);

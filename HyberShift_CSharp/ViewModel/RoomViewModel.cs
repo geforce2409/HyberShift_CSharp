@@ -15,8 +15,8 @@ namespace HyberShift_CSharp.ViewModel
         public RoomViewModel()
         {
             roomModel = new RoomModel();
-            Name = "AAAAAAAAAAA";
-            Member = "BBBBBBB, CCCCCCCC";
+            Name = "";
+            Member = "";
         }
 
         // getter and setter

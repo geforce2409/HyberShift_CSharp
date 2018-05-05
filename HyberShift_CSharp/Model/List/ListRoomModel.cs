@@ -70,6 +70,11 @@ namespace HyberShift_CSharp.Model.List
 
         public void Add(RoomModel element)
         {
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (list.ElementAt(i).Name.Equals(element.Name))
+                    return;
+            }
             list.Add(element);
         }
     }
