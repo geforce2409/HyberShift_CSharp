@@ -13,6 +13,7 @@
     <UserControl.Resources>
         <viewModel:ListRoomViewModel x:Key="ListRoomViewModel" />
         <viewModel:RoomViewModel x:Key="RoomViewModel" />
+        <!--<viewModel:ChatMessegeViewModel x:Key="ChatMessegeViewModel" />-->
         <Style x:Key="SendButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
@@ -333,7 +334,13 @@
                         <TextBox x:Name="MessageTxtBox" BorderBrush="Transparent"
                                  TextWrapping="Wrap" AcceptsReturn="True" CaretBrush="#7F000000"
                                  VerticalScrollBarVisibility="Auto"
-                                 Text="{Binding TextMessage, UpdateSourceTrigger=PropertyChanged}">
+                            Text="{Binding TextMessage, UpdateSourceTrigger=PropertyChanged}">
+                            <!--<TextBox.Text>
+                                <Binding Source="{StaticResource ChatMessegeViewModel}"
+                                         Path="Message"
+                                         UpdateSourceTrigger="PropertyChanged">
+                                </Binding>
+                            </TextBox.Text>-->
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="KeyUp">
                                     <i:InvokeCommandAction Command="{Binding TypingCommand}"/>
