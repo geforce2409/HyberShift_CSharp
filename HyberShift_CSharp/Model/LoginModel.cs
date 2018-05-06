@@ -96,16 +96,19 @@ namespace HyberShift_CSharp.Model
                     Debug.Log(data.ToString());
 
                     // [IMPORTANT] set info for userinfo
-                    userInfo.AvatarRef = data.GetValue("avatarstring").ToString();
-                    userInfo.FullName = data.GetValue("fullname").ToString();
-                    userInfo.Email = data.GetValue("email").ToString();
-                    userInfo.Phone = data.GetValue("phone").ToString();
+                    userInfo.UserId = data.GetValue("id").ToString();
+                    var content = (JObject)data.GetValue("content");
+
+                    userInfo.AvatarRef = content.GetValue("avatarstring").ToString();
+                    userInfo.FullName = content.GetValue("fullname").ToString();
+                    userInfo.Email = content.GetValue("email").ToString();
+                    userInfo.Phone = content.GetValue("phone").ToString();
 
                     Application.Current.Dispatcher.Invoke((Action)delegate
                     {
                         // your code
                         MainWindow mainWindow = new MainWindow();
-                       mainWindow.Show();
+                        mainWindow.Show();
 
                         //CreateRoom a = new CreateRoom();
                         //a.Show();

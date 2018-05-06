@@ -79,8 +79,8 @@ namespace HyberShift_CSharp.Model
 
                 try
                 {
-                    invalid = (JArray) jsoninfo.GetValue("invalid");
-                    jsarrMembers = (JArray) jsoninfo.GetValue("members");
+                    invalid = (JArray)jsoninfo.GetValue("invalid");
+                    jsarrMembers = (JArray)jsoninfo.GetValue("members");
                     RoomModel room = new RoomModel();
                     for (int i = 0; i < jsarrMembers.Count; i++)
                     {
@@ -88,7 +88,7 @@ namespace HyberShift_CSharp.Model
                     }
 
                     //Add to listRoom
-                    room.Name =  jsoninfo.GetValue("room_name").ToString();
+                    room.Name = jsoninfo.GetValue("room_name").ToString();
                     room.ID = jsoninfo.GetValue("room_id").ToString();
                     listRoomModel.AddWithCheck(room, "ID");
 
@@ -116,22 +116,22 @@ namespace HyberShift_CSharp.Model
                 {
                     Debug.Log(e.ToString());
                 }
-            }).On("room_created", args =>
-            {
-                var data = (JObject)args;
-                try
-                {
-                    string roomId = data.GetValue("room_id").ToString();
-                    string roomName = data.GetValue("room_name").ToString();
-                    Debug.Log("roomID: " + roomId + ", roomName: " + roomName);
-                    listRoomModel.AddWithCheck(new RoomModel(roomId, roomName, null), "ID");
-                    Debug.Log("Create room from: " + listRoomModel.NameList);
-                }
-                catch (JsonException e)
-                {
-                    Debug.Log(e.ToString());
-                }
-            });
+            }); //.On("room_created", args =>
+            //{
+            //    var data = (JObject)args;
+            //    try
+            //    {
+            //        string roomId = data.GetValue("room_id").ToString();
+            //        string roomName = data.GetValue("room_name").ToString();
+            //        Debug.Log("roomID: " + roomId + ", roomName: " + roomName);
+            //        listRoomModel.AddWithCheck(new RoomModel(roomId, roomName, null), "ID");
+            //        Debug.Log("Create room from: " + listRoomModel.NameList);
+            //    }
+            //    catch (JsonException e)
+            //    {
+            //        Debug.Log(e.ToString());
+            //    }
+            //});
         }
 
         public bool IsValidCreateRoom()

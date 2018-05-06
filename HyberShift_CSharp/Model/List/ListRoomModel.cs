@@ -10,22 +10,14 @@ using Quobject.SocketIoClientDotNet.Client;
 
 namespace HyberShift_CSharp.Model.List
 {
-    public class ListRoomModel : BaseList<RoomModel>, INotifyPropertyChanged
+    public class ListRoomModel : BaseList<RoomModel>
     {
         private static ListRoomModel instance;
-        private Socket socket;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        //private ListRoomModel listRoomModel;
 
         // constructor
         public ListRoomModel()
         {
-            list = new ObservableCollection<RoomModel>();
-            socket = SocketAPI.GetInstance().GetSocket();
-            // received list at the begining
-            HandleSocket();
+            list = new ObservableCollection<RoomModel>();       
         }
 
         // getter and setter
@@ -67,43 +59,6 @@ namespace HyberShift_CSharp.Model.List
         public ObservableCollection<string> GetMembersFrom(int indexRoom)
         {
             return GetFieldValueByIndex("Members", indexRoom);
-        }
-
-        private void HandleSocket()
-        {  
-            socket.On("room_created", (args) =>
-            {  
-                Application.Current.Dispatcher.Invoke((Action)delegate {
-                    JObject obj = (JObject)args;
-                    try
-                    {
-                        string roomId = obj.GetValue("room_id").ToString();
-                        string roomName = obj.GetValue("room_name").ToString();
-                        JArray listjson = (JArray)obj.GetValue("members");
-                        ObservableCollection<string> members = new ObservableCollection<string>();
-                        for (int i = 0; i < listjson.Count; i++)
-                        {
-                            members.Add(listjson.ElementAt(i).ToString());
-                        }
-                        list.Add(new RoomModel(roomId, roomName, members));
-                   
-                    //Debug.Log("ListRoomModel >> " + this.ToString());
-                    //Debug.LogOutput("ListRoomModel >> " + this.ToString());
-
-                    //test
-                    Debug.LogOutput("======================");
-                    Debug.LogOutput("Room id: " + roomId);
-                    Debug.LogOutput("Room name: " + roomName);
-
-                    }
-                    catch (JsonException e)
-                    {
-                        // TODO Auto-generated catch block
-                        Debug.Log("ListRoomModel exception >> " + e);
-                        Debug.LogOutput("ListRoomModel exception >> " + e);
-                    }
-                });
-            });
         }
 
         public override string ToString()

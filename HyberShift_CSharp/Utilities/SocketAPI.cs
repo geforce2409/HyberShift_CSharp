@@ -37,9 +37,9 @@ namespace HyberShift_CSharp.Utilities
         {
             if (!isConnected)
             {
+                EstablishConnection();
                 socket.Connect();
                 isConnected = true;
-                EstablishConnection();
             }
         }
 
@@ -48,6 +48,7 @@ namespace HyberShift_CSharp.Utilities
             if (isConnected)
             {
                 socket.Disconnect();
+                socket.Close();
                 isConnected = false;
             }
         }
@@ -57,7 +58,7 @@ namespace HyberShift_CSharp.Utilities
             socket.
                 On(Socket.EVENT_CONNECT, () => 
                 {
-                    Debug.Log("Client connected to server");                  
+                    Debug.LogOutput("Client connected to server");                  
                 }).
                 
                 On(Socket.EVENT_DISCONNECT, () => 

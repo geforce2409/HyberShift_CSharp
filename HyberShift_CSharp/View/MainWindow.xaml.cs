@@ -41,7 +41,8 @@ namespace HyberShift_CSharp.View
         {
             e.Cancel = true;
             Socket socket = SocketAPI.GetInstance().GetSocket();
-            socket.Disconnect();
+            SocketAPI socketAPI = SocketAPI.GetInstance();
+            socketAPI.Disconnect();
             base.OnClosing(e);
             App.Current.Shutdown();
         }
