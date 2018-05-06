@@ -125,14 +125,12 @@
     <Compile Include="DataObject\Journal.cs" />
     <Compile Include="DataObject\ListFriendInfo.cs" />
     <Compile Include="DataObject\ListJournal.cs" />
-    <Compile Include="DataObject\ListMessage.cs" />
     <Compile Include="DataObject\ListNotitification.cs" />
     <Compile Include="DataObject\ListOnline.cs" />
     <Compile Include="DataObject\ListRoom.cs" />
     <Compile Include="Model\List\BaseList.cs" />
     <Compile Include="Model\List\ListRoomModel.cs" />
     <Compile Include="Model\LoginModel.cs" />
-    <Compile Include="DataObject\Message.cs" />
     <Compile Include="DataObject\Notification.cs" />
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\RegisterModel.cs" />
