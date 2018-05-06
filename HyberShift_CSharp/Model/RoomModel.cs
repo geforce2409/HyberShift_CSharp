@@ -4,6 +4,7 @@ namespace HyberShift_CSharp.Model
 {
     public class RoomModel
     {
+        private ObservableCollection<string> members;
         public RoomModel()
         {
             Members = new ObservableCollection<string>();
@@ -22,6 +23,19 @@ namespace HyberShift_CSharp.Model
         public string Name { get; set; }
 
         public ObservableCollection<string> Members { get; set; }
+
+        public string ListMembers
+        {
+            get
+            {
+                string temp = "";
+                foreach(string mem in Members)
+                {
+                    temp += mem + " ";
+                }
+                return temp;
+            }
+        }
 
         public bool HasNewMessage { get; set; }
 

@@ -12,7 +12,6 @@ namespace HyberShift_CSharp.View.SignIn
         {
             InitializeComponent();
             var socketAPI = SocketAPI.GetInstance();
-            socketAPI.Connect();
         }
     }
 }

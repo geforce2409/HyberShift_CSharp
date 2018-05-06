@@ -4,7 +4,7 @@ namespace HyberShift_CSharp.Model.List
 {
     public abstract class BaseList<T>
     {
-        private ObservableCollection<T> list;
+        protected ObservableCollection<T> list;
 
         // constructor
         public BaseList()
