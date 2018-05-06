@@ -90,7 +90,7 @@ namespace HyberShift_CSharp.Model
                     //Add to listRoom
                     room.Name =  jsoninfo.GetValue("room_name").ToString();
                     room.ID = jsoninfo.GetValue("room_id").ToString();
-                    listRoomModel.Add(room);
+                    listRoomModel.AddWithCheck(room, "ID");
 
                     if (invalid.Count == 0)
                     {
@@ -124,7 +124,7 @@ namespace HyberShift_CSharp.Model
                     string roomId = data.GetValue("room_id").ToString();
                     string roomName = data.GetValue("room_name").ToString();
                     Debug.Log("roomID: " + roomId + ", roomName: " + roomName);
-                    listRoomModel.Add(new RoomModel(roomId, roomName, null));
+                    listRoomModel.AddWithCheck(new RoomModel(roomId, roomName, null), "ID");
                     Debug.Log("Create room from: " + listRoomModel.NameList);
                 }
                 catch (JsonException e)

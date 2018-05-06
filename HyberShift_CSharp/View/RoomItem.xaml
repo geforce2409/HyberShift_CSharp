@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <viewModel:RoomViewModel x:Key="RoomViewModel" />
+        <!--<viewModel:RoomViewModel x:Key="RoomViewModel" />-->
         <!--<DataTemplate x:Key="listRoomItem">
             <Border BorderThickness="1" BorderBrush="Green" Margin="2" Padding="5" Width="200" CornerRadius="3">
                 <Grid>
@@ -34,7 +34,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Name, Source={StaticResource RoomViewModel}}"/>
-        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Member, Source={StaticResource RoomViewModel}}"/>
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Name}"/>
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding ListMembers}"/>
     </Grid>
 </UserControl>

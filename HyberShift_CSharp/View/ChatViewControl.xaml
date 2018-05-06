@@ -283,18 +283,33 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
 
+                <!--<ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Name}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>-->
+
                 <!--ItemTemplate="{DynamicResource ParticipantsDataTemplate}"
                      ItemContainerStyle="{DynamicResource ParticipantsListBoxItemStyle}"
                      SelectedItem="{Binding SelectedParticipant}"                     
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      ScrollViewer.VerticalScrollBarVisibility="Auto">-->
-                <i:Interaction.Triggers>
+                <!--<i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction 
                             Command="{Binding ItemSelectedCommand, Source={StaticResource ListRoomViewModel}}" 
                             CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}"/>
                     </i:EventTrigger>
-                </i:Interaction.Triggers>
+                </i:Interaction.Triggers>-->
             </ListBox>
         </Border>
 

@@ -11,22 +11,13 @@ namespace HyberShift_CSharp.ViewModel
 {
     public class ListRoomViewModel : BaseViewModel
     {
-        private Socket socket;
         private readonly ListRoomModel listRoomModel;
         private string selectedString;
-        RoomModel currRoom;
+
         // constructor
         public ListRoomViewModel()
         {
-            listRoomModel = new ListRoomModel();
-
-            //List này bỏ cmt thì sẽ add trực tiếp lên listBox
-            //listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 1", Members = new ObservableCollection<string>() { "AAA", "BBB" } });
-            //listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 2", Members = new ObservableCollection<string>() { "CCC", "BBB" } });
-            //listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 3", Members = new ObservableCollection<string>() { "AAA", "CCC" } });
-            //listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 4", Members = new ObservableCollection<string>() { "BBB", "CCC" } });
-            //listRoomModel.Add(new RoomModel() { ID = null, Name = "Name 5", Members = new ObservableCollection<string>() { "CCC", "AAA" } });
-
+            listRoomModel = new ListRoomModel();      
             ItemSelectedCommand = new DelegateCommand<RoomModel>(HandleSelectedItem);
         }
 
@@ -63,17 +54,10 @@ namespace HyberShift_CSharp.ViewModel
 
         public ObservableCollection<RoomModel> ListRoom
         {
-            //get => roomModel.List;
-            //set
-            //{
-            //    roomModel.List = value;
-            //    NotifyChanged("List");
-            //}
-
-            get { return listRoomModel.ListRoom; }
+            get { return listRoomModel.List; }
             set
             {
-                listRoomModel.ListRoom = value;
+                listRoomModel.List = value;
                 NotifyChanged("ListRoom");
             }
         }

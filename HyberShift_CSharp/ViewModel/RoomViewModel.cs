@@ -8,7 +8,7 @@ using HyberShift_CSharp.Model;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    class RoomViewModel : BaseViewModel
+    public class RoomViewModel : BaseViewModel
     {
         private RoomModel roomModel;
         // constructor
@@ -16,10 +16,21 @@ namespace HyberShift_CSharp.ViewModel
         {
             roomModel = new RoomModel();
             Name = "";
-            Member = "";
+            Members = "";
+        }
+
+        public RoomViewModel(string id, string name, ObservableCollection<string> members)
+        {
+            roomModel = new RoomModel(id, name, members);
         }
 
         // getter and setter
+        public string ID
+        {
+            get { return roomModel.ID; }
+            set { roomModel.ID = value; NotifyChanged("ID"); }
+        }
+
         public string Name
         {
             get { return roomModel.Name; }
@@ -29,19 +40,26 @@ namespace HyberShift_CSharp.ViewModel
                     roomModel.Name = "Empty Name";
                 else
                     roomModel.Name = value;
-                //NotifyChanged("Name");
+                NotifyChanged("Name");
             }
         }
 
-        public string Member { get; set; }
-
-        // methods
-        public void SetInfo(RoomModel room)
+        public string Members
         {
-            Name = room.Name;
-            Member = room.Members.ElementAt(0);
-            for (int i = 1; i < room.Members.Count; i++)
-                Member += ", " + room.Members.ElementAt(i);
+            get
+            {
+                string temp = "";
+                foreach(string mem in roomModel.Members)
+                {
+                    temp += mem + " ";
+                }
+                return temp;
+            }
+            set
+            {
+
+            }
         }
+
     }
 }

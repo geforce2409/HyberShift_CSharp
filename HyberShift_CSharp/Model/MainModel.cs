@@ -34,30 +34,30 @@ namespace HyberShift_CSharp.Model
             CloseWindowManager.CloseMainWindow();
         }
 
-        public void HandleOnSocketEvent()
-        {
-            socket.On("room_created", args =>
-            {
-                var data = (JObject) args;
-                try
-                {
-                    string roomId = data.Values("room_id").ToString();
-                    string roomName = data.Values("room_name").ToString();
-                    JArray listjson = (JArray) data.GetValue("members");
+        //public void HandleOnSocketEvent()
+        //{
+        //    socket.On("room_created", args =>
+        //    {
+        //        var data = (JObject) args;
+        //        try
+        //        {
+        //            string roomId = data.Values("room_id").ToString();
+        //            string roomName = data.Values("room_name").ToString();
+        //            JArray listjson = (JArray) data.GetValue("members");
 
-                    ObservableCollection<string> members = new ObservableCollection<string>();
-                    for (int i = 0; i < listjson.Count; i++)
-                        members.Add(listjson.ElementAt(i).ToString());
+        //            ObservableCollection<string> members = new ObservableCollection<string>();
+        //            for (int i = 0; i < listjson.Count; i++)
+        //                members.Add(listjson.ElementAt(i).ToString());
 
-                    listRoomModel.Add(new RoomModel(roomId, roomName, members));
-                    Debug.Log("Register form: " + listRoomModel.NameList);
-                    //TO-DO: Cập nhật list view
-                }
-                catch (JsonException e)
-                {
-                    Debug.Log(e.ToString());
-                }
-            });
-        }
+        //            listRoomModel.Add(new RoomModel(roomId, roomName, members));
+        //            Debug.Log("Register form: " + listRoomModel.NameList);
+        //            //TO-DO: Cập nhật list view
+        //        }
+        //        catch (JsonException e)
+        //        {
+        //            Debug.Log(e.ToString());
+        //        }
+        //    });
+        //}
     }
 }

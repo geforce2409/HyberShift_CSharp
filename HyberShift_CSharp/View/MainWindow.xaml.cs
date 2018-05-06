@@ -1,4 +1,7 @@
-﻿using System;
+﻿using HyberShift_CSharp.Utilities;
+using Quobject.SocketIoClientDotNet.Client;
+using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;
 
@@ -32,6 +35,15 @@ namespace HyberShift_CSharp.View
             }
 
             _stateClosed = !_stateClosed;
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            Socket socket = SocketAPI.GetInstance().GetSocket();
+            socket.Disconnect();
+            base.OnClosing(e);
+            App.Current.Shutdown();
         }
     }
 }

@@ -17,13 +17,14 @@ namespace HyberShift_CSharp.Model
     public class LoginModel
     {
         private readonly Socket socket;
-        ListRoomModel listRoomModel = ListRoomModel.GetInstance();
+        ListRoomModel listRoomModel;
         UserInfo userInfo = UserInfo.GetInstance();
         // constructor
         public LoginModel()
         {
             InputEmail = "";
             InputPassword = "";
+            listRoomModel = ListRoomModel.GetInstance();
             socket = SocketAPI.GetInstance().GetSocket();
 
             socket.On(Socket.EVENT_CONNECT, () => { Debug.Log("Client connected to server"); })
@@ -88,7 +89,7 @@ namespace HyberShift_CSharp.Model
         {
             socket.On("authentication_result", args =>
             {
-                var data = (JObject) args;
+                var data = (JObject)args;
                 if (data != null)
                 {
                     Debug.Log("Authentication successed");
@@ -100,11 +101,11 @@ namespace HyberShift_CSharp.Model
                     userInfo.Email = data.GetValue("email").ToString();
                     userInfo.Phone = data.GetValue("phone").ToString();
 
-                    Application.Current.Dispatcher.Invoke((Action) delegate
+                    Application.Current.Dispatcher.Invoke((Action)delegate
                     {
                         // your code
                         MainWindow mainWindow = new MainWindow();
-                        mainWindow.Show();
+                       mainWindow.Show();
 
                         //CreateRoom a = new CreateRoom();
                         //a.Show();
@@ -116,27 +117,35 @@ namespace HyberShift_CSharp.Model
                 {
                     Debug.Log("Authentication failed");
                 }
-            }).On("room_created", args =>
-            {
-                var data = (JObject) args;
-                try
-                {
-                    string roomId = data.GetValue("room_id").ToString();
-                    string roomName = data.GetValue("room_name").ToString();
-                    JArray listjson = (JArray) data.GetValue("members");
+            }); //.On("room_created", args =>
+            //{
+            //    var data = (JObject) args;
+            //    try
+            //    {
+            //        string roomId = data.GetValue("room_id").ToString();
+            //        string roomName = data.GetValue("room_name").ToString();
+            //        JArray listjson = (JArray) data.GetValue("members");
 
-                    ObservableCollection<string> members = new ObservableCollection<string>();
-                    for (int i = 0; i < listjson.Count; i++)
-                        members.Add(listjson.ElementAt(i).ToString());
+            //        ObservableCollection<string> members = new ObservableCollection<string>();
+            //        for (int i = 0; i < listjson.Count; i++)
+            //            members.Add(listjson.ElementAt(i).ToString());
 
-                    listRoomModel.Add(new RoomModel(roomId, roomName, members));
-                    Debug.Log("Register form: " + listRoomModel.NameList);
-                }
-                catch (JsonException e)
-                {
-                    Debug.Log(e.ToString());
-                }
-            });
+            //        listRoomModel.List.Add(new RoomModel(roomId, roomName, members));
+
+            //        //test
+            //        Debug.LogOutput("LoginModel 'Name of rooms' >> ");
+            //        foreach (string name in listRoomModel.NameList)
+            //        {
+            //            Debug.LogOutput(name);
+            //        }
+            //        //Debug.Log("LoginModel >> " + listRoomModel.NameList);
+            //        //Debug.LogOutput("LoginModel >> " + listRoomModel.NameList);
+            //    }
+            //    catch (JsonException e)
+            //    {
+            //        Debug.Log(e.ToString());
+            //    }
+            //});
         }
     }
 }
