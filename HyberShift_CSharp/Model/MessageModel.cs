@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HyberShift_CSharp.Utilities;
 
 namespace HyberShift_CSharp.Model
 {
@@ -19,8 +21,8 @@ namespace HyberShift_CSharp.Model
         // TO-DO: Timestamp Property needs to be convert from long to some kind of date (E.g: 19:25 Friday)
         public string TimestampDisplay
         {
-            get;
-            set;
+            get { return TimeSpan.FromMilliseconds(Timestamp).ToString();}
+            set { Timestamp = DateTime.Now.Millisecond; }
         }
 
         public MessageModel()
