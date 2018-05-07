@@ -15,9 +15,9 @@ namespace HyberShift_CSharp.Model.List
         private static ListRoomModel instance;
 
         // constructor
-        public ListRoomModel()
+        public ListRoomModel(): base()
         {
-            list = new ObservableCollection<RoomModel>();       
+           
         }
 
         // getter and setter

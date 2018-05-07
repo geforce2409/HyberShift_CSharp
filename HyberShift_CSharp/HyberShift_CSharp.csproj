@@ -117,6 +117,8 @@
     <Compile Include="Domain\NotEmptyValidationRule.cs" />
     <Compile Include="Domain\IsValidInput.cs" />
     <Compile Include="Model\CreateRoomModel.cs" />
+    <Compile Include="Model\List\ListMessageModel.cs" />
+    <Compile Include="Model\MessageModel.cs" />
     <Compile Include="Utilities\BringNewItemIntoViewBehavior.cs" />
     <Compile Include="Utilities\ByteBitmapSourceConverter.cs" />
     <Compile Include="Utilities\IHavePassword.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="DataObject\UserOnline.cs" />
     <Compile Include="Utilities\VoiceAPI.cs" />
+    <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\CreateRoomViewModel.cs" />
     <Compile Include="ViewModel\ListRoomViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

@@ -13,6 +13,7 @@
     <UserControl.Resources>
         <viewModel:ListRoomViewModel x:Key="ListRoomViewModel" />
         <viewModel:RoomViewModel x:Key="RoomViewModel" />
+        <viewModel:ChatViewModel x:Key="ChatViewModel"/>
         <!--<viewModel:ChatMessegeViewModel x:Key="ChatMessegeViewModel" />-->
         <Style x:Key="SendButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>
@@ -303,13 +304,13 @@
                      SelectedItem="{Binding SelectedParticipant}"                     
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      ScrollViewer.VerticalScrollBarVisibility="Auto">-->
-                <!--<i:Interaction.Triggers>
+                <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction 
                             Command="{Binding ItemSelectedCommand, Source={StaticResource ListRoomViewModel}}" 
                             CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}"/>
                     </i:EventTrigger>
-                </i:Interaction.Triggers>-->
+                </i:Interaction.Triggers>
             </ListBox>
         </Border>
 
@@ -325,6 +326,7 @@
                 <ControlTemplate TargetType="ItemsControl">
                     <ScrollViewer>
                         <ItemsPresenter/>
+                        
                     </ScrollViewer>
                 </ControlTemplate>
             </ItemsControl.Template>
@@ -374,5 +376,23 @@
                         Command="{Binding SendTextMessageCommand}"/>
             </Grid>
         </Border>
+
+        <!--FOR TESTING MESSAGE-->
+        <ListBox Grid.Column="1" Margin="0,0,0,52.6" Grid.RowSpan="2" ItemsSource="{Binding ListMessage, Source={StaticResource ChatViewModel}}">
+            <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="2*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Message}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>
