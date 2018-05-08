@@ -79,6 +79,8 @@ namespace HyberShift_CSharp.ViewModel
                 msgjson.Add("sender", userInfo.FullName);
                 msgjson.Add("message", Message);
                 msgjson.Add("timestamp", DateTime.Now.Millisecond);
+                msgjson.Add("filename", "null");
+                msgjson.Add("filestring", "null");
 
                 if (currentRoom == null)
                     msgjson.Add("id", "public");
