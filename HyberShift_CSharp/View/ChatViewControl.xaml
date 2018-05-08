@@ -349,14 +349,14 @@
                         </Grid.ColumnDefinitions>
                         <!--Text-->
                         <TextBox x:Name="MessageTxtBox" BorderBrush="Transparent"
-                                 TextWrapping="Wrap" AcceptsReturn="True" CaretBrush="#7F000000"
+                                 TextWrapping="Wrap" AcceptsReturn="false" CaretBrush="#7F000000"
                                  VerticalScrollBarVisibility="Auto">
-                            <!--Text="{Binding TextMessage, UpdateSourceTrigger=PropertyChanged}">-->
                             <TextBox.Text>
                                 <Binding Source="{StaticResource ChatViewModel}"
                                          Path="Message"
                                          UpdateSourceTrigger="PropertyChanged">
                                 </Binding>
+                                
                             </TextBox.Text>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="KeyUp">

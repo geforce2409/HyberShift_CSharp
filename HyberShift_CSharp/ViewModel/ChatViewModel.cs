@@ -84,7 +84,7 @@ namespace HyberShift_CSharp.ViewModel
                 msgjson.Add("imgstring", userInfo.AvatarRef);
                 msgjson.Add("sender", userInfo.FullName);
                 msgjson.Add("message", Message);
-                msgjson.Add("timestamp", 0);
+                msgjson.Add("timestamp", DateTime.Now.Ticks);
                 msgjson.Add("filename", "null");
                 msgjson.Add("filestring", "null");
 
