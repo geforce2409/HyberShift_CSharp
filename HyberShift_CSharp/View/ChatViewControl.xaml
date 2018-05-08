@@ -373,6 +373,7 @@
                 <!--Send-->
                 <Button x:Name="SendButton" Grid.Column="1" Margin="10"
                         Style="{DynamicResource SendButtonStyle}"
+                        IsDefault="True"
                         Command="{Binding SendTextMessageCommand, Source={StaticResource ChatViewModel}}"/>
             </Grid>
         </Border>

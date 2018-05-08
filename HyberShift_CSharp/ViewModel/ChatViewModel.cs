@@ -27,6 +27,7 @@ namespace HyberShift_CSharp.ViewModel
             listMessageModel = ListMessageModel.GetInstance();
             socket = SocketAPI.GetInstance().GetSocket();
             SendTextMessageCommand = new DelegateCommand(SendMessage);
+            userInfo = UserInfo.GetInstance();
             HandleSocket();
         }
 
@@ -43,7 +44,11 @@ namespace HyberShift_CSharp.ViewModel
             }
         }
 
-        public string Message { get; set; }
+        public string Message
+        {
+            get;
+            set;
+        }
         public string RoomName //Display room's name
         {
             get { return currentRoom.Name; }
@@ -75,10 +80,11 @@ namespace HyberShift_CSharp.ViewModel
             var msgjson = new JObject();
             try
             {
+                //msgjson.Add("imgstring", userInfo.AvatarRef);
                 msgjson.Add("imgstring", userInfo.AvatarRef);
                 msgjson.Add("sender", userInfo.FullName);
                 msgjson.Add("message", Message);
-                msgjson.Add("timestamp", DateTime.Now.Millisecond);
+                msgjson.Add("timestamp", 0);
                 msgjson.Add("filename", "null");
                 msgjson.Add("filestring", "null");
 
@@ -96,16 +102,21 @@ namespace HyberShift_CSharp.ViewModel
             }
 
             Message = "";
+            NotifyChanged("Message");
         }
 
         private void HandleSocket()
         {
-            socket.On("room_change", (args) =>
+            socket.On("room_change", (roomId) =>
             {
-                // handle data
-                JObject data = (JObject) args;
-                string idRoom = data.GetValue("id").ToString();
-                JObject content = (JObject) data.GetValue("content");
+                currentRoom = ListRoomModel.GetInstance().GetRoomById(roomId.ToString());
+                Debug.LogOutput("Selected room: " + "room id: " + currentRoom.ID + " room name: " + currentRoom.Name);
+            });
+
+            socket.On("init_message", (args) =>
+            {
+                // handle data            
+                JObject content = (JObject)args;
 
                 string id = content.GetValue("id").ToString();
                 string sender = content.GetValue("sender").ToString();
@@ -117,9 +128,6 @@ namespace HyberShift_CSharp.ViewModel
 
                 Application.Current.Dispatcher.Invoke((Action) delegate
                 {
-                    // get current room from idRoom
-                    currentRoom = ListRoomModel.GetInstance().GetRoomById(idRoom);
-
                     if (currentRoom.ID.Equals(id))
                     {
                         MessageModel msg = new MessageModel(id, message, sender, imgstring, filestring, filename,

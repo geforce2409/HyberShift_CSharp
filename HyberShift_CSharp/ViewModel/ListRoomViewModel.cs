@@ -42,8 +42,6 @@ namespace HyberShift_CSharp.ViewModel
         // method
         private void HandleSelectedItem(RoomModel obj)
         {
-            Debug.LogOutput("Selected room: " + "room id: " + obj.ID + " room name: " + obj.Name);
-
             //emit to server to get message
             socket.Emit("room_change", obj.ID);
 
@@ -72,7 +70,7 @@ namespace HyberShift_CSharp.ViewModel
                         {
                             members.Add(listjson[i].ToString());
                         }
-                        ListRoom.Add(new RoomModel(roomId, roomName, members));
+                        listRoomModel.AddWithCheck(new RoomModel(roomId, roomName, members), "ID");
                     }
                     catch (JsonException e)
                     {

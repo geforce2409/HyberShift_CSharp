@@ -97,6 +97,7 @@
                     Margin="4,0,0,0"
                     Grid.Column="1"
                     Style="{StaticResource RaisedButton}"
+                    IsDefault="True"
                     Command="{Binding LoginCommand, Source={StaticResource LoginViewModel}}"
                     CommandParameter="{Binding ElementName=This}">
                     SIGN IN

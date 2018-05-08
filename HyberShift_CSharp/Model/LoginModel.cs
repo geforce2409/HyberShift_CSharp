@@ -16,12 +16,14 @@ namespace HyberShift_CSharp.Model
 {
     public class LoginModel
     {
+        private bool isAuthenticated;
         private readonly Socket socket;
         ListRoomModel listRoomModel;
         UserInfo userInfo = UserInfo.GetInstance();
         // constructor
         public LoginModel()
         {
+            isAuthenticated = false;
             InputEmail = "";
             InputPassword = "";
             listRoomModel = ListRoomModel.GetInstance();
@@ -89,6 +91,9 @@ namespace HyberShift_CSharp.Model
         {
             socket.On("authentication_result", args =>
             {
+                if (isAuthenticated) return;
+
+                isAuthenticated = true;
                 var data = (JObject)args;
                 if (data != null)
                 {
@@ -112,6 +117,7 @@ namespace HyberShift_CSharp.Model
 
                         //CreateRoom a = new CreateRoom();
                         //a.Show();
+
                         CloseWindowManager.CloseLoginWindow();
                     });
                     return;
