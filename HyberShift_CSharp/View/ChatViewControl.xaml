@@ -378,7 +378,7 @@
             </Grid>
         </Border>
 
-        <!--FOR TESTING MESSAGE-->
+        <!--FOR TESTING MESSAGE--><!--
         <ListBox Grid.Column="1" Margin="0,0,0,52.6" Grid.RowSpan="2" 
                  ItemsSource="{Binding ListMessage, Source={StaticResource ChatViewModel}}">
             <ListBox.ItemTemplate>
@@ -394,7 +394,7 @@
                             <ColumnDefinition Width="3*" />
                         </Grid.ColumnDefinitions>
 
-                        <!--Tạm thời lấy AvatarRef (string) thay cho Image-->
+                        --><!--Tạm thời lấy AvatarRef (string) thay cho Image--><!--
                         <TextBlock Grid.Column="0" Grid.Row="0" Margin="10,10,10,10" Text="{Binding ImgString}"/>
                         <TextBlock Grid.Column="1" Grid.Row="0" Margin="10,10,10,10" Text="{Binding Sender}"/>
                         <TextBlock Grid.Column="2" Grid.Row="0" Margin="10,10,10,10" Text="{Binding Message}"/>
@@ -402,6 +402,6 @@
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>
+        </ListBox>-->
     </Grid>
 </UserControl>
