@@ -151,6 +151,16 @@ namespace HyberShift_CSharp.Model.List
             list.Add(obj);
         }
 
+        public void AddWithCheck(T obj, params string[] propertyNames)
+        {
+            foreach (var element in list)
+                // if duplicated
+                foreach(string property in propertyNames)
+                    if (GetPropertyValue(element, property).Equals(GetPropertyValue(obj, property)))
+                        return;
+            list.Add(obj);
+        }
+
         /// <summary>
         ///     Lấy giá trị của thuộc tính
         /// </summary>

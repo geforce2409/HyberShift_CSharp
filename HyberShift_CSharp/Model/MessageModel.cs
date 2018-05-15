@@ -21,8 +21,8 @@ namespace HyberShift_CSharp.Model
         // TO-DO: Timestamp Property needs to be convert from long to some kind of date (E.g: 19:25 Friday)
         public string TimestampDisplay
         {
-            get { return TimeSpan.FromMilliseconds(Timestamp).ToString();}
-            set { Timestamp = DateTime.Now.Millisecond; }
+            get { return new DateTime(Timestamp).ToString(); }
+            set { Timestamp = DateTime.Now.Ticks; }
         }
 
         public MessageModel()

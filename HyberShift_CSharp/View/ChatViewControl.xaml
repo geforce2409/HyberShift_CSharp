@@ -234,7 +234,7 @@
                                Text="{Binding Message}"/>
                     <TextBlock Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Stretch"
                                Margin="0,0,5,0" FontSize="10" Opacity="0.8"
-                               Text="{Binding Time, StringFormat={}{0:t}}"/>
+                               Text="{Binding TimestampDisplay, StringFormat={}{0:t}}"/>
                 </Grid>
             </Border>
             <DataTemplate.Triggers>
@@ -316,9 +316,9 @@
 
         <!--Messages-->
         <ItemsControl x:Name="MessagesItemsCtrl" Grid.Column="1" Margin="0,5,0,0" 
-                      ItemsSource="{Binding SelectedParticipant.Chatter}" 
+                      ItemsSource="{Binding ListMessage, Source={StaticResource ChatViewModel}}"
                       ItemTemplate="{DynamicResource MessagesDataTemplate}"
-                      ScrollViewer.VerticalScrollBarVisibility="Auto">
+                      ScrollViewer.VerticalScrollBarVisibility="Auto" >
             <i:Interaction.Behaviors>
                 <utilities:BringNewItemIntoViewBehavior/>
             </i:Interaction.Behaviors>
@@ -379,7 +379,7 @@
         </Border>
 
         <!--FOR TESTING MESSAGE-->
-        <ListBox Grid.Column="1" Margin="0,0,0,52.6" Grid.RowSpan="2" ItemsSource="{Binding ListMessage, Source={StaticResource ChatViewModel}}">
+        <!--<ListBox Grid.Column="1" Margin="0,0,0,52.6" Grid.RowSpan="2" ItemsSource="{Binding ListMessage, Source={StaticResource ChatViewModel}}">
             <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -394,6 +394,6 @@
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-        </ListBox>
+        </ListBox>-->
     </Grid>
 </UserControl>

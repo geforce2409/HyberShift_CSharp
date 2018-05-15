@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using Microsoft.Office.Core;
 using Microsoft.Office.Interop.PowerPoint;
 
@@ -17,7 +19,16 @@ namespace HyberShift_CSharp.Utilities
 
         }
 
-        public ObservableCollection<string> ExportSlide(string path)
+        public ObservableCollection<string> Foo(string path, int width, int height)
+        {
+            ObservableCollection<string> paths = this.ExportSlide(path, width, height);
+            ObservableCollection<Bitmap> bitmaps = this.ImportSlide(paths);
+            ObservableCollection<string> base64Arr = this.ConvertToBase64(bitmaps);
+
+            return base64Arr;
+        }
+
+        public ObservableCollection<string> ExportSlide(string path, int width, int height)
         {
             ObservableCollection<string> paths = new ObservableCollection<string>();
 
@@ -29,7 +40,7 @@ namespace HyberShift_CSharp.Utilities
             foreach (Slide slide in pptPresentation.Slides)
             {
                 string destpath = @"E:\slide" + counter + ".jpg";
-                slide.Export(destpath, "jpg", 1024, 960);
+                slide.Export(destpath, "jpg", width, height);
                 paths.Add(destpath);
                 counter++;
             }
@@ -65,5 +76,17 @@ namespace HyberShift_CSharp.Utilities
 
             return base64Array;
         }
+
+        //public BitmapSource ConvertToBitmapSource(string base64Str)
+        //{
+        //    // Convert Base64 String to byte[]
+        //    byte[] imageBytes = Convert.FromBase64String(base64Str);
+        //    MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+
+        //    // Convert byte[] to Image
+        //    ms.Write(imageBytes, 0, imageBytes.Length);
+        //    Bitmap bitmap = new Bitmap(ms, true);
+            
+        //}
     }
 }
