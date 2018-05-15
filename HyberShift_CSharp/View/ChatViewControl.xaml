@@ -15,6 +15,7 @@
         <viewModel:ListRoomViewModel x:Key="ListRoomViewModel" />
         <viewModel:RoomViewModel x:Key="RoomViewModel" />
         <viewModel:ChatViewModel x:Key="ChatViewModel"/>
+        <viewModel:BoardViewModel x:Key="BoardViewModel"/>
         <!--<viewModel:ChatMessegeViewModel x:Key="ChatMessegeViewModel" />-->
         <Style x:Key="SendButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="Transparent"/>
@@ -488,7 +489,7 @@
 
             <!--Messages-->
             <ItemsControl x:Name="MessagesItemsCtrl" Margin="0,5,0,0" 
-                          ItemsSource="{Binding SelectedParticipant.Chatter}" 
+                          ItemsSource="{Binding ListMessage, Source={StaticResource ChatViewModel}}" 
                           ItemTemplate="{DynamicResource MessagesDataTemplate}"
                           ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
                 <i:Interaction.Behaviors>
@@ -533,10 +534,62 @@
                             <RowDefinition Height="30" />
                         </Grid.RowDefinitions>
 
-                        <Image
+                        <!--<Image
                             Grid.RowSpan="3" Grid.ColumnSpan="4"
                             Source="{Binding Photo, Converter={StaticResource ByteBmpSrcConverter},
-                            TargetNullValue={StaticResource BlankImage}}" Stretch="UniformToFill"/>
+                            TargetNullValue={StaticResource BlankImage}}" Stretch="UniformToFill"/>-->
+
+                        <Canvas
+                            x:Name="canvas"
+                            Grid.RowSpan="3" Grid.ColumnSpan="4">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="MouseDown">
+                                    <i:InvokeCommandAction 
+                                        Command="{Binding MouseDownCommand, Source={StaticResource BoardViewModel}}" 
+                                        CommandParameter="{Binding ElementName=canvas}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseMove">
+                                    <i:InvokeCommandAction 
+                                        Command="{Binding MouseMoveCommand, Source={StaticResource BoardViewModel}}" 
+                                        CommandParameter="{Binding ElementName=canvas}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="MouseUp">
+                                    <i:InvokeCommandAction 
+                                        Command="{Binding MouseUpCommand, Source={StaticResource BoardViewModel}}" 
+                                        CommandParameter="{Binding ElementName=canvas}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ItemsControl ItemsSource="{Binding ListPoint, Source={StaticResource BoardViewModel}}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas IsItemsHost="True"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemContainerStyle>
+                                    <Style>
+                                        <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                                        <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Ellipse 
+                                            Width="{Binding Thickness, Source={StaticResource BoardViewModel}}" 
+                                            Height="{Binding Thickness, Source={StaticResource BoardViewModel}}" 
+                                            Fill="{Binding BrushColor, Source={StaticResource BoardViewModel}}" 
+                                            Stroke="{Binding BrushColor, Source={StaticResource BoardViewModel}}" 
+                                            StrokeThickness ="1"/>
+                                        <!--<Line 
+                                            X2="{Binding LastX, Source={StaticResource BoardViewModel}}" 
+                                            Y2="{Binding LastY, Source={StaticResource BoardViewModel}}" 
+                                            X1="{Binding X}" 
+                                            Y1="{Binding Y}" 
+                                            Stroke="Black"/>-->
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                        </Canvas>
 
                         <xctk:ColorPicker
                             Grid.Column="2" Grid.Row="0" Height="20" />
@@ -683,24 +736,6 @@
                         Style="{DynamicResource AddMemberButtonStyle}"/>
             </Grid>
         </Border>
-
-
-
-        <!--FOR TESTING MESSAGE-->
-       
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="2*" />
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Column="0" Grid.Row="0" Text="{Binding Message}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-        </ListBox>
+    
     </Grid>
 </UserControl>
