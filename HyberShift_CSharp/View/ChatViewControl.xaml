@@ -188,6 +188,60 @@
             </Setter>
         </Style>
 
+        <Style x:Key="LeftArrowButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <materialDesign:PackIcon Name="PhotoIcon" Kind="ArrowLeft" SnapsToDevicePixels="True"
+                                                     Foreground="{TemplateBinding Foreground}"
+                                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                     Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" TargetName="PhotoIcon" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Foreground" TargetName="PhotoIcon" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.23"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="RightArrowButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <materialDesign:PackIcon Name="PhotoIcon" Kind="ArrowRight" SnapsToDevicePixels="True"
+                                                     Foreground="{TemplateBinding Foreground}"
+                                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                     Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" TargetName="PhotoIcon" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Foreground" TargetName="PhotoIcon" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.23"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="ParticipantsListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="HorizontalContentAlignment" 
@@ -431,6 +485,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+
             <!--Messages-->
             <ItemsControl x:Name="MessagesItemsCtrl" Margin="0,5,0,0" 
                           ItemsSource="{Binding SelectedParticipant.Chatter}" 
@@ -457,24 +512,25 @@
                           Width="5"
                           Visibility="Collapsed"/>
 
+            <!--Presentation-->
             <Border x:Name="PresentationBorder"
                     Grid.Column="2"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Right"
                     Width="300"
-                    Visibility="Collapsed">
+                    Visibility="Visible">
                 <Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition Width="30"/>
                             <ColumnDefinition Width="39*"/>
                             <ColumnDefinition Width="100"/>
                             <ColumnDefinition Width="100"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50" />
+                            <RowDefinition Height="30" />
                             <RowDefinition/>
-                            <RowDefinition Height="50" />
+                            <RowDefinition Height="30" />
                         </Grid.RowDefinitions>
 
                         <Image
@@ -483,7 +539,7 @@
                             TargetNullValue={StaticResource BlankImage}}" Stretch="UniformToFill"/>
 
                         <xctk:ColorPicker
-                            Grid.Column="2" Grid.Row="0" Height="20" Margin="0,15" />
+                            Grid.Column="2" Grid.Row="0" Height="20" />
 
                         <Slider
                             Grid.Column="3" Grid.Row="0"
@@ -496,9 +552,22 @@
                         <!--Image Btn-->
                         <Button
                             Grid.Column="0" Grid.Row="2"
-                            Foreground="#FF6E6E6E" 
-                            Margin="4"    
+                            Margin="8"
+                            Foreground="#FF6E6E6E"
                             Style="{DynamicResource ImageButtonStyle}"/>
+
+                        <StackPanel
+                            Grid.Column="1" Grid.Row="2"
+                            Grid.ColumnSpan="3"
+                            Orientation="Horizontal" HorizontalAlignment="Center" utilities:MarginSetter.Margin="8">
+                            <Button
+                                Foreground="#FF6E6E6E"
+                                Style="{DynamicResource LeftArrowButtonStyle}"/>
+
+                            <Button
+                                Foreground="#FF6E6E6E"
+                                Style="{DynamicResource RightArrowButtonStyle}"/>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </Border>
