@@ -52,7 +52,11 @@ namespace HyberShift_CSharp.ViewModel
         public string RoomName //Display room's name
         {
             get { return currentRoom.Name; }
-
+            set
+            {
+                currentRoom.Name = value;
+                NotifyChanged("RoomName");
+            }
             // Implement this means user can change the room's name,
             // need to emit when setting and handle on server (not implement on server yet)
             // ...
@@ -110,7 +114,8 @@ namespace HyberShift_CSharp.ViewModel
             socket.On("room_change", (roomId) =>
             {
                 currentRoom = ListRoomModel.GetInstance().GetRoomById(roomId.ToString());
-                Debug.LogOutput("Selected room: " + "room id: " + currentRoom.ID + " room name: " + currentRoom.Name);
+                RoomName = currentRoom.Name;
+                Debug.LogOutput("Selected room: " + "room id: " + currentRoom.ID + " room name: " + RoomName);
             });
 
             socket.On("init_message", (args) =>

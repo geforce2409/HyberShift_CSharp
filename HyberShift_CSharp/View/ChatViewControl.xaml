@@ -540,6 +540,7 @@
                             TargetNullValue={StaticResource BlankImage}}" Stretch="UniformToFill"/>-->
 
                         <Canvas
+                            Background="Transparent"
                             x:Name="canvas"
                             Grid.RowSpan="3" Grid.ColumnSpan="4">
                             <i:Interaction.Triggers>
@@ -600,8 +601,8 @@
                             Minimum="0"
                             Maximum="100"
                             Style="{StaticResource MaterialDesignDiscreteSlider}"
-                            Value="20"
-                            Width="100" Padding="0,-2,0,0" />
+                            Value="{Binding Thickness, Source={StaticResource BoardViewModel}}"
+                            Width="100" Padding="0,-2,0,0"/>
 
                         <!--Image Btn-->
                         <Button
@@ -699,7 +700,7 @@
                     <!--Name-->
                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"
                                Margin="5,0" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"
-                               Text="{Binding Name}" SnapsToDevicePixels="True"/>
+                               Text="{Binding RoomName, Source={StaticResource ChatViewModel}}" SnapsToDevicePixels="True"/>
 
                     <!--Online-->
                     <Ellipse VerticalAlignment="Center" HorizontalAlignment="Center" 
