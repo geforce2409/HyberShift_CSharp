@@ -25,12 +25,14 @@ namespace HyberShift_CSharp.ViewModel
     {
         private Socket socket;
         private ListPointModel listPointModel;
-        private DrawingModel drawingModel;
+        private RoomModel currentRoom;
 
         //getter and setter
         public DelegateCommand<object> MouseDownCommand { get; set; }
         public DelegateCommand<object> MouseMoveCommand { get; set; }
         public DelegateCommand<object> MouseUpCommand { get; set; }
+        public DelegateCommand<RoomModel> RoomChangeCommand { get; set; }
+        public DelegateCommand<object> CanvasChangeCommand { get; set; }
 
         public int Thickness { get; set; }
 
@@ -40,28 +42,8 @@ namespace HyberShift_CSharp.ViewModel
         {
             get { return new SolidColorBrush(SelectedColor); }
         }
-
-        public Double CurrentX
-        {
-            get { return listPointModel.List[listPointModel.List.Count - 1].X; }
-        }
-
-        public Double CurrentY
-        {
-            get { return listPointModel.List[listPointModel.List.Count - 1].Y; }
-        }
-
-        public Double LastX
-        {
-            get { return listPointModel.List[listPointModel.List.Count - 2].X; }
-        }
-
-        public Double LastY
-        {
-            get { return listPointModel.List[listPointModel.List.Count - 2].Y; }
-        }
-
-        public ObservableCollection<Point> ListPoint
+        
+        public ObservableCollection<EllipseModel> ListPoint
         {
             get { return listPointModel.List; }
             set
@@ -76,15 +58,21 @@ namespace HyberShift_CSharp.ViewModel
             socket = SocketAPI.GetInstance().GetSocket();
 
             listPointModel = new ListPointModel();
-            drawingModel = new DrawingModel();
             SelectedColor = Color.FromRgb(0, 0, 0);
             Thickness = 5;
       
             MouseDownCommand = new DelegateCommand<object>(OnMouseDown);
             MouseMoveCommand = new DelegateCommand<object>(OnMouseMove);
             MouseUpCommand = new DelegateCommand<object>(OnMouseUp);
+            RoomChangeCommand = new DelegateCommand<RoomModel>(OnRoomChange);
 
             HandleSocket();
+        }
+
+        private void OnRoomChange(RoomModel obj)
+        {
+            currentRoom = obj;
+            listPointModel.List.Clear();
         }
 
         private void OnMouseDown(object obj)
@@ -98,15 +86,26 @@ namespace HyberShift_CSharp.ViewModel
                 return;
 
             Canvas canvas = obj as Canvas;
+            
             Point currentPoint = Mouse.GetPosition(canvas);
+            Ellipse ellipse = new Ellipse();
+            ellipse.Width = Thickness;
+            ellipse.Height = Thickness;
+            ellipse.Fill = BrushColor;
+            ellipse.Stroke = BrushColor;
+            ellipse.StrokeThickness = 1;
             Application.Current.Dispatcher.Invoke((Action)delegate
             {
-                ListPoint.Add(currentPoint);
+                ListPoint.Add(new EllipseModel(ellipse, currentPoint));
             });
             
             JObject data = new JObject();
             data.Add("point_x", currentPoint.X);
             data.Add("point_y", currentPoint.Y);
+            data.Add("thickness", Thickness);
+            data.Add("r", BrushColor.Color.R);
+            data.Add("g", BrushColor.Color.G);
+            data.Add("b", BrushColor.Color.B);
             socket.Emit("test_drawing", data);
         }
 
@@ -124,11 +123,23 @@ namespace HyberShift_CSharp.ViewModel
 
             socket.On("test_drawing", (arg) =>
             {
-                JObject obj = (JObject)arg;
-                Point newPoint = new Point((double)obj.GetValue("point_x"), (double)obj.GetValue("point_y"));
                 Application.Current.Dispatcher.Invoke((Action)delegate
                 {
-                    ListPoint.Add(newPoint);
+                    Debug.LogOutput("recieved test_drawing event");
+                    JObject obj = (JObject)arg;
+                    Point newPoint = new Point((double)obj.GetValue("point_x"), (double)obj.GetValue("point_y"));
+                    double thickness = (double)obj.GetValue("thickness");
+                    byte r = (byte)obj.GetValue("r");
+                    byte g = (byte)obj.GetValue("g");
+                    byte b = (byte)obj.GetValue("b");
+                    SolidColorBrush color = new SolidColorBrush(Color.FromRgb(r, g, b));
+                    Ellipse newEllipse = new Ellipse();
+                    newEllipse.Width = thickness;
+                    newEllipse.Height = thickness;
+                    newEllipse.Fill = color;
+                    newEllipse.Stroke = color;
+                    newEllipse.StrokeThickness = 1;
+                    ListPoint.Add(new EllipseModel(newEllipse, newPoint));
                 });
             });
         }

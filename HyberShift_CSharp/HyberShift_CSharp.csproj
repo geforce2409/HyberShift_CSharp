@@ -136,10 +136,14 @@
     <Compile Include="Domain\IsValidInput.cs" />
     <Compile Include="Model\CreateRoomModel.cs" />
     <Compile Include="Model\DrawingModel.cs" />
+    <Compile Include="Model\EllipseModel.cs" />
+    <Compile Include="Model\Enum\TaskType.cs" />
     <Compile Include="Model\Interface\ICanvas.cs" />
     <Compile Include="Model\List\ListMessageModel.cs" />
     <Compile Include="Model\List\ListPointModel.cs" />
+    <Compile Include="Model\List\ListTaskModel.cs" />
     <Compile Include="Model\MessageModel.cs" />
+    <Compile Include="Model\TaskModel.cs" />
     <Compile Include="Utilities\BringNewItemIntoViewBehavior.cs" />
     <Compile Include="Utilities\ByteBitmapSourceConverter.cs" />
     <Compile Include="Model\Interface\IHavePassword.cs" />
@@ -166,11 +170,13 @@
     <Compile Include="ViewModel\BoardViewModel.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\CreateRoomViewModel.cs" />
+    <Compile Include="ViewModel\DrawingTestVM.cs" />
     <Compile Include="ViewModel\ListRoomViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\RoomViewModel.cs" />
     <Compile Include="ViewModel\SignInPageViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\TaskViewModel.cs" />
     <Compile Include="View\ChatViewControl.xaml.cs">
       <DependentUpon>ChatViewControl.xaml</DependentUpon>
     </Compile>

@@ -27,12 +27,20 @@ namespace HyberShift_CSharp.ViewModel
             listMessageModel = ListMessageModel.GetInstance();
             socket = SocketAPI.GetInstance().GetSocket();
             SendTextMessageCommand = new DelegateCommand(SendMessage);
+            ItemSelectedCommand = new DelegateCommand<RoomModel>(HandleItemSelected);
             userInfo = UserInfo.GetInstance();
             HandleSocket();
         }
 
+        private void HandleItemSelected(RoomModel obj)
+        {
+            currentRoom = obj;
+            RoomName = currentRoom.Name;
+        }
+
         // getter and setter
         public DelegateCommand SendTextMessageCommand { get; set; }
+        public DelegateCommand<RoomModel> ItemSelectedCommand { get; set; }
 
         public ObservableCollection<MessageModel> ListMessage
         {
@@ -111,12 +119,12 @@ namespace HyberShift_CSharp.ViewModel
 
         private void HandleSocket()
         {
-            socket.On("room_change", (roomId) =>
-            {
-                currentRoom = ListRoomModel.GetInstance().GetRoomById(roomId.ToString());
-                RoomName = currentRoom.Name;
-                Debug.LogOutput("Selected room: " + "room id: " + currentRoom.ID + " room name: " + RoomName);
-            });
+            //socket.On("room_change", (roomId) =>
+            //{
+            //    currentRoom = ListRoomModel.GetInstance().GetRoomById(roomId.ToString());
+            //    RoomName = currentRoom.Name;
+            //    Debug.LogOutput("Selected room: " + "room id: " + currentRoom.ID + " room name: " + RoomName);
+            //});
 
             socket.On("init_message", (args) =>
             {

@@ -10,7 +10,7 @@
         mc:Ignorable="d"
         Title="DrawingTest" Height="450" Width="800">
     <Window.Resources>
-        <viewModel:BoardViewModel x:Key="BoardViewModel"/>
+        <viewModel:DrawingTestVM x:Key="BoardViewModel"/>
     </Window.Resources>
     <Grid>
         <Border>
@@ -32,7 +32,7 @@
                         CommandParameter="{Binding ElementName=canvas}"/>
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <ItemsControl ItemsSource="{Binding ListPoint, Source={StaticResource BoardViewModel}}">
+                <ItemsControl ItemsSource="{Binding ListLine, Source={StaticResource BoardViewModel}}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
                             <Canvas IsItemsHost="True"/>
@@ -40,24 +40,25 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemContainerStyle>
                         <Style>
-                            <Setter Property="Canvas.Left" Value="{Binding X}"/>
-                            <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                            <Setter Property="Canvas.Left" Value="{Binding X1}"/>
+                            <Setter Property="Canvas.Top" Value="{Binding Y1}"/>
                         </Style>
                     </ItemsControl.ItemContainerStyle>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Ellipse 
+                            <!--<Ellipse 
                                 Width="{Binding Thickness, Source={StaticResource BoardViewModel}}" 
                                 Height="{Binding Thickness, Source={StaticResource BoardViewModel}}" 
                                 Fill="{Binding BrushColor, Source={StaticResource BoardViewModel}}" 
                                 Stroke="{Binding BrushColor, Source={StaticResource BoardViewModel}}" 
-                                StrokeThickness ="1"/>
-                            <!--<Line 
-                                X2="{Binding LastX, Source={StaticResource BoardViewModel}}" 
-                                Y2="{Binding LastY, Source={StaticResource BoardViewModel}}" 
-                                X1="{Binding X}" 
-                                Y1="{Binding Y}" 
-                                Stroke="Black"/>-->
+                                StrokeThickness ="1"/>-->
+                            <Line 
+                                X2="{Binding X2}" 
+                                Y2="{Binding Y2}" 
+                                X1="{Binding X1}" 
+                                Y1="{Binding Y1}" 
+                                Stroke="Black"
+                                StrokeThickness="5"/>
 
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

@@ -475,6 +475,16 @@
                             Command="{Binding ItemSelectedCommand, Source={StaticResource ListRoomViewModel}}" 
                             CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}"/>
                     </i:EventTrigger>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction 
+                            Command="{Binding ItemSelectedCommand, Source={StaticResource ChatViewModel}}" 
+                            CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}"/>
+                    </i:EventTrigger>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction 
+                            Command="{Binding RoomChangeCommand, Source={StaticResource BoardViewModel}}" 
+                            CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}"/>
+                    </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ListBox>
         </Border>
@@ -575,17 +585,11 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Ellipse 
-                                            Width="{Binding Thickness, Source={StaticResource BoardViewModel}}" 
-                                            Height="{Binding Thickness, Source={StaticResource BoardViewModel}}" 
-                                            Fill="{Binding BrushColor, Source={StaticResource BoardViewModel}}" 
-                                            Stroke="{Binding BrushColor, Source={StaticResource BoardViewModel}}" 
+                                            Width="{Binding Width}" 
+                                            Height="{Binding Height}" 
+                                            Fill="{Binding Fill}" 
+                                            Stroke="{Binding Stroke}" 
                                             StrokeThickness ="1"/>
-                                        <!--<Line 
-                                            X2="{Binding LastX, Source={StaticResource BoardViewModel}}" 
-                                            Y2="{Binding LastY, Source={StaticResource BoardViewModel}}" 
-                                            X1="{Binding X}" 
-                                            Y1="{Binding Y}" 
-                                            Stroke="Black"/>-->
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -725,11 +729,11 @@
                     </Ellipse>
                 </StackPanel>
 
-                <Button x:Name="VoiceCallButton" Grid.Column="1" Margin="10"
+                <Button x:Name="VoiceCallButton" Grid.Column="2" Margin="10"
                         Style="{DynamicResource VoiceCallButtonStyle}"/>
 
-                <Button x:Name="VideoCallButton" Grid.Column="2" Margin="10"
-                        Style="{DynamicResource VideoCallButtonStyle}"/>
+                <!--<Button x:Name="VideoCallButton" Grid.Column="2" Margin="10"
+                        Style="{DynamicResource VideoCallButtonStyle}"/>-->
 
                 <Button x:Name="PresentationButton" Grid.Column="3" Margin="10"
                         Style="{DynamicResource PresentationButtonStyle}"/>
