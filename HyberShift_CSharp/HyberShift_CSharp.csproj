@@ -139,6 +139,7 @@
     <Compile Include="Model\EllipseModel.cs" />
     <Compile Include="Model\Enum\TaskType.cs" />
     <Compile Include="Model\Interface\ICanvas.cs" />
+    <Compile Include="Model\Interface\IDialogService.cs" />
     <Compile Include="Model\List\ListMessageModel.cs" />
     <Compile Include="Model\List\ListPointModel.cs" />
     <Compile Include="Model\List\ListTaskModel.cs" />
@@ -165,6 +166,8 @@
     <Compile Include="DataObject\SenderTyping.cs" />
     <Compile Include="Model\UserInfo.cs" />
     <Compile Include="DataObject\UserOnline.cs" />
+    <Compile Include="Utilities\DialogService.cs" />
+    <Compile Include="Utilities\ImageUtils.cs" />
     <Compile Include="Utilities\PresentationAPI.cs" />
     <Compile Include="Utilities\VoiceAPI.cs" />
     <Compile Include="ViewModel\BoardViewModel.cs" />
