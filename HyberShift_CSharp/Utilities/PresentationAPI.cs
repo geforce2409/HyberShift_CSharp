@@ -19,9 +19,18 @@ namespace HyberShift_CSharp.Utilities
 
         }
 
-        public ObservableCollection<string> Foo(string path, int width, int height)
+        public ObservableCollection<string> LoadAndExportBase64(string path, int width, int height)
         {
             ObservableCollection<string> paths = this.ExportSlide(path, width, height);
+            ObservableCollection<Bitmap> bitmaps = this.ImportSlide(paths);
+            ObservableCollection<string> base64Arr = this.ConvertToBase64(bitmaps);
+
+            return base64Arr;
+        }
+
+        public ObservableCollection<string> LoadAndExportBase64(string path)
+        {
+            ObservableCollection<string> paths = this.ExportSlide(path);
             ObservableCollection<Bitmap> bitmaps = this.ImportSlide(paths);
             ObservableCollection<string> base64Arr = this.ConvertToBase64(bitmaps);
 
@@ -39,8 +48,28 @@ namespace HyberShift_CSharp.Utilities
             int counter = 0;
             foreach (Slide slide in pptPresentation.Slides)
             {
-                string destpath = @"E:\slide" + counter + ".jpg";
-                slide.Export(destpath, "jpg", width, height);
+                string destpath = Environment.CurrentDirectory + "\\slide" + counter + ".png";
+                slide.Export(destpath, "png", width, height);
+                paths.Add(destpath);
+                counter++;
+            }
+
+            return paths;
+        }
+
+        public ObservableCollection<string> ExportSlide(string path)
+        {
+            ObservableCollection<string> paths = new ObservableCollection<string>();
+
+            ApplicationClass pptApplication = new ApplicationClass();
+            Presentation pptPresentation = pptApplication.Presentations.Open(path, MsoTriState.msoFalse,
+            MsoTriState.msoFalse, MsoTriState.msoFalse);
+
+            int counter = 0;
+            foreach (Slide slide in pptPresentation.Slides)
+            {
+                string destpath = Environment.CurrentDirectory + "\\slide" + counter + ".png";
+                slide.Export(destpath, "png");
                 paths.Add(destpath);
                 counter++;
             }

@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,12 +28,16 @@ namespace HyberShift_CSharp.ViewModel
         private ListPointModel listPointModel;
         private RoomModel currentRoom;
 
+        private IDialogService dialogService;
+        private PresentationAPI presentation;
+
         //getter and setter
         public DelegateCommand<object> MouseDownCommand { get; set; }
         public DelegateCommand<object> MouseMoveCommand { get; set; }
         public DelegateCommand<object> MouseUpCommand { get; set; }
         public DelegateCommand<RoomModel> RoomChangeCommand { get; set; }
         public DelegateCommand<object> CanvasChangeCommand { get; set; }
+        public DelegateCommand OpenPresentationCommand { get; set; }
 
         public int Thickness { get; set; }
 
@@ -56,6 +61,8 @@ namespace HyberShift_CSharp.ViewModel
         public BoardViewModel(): base()
         {
             socket = SocketAPI.GetInstance().GetSocket();
+            dialogService = new DialogService();
+            presentation = new PresentationAPI();
 
             listPointModel = new ListPointModel();
             SelectedColor = Color.FromRgb(0, 0, 0);
@@ -65,6 +72,7 @@ namespace HyberShift_CSharp.ViewModel
             MouseMoveCommand = new DelegateCommand<object>(OnMouseMove);
             MouseUpCommand = new DelegateCommand<object>(OnMouseUp);
             RoomChangeCommand = new DelegateCommand<RoomModel>(OnRoomChange);
+            OpenPresentationCommand = new DelegateCommand(OpenPresentationSlide);
 
             HandleSocket();
         }
@@ -77,7 +85,7 @@ namespace HyberShift_CSharp.ViewModel
 
         private void OnMouseDown(object obj)
         {
-          
+            
         }
 
         private void OnMouseMove(object obj)
@@ -112,6 +120,31 @@ namespace HyberShift_CSharp.ViewModel
         private void OnMouseUp(object obj)
         {
        
+        }
+
+        public void OpenPresentationSlide()
+        {
+            string path = dialogService.OpenFile("Choose presentation file", "All Files|*.pptx;*.ppt|Presentation (.pptx ,.ppt)|*.pptx;*.ppt");
+            
+
+            ThreadStart starter = () =>
+            {
+                ObservableCollection<string> base64Arr = presentation.LoadAndExportBase64(path);
+                foreach (string img in base64Arr)
+                {
+                    Debug.LogOutput(img);
+                }
+            };
+            // callback when thread done
+            starter += () =>
+            {
+                Debug.LogOutput("Thread done");
+            };
+
+            Thread thread = new Thread(starter) { IsBackground = true };
+            thread.Start();
+
+            
         }
 
         private void HandleSocket()

@@ -14,7 +14,10 @@
     </Window.Resources>
     <Grid>
         <Border>
-            <Canvas x:Name="canvas" Background="Blue" Margin="0,0,161.6,0">
+            <Canvas x:Name="canvas" Margin="0,0,161.6,0">
+                <Canvas.Background>
+                    <ImageBrush ImageSource=""/>
+                </Canvas.Background>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDown">
                         <i:InvokeCommandAction 

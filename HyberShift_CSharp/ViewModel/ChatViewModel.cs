@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json;
 using Prism.Commands;
+using System.Windows.Controls;
 
 namespace HyberShift_CSharp.ViewModel
 {
@@ -19,17 +20,38 @@ namespace HyberShift_CSharp.ViewModel
     public class ChatViewModel : BaseViewModel
     {
         private ListMessageModel listMessageModel;
+        private ObservableCollection<string> sendersTyping;
         private RoomModel currentRoom;
         private Socket socket;
         private UserInfo userInfo;
         public ChatViewModel() : base()
         {
             listMessageModel = ListMessageModel.GetInstance();
+            sendersTyping = new ObservableCollection<string>();
             socket = SocketAPI.GetInstance().GetSocket();
             SendTextMessageCommand = new DelegateCommand(SendMessage);
             ItemSelectedCommand = new DelegateCommand<RoomModel>(HandleItemSelected);
+            TypingCommand = new DelegateCommand<TextBox>(HandleTyping);
+            DisplayTyping = "Hidden";
             userInfo = UserInfo.GetInstance();
             HandleSocket();
+        }
+
+        private void HandleTyping(TextBox textbox)
+        {
+            JObject data = new JObject();
+            data.Add("sender", userInfo.FullName);
+            data.Add("room_id", currentRoom.ID);
+
+            if (textbox.Text.Length > 0)
+            {
+                
+                socket.Emit("is_typing", data);
+            }
+            else
+            {
+                socket.Emit("done_typing", data);
+            }
         }
 
         private void HandleItemSelected(RoomModel obj)
@@ -41,6 +63,7 @@ namespace HyberShift_CSharp.ViewModel
         // getter and setter
         public DelegateCommand SendTextMessageCommand { get; set; }
         public DelegateCommand<RoomModel> ItemSelectedCommand { get; set; }
+        public DelegateCommand<TextBox> TypingCommand { get; set; }
 
         public ObservableCollection<MessageModel> ListMessage
         {
@@ -79,6 +102,33 @@ namespace HyberShift_CSharp.ViewModel
                 foreach (string mem in currentRoom.Members)
                     temp += mem + " ";
                 return temp;
+            }
+        }
+
+        public string DisplayTyping { get; set; }
+
+        public string TypingMessage
+        {
+            get
+            {
+                //convert list senderstyping to string
+                if (sendersTyping.Count == 0)
+                {
+                    DisplayTyping = "Hidden";
+                    NotifyChanged("DisplayTyping");
+                    return string.Empty;
+                }
+
+                DisplayTyping = "Visible";
+                NotifyChanged("DisplayTyping");
+                if (sendersTyping.Count == 1)
+                    return sendersTyping[0] + " is typing . . .";
+
+                string rs = string.Empty;
+                for (int i = 0; i < sendersTyping.Count - 1; i++)
+                    rs += sendersTyping[i] + ", ";
+                rs += sendersTyping[sendersTyping.Count - 1] + " are typing . . .";
+                return rs;
             }
         }
 
@@ -152,61 +202,83 @@ namespace HyberShift_CSharp.ViewModel
                 });
             });
 
-            socket.On("new_message", (args) =>
+            socket.On("is_typing", (arg) =>
             {
-                var msgjson = (JObject)args;
-                try
-                {
-                    // handle data
-                    JObject data = (JObject)args;
-                    string idRoom = data.GetValue("id").ToString();
-                    JObject content = (JObject)data.GetValue("content");
+                JObject data = (JObject)arg;
+                string sender = data.GetValue("sender").ToString();
 
-                    string id = content.GetValue("id").ToString();
-                    string sender = content.GetValue("sender").ToString();
-                    string message = content.GetValue("message").ToString();
-                    string imgstring = content.GetValue("imgstring").ToString();
-                    string filename = content.GetValue("filename").ToString();
-                    string filestring = content.GetValue("filestring").ToString();
-                    long timestamp = Convert.ToInt64(content.GetValue("timestamp"));
-
-                    MessageModel messageModel = new MessageModel(id, message, sender, imgstring, filename, filestring, timestamp);
-                    if (id == "public")
-                        Debug.LogOutput("public has new message");
-                    //else
-                    //{
-                    //    // get current room from idRoom
-                    //    currentRoom = ListRoomModel.GetInstance().GetRoomById(idRoom);
-
-                    //    Debug.LogOutput(currentRoom.Name + " has new message");
-                    //    // if user is in current room, then display
-                    //    if (currentRoom.ID.Equals(id))
-                    //    {
-                    //        int indexToAdd = getMinIndexFrom(listTyping);
-                    //        removeSenderFrom(listTyping, sender, lvMessage);
-                    //        if (indexToAdd == 0)
-                    //            lvMessage.getItems().add(message);
-                    //        else
-                    //            lvMessage.getItems().add(indexToAdd, message);
-
-                    //        increaseIndexFrom(listTyping, indexToAdd);
-                    //    }
-                    //    else
-                    //    {
-                    //        Room updateRoom = listRoom.getRoomById(id);
-                    //        int index = listRoom.getIndexOfRoom(id);
-                    //        updateRoom.setNewMessage(true);
-
-                    //        lvRoom.getItems().set(index, updateRoom);
-                    //        System.out.println("Has new message!!!!!!!");
-                    //    }
-                    //}
-                }
-                catch (JsonException e)
-                {
-                    Debug.LogOutput(e.ToString());
-                }
+                //check and add to senderstyping
+                foreach (string sd in sendersTyping)
+                    if (sd.Equals(sender))
+                        return;
+                sendersTyping.Add(sender);
+                NotifyChanged("TypingMessage");
             });
+
+            socket.On("done_typing", (arg) =>
+            {
+                JObject data = (JObject)arg;
+                string sender = data.GetValue("sender").ToString();
+
+                sendersTyping.Remove(sender);
+                NotifyChanged("TypingMessage");
+            });
+
+            //socket.On("new_message", (args) =>
+            //{
+            //    var msgjson = (JObject)args;
+            //    try
+            //    {
+            //        // handle data
+            //        JObject data = (JObject)args;
+            //        string idRoom = data.GetValue("id").ToString();
+            //        JObject content = (JObject)data.GetValue("content");
+
+            //        string id = content.GetValue("id").ToString();
+            //        string sender = content.GetValue("sender").ToString();
+            //        string message = content.GetValue("message").ToString();
+            //        string imgstring = content.GetValue("imgstring").ToString();
+            //        string filename = content.GetValue("filename").ToString();
+            //        string filestring = content.GetValue("filestring").ToString();
+            //        long timestamp = Convert.ToInt64(content.GetValue("timestamp"));
+
+            //        MessageModel messageModel = new MessageModel(id, message, sender, imgstring, filename, filestring, timestamp);
+            //        if (id == "public")
+            //            Debug.LogOutput("public has new message");
+            //        //else
+            //        //{
+            //        //    // get current room from idRoom
+            //        //    currentRoom = ListRoomModel.GetInstance().GetRoomById(idRoom);
+
+            //        //    Debug.LogOutput(currentRoom.Name + " has new message");
+            //        //    // if user is in current room, then display
+            //        //    if (currentRoom.ID.Equals(id))
+            //        //    {
+            //        //        int indexToAdd = getMinIndexFrom(listTyping);
+            //        //        removeSenderFrom(listTyping, sender, lvMessage);
+            //        //        if (indexToAdd == 0)
+            //        //            lvMessage.getItems().add(message);
+            //        //        else
+            //        //            lvMessage.getItems().add(indexToAdd, message);
+
+            //        //        increaseIndexFrom(listTyping, indexToAdd);
+            //        //    }
+            //        //    else
+            //        //    {
+            //        //        Room updateRoom = listRoom.getRoomById(id);
+            //        //        int index = listRoom.getIndexOfRoom(id);
+            //        //        updateRoom.setNewMessage(true);
+
+            //        //        lvRoom.getItems().set(index, updateRoom);
+            //        //        System.out.println("Has new message!!!!!!!");
+            //        //    }
+            //        //}
+            //    }
+            //    catch (JsonException e)
+            //    {
+            //        Debug.LogOutput(e.ToString());
+            //    }
+            //});
         }
     }
 }

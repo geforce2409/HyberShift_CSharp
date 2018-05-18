@@ -36,7 +36,7 @@ namespace HyberShift_CSharp.Utilities
             }
         }
 
-        //Byte array to Image
+        //Base64 array to Image
         public static Image GetImageFromBase64String(string base64String)
         {
             byte[] imageBytes = Convert.FromBase64String(base64String);
@@ -80,6 +80,12 @@ namespace HyberShift_CSharp.Utilities
 
                 return bitmapimage;
             }
+        }
+
+        public static BitmapImage Base64StringToBitmapSource(string base64string)
+        {
+            Image image = ImageUtils.GetImageFromBase64String(base64string);
+            return ImageUtils.BitmapToImageSource((Bitmap)image);
         }
     }
 }
