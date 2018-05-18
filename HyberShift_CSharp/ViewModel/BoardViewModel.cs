@@ -17,6 +17,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Xceed.Wpf.Toolkit;
 
@@ -30,6 +31,9 @@ namespace HyberShift_CSharp.ViewModel
 
         private IDialogService dialogService;
         private PresentationAPI presentation;
+        private ObservableCollection<string> base64Slide;
+        private ObservableCollection<BitmapImage> slideImages;
+        private int slideIndex;
 
         //getter and setter
         public DelegateCommand<object> MouseDownCommand { get; set; }
@@ -37,7 +41,14 @@ namespace HyberShift_CSharp.ViewModel
         public DelegateCommand<object> MouseUpCommand { get; set; }
         public DelegateCommand<RoomModel> RoomChangeCommand { get; set; }
         public DelegateCommand<object> CanvasChangeCommand { get; set; }
+
+        //presentation
         public DelegateCommand OpenPresentationCommand { get; set; }
+        public DelegateCommand<Button> LeftSlideCommand { get; set; }
+        public DelegateCommand<Button> RightSlideCommand { get; set; }
+
+        //Active board
+        public BitmapImage CanvasBackground { get; set; }
 
         public int Thickness { get; set; }
 
@@ -63,6 +74,9 @@ namespace HyberShift_CSharp.ViewModel
             socket = SocketAPI.GetInstance().GetSocket();
             dialogService = new DialogService();
             presentation = new PresentationAPI();
+            slideIndex = 0;
+            base64Slide = new ObservableCollection<string>();
+            slideImages = new ObservableCollection<BitmapImage>();
 
             listPointModel = new ListPointModel();
             SelectedColor = Color.FromRgb(0, 0, 0);
@@ -73,8 +87,42 @@ namespace HyberShift_CSharp.ViewModel
             MouseUpCommand = new DelegateCommand<object>(OnMouseUp);
             RoomChangeCommand = new DelegateCommand<RoomModel>(OnRoomChange);
             OpenPresentationCommand = new DelegateCommand(OpenPresentationSlide);
+            LeftSlideCommand = new DelegateCommand<Button>(NavigateLeftSlide);
+            RightSlideCommand = new DelegateCommand<Button>(NavigateRightSlide);
 
             HandleSocket();
+        }
+
+        private void NavigateLeftSlide(Button btn)
+        {
+            if (slideIndex == 0)
+            {
+                btn.IsEnabled = false;
+                return;
+            }
+
+            // emit slide
+            slideIndex--;
+            JObject data = new JObject();
+            data.Add("room_id", currentRoom.ID);
+            data.Add("slide", base64Slide[slideIndex]);
+            socket.Emit("new_slide", data);
+        }
+
+        private void NavigateRightSlide(Button btn)
+        {
+            if (slideIndex == base64Slide.Count - 1)
+            {
+                btn.IsEnabled = false;
+                return;
+            }
+
+            // emit slide
+            slideIndex++;
+            JObject data = new JObject();
+            data.Add("room_id", currentRoom.ID);
+            data.Add("slide", base64Slide[slideIndex]);
+            socket.Emit("new_slide", data);
         }
 
         private void OnRoomChange(RoomModel obj)
@@ -129,16 +177,27 @@ namespace HyberShift_CSharp.ViewModel
 
             ThreadStart starter = () =>
             {
-                ObservableCollection<string> base64Arr = presentation.LoadAndExportBase64(path);
-                foreach (string img in base64Arr)
-                {
-                    Debug.LogOutput(img);
-                }
+                base64Slide.Clear();
+                base64Slide = presentation.LoadAndExportBase64(path);
             };
+
             // callback when thread done
             starter += () =>
             {
                 Debug.LogOutput("Thread done");
+
+                // init first slide
+                slideIndex = 0;
+
+                // emit slide
+                JObject data = new JObject();
+                data.Add("room_id", currentRoom.ID);
+                data.Add("slide", base64Slide[slideIndex]);
+                socket.Emit("new_slide", data);
+
+                
+
+                Debug.LogOutput("Emiited new slide");
             };
 
             Thread thread = new Thread(starter) { IsBackground = true };
@@ -173,6 +232,26 @@ namespace HyberShift_CSharp.ViewModel
                     newEllipse.Stroke = color;
                     newEllipse.StrokeThickness = 1;
                     ListPoint.Add(new EllipseModel(newEllipse, newPoint));
+                });
+            });
+
+            socket.On("new_slide", (arg) =>
+            {
+                Application.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    JObject data = (JObject)arg;
+                    string roomId = data.GetValue("room_id").ToString();
+                    string slide = data.GetValue("slide").ToString();
+
+                    if (!currentRoom.ID.Equals(roomId))
+                        return;
+
+                    // convert to image source
+       
+                    CanvasBackground = ImageUtils.Base64StringToBitmapSource(slide);
+                    NotifyChanged("CanvasBackground");
+
+                    Debug.LogOutput("Updated canvas background");
                 });
             });
         }

@@ -191,6 +191,7 @@ namespace HyberShift_CSharp.ViewModel
 
                 Application.Current.Dispatcher.Invoke((Action) delegate
                 {
+                    //if user is in the room that occur event, display message
                     if (currentRoom.ID.Equals(id))
                     {
                         MessageModel msg = new MessageModel(id, message, sender, imgstring, filestring, filename,
@@ -206,6 +207,11 @@ namespace HyberShift_CSharp.ViewModel
             {
                 JObject data = (JObject)arg;
                 string sender = data.GetValue("sender").ToString();
+                string roomId = data.GetValue("room_id").ToString();
+
+                //if user is not in the room that occur event, then return
+                if (!currentRoom.ID.Equals(roomId))
+                    return;
 
                 //check and add to senderstyping
                 foreach (string sd in sendersTyping)
@@ -219,6 +225,11 @@ namespace HyberShift_CSharp.ViewModel
             {
                 JObject data = (JObject)arg;
                 string sender = data.GetValue("sender").ToString();
+                string roomId = data.GetValue("room_id").ToString();
+
+                //if user is not in the room that occur event, then return
+                if (!currentRoom.ID.Equals(roomId))
+                    return;
 
                 sendersTyping.Remove(sender);
                 NotifyChanged("TypingMessage");

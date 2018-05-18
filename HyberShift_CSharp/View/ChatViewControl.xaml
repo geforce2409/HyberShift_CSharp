@@ -553,9 +553,11 @@
                             TargetNullValue={StaticResource BlankImage}}" Stretch="UniformToFill"/>-->
 
                         <Canvas
-                            Background="Transparent"
                             x:Name="canvas"
                             Grid.RowSpan="3" Grid.ColumnSpan="4">
+                            <Canvas.Background>
+                                <ImageBrush ImageSource="{Binding CanvasBackground, Source={StaticResource BoardViewModel}}"/>
+                            </Canvas.Background>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDown">
                                     <i:InvokeCommandAction 
@@ -631,12 +633,18 @@
                             Grid.ColumnSpan="3"
                             Orientation="Horizontal" HorizontalAlignment="Center" utilities:MarginSetter.Margin="8">
                             <Button
+                                x:Name="btnLeftSlide"
                                 Foreground="#FF6E6E6E"
-                                Style="{DynamicResource LeftArrowButtonStyle}"/>
+                                Style="{DynamicResource LeftArrowButtonStyle}"
+                                Command="{Binding LeftSlideCommand, Source={StaticResource BoardViewModel}}"
+                                CommandParameter="{Binding ElementName=btnLeftSlide}"/>
 
                             <Button
+                                x:Name="btnRightSlide"
                                 Foreground="#FF6E6E6E"
-                                Style="{DynamicResource RightArrowButtonStyle}"/>
+                                Style="{DynamicResource RightArrowButtonStyle}"
+                                Command="{Binding RightSlideCommand, Source={StaticResource BoardViewModel}}"
+                                CommandParameter="{Binding ElementName=btnRightSlide}"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
