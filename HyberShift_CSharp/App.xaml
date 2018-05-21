@@ -38,6 +38,15 @@
                 <Setter Property="FontWeight" Value="Normal" />
             </Style>
 
+            <Style x:Key="PrimaryButton" BasedOn="{StaticResource MaterialDesignRaisedButton}"
+                   TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="#ffc146" />
+                <Setter Property="BorderBrush" Value="#ffc146" />
+                <Setter Property="Foreground" Value="{StaticResource PrimaryHueMidForegroundBrush}" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="FontWeight" Value="Normal" />
+            </Style>
+
             <Style x:Key="GhostButton" BasedOn="{StaticResource MaterialDesignRaisedButton}"
                    TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="Transparent" />

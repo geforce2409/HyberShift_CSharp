@@ -34,6 +34,12 @@ namespace HyberShift_CSharp.ViewModel
             socket = SocketAPI.GetInstance().GetSocket();
             listTaskModel = new ListTaskModel();
 
+            //test
+            ListTask.Add(new TaskModel("1", "Name 1", "Des 1", DateTime.Now, DateTime.Now, "Per 1", 0.2, Model.Enum.TaskType.TO_DO));
+            ListTask.Add(new TaskModel("2", "Name 2", "Des 2", DateTime.Now, DateTime.Now, "Per 2", 0.5, Model.Enum.TaskType.BACKLOG));
+            ListTask.Add(new TaskModel("3", "Name 3", "Des 3", DateTime.Now, DateTime.Now, "Per 3", 0.7, Model.Enum.TaskType.WARNING));
+            ListTask.Add(new TaskModel("4", "Name 4", "Des 4", DateTime.Now, DateTime.Now, "Per 4", 1, Model.Enum.TaskType.DELAY));
+
             HandleSocket();
         }
 

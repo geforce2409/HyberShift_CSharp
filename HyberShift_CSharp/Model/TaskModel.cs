@@ -35,5 +35,36 @@ namespace HyberShift_CSharp.Model
         public string Performer { get; set; }
         public double Progress { get; set; }    // 0 to 1 --> 0% to 100%
         public TaskType Tag { get; set; }
+        public string TaskIcon
+        {
+            get
+            {
+                switch(Tag)
+                {
+                    case TaskType.TO_DO:
+                        return "PlaylistCheck";
+                    case TaskType.IN_PROGRESS:
+                        return "ChartDonut";
+                    case TaskType.DONE:
+                        return "Check";
+                    case TaskType.WARNING:
+                        return "Alert";
+                    case TaskType.DELAY:
+                        return "ClockAlert";
+                    case TaskType.BACKLOG:
+                        return "Database";
+                    default:
+                        return string.Empty;
+                }
+            }
+        }
+
+        public string ProgressText
+        {
+            get
+            {
+                return Progress * 100 + " %";
+            }
+        }
     }
 }

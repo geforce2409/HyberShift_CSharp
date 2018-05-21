@@ -211,6 +211,12 @@
       <DependentUpon>SignUpControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\CloseWindowManager.cs" />
+    <Compile Include="View\Task\NewTask.xaml.cs">
+      <DependentUpon>NewTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Task\Task.xaml.cs">
+      <DependentUpon>Task.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\ChatViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -252,6 +258,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SignIn\SignUpControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Task\NewTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Task\Task.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
