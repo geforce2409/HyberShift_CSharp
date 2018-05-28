@@ -661,15 +661,17 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <ListBox Grid.Row="1" ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
-                             ScrollViewer.CanContentScroll="True"
-                             ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <Border Grid.Row="1">
+                        <ListBox Grid.Row="1" ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
+                                 ScrollViewer.CanContentScroll="False"
+                                 ScrollViewer.VerticalScrollBarVisibility="Visible">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <viewtask:Task/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
+                    </Border>
                 </Grid>
                 
             </Border>

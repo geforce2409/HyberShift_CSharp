@@ -10,8 +10,8 @@
             //SelectedViewModel = new RegisterViewModel(RegisterVMNavigator);
         }
 
-        public LoginViewModel LoginVM { get; set; }
-        public RegisterViewModel RegisterVM { get; set; }
+        //public LoginViewModel LoginVM { get; set; }
+        //public RegisterViewModel RegisterVM { get; set; }
 
         public object SelectedViewModel
         {

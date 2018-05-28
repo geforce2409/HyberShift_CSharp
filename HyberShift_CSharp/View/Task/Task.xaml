@@ -54,7 +54,7 @@
                                      Margin="10,14,10,14" Padding="0,0,0,0" Width="20" Height="20"
                                      Foreground="{StaticResource PrimaryBrush}"/>
             <TextBlock Grid.Row="3" Grid.Column="1" Margin="8,16,10.4,16" Grid.ColumnSpan="2"
-                       Text="{Binding StartDay}"/>
+                       Text="{Binding StartDay, StringFormat=dd-MM-yyyy}"/>
 
             <!--End day-->
             <materialDesign:PackIcon Grid.Row="4" Grid.Column="0" 
@@ -62,14 +62,16 @@
                                      Margin="10,14,10,14" Padding="0,0,0,0" Width="20" Height="20"
                                      Foreground="{StaticResource PrimaryBrush}"/>
             <TextBlock Grid.Row="4" Grid.Column="1" Margin="8,16,10.4,16" Grid.ColumnSpan="2"
-                       Text="{Binding EndDay}"/>
+                       Text="{Binding EndDay, StringFormat=dd-MM-yyyy}"/>
 
             <!--Progress-->
             <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding ProgressText}" 
                        Margin="5,5,5,5" Foreground="{StaticResource PrimaryBrush}"
                        Style="{DynamicResource MaterialDesignBody2TextBlock}"
                        TextAlignment="Center"/>
-            <ProgressBar Grid.Row="5" Grid.Column="1" Value="{Binding Progress}" Margin="5,5,5,5"/>
+            <ProgressBar Grid.Row="5" Grid.Column="1" Value="{Binding Progress}"
+                         Maximum="1" Minimum="0" 
+                         Margin="5,5,5,5"/>
 
             <!--<Border Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
                 <Button Style="{StaticResource PrimaryButton}">
