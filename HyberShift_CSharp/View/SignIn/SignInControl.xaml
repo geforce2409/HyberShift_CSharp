@@ -8,10 +8,6 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              Name="This">
 
-    <UserControl.Resources>
-        <viewModel:LoginViewModel x:Key="LoginViewModel" />
-    </UserControl.Resources>
-
     <!--Grid.Column="1"
     Grid.Row="1"-->
     <materialDesign:Card
@@ -48,8 +44,9 @@
                 x:Name="EmailTextBox"
                 Grid.Row="1" Grid.Column="1" Margin="8,16,11,16"
                 materialDesign:HintAssist.Hint="Email"
-                Style="{StaticResource TxtBox}">
-                <TextBox.Text>
+                Style="{StaticResource TxtBox}"
+                Text="{Binding Email, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}">
+                <!--<TextBox.Text>
                     <Binding Source="{StaticResource LoginViewModel}"
                              Path="Email"
                              UpdateSourceTrigger="PropertyChanged"
@@ -58,7 +55,8 @@
                             <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                         </Binding.ValidationRules>
                     </Binding>
-                </TextBox.Text>
+                    
+                </TextBox.Text>-->
             </TextBox>
 
             <materialDesign:PackIcon
@@ -98,7 +96,7 @@
                     Grid.Column="1"
                     Style="{StaticResource RaisedButton}"
                     IsDefault="True"
-                    Command="{Binding LoginCommand, Source={StaticResource LoginViewModel}}"
+                    Command="{Binding LoginCommand}"
                     CommandParameter="{Binding ElementName=This}">
                     SIGN IN
                 </Button>

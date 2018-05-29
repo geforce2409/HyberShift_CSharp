@@ -110,6 +110,33 @@
             </Setter>
         </Style>
 
+        <Style x:Key="CreateTaskButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <materialDesign:PackIcon Name="PhotoIcon" Kind="NotePlus" SnapsToDevicePixels="True"
+                                                     Foreground="{TemplateBinding Foreground}"
+                                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                     Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" TargetName="PhotoIcon" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Foreground" TargetName="PhotoIcon" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.23"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
         <Style x:Key="VideoCallButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
             <Setter Property="Template">
                 <Setter.Value>
@@ -190,6 +217,33 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!--<Style x:Key="CreateTaskButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <materialDesign:PackIcon Name="TaskIcon" Kind="Creation" SnapsToDevicePixels="True"
+                                                     Foreground="{TemplateBinding Foreground}"
+                                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                     Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" TargetName="PhotoIcon" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter Property="Foreground" TargetName="PhotoIcon" Value="{DynamicResource PrimaryHueMidBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.23"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>-->
 
         <Style x:Key="LeftArrowButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
             <Setter Property="Template">
@@ -533,7 +587,7 @@
             <Border x:Name="PresentationBorder"
                     Grid.Column="2"
                     VerticalAlignment="Stretch"
-                    HorizontalAlignment="Right"
+                    HorizontalAlignment="Stretch"
                     Width="300"
                     Visibility="Visible">
                 <Grid>
@@ -655,25 +709,16 @@
             
             <!--Task-->
             <Border Grid.Column="3">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Border Grid.Row="1">
-                        <ListBox Grid.Row="1" ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
+                <ListBox ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
                                  ScrollViewer.CanContentScroll="False"
-                                 ScrollViewer.VerticalScrollBarVisibility="Visible">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <viewtask:Task/>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                    </Border>
-                </Grid>
-                
+                                 ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                 >
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <viewtask:Task/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </Border>
         </Grid>
 
@@ -774,6 +819,10 @@
                         </Ellipse.Style>
                     </Ellipse>
                 </StackPanel>
+
+                <Button x:Name="CreateTaskButton" Grid.Column="1" Margin="10"
+                        Style="{DynamicResource CreateTaskButtonStyle}"
+                        Command="{Binding CreateTaskCommand, Source={StaticResource TaskViewModel}}"/>
 
                 <Button x:Name="VoiceCallButton" Grid.Column="2" Margin="10"
                         Style="{DynamicResource VoiceCallButtonStyle}"/>

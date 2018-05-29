@@ -1,6 +1,7 @@
 ﻿using HyberShift_CSharp.Model;
 using HyberShift_CSharp.Model.List;
 using HyberShift_CSharp.Utilities;
+using HyberShift_CSharp.View.Task;
 using Prism.Commands;
 using Quobject.SocketIoClientDotNet.Client;
 using System;
@@ -18,6 +19,8 @@ namespace HyberShift_CSharp.ViewModel
         private Socket socket;
         private ListTaskModel listTaskModel;
 
+        // getter and setter
+        public DelegateCommand CreateTaskCommand { get; set; }
         public ObservableCollection<TaskModel> ListTask
         {
             get { return listTaskModel.List; }
@@ -34,6 +37,8 @@ namespace HyberShift_CSharp.ViewModel
             socket = SocketAPI.GetInstance().GetSocket();
             listTaskModel = new ListTaskModel();
 
+            CreateTaskCommand = new DelegateCommand(CreateTask);
+
             //test
             ListTask.Add(new TaskModel("1", "Name 1", "Des 1", DateTime.Now, DateTime.Now, "Per 1", 0.2, Model.Enum.TaskType.TO_DO));
             ListTask.Add(new TaskModel("2", "Name 2", "Des 2", DateTime.Now, DateTime.Now, "Per 2", 0.5, Model.Enum.TaskType.BACKLOG));
@@ -47,6 +52,12 @@ namespace HyberShift_CSharp.ViewModel
         {
             // Handle socket
             
+        }
+
+        private void CreateTask()
+        {
+            CreateTaskDialog createTaskDialog = new CreateTaskDialog();
+            createTaskDialog.ShowDialog();
         }
     }
 }

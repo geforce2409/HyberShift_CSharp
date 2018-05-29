@@ -143,8 +143,10 @@
     <Compile Include="Model\List\ListMessageModel.cs" />
     <Compile Include="Model\List\ListPointModel.cs" />
     <Compile Include="Model\List\ListTaskModel.cs" />
+    <Compile Include="Model\List\ListTaskTypeModel.cs" />
     <Compile Include="Model\MessageModel.cs" />
     <Compile Include="Model\TaskModel.cs" />
+    <Compile Include="Model\TaskTypeModel.cs" />
     <Compile Include="Utilities\BringNewItemIntoViewBehavior.cs" />
     <Compile Include="Utilities\ByteBitmapSourceConverter.cs" />
     <Compile Include="Model\Interface\IHavePassword.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="ViewModel\BoardViewModel.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\CreateRoomViewModel.cs" />
+    <Compile Include="ViewModel\CreateTaskViewModel.cs" />
     <Compile Include="ViewModel\DrawingTestVM.cs" />
     <Compile Include="ViewModel\ListRoomViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -211,6 +214,9 @@
       <DependentUpon>SignUpControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities\CloseWindowManager.cs" />
+    <Compile Include="View\Task\CreateTaskDialog.xaml.cs">
+      <DependentUpon>CreateTaskDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Task\NewTask.xaml.cs">
       <DependentUpon>NewTask.xaml</DependentUpon>
     </Compile>
@@ -258,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SignIn\SignUpControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Task\CreateTaskDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
