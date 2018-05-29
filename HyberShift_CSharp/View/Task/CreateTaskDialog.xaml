@@ -9,9 +9,10 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Title="CreateTaskDialog" Height="450" Width="800">
-    <Window.Resources>
-        <viewmodel:CreateTaskViewModel x:Key="CreateTaskViewModel"/>
-    </Window.Resources>
+    
+    <Window.DataContext>
+        <viewmodel:CreateTaskViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.25*"/>
@@ -39,7 +40,7 @@
                                      Margin="10,14,10,14" Padding="0,0,0,0" Width="40" Height="40"
                                      Foreground="{StaticResource PrimaryBrush}"/>
         <TextBox Grid.Row="1" Grid.Column="1" Margin="8,16,10.4,16"
-                       Text="{Binding Name, Source={StaticResource CreateTaskViewModel}}" VerticalAlignment="Center"/>
+                       Text="{Binding Name}" VerticalAlignment="Center"/>
 
         <!--Performer-->
         <materialDesign:PackIcon Grid.Row="1" Grid.Column="2" 
@@ -47,7 +48,7 @@
                                      Margin="10,14,10,14" Padding="0,0,0,0" Width="40" Height="40"
                                      Foreground="{StaticResource PrimaryBrush}"/>
         <TextBox Grid.Row="1" Grid.Column="3" Margin="8,16,10.4,16"
-                       Text="{Binding Performer, Source={StaticResource CreateTaskViewModel}}" VerticalAlignment="Center"/>
+                       Text="{Binding Performer}" VerticalAlignment="Center"/>
 
         <!--Description-->
         <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" 
@@ -55,7 +56,7 @@
                                      Margin="10,14,10,14" Padding="0,0,0,0" Width="40" Height="40"
                                      Foreground="{StaticResource PrimaryBrush}"/>
         <TextBox Grid.Row="2" Grid.Column="1" Margin="8,16,10.4,16"
-                       Text="{Binding Description, Source={StaticResource CreateTaskViewModel}}" VerticalAlignment="Center"/>
+                       Text="{Binding Description}" VerticalAlignment="Center"/>
 
         <!--Tag-->
         <materialDesign:PackIcon Grid.Row="2" Grid.Column="2" Kind="Tag" Margin="10,14,10,14"
@@ -63,8 +64,8 @@
                                      Foreground="{StaticResource PrimaryBrush}"/>
 
         <ComboBox x:Name="cbTag" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Margin="10,14,10,14" 
-                  SelectedIndex="{Binding SelectedIndexTag, Source={StaticResource CreateTaskViewModel}}"
-                  ItemsSource="{Binding ListTag, Source={StaticResource CreateTaskViewModel}}">
+                  SelectedIndex="{Binding SelectedIndexTag}"
+                  ItemsSource="{Binding ListTag}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -113,7 +114,7 @@
                                      Foreground="{StaticResource PrimaryBrush}"/>
         <DatePicker Grid.Row="3" Grid.Column="1" Margin="8,16,10.4,16" VerticalAlignment="Center" 
                     materialDesign:HintAssist.Hint="Insert start day"
-                    Text="{Binding StartDay, Source={StaticResource CreateTaskViewModel}}"/>
+                    Text="{Binding StartDay}"/>
 
         <!--End day-->
         <materialDesign:PackIcon Grid.Row="3" Grid.Column="2" 
@@ -122,16 +123,16 @@
                                      Foreground="{StaticResource PrimaryBrush}"/>
         <DatePicker Grid.Row="3" Grid.Column="3" Margin="8,16,10.4,16" VerticalAlignment="Center" 
                     materialDesign:HintAssist.Hint="Insert end day"
-                    Text="{Binding EndDay, Source={StaticResource CreateTaskViewModel}}"/>
+                    Text="{Binding EndDay}"/>
 
         <Border Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <Button Style="{StaticResource GhostButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="140"
-                        Margin="5,0,5,0" Command="{Binding CancelCommand, Source={StaticResource CreateTaskViewModel}}">
+                        Margin="5,0,5,0" Command="{Binding CancelCommand}">
                     CANCEL
                 </Button>
                 <Button Style="{StaticResource RaisedButton}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="140"
-                        Margin="5,0,5,0" Command="{Binding SubmitCommand, Source={StaticResource CreateTaskViewModel}}">
+                        Margin="5,0,5,0" Command="{Binding SubmitCommand}">
                     SUBMIT
                 </Button>
             </StackPanel>

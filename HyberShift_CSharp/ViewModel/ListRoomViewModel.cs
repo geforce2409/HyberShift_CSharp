@@ -47,6 +47,8 @@ namespace HyberShift_CSharp.ViewModel
 
             //clear data in list message
             ListMessageModel.GetInstance().Clear();
+            // clear list task
+            ListTaskModel.GetInstance().Clear();
         }
 
         private void HandleSocket()

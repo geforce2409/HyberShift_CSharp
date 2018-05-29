@@ -10,9 +10,17 @@ namespace HyberShift_CSharp.Model.List
 {
     public class ListTaskModel: BaseList<TaskModel>
     {
+        private static ListTaskModel instance = null;
         public ListTaskModel(): base()
         {
 
+        }
+
+        public static ListTaskModel GetInstance()
+        {
+            if (instance == null)
+                instance = new ListTaskModel();
+            return instance;
         }
 
         public ObservableCollection<object> ListTaskName
@@ -86,6 +94,11 @@ namespace HyberShift_CSharp.Model.List
         public ObservableCollection<TaskModel> GetTaskFromTag(TaskType tag)
         {
             return this.GetCollectionByValue("Tag", tag);
+        }
+
+        public void Clear()
+        {
+            this.List.Clear();
         }
 
     }

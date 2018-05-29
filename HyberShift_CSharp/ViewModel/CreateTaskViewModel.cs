@@ -32,7 +32,7 @@ namespace HyberShift_CSharp.ViewModel
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SubmitCommand { get; set; }
         public int SelectedIndexTag { get; set; }
-
+        public string RoomID { get; set; }
         public string Name
         {
             get { return taskModel.Name; }
@@ -103,7 +103,13 @@ namespace HyberShift_CSharp.ViewModel
 
         private void CreateTask()
         {
-            Debug.LogOutput(Name + " " + Description + " " + Performer + " " + StartDay + " " + EndDay + " " + listTaskTypeModel.List[SelectedIndexTag].Content);
+            //Debug.LogOutput(taskModel.Name + " " + taskModel.Description + " " + taskModel.Performer + " " + taskModel.StartDay + " " + taskModel.EndDay + " " + listTaskTypeModel.List[SelectedIndexTag].Content);
+            taskModel.Tag = TaskTypeModel.GetTaskType(ListTag[SelectedIndexTag].Content);
+
+            taskModel.EmitToServer(RoomID);
+            Cancel();
         }
+
+       
     }
 }

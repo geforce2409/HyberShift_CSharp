@@ -1,4 +1,7 @@
 ﻿using HyberShift_CSharp.Model.Enum;
+using HyberShift_CSharp.Utilities;
+using Newtonsoft.Json.Linq;
+using Quobject.SocketIoClientDotNet.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +12,7 @@ namespace HyberShift_CSharp.Model
 {
     public class TaskModel
     {
+        private Socket socket = SocketAPI.GetInstance().GetSocket();
         public TaskModel()
         {
            
@@ -65,6 +69,25 @@ namespace HyberShift_CSharp.Model
             {
                 return Progress * 100 + " %";
             }
+        }
+
+        public void EmitToServer(string roomId)
+        {
+            // check data
+            if (this.Description == string.Empty)
+                this.Description = "No description";
+
+            JObject data = new JObject();
+            data.Add("room_id", roomId);
+            data.Add("work", this.Name);
+            data.Add("des", this.Description);
+            data.Add("performer", this.Performer);
+            data.Add("start_day", this.StartDay);
+            data.Add("end_day", this.EndDay);
+            data.Add("tag", this.Tag.ToString());
+            data.Add("progress", this.Progress);
+
+            socket.Emit("create_task", data);
         }
     }
 }
