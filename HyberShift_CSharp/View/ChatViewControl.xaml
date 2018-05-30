@@ -574,7 +574,6 @@
                     <ControlTemplate TargetType="ItemsControl">
                         <ScrollViewer>
                             <ItemsPresenter/>
-
                         </ScrollViewer>
                     </ControlTemplate>
                 </ItemsControl.Template>
