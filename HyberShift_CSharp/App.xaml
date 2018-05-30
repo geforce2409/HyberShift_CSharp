@@ -28,8 +28,9 @@
             <!-- Brushes -->
             <SolidColorBrush x:Key="PrimaryBrush" Color="#1a535c" />
             <SolidColorBrush x:Key="AccentBrush" Color="#ffc146" />
+            <SolidColorBrush x:Key="ChatViewBackground" Color="#eceff1" />
 
-            <Style x:Key="RaisedButton" BasedOn="{StaticResource MaterialDesignRaisedButton}"
+<Style x:Key="RaisedButton" BasedOn="{StaticResource MaterialDesignRaisedButton}"
                    TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="#1a535c" />
                 <Setter Property="BorderBrush" Value="#1a535c" />
