@@ -20,6 +20,7 @@ namespace HyberShift_CSharp.ViewModel
         private ListTaskTypeModel listTaskTypeModel;
         public CreateTaskViewModel() : base()
         {
+            currentRoom = new RoomModel();
             listTaskTypeModel = new ListTaskTypeModel();
             taskModel = new TaskModel();
             taskModel.StartDay = DateTime.Now;
