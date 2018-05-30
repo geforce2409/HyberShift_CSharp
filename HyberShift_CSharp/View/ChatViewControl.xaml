@@ -534,7 +534,6 @@
         <Border Grid.RowSpan="3" BorderThickness="0,0,1,0" SnapsToDevicePixels="True"
                 BorderBrush="{DynamicResource MaterialDesignDivider}">
             <ListBox x:Name="ListBoxRoom"
-                     Style="{StaticResource CustomListBox}"
                      ItemsSource="{Binding ListRoom, Source={StaticResource ListRoomViewModel}}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -627,7 +626,7 @@
                           Background="Black"
                           ShowsPreview="True"
                           Width="5"
-                          Visibility="Collapsed" />
+                          Visibility="Visible" />
 
             <!--Presentation-->
             <Border x:Name="PresentationBorder"
