@@ -635,7 +635,7 @@
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     Width="300"
-                    Visibility="Visible">
+                    Visibility="Collapsed">
                 <Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -763,7 +763,7 @@
                           Visibility="Collapsed" />
 
             <!--Task-->
-            <Border Grid.Column="4">
+            <Border Grid.Column="4" Visibility="Collapsed">
                 <ListBox x:Name="lbTask"
                          Style="{StaticResource CustomListBox}"
                          ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
@@ -889,8 +889,8 @@
                 <!--Message-->
                 <materialDesign:Card
                     Grid.Column="1"
-                    Margin="0,8,8,8" MaxHeight="80"
-                    UniformCornerRadius="20">
+                    Margin="0,8,8,8"
+                    UniformCornerRadius="20" Height="50">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -899,7 +899,8 @@
                         <!--Text-->
                         <TextBox x:Name="MessageTxtBox" BorderBrush="Transparent"
                                  TextWrapping="Wrap" AcceptsReturn="false" CaretBrush="#7F000000"
-                                 VerticalScrollBarVisibility="Auto" Height="40">
+                                 VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="8,2,0,2"
+                                 Style="{StaticResource NormalTxtBox}">
                             <TextBox.Text>
                                 <Binding Source="{StaticResource ChatViewModel}"
                                          Path="Message"
@@ -916,7 +917,7 @@
                         </TextBox>
 
                         <!--Send-->
-                        <Button x:Name="SendButton" Grid.Column="2" Margin="0,8,16,8"
+                        <Button x:Name="SendButton" Grid.Column="1" Margin="0,4,8,4"
                                 Style="{DynamicResource SendButtonStyle}"
                                 IsDefault="True"
                                 Command="{Binding SendTextMessageCommand, Source={StaticResource ChatViewModel}}" />
