@@ -422,8 +422,8 @@
         </DataTemplate>
 
         <DataTemplate x:Key="MessagesDataTemplate">
-            <Border Name="MessageBorder" MinHeight="40" MinWidth="400" MaxWidth="400" BorderThickness="1" Background="#EFEBE9" 
-                    Margin="10,0,60,10" BorderBrush="#BCAAA4" CornerRadius="4" SnapsToDevicePixels="True"
+            <Border Name="MessageBorder" MinHeight="40" MinWidth="400" MaxWidth="400" Background="{StaticResource PrimaryBrush}" 
+                    Margin="10,0,60,10" CornerRadius="20" SnapsToDevicePixels="True"
                     HorizontalAlignment="Left">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -468,8 +468,7 @@
                 <DataTrigger Binding="{Binding IsOriginNative}" Value="True">
                     <Setter TargetName="MessageBorder" Property="HorizontalAlignment" Value="Right"/>
                     <Setter TargetName="MessageBorder" Property="Margin" Value="60,0,10,10"/>
-                    <Setter TargetName="MessageBorder" Property="Background" Value="#BBDEFB"/>
-                    <Setter TargetName="MessageBorder" Property="BorderBrush" Value="#64B5F6"/>
+                    <Setter TargetName="MessageBorder" Property="Background" Value="White"/>
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Picture}" Value="{x:Null}">
                     <Setter TargetName="ImageMessageGrid" Property="Visibility" Value="Collapsed"/>
@@ -570,7 +569,8 @@
                 <TextBlock FontSize="10" Padding="5, 0 ,0 ,0" Foreground="White" Text="{Binding TypingMessage, Source={StaticResource ChatViewModel}}"></TextBlock>
             </Border>
             <!--Messages-->
-            <ItemsControl x:Name="MessagesItemsCtrl" Margin="0,5,0,0" 
+            <ItemsControl x:Name="MessagesItemsCtrl" Margin="0,5,0,0"
+                          Background="#eceff1"
                           ItemsSource="{Binding ListMessage, Source={StaticResource ChatViewModel}}" 
                           ItemTemplate="{DynamicResource MessagesDataTemplate}"
                           ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
@@ -579,7 +579,7 @@
                 </i:Interaction.Behaviors>
                 <ItemsControl.Template>
                     <ControlTemplate TargetType="ItemsControl">
-                        <ScrollViewer>
+                        <ScrollViewer Style="{StaticResource CustomScrollViewer}">
                             <ItemsPresenter/>
                         </ScrollViewer>
                     </ControlTemplate>
@@ -720,10 +720,12 @@
             
             <!--Task-->
             <Border Grid.Column="3">
-                <ListBox x:Name="lbTask" ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
-                                 ScrollViewer.CanContentScroll="False"
-                                 ScrollViewer.VerticalScrollBarVisibility="Visible"
-                                 SelectedItem="{Binding SelectedTask, Source={StaticResource TaskViewModel}}">
+                <ListBox x:Name="lbTask"
+                         Style="{StaticResource CustomListBox}"
+                         ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
+                         ScrollViewer.CanContentScroll="False"
+                         ScrollViewer.VerticalScrollBarVisibility="Visible"
+                         SelectedItem="{Binding SelectedTask, Source={StaticResource TaskViewModel}}">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Style.Triggers>
@@ -828,25 +830,26 @@
             </Border>
         </Grid>
 
-        <Border Grid.Row="2" Grid.Column="1" SnapsToDevicePixels="True"
-                BorderBrush="{DynamicResource MaterialDesignDivider}">
+        <Border Grid.Row="2" Grid.Column="1" SnapsToDevicePixels="True">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
                     <ColumnDefinition Width="50"/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <!--Message-->
-                <Border Margin="10,10,0,10" MaxHeight="80"
-                        BorderThickness="1" BorderBrush="{DynamicResource MaterialDesignDivider}">
+                <materialDesign:Card
+                    Grid.Column="1"
+                    Margin="0,8,8,8" MaxHeight="80"
+                    UniformCornerRadius="20">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
-                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
                         <!--Text-->
                         <TextBox x:Name="MessageTxtBox" BorderBrush="Transparent"
                                  TextWrapping="Wrap" AcceptsReturn="false" CaretBrush="#7F000000"
-                                 VerticalScrollBarVisibility="Auto">
+                                 VerticalScrollBarVisibility="Auto" Height="40">
                             <TextBox.Text>
                                 <Binding Source="{StaticResource ChatViewModel}"
                                          Path="Message"
@@ -861,17 +864,19 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBox>
-                        <!--Image-->
-                        <Button Grid.Column="1" Foreground="#FF6E6E6E" Margin="4"
-                                Style="{DynamicResource ImageButtonStyle}"
-                                Command="{Binding SendImageMessageCommand}"/>
+
+                        <!--Send-->
+                        <Button x:Name="SendButton" Grid.Column="2" Margin="0,8,16,8"
+                                Style="{DynamicResource SendButtonStyle}"
+                                IsDefault="True"
+                                Command="{Binding SendTextMessageCommand, Source={StaticResource ChatViewModel}}"/>
                     </Grid>
-                </Border>
-                <!--Send-->
-                <Button x:Name="SendButton" Grid.Column="1" Margin="10"
-                        Style="{DynamicResource SendButtonStyle}"
-                        IsDefault="True"
-                        Command="{Binding SendTextMessageCommand, Source={StaticResource ChatViewModel}}"/>
+                </materialDesign:Card>
+
+                <!--Image-->
+                <Button Foreground="#FF6E6E6E" Margin="8"
+                        Style="{DynamicResource ImageButtonStyle}"
+                        Command="{Binding SendImageMessageCommand}"/>
             </Grid>
         </Border>
 
@@ -906,7 +911,7 @@
                                Text="{Binding RoomName, Source={StaticResource ChatViewModel}}" SnapsToDevicePixels="True"/>
 
                     <!--Online-->
-                    <Ellipse VerticalAlignment="Center" HorizontalAlignment="Center" 
+                    <Ellipse VerticalAlignment="Center" HorizontalAlignment="Center"
                              Width="8" Height="8">
                         <Ellipse.Style>
                             <Style TargetType="Ellipse">
