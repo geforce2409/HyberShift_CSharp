@@ -429,6 +429,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition Height="5"/>
                         <RowDefinition Height="15"/>
                     </Grid.RowDefinitions>
                     <Grid x:Name="ImageMessageGrid" Margin="6,6,6,5">
@@ -449,10 +450,15 @@
                             </i:Interaction.Triggers>
                         </Image>
                     </Grid>
-                    <TextBox x:Name="MessageTxtBox" IsReadOnly="True" Grid.Row="1" Margin="7,5,7,0" TextWrapping="Wrap" 
-                               VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                    <StackPanel Grid.Row="1" Orientation="Vertical">
+                        <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" Text="{Binding Sender}"
+                                   VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,5,7,0"/>
+                        <TextBlock x:Name="MessageTxtBox" Margin="7,5,7,0" Style="{DynamicResource MaterialDesignCaptionTextBlock}"
+                               VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap"
                                Text="{Binding Message}"/>
-                    <TextBlock Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Stretch"
+                    </StackPanel>
+                    <Separator Grid.Row="2"/>
+                    <TextBlock Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Stretch"
                                Margin="0,0,5,0" FontSize="10" Opacity="0.8"
                                Text="{Binding TimestampDisplay, StringFormat={}{0:t}}"/>
                 </Grid>
@@ -888,11 +894,13 @@
                         <materialDesign:PackIcon Kind="AccountCircle" SnapsToDevicePixels="True" Width="Auto" Height="Auto"
                                                  Margin="-4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                         <Image Source="{Binding Photo, Converter={StaticResource ByteBmpSrcConverter},
-                            TargetNullValue={StaticResource BlankImage}}" Stretch="UniformToFill"/>
+                            TargetNullValue={StaticResource BlankImage}}" Stretch="UniformToFill"
+                               Margin="10,10,10,10"/>
                     </Grid>
 
                     <!--Name-->
-                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left"
+                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Style="{DynamicResource MaterialDesignTitleTextBlock}"
+                               Foreground="White"
                                Margin="5,0" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"
                                Text="{Binding RoomName, Source={StaticResource ChatViewModel}}" SnapsToDevicePixels="True"/>
 
