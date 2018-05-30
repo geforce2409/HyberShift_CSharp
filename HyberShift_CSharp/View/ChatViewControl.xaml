@@ -449,8 +449,9 @@
 
         <DataTemplate x:Key="MessagesDataTemplate">
             <Border Name="MessageBorder" MinHeight="40" MinWidth="400" MaxWidth="400"
-                    Background="{StaticResource PrimaryBrush}"
-                    Margin="10,0,60,10" CornerRadius="20" SnapsToDevicePixels="True"
+                    Background="{StaticResource PrimaryHueDarkBrush}"
+                    Margin="10,0,60,10" Padding="16"
+                    CornerRadius="20" SnapsToDevicePixels="True"
                     HorizontalAlignment="Left">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -483,6 +484,7 @@
                         <TextBox x:Name="MessageTxtBox" Margin="7,5,7,0"
                                  IsReadOnly="True" TextWrapping="Wrap"
                                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                 Foreground="White"
                                  Text="{Binding Message}" />
                     </StackPanel>
                     <!--<Separator Grid.Row="2"/>-->
@@ -591,6 +593,7 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="230" />
             </Grid.ColumnDefinitions>
 
@@ -599,6 +602,7 @@
                 <TextBlock FontSize="10" Padding="5, 0 ,0 ,0" Foreground="White"
                            Text="{Binding TypingMessage, Source={StaticResource ChatViewModel}}" />
             </Border>
+
             <!--Messages-->
             <ItemsControl x:Name="MessagesItemsCtrl" Margin="0,5,0,0"
                           ItemsSource="{Binding ListMessage, Source={StaticResource ChatViewModel}}"
@@ -749,8 +753,16 @@
                 </Grid>
             </Border>
 
+            <GridSplitter Grid.Column="3"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Stretch"
+                          Background="Black"
+                          ShowsPreview="True"
+                          Width="5"
+                          Visibility="Collapsed" />
+
             <!--Task-->
-            <Border Grid.Column="3">
+            <Border Grid.Column="4">
                 <ListBox x:Name="lbTask"
                          Style="{StaticResource CustomListBox}"
                          ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
