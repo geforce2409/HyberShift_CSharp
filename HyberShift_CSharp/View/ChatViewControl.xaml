@@ -449,7 +449,7 @@
 
         <DataTemplate x:Key="MessagesDataTemplate">
             <Border Name="MessageBorder" MinHeight="40" MinWidth="400" MaxWidth="400"
-                    Background="{StaticResource PrimaryBrush}"
+                    Background="{StaticResource PrimaryHueDarkBrush}"
                     Margin="10,0,60,10" Padding="16"
                     CornerRadius="20" SnapsToDevicePixels="True"
                     HorizontalAlignment="Left">
@@ -484,6 +484,7 @@
                         <TextBox x:Name="MessageTxtBox" Margin="7,5,7,0"
                                  IsReadOnly="True" TextWrapping="Wrap"
                                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                 Foreground="White"
                                  Text="{Binding Message}" />
                     </StackPanel>
                     <!--<Separator Grid.Row="2"/>-->
