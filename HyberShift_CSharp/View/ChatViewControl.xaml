@@ -422,7 +422,7 @@
         </DataTemplate>
 
         <DataTemplate x:Key="MessagesDataTemplate">
-            <Border Name="MessageBorder" MinHeight="40" MinWidth="280" BorderThickness="1" Background="#EFEBE9" 
+            <Border Name="MessageBorder" MinHeight="40" MinWidth="400" MaxWidth="400" BorderThickness="1" Background="#EFEBE9" 
                     Margin="10,0,60,10" BorderBrush="#BCAAA4" CornerRadius="4" SnapsToDevicePixels="True"
                     HorizontalAlignment="Left">
                 <Grid>
@@ -714,13 +714,108 @@
             
             <!--Task-->
             <Border Grid.Column="3">
-                <ListBox ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
+                <ListBox x:Name="lbTask" ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
                                  ScrollViewer.CanContentScroll="False"
                                  ScrollViewer.VerticalScrollBarVisibility="Visible"
-                                 >
+                                 SelectedItem="{Binding SelectedTask, Source={StaticResource TaskViewModel}}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Style.Triggers>
+                                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                    <Setter Property="IsSelected" Value="True"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <viewtask:Task/>
+                            <materialDesign:Card Width="200" Height="Auto">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--Title Task Name -->
+
+                                    <materialDesign:PackIcon Kind="{Binding TaskIcon}" Grid.Row="0" Grid.Column="0" 
+                                     Background="{StaticResource PrimaryHueMidBrush}" Width="40" Height="32"
+                                     Foreground="{StaticResource PrimaryBrush}"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Style="{DynamicResource MaterialDesignTitleTextBlock}" 
+                                                TextAlignment="Center" Background="{StaticResource PrimaryHueMidBrush}"
+                                                Padding="0,5,5,0" Foreground="White" Text="{Binding Name}"/>
+
+
+                                    <!--Performer-->
+                                    <materialDesign:PackIcon Grid.Row="1" Grid.Column="0" 
+                                     Kind="Account" VerticalAlignment="Stretch"  
+                                     Margin="10,14,10,14" Padding="0,0,0,0" Width="20" Height="20"
+                                     Foreground="{StaticResource PrimaryBrush}"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Margin="8,16,10.4,16" Grid.ColumnSpan="2"
+                                                Text="{Binding Performer}"/>
+
+                                    <!--Description-->
+                                    <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" 
+                                     Kind="NoteText" VerticalAlignment="Stretch" 
+                                     Margin="10,14,10,14" Padding="0,0,0,0" Width="20" Height="20"
+                                     Foreground="{StaticResource PrimaryBrush}"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="8,16,10.4,16" Grid.ColumnSpan="2"
+                                                Text="{Binding Description}"/>
+
+                                    <!--Start day-->
+                                    <materialDesign:PackIcon Grid.Row="3" Grid.Column="0" 
+                                     Kind="CalendarBlank" VerticalAlignment="Stretch" 
+                                     Margin="10,14,10,14" Padding="0,0,0,0" Width="20" Height="20"
+                                     Foreground="{StaticResource PrimaryBrush}"/>
+                                    <TextBlock Grid.Row="3" Grid.Column="1" Margin="8,16,10.4,16" Grid.ColumnSpan="2"
+                                                Text="{Binding StartDay, StringFormat=dd-MM-yyyy}"/>
+
+                                    <!--End day-->
+                                    <materialDesign:PackIcon Grid.Row="4" Grid.Column="0" 
+                                     Kind="CalendarCheck" VerticalAlignment="Stretch" 
+                                     Margin="10,14,10,14" Padding="0,0,0,0" Width="20" Height="20"
+                                     Foreground="{StaticResource PrimaryBrush}"/>
+                                    <TextBlock Grid.Row="4" Grid.Column="1" Margin="8,16,10.4,16" Grid.ColumnSpan="2"
+                                                Text="{Binding EndDay, StringFormat=dd-MM-yyyy}"/>
+
+                                    <!--Progress-->
+                                    <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding ProgressText}" 
+                                               Margin="5,5,5,5" Foreground="{StaticResource PrimaryBrush}"
+                                               Style="{DynamicResource MaterialDesignBody2TextBlock}"
+                                               TextAlignment="Center"/>
+                                    <ProgressBar Grid.Row="5" Grid.Column="1"
+                                                 Value="{Binding Progress}"
+                                                 SmallChange="0.1"
+                                                 Maximum="1" Minimum="0" 
+                                                 Margin="5,5,5,5"/>
+
+                                    <Button Grid.Row="6" Grid.Column="0" Style="{StaticResource RaisedButton}" 
+                                            Padding="0,0,0,0" Width="20" Height="20"
+                                            Content="{materialDesign:PackIcon Kind=Update}"
+                                            Command="{Binding UpdateProgressCommand, Source={StaticResource TaskViewModel}}"/>
+
+                                    <Slider x:Name="slider" Grid.Row="6" Grid.Column="1" Margin="10,5,10,5" 
+                                            Minimum="0" Maximum="1"
+                                            Value="{Binding SliderProgress}"
+                                            />  
+
+                                    <!--<Border Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
+                <Button Style="{StaticResource PrimaryButton}">
+                    
+                </Button>
+            </Border>-->
+                                </Grid>
+                            </materialDesign:Card>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

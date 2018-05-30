@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HyberShift_CSharp.View.Task"
+             xmlns:viewmodel="clr-namespace:HyberShift_CSharp.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
+
     <materialDesign:Card Width="200" Height="Auto">
         <Grid>
             <Grid.RowDefinitions>
@@ -69,18 +71,27 @@
                        Margin="5,5,5,5" Foreground="{StaticResource PrimaryBrush}"
                        Style="{DynamicResource MaterialDesignBody2TextBlock}"
                        TextAlignment="Center"/>
-            <ProgressBar Grid.Row="5" Grid.Column="1" Value="{Binding Progress}"
+            <ProgressBar Grid.Row="5" Grid.Column="1"
+                         Value="{Binding Progress}"
                          Maximum="1" Minimum="0" 
                          Margin="5,5,5,5"/>
+
+            <Button Grid.Row="6" Grid.Column="0" Style="{StaticResource RaisedButton}" 
+                    Padding="0,0,0,0" Width="20" Height="20"
+                    Content="{materialDesign:PackIcon Kind=Update}"
+                    Command="{Binding Path=DataContext.UpdateProgressCommand,RelativeSource={RelativeSource AncestorType=ListBoxItem}}"
+                    />
+
+            <Slider x:Name="slider" Grid.Row="6" Grid.Column="1" Margin="10,5,10,5" 
+                    Minimum="0" Maximum="1"
+                    Value="{Binding Progress}"
+                    />
 
             <!--<Border Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2">
                 <Button Style="{StaticResource PrimaryButton}">
                     
                 </Button>
             </Border>-->
-
-
-
         </Grid>
     </materialDesign:Card>
 </UserControl>

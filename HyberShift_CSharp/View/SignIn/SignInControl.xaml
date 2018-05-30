@@ -54,8 +54,7 @@
                         <Binding.ValidationRules>
                             <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                         </Binding.ValidationRules>
-                    </Binding>
-                    
+                    </Binding>                 
                 </TextBox.Text>-->
             </TextBox>
 

@@ -26,6 +26,8 @@ namespace HyberShift_CSharp.ViewModel
         // getter and setter
         public DelegateCommand CreateTaskCommand { get; set; }
         public DelegateCommand<RoomModel> RoomChangeCommand { get; set; }
+        public DelegateCommand UpdateProgressCommand { get; set; }
+        public TaskModel SelectedTask { get; set; }
         public ObservableCollection<TaskModel> ListTask
         {
             get { return listTaskModel.List; }
@@ -44,6 +46,7 @@ namespace HyberShift_CSharp.ViewModel
 
             CreateTaskCommand = new DelegateCommand(CreateTask);
             RoomChangeCommand = new DelegateCommand<RoomModel>(OnRoomChange);
+            UpdateProgressCommand = new DelegateCommand(UpdateTask);
 
             ////test
             //ListTask.Add(new TaskModel("1", "Name 1", "Des 1", DateTime.Now, DateTime.Now, "Per 1", 0.2, Model.Enum.TaskType.TO_DO));
@@ -84,13 +87,38 @@ namespace HyberShift_CSharp.ViewModel
 
         private void CreateTask()
         {
-            CreateTaskDialog createTaskDialog = new CreateTaskDialog(currentRoom.ID);
+            CreateTaskDialog createTaskDialog = new CreateTaskDialog(currentRoom);
             createTaskDialog.ShowDialog();
         }
 
         private void OnRoomChange(RoomModel obj)
         {
             currentRoom = obj;
+        }
+
+        private void UpdateTask()
+        {
+            Application.Current.Dispatcher.Invoke((Action)delegate
+            {
+                Debug.LogOutput(SelectedTask.Progress.ToString());
+                Debug.LogOutput(currentRoom.ID);
+                Debug.LogOutput(SelectedTask.ID);
+                JObject data = new JObject();
+                data.Add("room_id", currentRoom.ID);
+                data.Add("task_id", SelectedTask.ID);
+                JObject dataUpdate = new JObject();
+                dataUpdate.Add("progress", SelectedTask.SliderProgress);
+                if (SelectedTask.SliderProgress > 0 && SelectedTask.SliderProgress < 1)
+                    dataUpdate.Add("tag", TaskType.IN_PROGRESS.ToString());
+                else if (SelectedTask.SliderProgress == 1)
+                    dataUpdate.Add("tag", TaskType.DONE.ToString());
+                data.Add("update", dataUpdate);
+
+                socket.Emit("task_modify", data);
+
+                ListTask.Clear();
+            });
+            
         }
     }
 }

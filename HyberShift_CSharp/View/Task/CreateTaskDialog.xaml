@@ -39,7 +39,7 @@
                                      Kind="RenameBox" VerticalAlignment="Center" HorizontalAlignment="Center"  
                                      Margin="10,14,10,14" Padding="0,0,0,0" Width="40" Height="40"
                                      Foreground="{StaticResource PrimaryBrush}"/>
-        <TextBox Grid.Row="1" Grid.Column="1" Margin="8,16,10.4,16"
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="8,16,10.4,16" materialDesign:HintAssist.Hint="Name"
                        Text="{Binding Name}" VerticalAlignment="Center"/>
 
         <!--Performer-->
@@ -47,15 +47,17 @@
                                      Kind="Account" VerticalAlignment="Center" HorizontalAlignment="Center"  
                                      Margin="10,14,10,14" Padding="0,0,0,0" Width="40" Height="40"
                                      Foreground="{StaticResource PrimaryBrush}"/>
-        <TextBox Grid.Row="1" Grid.Column="3" Margin="8,16,10.4,16"
-                       Text="{Binding Performer}" VerticalAlignment="Center"/>
+        <!--<TextBlock Grid.Row="1" Grid.Column="3" Margin="8,16,10.4,16"
+                       VerticalAlignment="Center" Text="{Binding Performer}"/>-->
+        <ComboBox Grid.Row="1" Grid.Column="3" Margin="8,16,10.4,16"
+                       ItemsSource="{Binding ListMembers}" VerticalAlignment="Center" SelectedItem="{Binding Performer}" />
 
         <!--Description-->
         <materialDesign:PackIcon Grid.Row="2" Grid.Column="0" 
                                      Kind="NoteText" VerticalAlignment="Center" HorizontalAlignment="Center"
                                      Margin="10,14,10,14" Padding="0,0,0,0" Width="40" Height="40"
                                      Foreground="{StaticResource PrimaryBrush}"/>
-        <TextBox Grid.Row="2" Grid.Column="1" Margin="8,16,10.4,16"
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="8,16,10.4,16" materialDesign:HintAssist.Hint="Description"
                        Text="{Binding Description}" VerticalAlignment="Center"/>
 
         <!--Tag-->

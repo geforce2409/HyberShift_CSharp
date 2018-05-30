@@ -15,6 +15,7 @@ namespace HyberShift_CSharp.ViewModel
 {
     public class CreateTaskViewModel : BaseViewModel
     {
+        private RoomModel currentRoom;
         private TaskModel taskModel;
         private ListTaskTypeModel listTaskTypeModel;
         public CreateTaskViewModel() : base()
@@ -25,14 +26,22 @@ namespace HyberShift_CSharp.ViewModel
             taskModel.EndDay = DateTime.Now;
             CancelCommand = new DelegateCommand(Cancel);
             SubmitCommand = new DelegateCommand(CreateTask);
-            
         }
 
         // getter and setter
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SubmitCommand { get; set; }
         public int SelectedIndexTag { get; set; }
-        public string RoomID { get; set; }
+        public RoomModel CurrentRoom
+        {
+            get { return currentRoom; }
+            set { currentRoom = value; NotifyChanged("CurrentRoom"); }
+        }
+        public ObservableCollection<string> ListMembers
+        {
+            get { return currentRoom.Members; }
+            set { currentRoom.Members = value;NotifyChanged("ListMembers"); }
+        }
         public string Name
         {
             get { return taskModel.Name; }
@@ -53,11 +62,11 @@ namespace HyberShift_CSharp.ViewModel
             get { return taskModel.EndDay; }
             set { taskModel.EndDay = value; NotifyChanged("EndDay"); }
         }
-        public string Performer
-        {
-            get { return taskModel.Performer; }
-            set { taskModel.Performer = value; NotifyChanged("Performer"); }
-        }
+        public string Performer { get; set; }
+        //{
+        //    get { return taskModel.Performer; }
+        //    set { taskModel.Performer = value; NotifyChanged("Performer"); }
+        //}
         public ObservableCollection<TaskTypeModel> ListTag
         {
             get { return listTaskTypeModel.List; }
@@ -96,6 +105,7 @@ namespace HyberShift_CSharp.ViewModel
 
         private void Cancel()
         {
+            Debug.LogOutput(ListMembers[0]);
             foreach (Window window in Application.Current.Windows)
                 if (window.Title == "CreateTaskDialog")
                     window.Close();
@@ -105,8 +115,9 @@ namespace HyberShift_CSharp.ViewModel
         {
             //Debug.LogOutput(taskModel.Name + " " + taskModel.Description + " " + taskModel.Performer + " " + taskModel.StartDay + " " + taskModel.EndDay + " " + listTaskTypeModel.List[SelectedIndexTag].Content);
             taskModel.Tag = TaskTypeModel.GetTaskType(ListTag[SelectedIndexTag].Content);
+            taskModel.Performer = Performer;
 
-            taskModel.EmitToServer(RoomID);
+            taskModel.EmitToServer(CurrentRoom.ID);
             Cancel();
         }
 

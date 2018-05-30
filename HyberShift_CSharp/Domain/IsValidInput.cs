@@ -21,9 +21,11 @@ namespace HyberShift_CSharp
         // Kiểm tra định dạng Phone
         public static bool IsValidPhone(string value)
         {
-            var strRegex = @"^-*[0-9,\.?\-?\(?\)?\ ]+$";
-            var re = new Regex(strRegex);
-            if (re.IsMatch(value))
+            //var strRegex = @"^-*[0-9,\.?\-?\(?\)?\ ]+$";
+            //var re = new Regex(strRegex);
+            //if (re.IsMatch(value))
+            //    return true;
+            if (value.Trim().Length <= 13 && value.Trim().Length >= 0)
                 return true;
             return false;
         }

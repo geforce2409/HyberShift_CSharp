@@ -1,4 +1,5 @@
-﻿using HyberShift_CSharp.ViewModel;
+﻿using HyberShift_CSharp.Model;
+using HyberShift_CSharp.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,10 @@ namespace HyberShift_CSharp.View.Task
             InitializeComponent();
         }
 
-        public CreateTaskDialog(string roomid): this()
+        public CreateTaskDialog(RoomModel currentRoom): this()
         {
-            ((CreateTaskViewModel)DataContext).RoomID = roomid;
+            ((CreateTaskViewModel)DataContext).CurrentRoom = currentRoom;
+            ((CreateTaskViewModel)DataContext).ListMembers = currentRoom.Members;
         }
     }
 }

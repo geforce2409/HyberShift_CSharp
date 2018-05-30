@@ -63,9 +63,9 @@
                         x:Name="EmailTextBox"
                         Grid.Row="0" Grid.Column="1" Margin="8,16,11,16"
                         materialDesign:HintAssist.Hint="Email"
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                        Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">
-                        <!--<TextBox.Text>
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        <!--Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">-->
+                        <TextBox.Text>
                             <Binding Source="{StaticResource RegisterViewModel}"
                                      Path="Email"
                                      UpdateSourceTrigger="PropertyChanged"
@@ -74,7 +74,7 @@
                                     <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
                                 </Binding.ValidationRules>
                             </Binding>
-                        </TextBox.Text>-->
+                        </TextBox.Text>
                     </TextBox>
 
                     <materialDesign:PackIcon
@@ -137,7 +137,7 @@
                     <TextBox
                         x:Name="PhoneTextBox"
                         Grid.Row="4" Grid.Column="1" Margin="8,8,11,16"
-                        materialDesign:HintAssist.Hint="Phone"
+                        materialDesign:HintAssist.Hint="Phone (Ex: +841234567890)"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                         <TextBox.Text>
                             <Binding Source="{StaticResource RegisterViewModel}"
