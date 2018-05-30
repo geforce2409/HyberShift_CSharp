@@ -450,7 +450,8 @@
         <DataTemplate x:Key="MessagesDataTemplate">
             <Border Name="MessageBorder" MinHeight="40" MinWidth="400" MaxWidth="400"
                     Background="{StaticResource PrimaryBrush}"
-                    Margin="10,0,60,10" CornerRadius="20" SnapsToDevicePixels="True"
+                    Margin="10,0,60,10" Padding="16"
+                    CornerRadius="20" SnapsToDevicePixels="True"
                     HorizontalAlignment="Left">
                 <Grid>
                     <Grid.RowDefinitions>
