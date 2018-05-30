@@ -26,6 +26,7 @@ namespace HyberShift_CSharp.ViewModel
         private UserInfo userInfo;
         public ChatViewModel() : base()
         {
+            currentRoom = new RoomModel();
             listMessageModel = ListMessageModel.GetInstance();
             sendersTyping = new ObservableCollection<string>();
             socket = SocketAPI.GetInstance().GetSocket();

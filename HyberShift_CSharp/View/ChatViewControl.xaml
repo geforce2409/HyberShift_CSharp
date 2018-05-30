@@ -429,7 +429,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
-                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="0"/>
                         <RowDefinition Height="15"/>
                     </Grid.RowDefinitions>
                     <Grid x:Name="ImageMessageGrid" Margin="6,6,6,5">
@@ -453,11 +453,12 @@
                     <StackPanel Grid.Row="1" Orientation="Vertical">
                         <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}" Text="{Binding Sender}"
                                    VerticalAlignment="Center" HorizontalAlignment="Left" Margin="7,5,7,0"/>
-                        <TextBlock x:Name="MessageTxtBox" Margin="7,5,7,0" Style="{DynamicResource MaterialDesignCaptionTextBlock}"
-                               VerticalAlignment="Stretch" HorizontalAlignment="Stretch" TextWrapping="Wrap"
+                        <TextBox x:Name="MessageTxtBox" Margin="7,5,7,0" 
+                                 IsReadOnly="True" TextWrapping="Wrap"
+                                VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                                Text="{Binding Message}"/>
                     </StackPanel>
-                    <Separator Grid.Row="2"/>
+                    <!--<Separator Grid.Row="2"/>-->
                     <TextBlock Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Stretch"
                                Margin="0,0,5,0" FontSize="10" Opacity="0.8"
                                Text="{Binding TimestampDisplay, StringFormat={}{0:t}}"/>

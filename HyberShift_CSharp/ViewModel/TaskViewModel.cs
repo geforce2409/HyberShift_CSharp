@@ -43,6 +43,7 @@ namespace HyberShift_CSharp.ViewModel
         {
             socket = SocketAPI.GetInstance().GetSocket();
             listTaskModel = ListTaskModel.GetInstance();
+            currentRoom = new RoomModel();
 
             CreateTaskCommand = new DelegateCommand(CreateTask);
             RoomChangeCommand = new DelegateCommand<RoomModel>(OnRoomChange);
