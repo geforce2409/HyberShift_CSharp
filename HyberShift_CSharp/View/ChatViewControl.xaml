@@ -503,7 +503,9 @@
 
         <Border Grid.RowSpan="3" BorderThickness="0,0,1,0" SnapsToDevicePixels="True"
                 BorderBrush="{DynamicResource MaterialDesignDivider}">
-            <ListBox x:Name="ListBoxRoom" ItemsSource = "{Binding ListRoom, Source={StaticResource ListRoomViewModel}}">
+            <ListBox x:Name="ListBoxRoom" 
+                     Style="{StaticResource CustomListBox}"
+                     ItemsSource = "{Binding ListRoom, Source={StaticResource ListRoomViewModel}}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <local:RoomItem></local:RoomItem>
@@ -880,6 +882,7 @@
         </Border>
 
         <Border Grid.Row="0" Grid.Column="1" SnapsToDevicePixels="True"
+                Background="White"
                 BorderBrush="{DynamicResource MaterialDesignDivider}">
             <Grid>
                 <Grid.ColumnDefinitions>
