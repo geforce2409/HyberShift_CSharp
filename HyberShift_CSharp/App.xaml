@@ -65,11 +65,6 @@
                 </Style.Triggers>
             </Style>
 
-            <Style x:Key="TxtBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}"
-                   TargetType="{x:Type TextBox}">
-                <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}" />
-            </Style>
-
             <!--#region ios ScrollViewer-->
             <Style x:Key="CustomScrollbarStyle"
                    TargetType="{x:Type ScrollBar}">

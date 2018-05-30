@@ -43,7 +43,7 @@
             x:Name="RoomTextBox"
             Grid.Row="1" Grid.Column="1" Margin="8,16,11,16"
             materialDesign:HintAssist.Hint="Room Name"
-            Style="{StaticResource TxtBox}">
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}">
             <TextBox.Text>
                 <Binding Source="{StaticResource CreateRoomViewModel}"
                          Path="RoomName"
@@ -63,7 +63,7 @@
             x:Name="EmailTextBox"
             Grid.Row="2" Grid.Column="1" Margin="8,16,11,16"
             materialDesign:HintAssist.Hint="Email of Members"
-            Style="{StaticResource TxtBox}">
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}">
             <TextBox.Text>
                 <Binding Source="{StaticResource CreateRoomViewModel}"
                          Path="Email"

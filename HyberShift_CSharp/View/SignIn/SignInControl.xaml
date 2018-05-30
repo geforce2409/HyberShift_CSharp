@@ -44,7 +44,7 @@
                 x:Name="EmailTextBox"
                 Grid.Row="1" Grid.Column="1" Margin="8,16,11,16"
                 materialDesign:HintAssist.Hint="Email"
-                Style="{StaticResource TxtBox}"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                 Text="{Binding Email, NotifyOnValidationError=True, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}">
                 <!--<TextBox.Text>
                     <Binding Source="{StaticResource LoginViewModel}"
