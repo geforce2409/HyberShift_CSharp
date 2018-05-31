@@ -25,6 +25,8 @@ namespace HyberShift_CSharp.ViewModel
 {
     public class BoardViewModel: BaseViewModel
     {
+        private int flagShowPresentation = 0; // đặt cờ để xác định presentation đang được bật hay tắt
+
         private Socket socket;
         private ListPointModel listPointModel;
         private RoomModel currentRoom;
@@ -46,7 +48,7 @@ namespace HyberShift_CSharp.ViewModel
         public DelegateCommand OpenPresentationCommand { get; set; }
         public DelegateCommand<Button> LeftSlideCommand { get; set; }
         public DelegateCommand<Button> RightSlideCommand { get; set; }
-
+        public DelegateCommand<Border> ShowPresenationCommand { get; set; }
         //Active board
         public BitmapImage CanvasBackground { get; set; }
 
@@ -89,7 +91,7 @@ namespace HyberShift_CSharp.ViewModel
             OpenPresentationCommand = new DelegateCommand(OpenPresentationSlide);
             LeftSlideCommand = new DelegateCommand<Button>(NavigateLeftSlide);
             RightSlideCommand = new DelegateCommand<Button>(NavigateRightSlide);
-
+            ShowPresenationCommand= new DelegateCommand<Border>(ShowPresenation);
             HandleSocket();
         }
 
@@ -204,6 +206,20 @@ namespace HyberShift_CSharp.ViewModel
             thread.Start();
 
             
+        }
+
+        public void ShowPresenation(Border border)
+        {
+            if (border.Visibility == Visibility.Collapsed && flagShowPresentation == 0)
+            {
+                border.Visibility = Visibility.Visible;
+                flagShowPresentation = 1;
+            }
+            else if (border.Visibility == Visibility.Visible && flagShowPresentation == 1)
+            {
+                border.Visibility = Visibility.Collapsed;
+                flagShowPresentation = 0;
+            }
         }
 
         private void HandleSocket()

@@ -814,7 +814,7 @@
             <!--Task-->
             <Border Grid.Column="4" Visibility="Visible">
                 <ListBox x:Name="lbTask"
-                         Style="{StaticResource CustomListBox}"
+
                          ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
                          ScrollViewer.CanContentScroll="False"
                          ScrollViewer.VerticalScrollBarVisibility="Visible"
@@ -1066,7 +1066,9 @@
                         Style="{DynamicResource VideoCallButtonStyle}"/>-->
 
                 <Button x:Name="PresentationButton" Grid.Column="3" Margin="10"
-                        Style="{DynamicResource PresentationButtonStyle}" />
+                        Style="{DynamicResource PresentationButtonStyle}" 
+                        Command="{Binding ShowPresenationCommand, Source={StaticResource BoardViewModel}}"
+                        CommandParameter="{Binding ElementName=PresentationBorder}"/>
 
                 <Button x:Name="AddMemberButton" Grid.Column="4" Margin="10"
                         Style="{DynamicResource AddMemberButtonStyle}" />
