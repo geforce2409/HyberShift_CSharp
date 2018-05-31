@@ -173,16 +173,31 @@
     <Compile Include="Utilities\PresentationAPI.cs" />
     <Compile Include="Utilities\VoiceAPI.cs" />
     <Compile Include="ViewModel\BoardViewModel.cs" />
+    <Compile Include="ViewModel\CallingViewModel.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\CreateRoomViewModel.cs" />
     <Compile Include="ViewModel\CreateTaskViewModel.cs" />
     <Compile Include="ViewModel\DrawingTestVM.cs" />
     <Compile Include="ViewModel\ListRoomViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\OnGoingCallViewModel.cs" />
     <Compile Include="ViewModel\RoomViewModel.cs" />
     <Compile Include="ViewModel\SignInPageViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\TaskViewModel.cs" />
+    <Compile Include="ViewModel\WaitingCallViewModel.cs" />
+    <Compile Include="View\Calling\CallingWindow.xaml.cs">
+      <DependentUpon>CallingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calling\MakingCallControl.xaml.cs">
+      <DependentUpon>MakingCallControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calling\OnGoingCallControl.xaml.cs">
+      <DependentUpon>OnGoingCallControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Calling\WaitingCallControl.xaml.cs">
+      <DependentUpon>WaitingCallControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ChatViewControl.xaml.cs">
       <DependentUpon>ChatViewControl.xaml</DependentUpon>
     </Compile>
@@ -226,6 +241,22 @@
     <Compile Include="View\Task\Task.xaml.cs">
       <DependentUpon>Task.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Calling\CallingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Calling\MakingCallControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Calling\OnGoingCallControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Calling\WaitingCallControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ChatViewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -352,8 +383,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\Calling\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
