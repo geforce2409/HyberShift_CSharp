@@ -5,7 +5,7 @@
              xmlns:core="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:utilities="clr-namespace:HyberShift_CSharp.Utilities"
-             StartupUri="View/MainWindow.xaml">
+             StartupUri="View/SignIn/SignInPage.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -336,7 +336,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListBox}">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Style="{StaticResource CustomScrollViewer}" />
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" Style="{StaticResource CustomScrollViewer}" />
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -362,6 +362,28 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+
+            <Style x:Key="MsgTxtBox"
+                   TargetType="{x:Type TextBox}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <Border x:Name="border" SnapsToDevicePixels="True">
+                                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" Style="{StaticResource CustomScrollViewer}"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                                </Trigger>
+                                <Trigger Property="IsFocused" Value="true">
+                                    <Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
 
             <BitmapImage x:Key="BlankImage" UriSource="/HyberShift_CSharp;component/Res/blank.png" />
             <utilities:ByteBitmapSourceConverter x:Key="ByteBmpSrcConverter" />
