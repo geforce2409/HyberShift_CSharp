@@ -936,7 +936,7 @@
                 <!--Message-->
                 <materialDesign:Card
                     Grid.Column="1"
-                    Margin="0,8,8,8"
+                    Margin="2,8,8,8"
                     UniformCornerRadius="20" Height="50">
                     <Grid>
                         <Grid.ColumnDefinitions>
