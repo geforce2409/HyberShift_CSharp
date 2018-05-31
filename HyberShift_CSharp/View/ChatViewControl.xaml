@@ -484,6 +484,7 @@
                         <TextBox x:Name="MessageTxtBox" Margin="7,5,7,0"
                                  IsReadOnly="True" TextWrapping="Wrap"
                                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                 Style="{StaticResource NormalTxtBox}"
                                  Foreground="White"
                                  Text="{Binding Message}" />
                     </StackPanel>
@@ -626,7 +627,7 @@
                           Background="Black"
                           ShowsPreview="True"
                           Width="5"
-                          Visibility="Visible" />
+                          Visibility="Collapsed" />
 
             <!--Presentation-->
             <Border x:Name="PresentationBorder"
