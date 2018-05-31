@@ -2,6 +2,7 @@
 using HyberShift_CSharp.Model.Enum;
 using HyberShift_CSharp.Model.List;
 using HyberShift_CSharp.Utilities;
+using HyberShift_CSharp.View.Dialog;
 using HyberShift_CSharp.View.Task;
 using Newtonsoft.Json.Linq;
 using Prism.Commands;
@@ -88,8 +89,14 @@ namespace HyberShift_CSharp.ViewModel
 
         private void CreateTask()
         {
-            CreateTaskDialog createTaskDialog = new CreateTaskDialog(currentRoom);
-            createTaskDialog.ShowDialog();
+            //CreateTaskDialog createTaskDialog = new CreateTaskDialog(currentRoom);
+            //createTaskDialog.ShowDialog();
+
+            ConfirmDialog dialog = new ConfirmDialog("Confirm create task", "Are you sure to create a new task?", (Action)delegate
+            {
+                Debug.LogOutput("Comfirm dialog!");
+            });
+            dialog.ShowDialog();
         }
 
         private void OnRoomChange(RoomModel obj)
