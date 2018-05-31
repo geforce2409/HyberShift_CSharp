@@ -336,7 +336,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type ListBox}">
-                            <ScrollViewer Style="{StaticResource CustomScrollViewer}" />
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Style="{StaticResource CustomScrollViewer}" />
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
