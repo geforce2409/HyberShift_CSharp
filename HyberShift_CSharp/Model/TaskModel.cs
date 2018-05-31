@@ -84,7 +84,7 @@ namespace HyberShift_CSharp.Model
             JObject data = new JObject();
             data.Add("room_id", roomId);
             data.Add("work", this.Name);
-            data.Add("des", this.Description);
+            data.Add("description", this.Description);
             data.Add("performer", this.Performer);
             data.Add("start_day", this.StartDay);
             data.Add("end_day", this.EndDay);
