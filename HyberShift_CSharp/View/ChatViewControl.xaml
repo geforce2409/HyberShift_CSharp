@@ -803,14 +803,6 @@
                 </Grid>
             </Border>
 
-            <GridSplitter Grid.Column="3"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Stretch"
-                          Background="Black"
-                          ShowsPreview="True"
-                          Width="5"
-                          Visibility="Collapsed" />
-
             <!--Task-->
             <Border Grid.Column="4" Visibility="Visible">
                 <ListBox x:Name="lbTask"
