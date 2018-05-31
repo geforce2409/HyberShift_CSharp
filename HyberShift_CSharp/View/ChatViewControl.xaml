@@ -93,6 +93,35 @@
                 </Setter>
             </Style>
 
+            <Style x:Key="CreateTaskButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <materialDesign:PackIcon Name="PhotoIcon" Kind="ClipboardPlus" SnapsToDevicePixels="True"
+                                                         Foreground="{TemplateBinding Foreground}"
+                                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" TargetName="PhotoIcon"
+                                            Value="{DynamicResource PrimaryHueMidBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="Foreground" TargetName="PhotoIcon"
+                                            Value="{DynamicResource PrimaryHueMidBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.23" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
             <Style x:Key="VoiceCallButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
                 <Setter Property="Template">
                     <Setter.Value>
@@ -952,6 +981,10 @@
                         <Button Margin="8"
                                 Style="{DynamicResource ImageButtonStyle}"
                                 Command="{Binding SendImageMessageCommand}" />
+
+                        <!--Create task-->
+                        <Button Margin="8"
+                                Style="{DynamicResource CreateTaskButtonStyle}" />
                     </StackPanel>
                 </materialDesign:PopupBox>
 
