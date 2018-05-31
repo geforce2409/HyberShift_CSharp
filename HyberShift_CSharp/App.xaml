@@ -5,7 +5,7 @@
              xmlns:core="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              xmlns:utilities="clr-namespace:HyberShift_CSharp.Utilities"
-             StartupUri="View/MainWindow.xaml">
+             StartupUri="View/SignIn/SignInPage.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

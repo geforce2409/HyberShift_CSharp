@@ -634,7 +634,7 @@
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     Width="300"
-                    Visibility="Collapsed">
+                    Visibility="Visible">
                 <Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -762,7 +762,7 @@
                           Visibility="Collapsed" />
 
             <!--Task-->
-            <Border Grid.Column="4" Visibility="Collapsed">
+            <Border Grid.Column="4" Visibility="Visible">
                 <ListBox x:Name="lbTask"
                          Style="{StaticResource CustomListBox}"
                          ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
