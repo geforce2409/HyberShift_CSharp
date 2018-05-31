@@ -89,14 +89,8 @@ namespace HyberShift_CSharp.ViewModel
 
         private void CreateTask()
         {
-            //CreateTaskDialog createTaskDialog = new CreateTaskDialog(currentRoom);
-            //createTaskDialog.ShowDialog();
-
-            ConfirmDialog dialog = new ConfirmDialog("Confirm create task", "Are you sure to create a new task?", (Action)delegate
-            {
-                Debug.LogOutput("Comfirm dialog!");
-            });
-            dialog.ShowDialog();
+            CreateTaskDialog createTaskDialog = new CreateTaskDialog(currentRoom);
+            createTaskDialog.ShowDialog();
         }
 
         private void OnRoomChange(RoomModel obj)
