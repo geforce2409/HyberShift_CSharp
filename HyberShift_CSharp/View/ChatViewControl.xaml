@@ -62,7 +62,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid Background="#00000000">
+                        <Grid>
                             <materialDesign:PackIcon Name="PhotoIcon" Kind="Image" SnapsToDevicePixels="True"
                                                      Foreground="{TemplateBinding Foreground}"
                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -484,7 +484,7 @@
                         <TextBox x:Name="MessageTxtBox" Margin="7,5,7,0"
                                  IsReadOnly="True" TextWrapping="Wrap"
                                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                                 Style="{StaticResource NormalTxtBox}"
+                                 Style="{StaticResource no}"
                                  Foreground="White"
                                  Text="{Binding Message}" />
                     </StackPanel>
@@ -925,7 +925,8 @@
                 </materialDesign:Card>
 
                 <!--Image-->
-                <Button Foreground="#FF6E6E6E" Margin="8"
+                <!--Foreground="#FF6E6E6E"-->
+                <Button Margin="8"
                         Style="{DynamicResource ImageButtonStyle}"
                         Command="{Binding SendImageMessageCommand}" />
             </Grid>
