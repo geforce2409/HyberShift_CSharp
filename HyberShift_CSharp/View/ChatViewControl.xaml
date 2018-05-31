@@ -502,6 +502,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                                 <RowDefinition />
+                                <RowDefinition />
                                 <RowDefinition Height="0" />
                                 <RowDefinition Height="15" />
                             </Grid.RowDefinitions>
@@ -530,14 +531,15 @@
                                      Style="{StaticResource MsgTxtBox}"
                                      Foreground="White"
                                      Text="{Binding Message}" />
+                            <!--Timestamp-->
+                            <TextBlock Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Stretch"
+                                       Margin="26,18,0,0" FontSize="10" Opacity="0.8"
+                                       Text="{Binding TimestampDisplay, StringFormat={}{0:t}}" 
+                                       Foreground="#EBEFF1"/>
                         </Grid>
                     </Border>
 
-                    <!--Timestamp-->
-                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Stretch"
-                               Margin="26,8,0,0" FontSize="10" Opacity="0.8"
-                               Text="{Binding TimestampDisplay, StringFormat={}{0:t}}" 
-                               Foreground="#547381"/>
+
                 </StackPanel>
                 
                 <DataTemplate.Triggers>
