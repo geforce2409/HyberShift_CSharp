@@ -676,14 +676,14 @@
                           Background="Black"
                           ShowsPreview="True"
                           Width="5"
-                          Visibility="Collapsed" />
+                          Visibility="Visible" />
 
             <!--Presentation-->
             <Border x:Name="PresentationBorder"
                     Grid.Column="2"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
-                    Width="300"
+                    Width="600"
                     Visibility="Collapsed">
                 <Grid>
                     <Grid>
