@@ -653,7 +653,7 @@
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     Width="300"
-                    Visibility="Visible">
+                    Visibility="Collapsed">
                 <Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
