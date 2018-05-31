@@ -974,7 +974,7 @@
                 <materialDesign:PopupBox
                     Grid.Column="0"
                     Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
-                    PlacementMode="TopAndAlignCentres" Width="30" Height="30" Margin="8,0,0,0">
+                    PlacementMode="TopAndAlignCentres" Width="30" Height="30" Margin="14,0,0,0">
                     <StackPanel>
                         <!--Image-->
                         <!--Foreground="#FF6E6E6E"-->
@@ -1012,7 +1012,7 @@
                         <Ellipse x:Name="ClipEllipse" Fill="White" />
                         <materialDesign:PackIcon Kind="AccountCircle" SnapsToDevicePixels="True" Width="Auto"
                                                  Height="Auto"
-                                                 Margin="-4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                                 Margin="4,-4,-4,-4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
                         <Image
                             Source="{Binding Photo, Converter={StaticResource ByteBmpSrcConverter},
                             TargetNullValue={StaticResource BlankImage}}"
