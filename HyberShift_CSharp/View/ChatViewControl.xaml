@@ -633,6 +633,11 @@
                             Command="{Binding RoomChangeCommand, Source={StaticResource TaskViewModel}}"
                             CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}" />
                     </i:EventTrigger>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction
+                            Command="{Binding RoomChangeCommand, Source={StaticResource CallingViewModel}}"
+                            CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}" />
+                    </i:EventTrigger>
                 </i:Interaction.Triggers>
             </ListBox>
         </Border>

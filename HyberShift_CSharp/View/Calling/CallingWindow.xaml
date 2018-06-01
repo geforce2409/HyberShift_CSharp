@@ -13,6 +13,10 @@
             <local:WaitingCallControl/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewmodel:MakingCallViewModel}">
+            <local:MakingCallControl/>
+        </DataTemplate>
+
         <DataTemplate DataType="{x:Type viewmodel:OnGoingCallViewModel}">
             <local:OnGoingCallControl/>
         </DataTemplate>
