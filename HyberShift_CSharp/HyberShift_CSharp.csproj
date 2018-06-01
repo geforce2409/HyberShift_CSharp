@@ -134,9 +134,11 @@
     </ApplicationDefinition>
     <Compile Include="Domain\NotEmptyValidationRule.cs" />
     <Compile Include="Domain\IsValidInput.cs" />
+    <Compile Include="Model\CallingModel.cs" />
     <Compile Include="Model\CreateRoomModel.cs" />
     <Compile Include="Model\DrawingModel.cs" />
     <Compile Include="Model\EllipseModel.cs" />
+    <Compile Include="Model\Enum\CallingState.cs" />
     <Compile Include="Model\Enum\TaskType.cs" />
     <Compile Include="Model\Interface\ICanvas.cs" />
     <Compile Include="Model\Interface\IDialogService.cs" />
@@ -180,6 +182,7 @@
     <Compile Include="ViewModel\DrawingTestVM.cs" />
     <Compile Include="ViewModel\ListRoomViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MakingCallViewModel.cs" />
     <Compile Include="ViewModel\OnGoingCallViewModel.cs" />
     <Compile Include="ViewModel\RoomViewModel.cs" />
     <Compile Include="ViewModel\SignInPageViewModel.cs" />
@@ -206,6 +209,9 @@
     </Compile>
     <Compile Include="View\Dialog\ConfirmDialog.xaml.cs">
       <DependentUpon>ConfirmDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\MessageDialog.xaml.cs">
+      <DependentUpon>MessageDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DrawingTest.xaml.cs">
       <DependentUpon>DrawingTest.xaml</DependentUpon>
@@ -266,6 +272,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Dialog\ConfirmDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Dialog\MessageDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

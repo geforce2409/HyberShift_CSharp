@@ -35,7 +35,7 @@ namespace HyberShift_CSharp.Utilities
         }
 
         //getter and setter
-        public string ID { get; set; }
+        //public string ID { get; set; }
 
         // constructor
         public VoiceAPI()
@@ -43,15 +43,18 @@ namespace HyberShift_CSharp.Utilities
             socket = SocketAPI.GetInstance().GetSocket();
         }
 
-        public VoiceAPI(string id): this()
-        {
-            ID = id;
-        }
+        //public VoiceAPI(string id): this()
+        //{
+        //    ID = id;
+        //}
 
         #region Send
         public void Send(string id)
         {
-            timer = new DispatcherTimer();
+            if (timer == null)
+            {
+                timer = new DispatcherTimer();
+            }
             timer.Interval = new TimeSpan(500);
             timer.Tick += (sender, e) =>
             {
@@ -140,6 +143,11 @@ namespace HyberShift_CSharp.Utilities
         {
             recThread = new Thread(HandleReceive);
             recThread.Start();
+        }
+
+        public void StopReceiving()
+        {
+            socket.Off("stream_audio");
         }
 
         private void HandleReceive()

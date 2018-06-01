@@ -9,6 +9,6 @@
              d:DesignHeight="150" d:DesignWidth="800">
     <Grid>
         <Button Grid.Column="2" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Content="{materialDesign:PackIcon Kind=PhoneHangup, Size=40}"
-                Background="#c20144" Width="80" Height="80" Foreground="White"/>
+                Background="#c20144" Width="80" Height="80" Foreground="White" Command="{Binding HangupCommand}"/>
     </Grid>
 </UserControl>

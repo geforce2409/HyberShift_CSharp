@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HyberShift_CSharp.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,11 @@ namespace HyberShift_CSharp.View.Calling
         public CallingWindow()
         {
             InitializeComponent();
+        }
+
+        public CallingWindow(RoomModel room): this()
+        {
+            tbRoom.Text = room.Name;
         }
     }
 }

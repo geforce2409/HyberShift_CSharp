@@ -8,13 +8,13 @@ namespace HyberShift_CSharp.ViewModel
 {
     public class WaitingCallViewModel: BaseViewModel
     {
-        private readonly Action<object> navigate;
+        private readonly Action<object, object[]> navigate;
         public WaitingCallViewModel(): base()
         {
 
         }
 
-        public WaitingCallViewModel(Action<object> navigate): this()
+        public WaitingCallViewModel(Action<object, object[]> navigate, params object[] parameters): this()
         {
             this.navigate = navigate;
         }
