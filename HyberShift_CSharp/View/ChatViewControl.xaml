@@ -690,7 +690,7 @@
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     Width="600"
-                    Visibility="visible">
+                    Visibility="Collapsed">
                 <Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -781,13 +781,13 @@
                             Command="{Binding SaveImageCommand, Source={StaticResource BoardViewModel}}"
                             CommandParameter="{Binding ElementName=canvas}"/>
 
-                        <!--Open slide btn-->
+                        <!--Open slide btn--><!--
                         <Button
                             Grid.Column="1" Grid.Row="2"
                             Margin="0"
                             Foreground="#FF6E6E6E"
                             Style="{DynamicResource PresentationButtonStyle}"
-                            Command="{Binding OpenPresentationCommand, Source={StaticResource BoardViewModel}}" />
+                            Command="{Binding OpenPresentationCommand, Source={StaticResource BoardViewModel}}" />-->
 
                         <StackPanel
                             Grid.Column="1" Grid.Row="2"
@@ -987,6 +987,13 @@
                         <!--Create task-->
                         <Button Margin="8"
                                 Style="{DynamicResource CreateTaskButtonStyle}" />
+
+                        <!--Open slide btn-->
+                        <Button
+                            Foreground="#FF6E6E6E"
+                            Style="{DynamicResource PresentationButtonStyle}"
+                            Command="{Binding OpenPresentationCommand, Source={StaticResource BoardViewModel}}" />
+
                     </StackPanel>
                 </materialDesign:PopupBox>
 

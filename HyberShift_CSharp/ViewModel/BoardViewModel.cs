@@ -205,13 +205,11 @@ namespace HyberShift_CSharp.ViewModel
 
                 
 
-                Debug.LogOutput("Emiited new slide");
+                Debug.LogOutput("Emited new slide");
             };
 
             Thread thread = new Thread(starter) { IsBackground = true };
             thread.Start();
-
-            
         }
 
         public void ShowPresenation(Border border)
@@ -240,7 +238,7 @@ namespace HyberShift_CSharp.ViewModel
             data.Add("imgstring", encodstring);
             socket.Emit("new_image", data);
 
-            Debug.LogOutput("Emiited new image");
+            Debug.LogOutput("Emited new image");
         }
 
         public void SaveImage(object obj)
