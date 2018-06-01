@@ -49,6 +49,7 @@ namespace HyberShift_CSharp.ViewModel
         public DelegateCommand<Button> LeftSlideCommand { get; set; }
         public DelegateCommand<Button> RightSlideCommand { get; set; }
         public DelegateCommand<Border> ShowPresenationCommand { get; set; }
+        public DelegateCommand SendImagePresentationCommand { get; set; }
         //Active board
         public BitmapImage CanvasBackground { get; set; }
 
@@ -92,6 +93,7 @@ namespace HyberShift_CSharp.ViewModel
             LeftSlideCommand = new DelegateCommand<Button>(NavigateLeftSlide);
             RightSlideCommand = new DelegateCommand<Button>(NavigateRightSlide);
             ShowPresenationCommand= new DelegateCommand<Border>(ShowPresenation);
+            SendImagePresentationCommand = new DelegateCommand(SendImagePresentation);
             HandleSocket();
         }
 
@@ -220,6 +222,14 @@ namespace HyberShift_CSharp.ViewModel
                 border.Visibility = Visibility.Collapsed;
                 flagShowPresentation = 0;
             }
+        }
+
+        public void SendImagePresentation()
+        {
+            //DialogService dialogOpenImage = new DialogService();
+            //dialogOpenImage.OpenFile("Choose image file", )
+
+            string path = dialogService.OpenFile("Choose image file", "Image (.png ,.jpg)|*.png;*.jpg");
         }
 
         private void HandleSocket()
