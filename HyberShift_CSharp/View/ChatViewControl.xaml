@@ -24,6 +24,7 @@
             <viewModel:ChatViewModel x:Key="ChatViewModel" />
             <viewModel:BoardViewModel x:Key="BoardViewModel" />
             <viewModel:TaskViewModel x:Key="TaskViewModel" />
+            <viewModel:CallingViewModel x:Key="CallingViewModel" />
             <!--<viewModel:ChatMessegeViewModel x:Key="ChatMessegeViewModel" />-->
             <Style x:Key="SendButtonStyle" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="Transparent" />
@@ -1052,7 +1053,8 @@
                         Command="{Binding CreateTaskCommand, Source={StaticResource TaskViewModel}}" />
 
                 <Button x:Name="VoiceCallButton" Grid.Column="2" Margin="10"
-                        Style="{DynamicResource VoiceCallButtonStyle}" />
+                        Style="{DynamicResource VoiceCallButtonStyle}"
+                        Command="{Binding ShowVoiceCallCommand, Source={StaticResource CallingViewModel}}"/>
 
                 <!--<Button x:Name="VideoCallButton" Grid.Column="2" Margin="10"
                         Style="{DynamicResource VideoCallButtonStyle}"/>-->
