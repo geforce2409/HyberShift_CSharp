@@ -980,7 +980,7 @@
                         <!--Foreground="#FF6E6E6E"-->
                         <Button Margin="8"
                                 Style="{DynamicResource ImageButtonStyle}"
-                                Command="{Binding SendImageMessageCommand}" />
+                                Command="{Binding SendImagePresentationCommand, Source={StaticResource BoardViewModel}}" />
 
                         <!--Create task-->
                         <Button Margin="8"
