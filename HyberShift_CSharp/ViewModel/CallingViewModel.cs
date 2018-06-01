@@ -97,15 +97,20 @@ namespace HyberShift_CSharp.ViewModel
         {
             socket.On("new_call", (arg) =>
             {
-                //check if user is having a call
-                if (callingModel.State == Model.Enum.CallingState.BUSY)
-                    return;
+                Application.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    //check if user is having a call
+                    if (callingModel.State == Model.Enum.CallingState.BUSY)
+                        return;
 
-                JObject data = (JObject)arg;
-                string roomId = data.GetValue("room_id").ToString();
-                RoomModel room = data.GetValue("room").ToObject<RoomModel>();
-                CallingWindow callingWindow = new CallingWindow(room);
-                callingWindow.Show();
+                    JObject data = (JObject)arg;
+                    string roomId = data.GetValue("room_id").ToString();
+                    RoomModel room = data.GetValue("room").ToObject<RoomModel>();
+                    CallingWindow callingWindow = new CallingWindow(room);
+
+                    callingWindow.Show();
+                });
+                
             });
         }
     }

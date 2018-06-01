@@ -16,6 +16,7 @@ namespace HyberShift_CSharp.Utilities
         {
             socket = IO.Socket("http://hybershift-server-helloqwert12.c9users.io/");
             isConnected = false;
+            EstablishConnection();
         }
 
         public static SocketAPI GetInstance()
@@ -37,7 +38,6 @@ namespace HyberShift_CSharp.Utilities
         {
             if (!isConnected)
             {
-                EstablishConnection();
                 socket.Connect();
                 isConnected = true;
             }
