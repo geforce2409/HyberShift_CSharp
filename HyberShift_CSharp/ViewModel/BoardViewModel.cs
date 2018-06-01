@@ -19,7 +19,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using HyberShift_CSharp.View.Dialog;
 using Xceed.Wpf.Toolkit;
+using Image = System.Drawing.Image;
 
 namespace HyberShift_CSharp.ViewModel
 {
@@ -50,6 +52,7 @@ namespace HyberShift_CSharp.ViewModel
         public DelegateCommand<Button> RightSlideCommand { get; set; }
         public DelegateCommand<Border> ShowPresenationCommand { get; set; }
         public DelegateCommand SendImagePresentationCommand { get; set; }
+        public DelegateCommand<object> SaveImageCommand { get; set; }
         //Active board
         public BitmapImage CanvasBackground { get; set; }
 
@@ -94,6 +97,7 @@ namespace HyberShift_CSharp.ViewModel
             RightSlideCommand = new DelegateCommand<Button>(NavigateRightSlide);
             ShowPresenationCommand= new DelegateCommand<Border>(ShowPresenation);
             SendImagePresentationCommand = new DelegateCommand(SendImagePresentation);
+            SaveImageCommand = new DelegateCommand<object>(SaveImage);
             HandleSocket();
         }
 
@@ -226,10 +230,54 @@ namespace HyberShift_CSharp.ViewModel
 
         public void SendImagePresentation()
         {
-            //DialogService dialogOpenImage = new DialogService();
-            //dialogOpenImage.OpenFile("Choose image file", )
-
             string path = dialogService.OpenFile("Choose image file", "Image (.png ,.jpg)|*.png;*.jpg");
+            string encodstring = ImageUtils.CopyImageToBase64String(Image.FromFile(path));
+            base64Slide.Clear();
+
+            // emit image
+            JObject data = new JObject();
+            data.Add("room_id", currentRoom.ID);
+            data.Add("imgstring", encodstring);
+            socket.Emit("new_image", data);
+
+            Debug.LogOutput("Emiited new image");
+        }
+
+        public void SaveImage(object obj)
+        {
+            try
+            {
+                System.Windows.Controls.Canvas canvas = obj as System.Windows.Controls.Canvas;
+                CreateSaveBitmap(canvas, @"D:\out.png");
+
+                MessageDialog dialog = new MessageDialog("Save Image Complete", "Your image have been saved in D storage!");
+                dialog.Show();
+                Debug.LogOutput("Save image success!");
+            }
+            catch (Exception e)
+            {
+                MessageDialog dialog = new MessageDialog("Save Image Fail", "Something wrong. Please check again!");
+                dialog.Show();
+                Debug.LogOutput("Save image error!");
+                throw;
+            }
+        }
+
+        private void CreateSaveBitmap(System.Windows.Controls.Canvas canvas, string filename)
+        {
+            RenderTargetBitmap rtb = new RenderTargetBitmap((int)canvas.RenderSize.Width,
+                (int)canvas.RenderSize.Height, 96d, 96d, System.Windows.Media.PixelFormats.Default);
+            rtb.Render(canvas);
+
+            //var crop = new CroppedBitmap(rtb, new Int32Rect(50, 50, 250, 250));
+
+            BitmapEncoder pngEncoder = new PngBitmapEncoder();
+            pngEncoder.Frames.Add(BitmapFrame.Create(rtb));
+
+            using (var fs = System.IO.File.OpenWrite(filename))
+            {
+                pngEncoder.Save(fs);
+            }
         }
 
         private void HandleSocket()
@@ -275,6 +323,26 @@ namespace HyberShift_CSharp.ViewModel
                     // convert to image source
        
                     CanvasBackground = ImageUtils.Base64StringToBitmapSource(slide);
+                    NotifyChanged("CanvasBackground");
+
+                    Debug.LogOutput("Updated canvas background");
+                });
+            });
+
+            socket.On("new_image", (arg) =>
+            {
+                Application.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    JObject data = (JObject)arg;
+                    string roomId = data.GetValue("room_id").ToString();
+                    string image = data.GetValue("imgstring").ToString();
+
+                    if (!currentRoom.ID.Equals(roomId))
+                        return;
+
+                    // convert to image source
+
+                    CanvasBackground = ImageUtils.Base64StringToBitmapSource(image);
                     NotifyChanged("CanvasBackground");
 
                     Debug.LogOutput("Updated canvas background");

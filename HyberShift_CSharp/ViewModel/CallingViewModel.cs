@@ -69,6 +69,7 @@ namespace HyberShift_CSharp.ViewModel
                     new MessageDialog("Empty Room", "Please choose the room you want to call").ShowDialog();
                     return;
                 }
+
                 CallingWindow callingWindow = new CallingWindow(currentRoom);
                 callingWindow.Show();
                 flagShowVoiceCall = 1;
@@ -81,10 +82,10 @@ namespace HyberShift_CSharp.ViewModel
             //}
             //else
             //{
-                //foreach (Window window in Application.Current.Windows)
-                //    if (window.Title == "CallingWindow")
-                //        window.Close();
-                //flagShowVoiceCall = 0;
+            //    foreach (Window window in Application.Current.Windows)
+            //        if (window.Title == "CallingWindow")
+            //            window.Close();
+            //    flagShowVoiceCall = 0;
             //}
         }
 

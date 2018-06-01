@@ -542,7 +542,7 @@
 
 
                 </StackPanel>
-                
+
                 <DataTemplate.Triggers>
                     <DataTrigger Binding="{Binding IsOriginNative}" Value="True">
                         <Setter TargetName="MessageBorder" Property="HorizontalAlignment" Value="Right" />
@@ -690,7 +690,7 @@
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     Width="600"
-                    Visibility="Collapsed">
+                    Visibility="visible">
                 <Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -775,14 +775,16 @@
                         <!--Image Btn-->
                         <Button
                             Grid.Column="0" Grid.Row="2"
-                            Margin="8"
+                            Margin="0"
                             Foreground="#FF6E6E6E"
-                            Style="{DynamicResource ImageButtonStyle}" />
+                            Style="{DynamicResource ImageButtonStyle}" 
+                            Command="{Binding SaveImageCommand, Source={StaticResource BoardViewModel}}"
+                            CommandParameter="{Binding ElementName=canvas}"/>
 
                         <!--Open slide btn-->
                         <Button
                             Grid.Column="1" Grid.Row="2"
-                            Margin="8"
+                            Margin="0"
                             Foreground="#FF6E6E6E"
                             Style="{DynamicResource PresentationButtonStyle}"
                             Command="{Binding OpenPresentationCommand, Source={StaticResource BoardViewModel}}" />
@@ -796,14 +798,14 @@
                                 Foreground="#FF6E6E6E"
                                 Style="{DynamicResource LeftArrowButtonStyle}"
                                 Command="{Binding LeftSlideCommand, Source={StaticResource BoardViewModel}}"
-                                CommandParameter="{Binding ElementName=btnLeftSlide}" />
+                                CommandParameter="{Binding ElementName=btnLeftSlide}"/>
 
                             <Button
                                 x:Name="btnRightSlide"
                                 Foreground="#FF6E6E6E"
                                 Style="{DynamicResource RightArrowButtonStyle}"
                                 Command="{Binding RightSlideCommand, Source={StaticResource BoardViewModel}}"
-                                CommandParameter="{Binding ElementName=btnRightSlide}" />
+                                CommandParameter="{Binding ElementName=btnRightSlide}"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
