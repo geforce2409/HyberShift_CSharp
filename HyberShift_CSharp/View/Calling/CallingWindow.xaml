@@ -39,9 +39,8 @@
             </StackPanel>
         </Border>
 
-        <ContentControl Grid.Row="1">
-            
-        </ContentControl>
-        
+        <ContentControl Grid.Row="1"
+                        Content="{Binding SelectedViewModel, Source={StaticResource CallingViewModel}}"/>
+
     </Grid>
 </Window>

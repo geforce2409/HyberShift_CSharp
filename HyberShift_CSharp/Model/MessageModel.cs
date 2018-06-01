@@ -11,6 +11,7 @@ namespace HyberShift_CSharp.Model
     public class MessageModel
     {
         public string ID { get; set; }
+        public string MessageID { get; set; }
         public string Message { get; set; }
         public string Sender { get; set; }
         public string ImgString { get; set; }
@@ -30,10 +31,11 @@ namespace HyberShift_CSharp.Model
 
         }
 
-        public MessageModel(string id, string message, string sender, string imgstring, string filestring,
+        public MessageModel(string id, string messageid, string message, string sender, string imgstring, string filestring,
                             string filename, long timestamp)
         {
             ID = id;
+            MessageID = messageid;
             Message = message;
             Sender = sender;
             ImgString = imgstring;

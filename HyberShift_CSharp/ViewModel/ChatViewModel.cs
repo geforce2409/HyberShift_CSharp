@@ -183,6 +183,7 @@ namespace HyberShift_CSharp.ViewModel
                 JObject content = (JObject)args;
 
                 string id = content.GetValue("id").ToString();
+                string messageid = content.GetValue("message_id").ToString();
                 string sender = content.GetValue("sender").ToString();
                 string message = content.GetValue("message").ToString();
                 string imgstring = content.GetValue("imgstring").ToString();
@@ -195,9 +196,9 @@ namespace HyberShift_CSharp.ViewModel
                     //if user is in the room that occur event, display message
                     if (currentRoom.ID.Equals(id))
                     {
-                        MessageModel msg = new MessageModel(id, message, sender, imgstring, filestring, filename,
+                        MessageModel msg = new MessageModel(id, messageid, message, sender, imgstring, filestring, filename,
                             timestamp);
-                        listMessageModel.Add(msg);
+                        listMessageModel.AddWithCheck(msg, "MessageID");
 
                         Debug.LogOutput("Room: " + currentRoom.Name + " Message >> " + msg.Message);
                     }
