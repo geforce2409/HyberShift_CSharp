@@ -578,7 +578,7 @@
 
                     <Border Name="MessageBorder"
                             Background="{StaticResource PrimaryHueDarkBrush}"
-                            Margin="10,8,0,0" Padding="8"
+                            Margin="10,8,0,0" Padding="4"
                             CornerRadius="20" SnapsToDevicePixels="True"
                             HorizontalAlignment="Left">
 
@@ -586,9 +586,6 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition />
                                 <RowDefinition />
-                                <RowDefinition />
-                                <RowDefinition Height="0" />
-                                <RowDefinition Height="15" />
                             </Grid.RowDefinitions>
                             <Grid x:Name="ImageMessageGrid" Margin="6,6,6,5">
                                 <Grid.OpacityMask>
@@ -609,7 +606,7 @@
                                 </Image>
                             </Grid>
 
-                            <TextBox Grid.Row="1" x:Name="MessageTxtBox" Margin="7,5,7,0"
+                            <TextBox Grid.Row="1" x:Name="MessageTxtBox" Margin="8"
                                      IsReadOnly="True" TextWrapping="Wrap"
                                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                      Style="{StaticResource MsgTxtBox}"
@@ -620,7 +617,7 @@
 
                     <!--Timestamp-->
                     <TextBlock HorizontalAlignment="Right" VerticalAlignment="Stretch"
-                               Margin="26,8,0,0" FontSize="10" Opacity="0.8"
+                               Margin="26,8,8,0" FontSize="10" Opacity="0.8"
                                Text="{Binding TimestampDisplay, StringFormat={}{0:t}}"
                                Foreground="#547381" />
                 </StackPanel>
@@ -688,8 +685,8 @@
                         <Button Grid.Row="0" Grid.Column="1" 
                                 Style="{StaticResource SettingsButtonStyle}" HorizontalAlignment="Right" />
 
-                        <Border Grid.Row="1" Grid.Column="0" BorderBrush="{StaticResource PrimaryHueDarkBrush}"
-                                CornerRadius="3" Height="30" >
+                        <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black"
+                                CornerRadius="3" Height="30" BorderThickness="1" Margin="8,0,0,0" >
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -700,7 +697,7 @@
                                         Command="{Binding SearchCommand}" x:Name="SearchButton"
                                         CommandParameter="{Binding ElementName=SearchBox, Path=Text}"
                                         Height="24" Width="24">
-                                    <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                                    <materialDesign:PackIcon Kind="Magnify" Opacity=".56" Foreground="Black" />
                                 </Button>
 
                                 <!--KeyDown="Search_OnKeyDown"-->
@@ -818,7 +815,7 @@
                           Background="Black"
                           ShowsPreview="True"
                           Width="5"
-                          Visibility="Visible" />
+                          Visibility="Collapsed" />
 
             <!--Presentation-->
             <Border x:Name="PresentationBorder"
@@ -949,6 +946,14 @@
                     </Grid>
                 </Grid>
             </Border>
+
+            <GridSplitter Grid.Column="3"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Stretch"
+                          Background="Black"
+                          ShowsPreview="True"
+                          Width="5"
+                          Visibility="Collapsed" />
 
             <!--Task-->
             <Border Grid.Column="4" Visibility="Visible">
