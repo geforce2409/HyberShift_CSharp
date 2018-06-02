@@ -714,7 +714,7 @@
             </Border>
 
             <Border BorderThickness="0,0,1,0" SnapsToDevicePixels="True"
-                    BorderBrush="{DynamicResource MaterialDesignDivider}" Height="370">
+                    BorderBrush="{DynamicResource MaterialDesignDivider}" Height="362" Margin="0,8,0,0">
                 <ListBox x:Name="ListBoxRoom"
                          ItemsSource="{Binding ListRoom, Source={StaticResource ListRoomViewModel}}">
                     <ListBox.ItemTemplate>
@@ -809,13 +809,13 @@
                 </ItemsControl.Template>
             </ItemsControl>
 
-            <GridSplitter Grid.Column="1"
+            <!--<GridSplitter Grid.Column="1"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Stretch"
                           Background="Black"
                           ShowsPreview="True"
                           Width="5"
-                          Visibility="Collapsed" />
+                          Visibility="Collapsed" />-->
 
             <!--Presentation-->
             <Border x:Name="PresentationBorder"
@@ -823,14 +823,14 @@
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
                     Width="600"
-                    Visibility="Collapsed">
+                    Visibility="Visible">
                 <Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="30" />
-                            <ColumnDefinition Width="39*" />
-                            <ColumnDefinition Width="100" />
-                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="250" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30" />
@@ -903,7 +903,7 @@
                             Maximum="100"
                             Style="{StaticResource MaterialDesignDiscreteSlider}"
                             Value="{Binding Thickness, Source={StaticResource BoardViewModel}}"
-                            Width="100" Padding="0,-2,0,0" />
+                            Width="100" Padding="0,-2,0,0" HorizontalAlignment="Center" Margin="0,0,0,8" />
 
                         <!--Image Btn-->
                         <Button
@@ -947,13 +947,13 @@
                 </Grid>
             </Border>
 
-            <GridSplitter Grid.Column="3"
+            <!--<GridSplitter Grid.Column="3"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Stretch"
                           Background="Black"
                           ShowsPreview="True"
                           Width="5"
-                          Visibility="Collapsed" />
+                          Visibility="Collapsed" />-->
 
             <!--Task-->
             <Border Grid.Column="4" Visibility="Visible">

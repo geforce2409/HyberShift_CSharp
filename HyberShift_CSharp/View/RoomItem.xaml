@@ -38,12 +38,13 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="1" Grid.Row="0" Style="{DynamicResource MaterialDesignBody2TextBlock}" Foreground="White"
-                   HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Name}" 
-                   FontSize="16"/>
+        <TextBlock Grid.Column="1" Grid.Row="0" Style="{DynamicResource MaterialDesignBody1TextBlock}"
+                   Foreground="Black" FontSize="16"
+                   HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Name}"/>
 
         <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="WrapWithOverflow" Style="{DynamicResource MaterialDesignBody1TextBlock}" 
-                   HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding ListMembers}" Foreground="#FFC0BCBC" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding ListMembers}"
+                   Foreground="Black" FontSize="10"
                    Margin="0,8,0,0"/>
     </Grid>
 </UserControl>
