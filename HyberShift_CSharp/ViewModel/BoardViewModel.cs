@@ -181,7 +181,9 @@ namespace HyberShift_CSharp.ViewModel
         public void OpenPresentationSlide()
         {
             string path = dialogService.OpenFile("Choose presentation file", "All Files|*.pptx;*.ppt|Presentation (.pptx ,.ppt)|*.pptx;*.ppt");
-            
+
+            if (path == "")
+                return;
 
             ThreadStart starter = () =>
             {
