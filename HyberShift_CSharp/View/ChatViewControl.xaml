@@ -810,13 +810,13 @@
                 </ItemsControl.Template>
             </ItemsControl>
 
-            <!--<GridSplitter Grid.Column="1"
+            <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Stretch"
                           Background="Black"
                           ShowsPreview="True"
                           Width="5"
-                          Visibility="Collapsed" />-->
+                          Visibility="Collapsed" />
 
             <!--Presentation-->
             <Border x:Name="PresentationBorder"
@@ -943,13 +943,13 @@
                 </Grid>
             </Border>
 
-            <!--<GridSplitter Grid.Column="3"
+            <GridSplitter Grid.Column="3"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Stretch"
                           Background="Black"
                           ShowsPreview="True"
                           Width="5"
-                          Visibility="Collapsed" />-->
+                          Visibility="Collapsed" />
 
             <!--Task-->
             <Border Grid.Column="4" Visibility="Visible">
