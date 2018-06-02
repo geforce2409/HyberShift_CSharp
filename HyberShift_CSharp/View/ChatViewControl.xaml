@@ -389,7 +389,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="10" Width="Auto" Height="Auto" />
+                                                         Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -418,7 +418,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="10" Width="Auto" Height="Auto" />
+                                                         Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -908,7 +908,6 @@
                         <!--Image Btn-->
                         <Button
                             Grid.Column="0" Grid.Row="2"
-                            Margin="10"
                             Foreground="#FF6E6E6E"
                             Style="{DynamicResource ImageButtonStyle}"
                             Command="{Binding SaveImageCommand, Source={StaticResource BoardViewModel}}"
@@ -918,7 +917,6 @@
                         <!--
                         <Button
                             Grid.Column="1" Grid.Row="2"
-                            Margin="10"
                             Foreground="#FF6E6E6E"
                             Style="{DynamicResource PresentationButtonStyle}"
                             Command="{Binding OpenPresentationCommand, Source={StaticResource BoardViewModel}}" />-->
@@ -930,7 +928,6 @@
                             <Button
                                 x:Name="btnLeftSlide"
                                 Foreground="#FF6E6E6E"
-                                Margin="10"
                                 Style="{DynamicResource LeftArrowButtonStyle}"
                                 Command="{Binding LeftSlideCommand, Source={StaticResource BoardViewModel}}"
                                 CommandParameter="{Binding ElementName=btnLeftSlide}" />
@@ -938,7 +935,6 @@
                             <Button
                                 x:Name="btnRightSlide"
                                 Foreground="#FF6E6E6E"
-                                Margin="10"
                                 Style="{DynamicResource RightArrowButtonStyle}"
                                 Command="{Binding RightSlideCommand, Source={StaticResource BoardViewModel}}"
                                 CommandParameter="{Binding ElementName=btnRightSlide}" />
