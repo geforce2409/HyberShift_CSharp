@@ -29,7 +29,7 @@
             <Style x:Key="SendButtonStyle" TargetType="{x:Type Button}">
                 <Setter Property="Background" Value="Transparent" />
                 <Setter Property="BorderBrush" Value="Transparent" />
-                <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkBrush}" />
+                <Setter Property="Foreground" Value="{StaticResource PrimaryHueDarkBrush}" />
                 <Setter Property="Cursor" Value="Hand" />
                 <Setter Property="FontWeight" Value="Medium" />
                 <Setter Property="FontSize" Value="14" />
@@ -40,12 +40,12 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid Background="#00000000">
+                            <Grid>
                                 <materialDesign:PackIcon Name="SendIcon" Kind="Send" SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
+                                                         Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -74,7 +74,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
+                                                         Margin="10" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -94,16 +94,17 @@
                 </Setter>
             </Style>
 
-            <Style x:Key="CreateTaskButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+            <Style x:Key="CreateTaskButtonStyle" TargetType="Button" BasedOn="{StaticResource ImageButtonStyle}">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
-                                <materialDesign:PackIcon Name="PhotoIcon" Kind="ClipboardPlus" SnapsToDevicePixels="True"
+                                <materialDesign:PackIcon Name="PhotoIcon" Kind="ClipboardPlus"
+                                                         SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
+                                                         Margin="10" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -132,7 +133,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
+                                                         Margin="10" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -162,7 +163,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
+                                                         Margin="10" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -191,7 +192,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
+                                                         Margin="10" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -211,7 +212,7 @@
                 </Setter>
             </Style>
 
-            <Style x:Key="PresentationButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+            <Style x:Key="PresentationButtonStyle" TargetType="Button" BasedOn="{StaticResource ImageButtonStyle}">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -221,7 +222,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
+                                                         Margin="10" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -250,7 +251,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
+                                                         Margin="10" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -265,6 +266,86 @@
                                     <Setter Property="Opacity" Value="0.23" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="SettingsButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <materialDesign:PackIcon Name="PhotoIcon" Kind="Settings" SnapsToDevicePixels="True"
+                                                         Foreground="{TemplateBinding Foreground}"
+                                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                         Margin="10" Width="20" Height="20" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" TargetName="PhotoIcon"
+                                            Value="{DynamicResource PrimaryHueMidBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="Foreground" TargetName="PhotoIcon"
+                                            Value="{DynamicResource PrimaryHueMidBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.23" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="AddRoomButtonStyle" TargetType="Button" BasedOn="{StaticResource SettingsButtonStyle}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <materialDesign:PackIcon Name="PhotoIcon" Kind="Plus" SnapsToDevicePixels="True"
+                                                         Foreground="{TemplateBinding Foreground}"
+                                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                         Margin="10" Width="Auto" Height="Auto" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" TargetName="PhotoIcon"
+                                            Value="{DynamicResource PrimaryHueMidBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="Foreground" TargetName="PhotoIcon"
+                                            Value="{DynamicResource PrimaryHueMidBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.23" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="ProfileButtonStyle" TargetType="Button" BasedOn="{StaticResource SettingsButtonStyle}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <materialDesign:PackIcon Name="PhotoIcon" Kind="AccountCircle" SnapsToDevicePixels="True"
+                                                         Foreground="{TemplateBinding Foreground}"
+                                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                         Width="Auto" Height="Auto" />
+
+                                <Image
+                                    Source="{Binding Photo, Converter={StaticResource ByteBmpSrcConverter}, TargetNullValue={StaticResource BlankImage}}"
+                                    Stretch="UniformToFill"
+                                    Margin="10,10,10,10" />
+                            </Grid>
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
@@ -306,7 +387,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
+                                                         Margin="10" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -335,7 +416,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
+                                                         Margin="10" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -490,14 +571,14 @@
                 <StackPanel Orientation="Vertical">
 
                     <TextBlock Style="{DynamicResource MaterialDesignBody2TextBlock}"
-                           Text="{Binding Sender}" Foreground="#547381"
-                           VerticalAlignment="Center" HorizontalAlignment="Left" Margin="26,0,0,0" />
+                               Text="{Binding Sender}" Foreground="#547381"
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Margin="26,10,0,0" />
 
                     <Border Name="MessageBorder"
-                        Background="{StaticResource PrimaryHueDarkBrush}"
-                        Margin="10,8,60,10" Padding="8"
-                        CornerRadius="20" SnapsToDevicePixels="True"
-                        HorizontalAlignment="Left">
+                            Background="{StaticResource PrimaryHueDarkBrush}"
+                            Margin="10,8,0,0" Padding="8"
+                            CornerRadius="20" SnapsToDevicePixels="True"
+                            HorizontalAlignment="Left">
 
                         <Grid>
                             <Grid.RowDefinitions>
@@ -513,14 +594,14 @@
                                 </Grid.OpacityMask>
                                 <Border x:Name="ClipBorder" CornerRadius="3" Background="White" />
                                 <Image Stretch="UniformToFill" Cursor="Hand"
-                                   ToolTip="Click to open image in your default image viewer"
-                                   Source="{Binding Picture}">
+                                       ToolTip="Click to open image in your default image viewer"
+                                       Source="{Binding Picture}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="MouseLeftButtonUp">
                                             <i:InvokeCommandAction
-                                            Command="{Binding DataContext.OpenImageCommand, 
+                                                Command="{Binding DataContext.OpenImageCommand, 
                                         RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
-                                            CommandParameter="{Binding}" />
+                                                CommandParameter="{Binding}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </Image>
@@ -532,15 +613,14 @@
                                      Style="{StaticResource MsgTxtBox}"
                                      Foreground="White"
                                      Text="{Binding Message}" />
-                            <!--Timestamp-->
-                            <TextBlock Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Stretch"
-                                       Margin="26,18,0,0" FontSize="10" Opacity="0.8"
-                                       Text="{Binding TimestampDisplay, StringFormat={}{0:t}}" 
-                                       Foreground="#EBEFF1"/>
                         </Grid>
                     </Border>
 
-
+                    <!--Timestamp-->
+                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Stretch"
+                               Margin="26,8,0,0" FontSize="10" Opacity="0.8"
+                               Text="{Binding TimestampDisplay, StringFormat={}{0:t}}"
+                               Foreground="#547381" />
                 </StackPanel>
 
                 <DataTemplate.Triggers>
@@ -577,22 +657,74 @@
             <RowDefinition Height="172*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="220" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
-        <Border Grid.RowSpan="3" BorderThickness="0,0,1,0" SnapsToDevicePixels="True"
-                BorderBrush="{DynamicResource MaterialDesignDivider}">
-            <ListBox x:Name="ListBoxRoom"
-                     ItemsSource="{Binding ListRoom, Source={StaticResource ListRoomViewModel}}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <local:RoomItem />
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
+        <StackPanel Orientation="Vertical" Grid.RowSpan="3">
+            <Border BorderThickness="0,0,1,0" SnapsToDevicePixels="True"
+                    BorderBrush="{DynamicResource MaterialDesignDivider}">
+                <StackPanel Orientation="Vertical">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
 
-                <!--<ListBox.ItemTemplate>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!--Profile-->
+                        <Button x:Name="ProfileButton"
+                                Style="{StaticResource ProfileButtonStyle}" Width="30" Height="30" Margin="8,5,0,5" HorizontalAlignment="Left" />
+
+                        <!--Settings-->
+                        <Button Grid.Row="0" Grid.Column="1" 
+                                Style="{StaticResource SettingsButtonStyle}" HorizontalAlignment="Right" />
+
+                        <Border Grid.Row="1" Grid.Column="0" BorderBrush="{StaticResource PrimaryHueDarkBrush}"
+                                CornerRadius="3" Height="30" >
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Button Style="{DynamicResource MaterialDesignToolButton}"
+                                        Command="{Binding SearchCommand}" x:Name="SearchButton"
+                                        CommandParameter="{Binding ElementName=SearchBox, Path=Text}"
+                                        Height="24" Width="24">
+                                    <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                                </Button>
+
+                                <!--KeyDown="Search_OnKeyDown"-->
+                                <TextBox Grid.Column="1" Margin="5 0 0 0"
+                                         materialDesign:HintAssist.Hint="Search" x:Name="SearchBox"
+                                         materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                         BorderThickness="0" VerticalAlignment="Center" Width="150" />
+                            </Grid>
+                        </Border>
+
+                        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource AddRoomButtonStyle}" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Border BorderThickness="0,0,1,0" SnapsToDevicePixels="True"
+                    BorderBrush="{DynamicResource MaterialDesignDivider}" Height="370">
+                <ListBox x:Name="ListBoxRoom"
+                         ItemsSource="{Binding ListRoom, Source={StaticResource ListRoomViewModel}}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <local:RoomItem />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                    <!--<ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -607,40 +739,42 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>-->
 
-                <!--ItemTemplate="{DynamicResource ParticipantsDataTemplate}"
+                    <!--ItemTemplate="{DynamicResource ParticipantsDataTemplate}"
                      ItemContainerStyle="{DynamicResource ParticipantsListBoxItemStyle}"
                      SelectedItem="{Binding SelectedParticipant}"                     
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      ScrollViewer.VerticalScrollBarVisibility="Auto">-->
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction
-                            Command="{Binding ItemSelectedCommand, Source={StaticResource ListRoomViewModel}}"
-                            CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}" />
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction
-                            Command="{Binding ItemSelectedCommand, Source={StaticResource ChatViewModel}}"
-                            CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}" />
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction
-                            Command="{Binding RoomChangeCommand, Source={StaticResource BoardViewModel}}"
-                            CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}" />
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction
-                            Command="{Binding RoomChangeCommand, Source={StaticResource TaskViewModel}}"
-                            CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}" />
-                    </i:EventTrigger>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction
-                            Command="{Binding RoomChangeCommand, Source={StaticResource CallingViewModel}}"
-                            CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}" />
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
-            </ListBox>
-        </Border>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction
+                                Command="{Binding ItemSelectedCommand, Source={StaticResource ListRoomViewModel}}"
+                                CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction
+                                Command="{Binding ItemSelectedCommand, Source={StaticResource ChatViewModel}}"
+                                CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction
+                                Command="{Binding RoomChangeCommand, Source={StaticResource BoardViewModel}}"
+                                CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction
+                                Command="{Binding RoomChangeCommand, Source={StaticResource TaskViewModel}}"
+                                CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}" />
+                        </i:EventTrigger>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction
+                                Command="{Binding RoomChangeCommand, Source={StaticResource CallingViewModel}}"
+                                CommandParameter="{Binding SelectedItem, ElementName=ListBoxRoom}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+            </Border>
+
+        </StackPanel>
 
         <Grid
             Grid.Column="1" Grid.Row="1"
@@ -668,7 +802,7 @@
                     <utilities:BringNewItemIntoViewBehavior />
                 </i:Interaction.Behaviors>
                 <ItemsControl.Template>
-                    <ControlTemplate TargetType="ItemsControl">
+                    <ControlTemplate TargetType="{x:Type ItemsControl}">
                         <ScrollViewer Style="{StaticResource CustomScrollViewer}">
                             <ItemsPresenter />
                         </ScrollViewer>
@@ -775,16 +909,17 @@
                         <!--Image Btn-->
                         <Button
                             Grid.Column="0" Grid.Row="2"
-                            Margin="0"
+                            Margin="10"
                             Foreground="#FF6E6E6E"
-                            Style="{DynamicResource ImageButtonStyle}" 
+                            Style="{DynamicResource ImageButtonStyle}"
                             Command="{Binding SaveImageCommand, Source={StaticResource BoardViewModel}}"
-                            CommandParameter="{Binding ElementName=canvas}"/>
+                            CommandParameter="{Binding ElementName=canvas}" />
 
-                        <!--Open slide btn--><!--
+                        <!--Open slide btn-->
+                        <!--
                         <Button
                             Grid.Column="1" Grid.Row="2"
-                            Margin="0"
+                            Margin="10"
                             Foreground="#FF6E6E6E"
                             Style="{DynamicResource PresentationButtonStyle}"
                             Command="{Binding OpenPresentationCommand, Source={StaticResource BoardViewModel}}" />-->
@@ -796,16 +931,18 @@
                             <Button
                                 x:Name="btnLeftSlide"
                                 Foreground="#FF6E6E6E"
+                                Margin="10"
                                 Style="{DynamicResource LeftArrowButtonStyle}"
                                 Command="{Binding LeftSlideCommand, Source={StaticResource BoardViewModel}}"
-                                CommandParameter="{Binding ElementName=btnLeftSlide}"/>
+                                CommandParameter="{Binding ElementName=btnLeftSlide}" />
 
                             <Button
                                 x:Name="btnRightSlide"
                                 Foreground="#FF6E6E6E"
+                                Margin="10"
                                 Style="{DynamicResource RightArrowButtonStyle}"
                                 Command="{Binding RightSlideCommand, Source={StaticResource BoardViewModel}}"
-                                CommandParameter="{Binding ElementName=btnRightSlide}"/>
+                                CommandParameter="{Binding ElementName=btnRightSlide}" />
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -820,7 +957,7 @@
                          ScrollViewer.VerticalScrollBarVisibility="Visible"
                          SelectedItem="{Binding SelectedTask, Source={StaticResource TaskViewModel}}">
                     <ListBox.ItemContainerStyle>
-                        <Style TargetType="ListBoxItem">
+                        <Style TargetType="{x:Type ListBoxItem}">
                             <Style.Triggers>
                                 <Trigger Property="IsKeyboardFocusWithin" Value="True">
                                     <Setter Property="IsSelected" Value="True" />
@@ -949,13 +1086,8 @@
                         <TextBox x:Name="MessageTxtBox" BorderBrush="Transparent"
                                  TextWrapping="Wrap" AcceptsReturn="false" CaretBrush="#7F000000"
                                  VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="8,2,0,2"
-                                 Style="{StaticResource NormalTxtBox}">
-                            <TextBox.Text>
-                                <Binding Source="{StaticResource ChatViewModel}"
-                                         Path="Message"
-                                         UpdateSourceTrigger="PropertyChanged" />
-
-                            </TextBox.Text>
+                                 Style="{StaticResource NormalTxtBox}"
+                                 Text="{Binding Message, Source={StaticResource ChatViewModel}, UpdateSourceTrigger=PropertyChanged}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="TextChanged">
                                     <i:InvokeCommandAction
@@ -979,20 +1111,20 @@
                     PlacementMode="TopAndAlignCentres" Width="30" Height="30" Margin="14,0,0,0">
                     <StackPanel>
                         <!--Image-->
-                        <!--Foreground="#FF6E6E6E"-->
-                        <Button Margin="8"
-                                Style="{DynamicResource ImageButtonStyle}"
-                                Command="{Binding SendImagePresentationCommand, Source={StaticResource BoardViewModel}}" />
+                        <Button
+                            Command="{Binding SendImagePresentationCommand, Source={StaticResource BoardViewModel}}"
+                            Background="White" BorderBrush="White">
+                            <Button Style="{StaticResource ImageButtonStyle}"
+                                    Command="{Binding SendImagePresentationCommand, Source={StaticResource BoardViewModel}}" />
+                        </Button>
+
 
                         <!--Create task-->
-                        <Button Margin="8"
-                                Style="{DynamicResource CreateTaskButtonStyle}" />
+                        <Button Style="{StaticResource CreateTaskButtonStyle}" />
 
                         <!--Open slide btn-->
-                        <Button
-                            Foreground="#FF6E6E6E"
-                            Style="{DynamicResource PresentationButtonStyle}"
-                            Command="{Binding OpenPresentationCommand, Source={StaticResource BoardViewModel}}" />
+                        <Button Style="{StaticResource PresentationButtonStyle}"
+                                Command="{Binding OpenPresentationCommand, Source={StaticResource BoardViewModel}}" />
 
                     </StackPanel>
                 </materialDesign:PopupBox>
@@ -1007,24 +1139,20 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="50" />
-                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="40" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Orientation="Horizontal">
                     <!--Pic-->
-                    <Grid Grid.Column="1" Margin="6" SnapsToDevicePixels="True">
-                        <Grid.OpacityMask>
-                            <VisualBrush Visual="{Binding ElementName=ClipEllipse}" />
-                        </Grid.OpacityMask>
-                        <Ellipse x:Name="ClipEllipse" Fill="White" />
-                        <materialDesign:PackIcon Kind="AccountCircle" SnapsToDevicePixels="True" Width="Auto"
-                                                 Height="Auto"
-                                                 Margin="4,-4,-4,-4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                    <Grid Margin="6" SnapsToDevicePixels="True">
+                        <materialDesign:PackIcon Kind="AccountCircle" SnapsToDevicePixels="True" Width="40"
+                                                 Height="40"
+                                                 Margin="4,-4,-4,-4" HorizontalAlignment="Stretch"
+                                                 VerticalAlignment="Stretch" />
                         <Image
-                            Source="{Binding Photo, Converter={StaticResource ByteBmpSrcConverter},
-                            TargetNullValue={StaticResource BlankImage}}"
+                            Source="{Binding Photo, Converter={StaticResource ByteBmpSrcConverter}, TargetNullValue={StaticResource BlankImage}}"
                             Stretch="UniformToFill"
                             Margin="10,10,10,10" />
                     </Grid>
@@ -1041,20 +1169,17 @@
                     <Ellipse VerticalAlignment="Center" HorizontalAlignment="Center"
                              Width="8" Height="8">
                         <Ellipse.Style>
-                            <Style TargetType="Ellipse">
+                            <Style TargetType="{x:Type Ellipse}">
                                 <Setter Property="Fill" Value="#F44336" />
                                 <Style.Triggers>
                                     <MultiDataTrigger>
                                         <MultiDataTrigger.Conditions>
                                             <Condition
-                                                Binding="{Binding DataContext.IsConnected, 
-                                                RelativeSource={RelativeSource FindAncestor, AncestorType=UserControl}}"
+                                                Binding="{Binding DataContext.IsConnected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}"
                                                 Value="True" />
                                             <Condition Binding="{Binding IsLoggedIn}" Value="True" />
                                         </MultiDataTrigger.Conditions>
-                                        <MultiDataTrigger.Setters>
-                                            <Setter Property="Fill" Value="#64DD17" />
-                                        </MultiDataTrigger.Setters>
+                                        <Setter Property="Fill" Value="#64DD17" />
                                     </MultiDataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -1062,23 +1187,23 @@
                     </Ellipse>
                 </StackPanel>
 
-                <Button x:Name="TaskButton" Grid.Column="1" Margin="10"
+                <Button x:Name="TaskButton" Grid.Column="1"
                         Style="{DynamicResource TaskButtonStyle}"
                         Command="{Binding CreateTaskCommand, Source={StaticResource TaskViewModel}}" />
 
-                <Button x:Name="VoiceCallButton" Grid.Column="2" Margin="10"
+                <Button x:Name="VoiceCallButton" Grid.Column="2"
                         Style="{DynamicResource VoiceCallButtonStyle}"
-                        Command="{Binding ShowVoiceCallCommand, Source={StaticResource CallingViewModel}}"/>
+                        Command="{Binding ShowVoiceCallCommand, Source={StaticResource CallingViewModel}}" />
 
                 <!--<Button x:Name="VideoCallButton" Grid.Column="2" Margin="10"
                         Style="{DynamicResource VideoCallButtonStyle}"/>-->
 
-                <Button x:Name="PresentationButton" Grid.Column="3" Margin="10"
-                        Style="{DynamicResource PresentationButtonStyle}" 
+                <Button x:Name="PresentationButton" Grid.Column="3"
+                        Style="{DynamicResource PresentationButtonStyle}"
                         Command="{Binding ShowPresenationCommand, Source={StaticResource BoardViewModel}}"
-                        CommandParameter="{Binding ElementName=PresentationBorder}"/>
+                        CommandParameter="{Binding ElementName=PresentationBorder}" />
 
-                <Button x:Name="AddMemberButton" Grid.Column="4" Margin="10"
+                <Button x:Name="AddMemberButton" Grid.Column="4"
                         Style="{DynamicResource AddMemberButtonStyle}" />
             </Grid>
         </Border>

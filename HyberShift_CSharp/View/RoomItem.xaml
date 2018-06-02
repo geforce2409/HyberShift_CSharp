@@ -26,26 +26,26 @@
             </Border>
         </DataTemplate>-->
     </UserControl.Resources>
+
     <Grid>
-       
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
+
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
             <RowDefinition Height="10" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-        <materialDesign:PackIcon Grid.Column="0" Grid.Row="0" Kind="Roomba" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+
+        <Separator Foreground="White" Grid.Column="1" Grid.Row="0"/>
+
+        <materialDesign:PackIcon Grid.Column="0" Grid.Row="1" Kind="Roomba" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
                                  Margin="5,5,5,5" Foreground="{StaticResource AccentBrush}"/>
         <TextBlock Grid.Column="1" Grid.Row="0" Style="{DynamicResource MaterialDesignBody2TextBlock}" Foreground="White"
                    HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Name}"/>
 
-        <Separator Foreground="White" Grid.Column="1" Grid.Row="1"/>
-
-        <materialDesign:PackIcon Grid.Column="0" Grid.Row="2" Kind="AccountMultiple" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
-                                 Margin="5,5,5,5" Foreground="{StaticResource AccentBrush}"/>
         <TextBlock Grid.Column="1" Grid.Row="2" TextWrapping="WrapWithOverflow" Style="{DynamicResource MaterialDesignBody1TextBlock}" 
                    HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding ListMembers}" Foreground="#FFC0BCBC"/>
     </Grid>
