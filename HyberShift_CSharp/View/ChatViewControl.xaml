@@ -17,6 +17,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Slider.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <viewModel:ListRoomViewModel x:Key="ListRoomViewModel" />
@@ -901,9 +902,8 @@
                             Grid.Column="3" Grid.Row="0"
                             Minimum="0"
                             Maximum="100"
-                            Style="{StaticResource MaterialDesignDiscreteSlider}"
                             Value="{Binding Thickness, Source={StaticResource BoardViewModel}}"
-                            Width="100" Padding="0,-2,0,0" HorizontalAlignment="Center" Margin="0,0,0,8" />
+                            Width="100" HorizontalAlignment="Center" Margin="8" />
 
                         <!--Image Btn-->
                         <Button
