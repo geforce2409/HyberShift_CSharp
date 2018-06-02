@@ -55,7 +55,7 @@
                    Foreground="Black" FontSize="16"
                    HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding Name}"/>
 
-        <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="WrapWithOverflow" Style="{DynamicResource MaterialDesignBody1TextBlock}" 
+        <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Style="{DynamicResource MaterialDesignBody1TextBlock}" 
                    HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding ListMembers}"
                    Foreground="Black" FontSize="10"
                    Margin="0,4,0,0"/>

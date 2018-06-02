@@ -212,16 +212,18 @@ namespace HyberShift_CSharp.ViewModel
             thread.Start();
         }
 
-        public void ShowPresenation(Border border)
+        public void ShowPresenation(Border border)//, GridSplitter gridSplitter)
         {
-            if (border.Visibility == Visibility.Collapsed && flagShowPresentation == 0)
+            if (flagShowPresentation == 0)
             {
                 border.Visibility = Visibility.Visible;
+                //gridSplitter.Visibility = Visibility.Visible;
                 flagShowPresentation = 1;
             }
-            else if (border.Visibility == Visibility.Visible && flagShowPresentation == 1)
+            else if (flagShowPresentation == 1)
             {
                 border.Visibility = Visibility.Collapsed;
+                //gridSplitter.Visibility = Visibility.Visible;
                 flagShowPresentation = 0;
             }
         }
@@ -229,6 +231,10 @@ namespace HyberShift_CSharp.ViewModel
         public void SendImagePresentation()
         {
             string path = dialogService.OpenFile("Choose image file", "Image (.png ,.jpg)|*.png;*.jpg");
+
+            if (path == "")
+                return;
+
             string encodstring = ImageUtils.CopyImageToBase64String(Image.FromFile(path));
             base64Slide.Clear();
 

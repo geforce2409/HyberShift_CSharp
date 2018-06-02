@@ -61,8 +61,8 @@ namespace HyberShift_CSharp.ViewModel
 
         public void ShowVoiceCall()
         {
-            //if (flagShowVoiceCall == 0)
-            //{
+            if (flagShowVoiceCall == 0)
+            {
                 //check if user has chosen room
                 if (currentRoom.ID == null)
                 {
@@ -79,14 +79,14 @@ namespace HyberShift_CSharp.ViewModel
                 data.Add("room_id", currentRoom.ID);
                 data.Add("room", JObject.FromObject(currentRoom));
                 socket.Emit("new_call", data);
-            //}
-            //else
-            //{
-            //    foreach (Window window in Application.Current.Windows)
-            //        if (window.Title == "CallingWindow")
-            //            window.Close();
-            //    flagShowVoiceCall = 0;
-            //}
+            }
+            else
+            {
+                foreach (Window window in Application.Current.Windows)
+                    if (window.Title == "CallingWindow")
+                        window.Close();
+                flagShowVoiceCall = 0;
+            }
         }
 
         public void OnRoomChange(RoomModel room)

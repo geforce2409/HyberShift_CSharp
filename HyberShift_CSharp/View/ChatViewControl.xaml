@@ -21,7 +21,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <viewModel:ListRoomViewModel x:Key="ListRoomViewModel" />
-            <viewModel:RoomViewModel x:Key="RoomViewModel" />
+            <viewModel:CreateRoomViewModel x:Key="CreateRoomViewModel" />
             <viewModel:ChatViewModel x:Key="ChatViewModel" />
             <viewModel:BoardViewModel x:Key="BoardViewModel" />
             <viewModel:TaskViewModel x:Key="TaskViewModel" />
@@ -709,7 +709,9 @@
                             </Grid>
                         </Border>
 
-                        <Button Grid.Row="1" Grid.Column="1" Style="{StaticResource AddRoomButtonStyle}" FontFamily="Segoe UI Light" />
+                        <Button Grid.Row="1" Grid.Column="1" 
+                                Style="{StaticResource AddRoomButtonStyle}" FontFamily="Segoe UI Light" 
+                                Command="{Binding ShowCreateRoomCommand, Source={StaticResource CreateRoomViewModel}}" />
                     </Grid>
                 </StackPanel>
             </Border>
@@ -810,7 +812,7 @@
                 </ItemsControl.Template>
             </ItemsControl>
 
-            <GridSplitter Grid.Column="1"
+            <GridSplitter Grid.Column="1" Name="SplitterChatPresentation"
                           HorizontalAlignment="Center"
                           VerticalAlignment="Stretch"
                           Background="Black"
@@ -1086,7 +1088,8 @@
                             <ColumnDefinition Width="40" />
                         </Grid.ColumnDefinitions>
                         <!--Text-->
-                        <TextBox x:Name="MessageTxtBox" BorderBrush="Transparent"
+                        <TextBox x:Name="MessageTxtBox" BorderBrush="Transparent" 
+                                 materialDesign:HintAssist.Hint="Message"
                                  TextWrapping="Wrap" AcceptsReturn="false" CaretBrush="#7F000000"
                                  VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="8,2,0,2"
                                  Style="{StaticResource NormalTxtBox}"
