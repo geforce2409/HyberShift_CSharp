@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HyberShift_CSharp.View.Calling"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="800">
@@ -14,14 +15,20 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <i:InvokeCommandAction Command="{Binding LoadCommand}"/>
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+
         <Button Grid.Column="0" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Content="{materialDesign:PackIcon Kind=VolumeMute, Size=40}"
-                Background="{StaticResource AccentBrush}" Width="80" Height="80" Foreground="White"/>
+                Background="{StaticResource AccentBrush}" Width="80" Height="80" Foreground="White" Command="{Binding MuteCommand}"/>
 
         <TextBlock Grid.Column="1" Style="{DynamicResource MaterialDesignDisplay1TextBlock}" 
                    HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Timestamp}"
                    Margin="10"/>
 
         <Button Grid.Column="2" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Content="{materialDesign:PackIcon Kind=PhoneHangup, Size=40}"
-                Background="{StaticResource PrimaryBrush}" Width="80" Height="80" Foreground="White"/>
+                Background="{StaticResource PrimaryBrush}" Width="80" Height="80" Foreground="White" Command="{Binding HangupCommand}"/>
     </Grid>
 </UserControl>

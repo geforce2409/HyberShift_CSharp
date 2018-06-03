@@ -9,6 +9,7 @@ using System.Media;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Threading;
 
 namespace HyberShift_CSharp.Utilities
@@ -71,23 +72,26 @@ namespace HyberShift_CSharp.Utilities
 
         private void Recordwav()
         {
-            sourceStream = new WaveIn();
-            int devicenum = 0;
+           
+                sourceStream = new WaveIn();
+                int devicenum = 0;
 
-            for (int i = 0; i < NAudio.Wave.WaveIn.DeviceCount; i++)
-            {
-                if (NAudio.Wave.WaveIn.GetCapabilities(i).ProductName.Contains("icrophone"))
-                    devicenum = i;
-            }
-            sourceStream.DeviceNumber = devicenum;
-            sourceStream.WaveFormat = new WaveFormat(22000, WaveIn.GetCapabilities(devicenum).Channels);
-            sourceStream.DataAvailable += new EventHandler<WaveInEventArgs>(sourceStreamDataAvailable);
+                for (int i = 0; i < NAudio.Wave.WaveIn.DeviceCount; i++)
+                {
+                    if (NAudio.Wave.WaveIn.GetCapabilities(i).ProductName.Contains("icrophone"))
+                        devicenum = i;
+                }
+                sourceStream.DeviceNumber = devicenum;
+                sourceStream.WaveFormat = new WaveFormat(22000, WaveIn.GetCapabilities(devicenum).Channels);
+                sourceStream.DataAvailable += new EventHandler<WaveInEventArgs>(sourceStreamDataAvailable);
 
-            waveWriter = new WaveFileWriter(path, sourceStream.WaveFormat);
+                waveWriter = new WaveFileWriter(path, sourceStream.WaveFormat);
 
-            sourceStream.StartRecording();
+                sourceStream.StartRecording();
 
-            timer.Start();
+                timer.Start();
+           
+            
         }
 
         private void sourceStreamDataAvailable(object sender, WaveInEventArgs e)
@@ -110,7 +114,10 @@ namespace HyberShift_CSharp.Utilities
             dataArray = File.ReadAllBytes(path);
             // TO-DO: add JSONObject here
             if (id == null)
-                socket.Emit("stream_audio", dataArray);
+            {
+                //socket.Emit("stream_audio", dataArray);
+                Debug.LogOutput(" stream audio: room id is null");
+            }
             else
             {
                 JObject audio = new JObject();
@@ -152,9 +159,11 @@ namespace HyberShift_CSharp.Utilities
 
         private void HandleReceive()
         {
-            socket.On("stream_audio", (data) =>
+            socket.On("stream_audio", (arg) =>
             {
-                Stream stream = new MemoryStream((byte[])data);
+                JObject json = (JObject)arg;
+                byte[] data = (byte[])json.GetValue("content");
+                Stream stream = new MemoryStream(data);
                 SoundPlayer sp = new SoundPlayer(stream);
                 sp.Play();
             });

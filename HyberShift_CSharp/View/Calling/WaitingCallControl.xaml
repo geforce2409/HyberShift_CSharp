@@ -15,8 +15,8 @@
         </Grid.ColumnDefinitions>
 
         <Button Grid.Column="0" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Content="{materialDesign:PackIcon Kind=Phone, Size=40}"
-                Background="#62a8e1" Width="80" Height="80" Foreground="White"/>
+                Background="#62a8e1" Width="80" Height="80" Foreground="White" Command="{Binding AcceptCommand}"/>
         <Button Grid.Column="2" Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Content="{materialDesign:PackIcon Kind=PhoneHangup, Size=40}"
-                Background="#c20144" Width="80" Height="80" Foreground="White"/>
+                Background="#c20144" Width="80" Height="80" Foreground="White" Command="{Binding HangupCommand}"/>
     </Grid>
 </UserControl>

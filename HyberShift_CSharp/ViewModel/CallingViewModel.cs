@@ -24,15 +24,31 @@ namespace HyberShift_CSharp.ViewModel
         private object selectedViewModel;
         private RoomModel currentRoom;
         private CallingModel callingModel;
+
         public DelegateCommand ShowVoiceCallCommand { get; set; }
         public DelegateCommand<RoomModel> RoomChangeCommand { get; set; }
+        public RoomModel CurrentRoom
+        {
+            get { return currentRoom; }
+            set
+            {
+                currentRoom = value;
+                NotifyChanged("CurrentRoom");
+                NotifyChanged("RoomName");
+                SelectedViewModel = new WaitingCallViewModel(ViewModelNavigator, currentRoom);
+            }
+        }
+        public string RoomName
+        {
+            get { return currentRoom.Name; }
+        }
         public CallingViewModel()
         {
             socket = SocketAPI.GetInstance().GetSocket();
             currentRoom = new RoomModel();
-            callingModel = new CallingModel(currentRoom);
+            callingModel = CallingModel.GetInstace(currentRoom);
             RoomChangeCommand = new DelegateCommand<RoomModel>(OnRoomChange);
-            SelectedViewModel = new MakingCallViewModel(ViewModelNavigator, null);
+           
             ShowVoiceCallCommand = new DelegateCommand(ShowVoiceCall);
 
             HandleSocket();
@@ -71,7 +87,7 @@ namespace HyberShift_CSharp.ViewModel
                 }
                 CallingWindow callingWindow = new CallingWindow(currentRoom);
                 callingWindow.Show();
-                flagShowVoiceCall = 1;
+            flagShowVoiceCall = 1;
 
                 //emit to server
                 JObject data = new JObject();
@@ -91,6 +107,7 @@ namespace HyberShift_CSharp.ViewModel
         public void OnRoomChange(RoomModel room)
         {
             currentRoom = room;
+            callingModel.Room = room;
         }
 
         private void HandleSocket()
@@ -106,12 +123,21 @@ namespace HyberShift_CSharp.ViewModel
                     JObject data = (JObject)arg;
                     string roomId = data.GetValue("room_id").ToString();
                     RoomModel room = data.GetValue("room").ToObject<RoomModel>();
-                    CallingWindow callingWindow = new CallingWindow(room);
+                    callingModel.State = Model.Enum.CallingState.BUSY;
 
-                    callingWindow.Show();
+                    ReceiveCallWindow receiveCallWindow = new ReceiveCallWindow(room);
+                    receiveCallWindow.Show();
                 });
-                
+
             });
+
+            //socket.On("accept_call", (arg) =>
+            //{
+            //    Application.Current.Dispatcher.Invoke((Action)delegate
+            //    {
+            //        callingModel.SendVoice();
+            //    });
+            //});
         }
     }
 }

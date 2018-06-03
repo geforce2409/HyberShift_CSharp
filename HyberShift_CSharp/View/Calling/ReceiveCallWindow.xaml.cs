@@ -17,19 +17,18 @@ using System.Windows.Shapes;
 namespace HyberShift_CSharp.View.Calling
 {
     /// <summary>
-    /// Interaction logic for CallingWindow.xaml
+    /// Interaction logic for ReceiveCallWindow.xaml
     /// </summary>
-    public partial class CallingWindow : Window
+    public partial class ReceiveCallWindow : Window
     {
-        public CallingWindow()
+        public ReceiveCallWindow()
         {
             InitializeComponent();
         }
 
-        public CallingWindow(RoomModel room): this()
+        public ReceiveCallWindow(RoomModel room): this()
         {
-            ((CallingViewModel)DataContext).CurrentRoom = room;
-            ((CallingViewModel)DataContext).SelectedViewModel = new MakingCallViewModel(((CallingViewModel)DataContext).ViewModelNavigator, room);
+            ((CallingViewModel)DataContext).CurrentRoom = room;     
         }
     }
 }

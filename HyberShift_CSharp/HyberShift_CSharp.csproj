@@ -198,6 +198,9 @@
     <Compile Include="View\Calling\OnGoingCallControl.xaml.cs">
       <DependentUpon>OnGoingCallControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Calling\ReceiveCallWindow.xaml.cs">
+      <DependentUpon>ReceiveCallWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Calling\WaitingCallControl.xaml.cs">
       <DependentUpon>WaitingCallControl.xaml</DependentUpon>
     </Compile>
@@ -256,6 +259,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Calling\OnGoingCallControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Calling\ReceiveCallWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

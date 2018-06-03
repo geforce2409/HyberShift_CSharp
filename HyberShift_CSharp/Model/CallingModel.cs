@@ -10,13 +10,29 @@ namespace HyberShift_CSharp.Model
 {
     public class CallingModel
     {
+        private static CallingModel instance = null;
         public CallingState State { get; set; }
         public RoomModel Room { get; set; }
         private VoiceAPI voiceAPI;
 
+        public static CallingModel GetInstace()
+        {
+            if (instance == null)
+                instance = new CallingModel();
+            return instance;
+        }
+
+        public static CallingModel GetInstace(RoomModel room)
+        {
+            if (instance == null)
+                instance = new CallingModel(room);
+            instance.Room = room;
+            return instance;
+        }
+
         public CallingModel()
         {
-            State = CallingState.FREE;
+            //State = CallingState.FREE;
             Room = new RoomModel();
             voiceAPI = VoiceAPI.GetInstance();
            
