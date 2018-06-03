@@ -11,7 +11,7 @@
                          mc:Ignorable="d"
                          Title="MainWindow" Height="584" Width="720"
                          WindowStartupLocation="CenterScreen"
-                         TintColor="#10FFFFFF"
+                         TintColor="#FFFFFF"
                          TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                          TextElement.FontWeight="Regular"
                          TextElement.FontSize="12"

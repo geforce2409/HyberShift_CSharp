@@ -8,7 +8,7 @@
       xmlns:domain="clr-namespace:HyberShift_CSharp.Domain"
       xmlns:viewModel="clr-namespace:HyberShift_CSharp.ViewModel"
       mc:Ignorable="d"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="300" d:DesignWidth="600"
       Title="CreateRoom"
       TextElement.Foreground="{DynamicResource MaterialDesignBody}"
       TextElement.FontWeight="Regular"
@@ -62,7 +62,7 @@
         <TextBox
             x:Name="EmailTextBox"
             Grid.Row="2" Grid.Column="1" Margin="8,16,11,16"
-            materialDesign:HintAssist.Hint="Email of Members"
+            materialDesign:HintAssist.Hint="Email of Members (Ex: a@gmail.com, b@gmail.com"
             Style="{StaticResource MaterialDesignFloatingHintTextBox}">
             <TextBox.Text>
                 <Binding Source="{StaticResource CreateRoomViewModel}"

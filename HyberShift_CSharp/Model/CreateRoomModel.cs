@@ -106,8 +106,6 @@ namespace HyberShift_CSharp.Model
                     //}
                     Application.Current.Dispatcher.Invoke((Action)delegate {
                         // your code
-                        MainWindow mainWindow = new MainWindow();
-                        mainWindow.Show();
                         CloseWindowManager.CloseCreateRoomWindow();
                         return;
                     });
