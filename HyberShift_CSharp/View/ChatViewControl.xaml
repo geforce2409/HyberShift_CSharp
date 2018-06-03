@@ -825,7 +825,7 @@
                     Grid.Column="2"
                     VerticalAlignment="Stretch"
                     HorizontalAlignment="Stretch"
-                    Width="600"
+                    Width="520"
                     Visibility="Collapsed">
                 <Grid>
                     <Grid>
