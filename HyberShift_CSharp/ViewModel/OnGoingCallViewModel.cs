@@ -33,14 +33,16 @@ namespace HyberShift_CSharp.ViewModel
             currentRoom = (RoomModel)parameters[0];
             callingModel = CallingModel.GetInstace(currentRoom);
 
-            // start the call
-            callingModel.SendVoice();
+            
             
         }
 
         private void Mute()
         {
+            Debug.LogOutput("Mute button clicked");
 
+            // start the call
+            callingModel.SendVoice();
         }
 
         private void Exit()

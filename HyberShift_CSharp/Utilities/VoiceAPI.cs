@@ -161,6 +161,7 @@ namespace HyberShift_CSharp.Utilities
         {
             socket.On("stream_audio", (arg) =>
             {
+                Debug.LogOutput("recived audio");
                 JObject json = (JObject)arg;
                 byte[] data = (byte[])json.GetValue("content");
                 Stream stream = new MemoryStream(data);

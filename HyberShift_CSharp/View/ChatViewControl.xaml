@@ -1193,13 +1193,13 @@
                     </Ellipse>
                 </StackPanel>
 
-                <Button x:Name="TaskButton" Grid.Column="1"
+                <Button x:Name="TaskButton" Grid.Column="2"
                         Style="{DynamicResource TaskButtonStyle}"
                         Command="{Binding CreateTaskCommand, Source={StaticResource TaskViewModel}}" />
 
-                <Button x:Name="VoiceCallButton" Grid.Column="2"
+                <!--<Button x:Name="VoiceCallButton" Grid.Column="2"
                         Style="{DynamicResource VoiceCallButtonStyle}"
-                        Command="{Binding ShowVoiceCallCommand, Source={StaticResource CallingViewModel}}" />
+                        Command="{Binding ShowVoiceCallCommand, Source={StaticResource CallingViewModel}}" />-->
 
                 <!--<Button x:Name="VideoCallButton" Grid.Column="2" Margin="10"
                         Style="{DynamicResource VideoCallButtonStyle}"/>-->
