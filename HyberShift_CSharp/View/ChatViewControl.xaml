@@ -70,6 +70,7 @@
             <Style x:Key="ImageButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
                 <Setter Property="Background" Value="White" />
                 <Setter Property="BorderBrush" Value="White" />
+                <Setter Property="Padding" Value="10" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -78,7 +79,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="10" Width="Auto" Height="Auto" />
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -108,7 +109,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="10" Width="Auto" Height="Auto" />
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -129,6 +130,7 @@
             </Style>
 
             <Style x:Key="VoiceCallButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+                <Setter Property="Padding" Value="10" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -137,7 +139,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="10" Width="Auto" Height="Auto" />
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -158,6 +160,7 @@
             </Style>
 
             <Style x:Key="TaskButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+                <Setter Property="Padding" Value="10" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -167,7 +170,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="10" Width="Auto" Height="Auto" />
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -188,6 +191,7 @@
             </Style>
 
             <Style x:Key="VideoCallButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+                <Setter Property="Padding" Value="10" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -196,7 +200,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="10" Width="Auto" Height="Auto" />
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -226,7 +230,37 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="10" Width="Auto" Height="Auto" />
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" TargetName="PhotoIcon"
+                                            Value="{DynamicResource PrimaryHueMidBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter Property="Foreground" TargetName="PhotoIcon"
+                                            Value="{DynamicResource PrimaryHueMidBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.23" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="ClearButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Grid>
+                                <materialDesign:PackIcon Name="PhotoIcon" Kind="Refresh"
+                                                         SnapsToDevicePixels="True"
+                                                         Foreground="{TemplateBinding Foreground}"
+                                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -247,6 +281,7 @@
             </Style>
 
             <Style x:Key="AddMemberButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+                <Setter Property="Padding" Value="10" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -255,7 +290,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="10" Width="Auto" Height="Auto" />
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -276,6 +311,7 @@
             </Style>
 
             <Style x:Key="SettingsButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+                <Setter Property="Padding" Value="10" />
                 <Setter Property="Foreground" Value="Black" />
                 <Setter Property="ContextMenu">
                     <Setter.Value>
@@ -296,7 +332,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="10" Width="20" Height="20" />
+                                                         Margin="{TemplateBinding Padding}" Width="20" Height="20" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -332,6 +368,7 @@
 
             <Style x:Key="AddRoomButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
                 <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Padding" Value="9,10,11,10" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -340,7 +377,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Margin="9,10,11,10" Width="Auto" Height="Auto" />
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -360,7 +397,7 @@
                 </Setter>
             </Style>
 
-            <Style x:Key="ProfileButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+            <!--<Style x:Key="ProfileButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
                 <Setter Property="Foreground" Value="Black" />
                 <Setter Property="Template">
                     <Setter.Value>
@@ -371,7 +408,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Width="Auto" Height="Auto" />
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
 
                                 <Image
                                     Source="{Binding Photo, Converter={StaticResource ByteBmpSrcConverter}, TargetNullValue={StaticResource BlankImage}}"
@@ -381,7 +418,7 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
-            </Style>
+            </Style>-->
 
             <!--<Style x:Key="CreateTaskButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
             <Setter Property="Template">
@@ -419,7 +456,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Width="Auto" Height="Auto" />
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -448,7 +485,7 @@
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                         Width="Auto" Height="Auto" />
+                                                         Margin="{TemplateBinding Padding}" Width="Auto" Height="Auto" />
                             </Grid>
                             <ControlTemplate.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
@@ -725,9 +762,7 @@
                                        HorizontalAlignment="Center" VerticalAlignment="Center"
                                        Margin="8,5,0,5" Text="{Binding UserName, Source={StaticResource ChatViewModel}}"/>
                         </StackPanel>
-                        
-                        
-
+                       
                         <!--Settings-->
                         <Button Grid.Row="0" Grid.Column="1" 
                                 Style="{StaticResource SettingsButtonStyle}" HorizontalAlignment="Right" 
@@ -885,7 +920,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="30" />
                             <RowDefinition />
-                            <RowDefinition Height="30" />
+                            <RowDefinition Height="25" />
                         </Grid.RowDefinitions>
 
                         <!--<Image
@@ -956,7 +991,7 @@
 
                         <!--Image Btn-->
                         <Button
-                            Grid.Column="0" Grid.Row="2"
+                            Grid.Column="0" Grid.Row="2" Padding="0"
                             Foreground="#FF6E6E6E"
                             Style="{DynamicResource ImageButtonStyle}"
                             Command="{Binding SaveImageCommand, Source={StaticResource BoardViewModel}}"
@@ -967,13 +1002,14 @@
                         <Button
                             Grid.Column="1" Grid.Row="2"
                             Foreground="#FF6E6E6E"
-                            Style="{DynamicResource PresentationButtonStyle}"
+                            Style="{DynamicResource ClearButtonStyle}"
                             Command="{Binding ClearBoardCommand, Source={StaticResource BoardViewModel}}" />
 
                         <StackPanel
                             Grid.Column="1" Grid.Row="2"
                             Grid.ColumnSpan="3"
-                            Orientation="Horizontal" HorizontalAlignment="Center" utilities:MarginSetter.Margin="8">
+                            Orientation="Horizontal" HorizontalAlignment="Center" utilities:MarginSetter.Margin="0">
+
                             <Button
                                 x:Name="btnLeftSlide"
                                 Foreground="#FF6E6E6E"
