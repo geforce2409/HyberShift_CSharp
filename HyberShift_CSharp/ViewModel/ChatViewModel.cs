@@ -13,6 +13,8 @@ using System.Windows;
 using Newtonsoft.Json;
 using Prism.Commands;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using Image = System.Drawing.Image;
 
 namespace HyberShift_CSharp.ViewModel
 {
@@ -91,6 +93,16 @@ namespace HyberShift_CSharp.ViewModel
             // Implement this means user can change the room's name,
             // need to emit when setting and handle on server (not implement on server yet)
             // ...
+        }
+        public BitmapImage Photo
+        {
+            get
+            {
+                if (userInfo.AvatarRef == "null")
+                    return null;
+                else return ImageUtils.Base64StringToBitmapSource(userInfo.AvatarRef);
+            }
+            set { Photo = ImageUtils.Base64StringToBitmapSource(userInfo.AvatarRef); NotifyChanged("Photo");}
         }
 
         public string Members // Display room's members

@@ -1157,10 +1157,18 @@
                                                  Height="40"
                                                  Margin="4,-4,-4,-4" HorizontalAlignment="Stretch"
                                                  VerticalAlignment="Stretch" />
-                        <Image
+
+                        <Canvas x:Name="Photo" Height="60" Width="60">
+                            <Canvas.Background>
+                                <ImageBrush
+                                        ImageSource="{Binding Photo, Source={StaticResource ChatViewModel}}"/>
+                            </Canvas.Background>
+                        </Canvas>
+
+                        <!--<Image
                             Source="{Binding Photo, Converter={StaticResource ByteBmpSrcConverter}, TargetNullValue={StaticResource BlankImage}}"
                             Stretch="UniformToFill"
-                            Margin="10,10,10,10" />
+                            Margin="10,10,10,10" />-->
                     </Grid>
 
                     <!--Name-->

@@ -115,46 +115,14 @@ namespace HyberShift_CSharp.Model
                         MainWindow mainWindow = new MainWindow();
                         mainWindow.Show();
 
-                        //CreateRoom a = new CreateRoom();
-                        //a.Show();
-
                         CloseWindowManager.CloseLoginWindow();
                     });
-                    return;
                 }
                 else
                 {
                     Debug.Log("Authentication failed");
                 }
-            }); //.On("room_created", args =>
-            //{
-            //    var data = (JObject) args;
-            //    try
-            //    {
-            //        string roomId = data.GetValue("room_id").ToString();
-            //        string roomName = data.GetValue("room_name").ToString();
-            //        JArray listjson = (JArray) data.GetValue("members");
-
-            //        ObservableCollection<string> members = new ObservableCollection<string>();
-            //        for (int i = 0; i < listjson.Count; i++)
-            //            members.Add(listjson.ElementAt(i).ToString());
-
-            //        listRoomModel.List.Add(new RoomModel(roomId, roomName, members));
-
-            //        //test
-            //        Debug.LogOutput("LoginModel 'Name of rooms' >> ");
-            //        foreach (string name in listRoomModel.NameList)
-            //        {
-            //            Debug.LogOutput(name);
-            //        }
-            //        //Debug.Log("LoginModel >> " + listRoomModel.NameList);
-            //        //Debug.LogOutput("LoginModel >> " + listRoomModel.NameList);
-            //    }
-            //    catch (JsonException e)
-            //    {
-            //        Debug.Log(e.ToString());
-            //    }
-            //});
+            }); 
         }
     }
 }
