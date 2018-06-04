@@ -17,7 +17,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary
                     Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.PopupBox.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Slider.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Slider.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <viewModel:ListRoomViewModel x:Key="ListRoomViewModel" />
@@ -276,6 +277,17 @@
 
             <Style x:Key="SettingsButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
                 <Setter Property="Foreground" Value="Black" />
+                <Setter Property="ContextMenu">
+                    <Setter.Value>
+                        <ContextMenu>
+                            <MenuItem
+                                Header="Settings" />
+                            <Separator Margin="8,2" />
+                            <MenuItem
+                                Header="Sign out" />
+                        </ContextMenu>
+                    </Setter.Value>
+                </Setter>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -302,9 +314,24 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+
+                <Style.Triggers>
+                    <EventTrigger RoutedEvent="Click">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <BooleanAnimationUsingKeyFrames Storyboard.TargetProperty="ContextMenu.IsOpen">
+                                        <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="True"/>
+                                    </BooleanAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Style.Triggers>
             </Style>
 
-            <Style x:Key="AddRoomButtonStyle" TargetType="Button" BasedOn="{StaticResource SettingsButtonStyle}">
+            <Style x:Key="AddRoomButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+                <Setter Property="Foreground" Value="Black" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -333,12 +360,14 @@
                 </Setter>
             </Style>
 
-            <Style x:Key="ProfileButtonStyle" TargetType="Button" BasedOn="{StaticResource SettingsButtonStyle}">
+            <Style x:Key="ProfileButtonStyle" TargetType="Button" BasedOn="{StaticResource SendButtonStyle}">
+                <Setter Property="Foreground" Value="Black" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
                             <Grid>
-                                <materialDesign:PackIcon Name="PhotoIcon" Kind="AccountCircle" SnapsToDevicePixels="True"
+                                <materialDesign:PackIcon Name="PhotoIcon" Kind="AccountCircle"
+                                                         SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -670,7 +699,7 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
-                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40" />
                         </Grid.ColumnDefinitions>
 
                         <Grid.RowDefinitions>
@@ -679,15 +708,23 @@
                         </Grid.RowDefinitions>
 
                         <!--Profile-->
-                        <Button x:Name="ProfileButton"
-                                Style="{StaticResource ProfileButtonStyle}" Width="30" Height="30" Margin="8,5,0,5" HorizontalAlignment="Left" />
+                        <Grid HorizontalAlignment="Left" Height="34">
+                            <Grid.OpacityMask>
+                                <VisualBrush Visual="{Binding ElementName=ProfileClipEllipse}" />
+                            </Grid.OpacityMask>
+                            <Ellipse x:Name="ProfileClipEllipse" Fill="White" Margin="4,2,-4,2" />
+                            <Button x:Name="ProfileButton"
+                                    Style="{StaticResource ProfileButtonStyle}" Width="30" Height="30" Margin="4,0,-4,0"
+                                    HorizontalAlignment="Left" />
+                        </Grid>
 
                         <!--Settings-->
-                        <Button Grid.Row="0" Grid.Column="1" 
+                        <Button Grid.Row="0" Grid.Column="1"
+                                Name="SettingsButton"
                                 Style="{StaticResource SettingsButtonStyle}" HorizontalAlignment="Right" />
 
                         <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black"
-                                CornerRadius="3" Height="30" BorderThickness="1" Margin="8,0,0,0" >
+                                CornerRadius="3" Height="30" BorderThickness="1" Margin="8,0,0,0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -709,8 +746,8 @@
                             </Grid>
                         </Border>
 
-                        <Button Grid.Row="1" Grid.Column="1" 
-                                Style="{StaticResource AddRoomButtonStyle}" FontFamily="Segoe UI Light" 
+                        <Button Grid.Row="1" Grid.Column="1"
+                                Style="{StaticResource AddRoomButtonStyle}" FontFamily="Segoe UI Light"
                                 Command="{Binding ShowCreateRoomCommand, Source={StaticResource CreateRoomViewModel}}" />
                     </Grid>
                 </StackPanel>
@@ -1088,7 +1125,7 @@
                             <ColumnDefinition Width="40" />
                         </Grid.ColumnDefinitions>
                         <!--Text-->
-                        <TextBox x:Name="MessageTxtBox" BorderBrush="Transparent" 
+                        <TextBox x:Name="MessageTxtBox" BorderBrush="Transparent"
                                  materialDesign:HintAssist.Hint="Message"
                                  TextWrapping="Wrap" AcceptsReturn="false" CaretBrush="#7F000000"
                                  VerticalScrollBarVisibility="Auto" VerticalContentAlignment="Center" Padding="8,2,0,2"
@@ -1132,7 +1169,7 @@
                         <Button Background="White" BorderBrush="White"
                                 Command="{Binding SendImagePresentationCommand, Source={StaticResource BoardViewModel}}">
                             <Button Style="{StaticResource ImageButtonStyle}"
-                                Command="{Binding SendImagePresentationCommand, Source={StaticResource BoardViewModel}}" />
+                                    Command="{Binding SendImagePresentationCommand, Source={StaticResource BoardViewModel}}" />
                         </Button>
                     </StackPanel>
                 </materialDesign:PopupBox>
@@ -1153,6 +1190,10 @@
                 <StackPanel Orientation="Horizontal">
                     <!--Pic-->
                     <Grid Margin="6" SnapsToDevicePixels="True">
+                        <Grid.OpacityMask>
+                            <VisualBrush Visual="{Binding ElementName=ClipEllipse}" />
+                        </Grid.OpacityMask>
+                        <Ellipse x:Name="ClipEllipse" Fill="White" Margin="4,0,-4,0" />
                         <materialDesign:PackIcon Kind="AccountCircle" SnapsToDevicePixels="True" Width="40"
                                                  Height="40"
                                                  Margin="4,-4,-4,-4" HorizontalAlignment="Stretch"
