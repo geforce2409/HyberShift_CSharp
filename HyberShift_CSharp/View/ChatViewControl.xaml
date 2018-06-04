@@ -42,7 +42,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="SendIcon" Kind="Send" SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -74,7 +74,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="Image" SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -103,7 +103,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="ClipboardPlus"
                                                          SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
@@ -134,7 +134,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="Phone" SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -164,7 +164,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="ClipboardCheck"
                                                          SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
@@ -195,7 +195,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="Video" SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -224,7 +224,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="Presentation"
                                                          SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
@@ -254,7 +254,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="Refresh"
                                                          SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
@@ -285,7 +285,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="AccountPlus" SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -328,7 +328,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="Settings" SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -373,7 +373,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="Plus" SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -403,7 +403,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="AccountCircle"
                                                          SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
@@ -425,7 +425,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Grid>
+                        <Grid Background="Transparent">
                             <materialDesign:PackIcon Name="TaskIcon" Kind="Creation" SnapsToDevicePixels="True"
                                                      Foreground="{TemplateBinding Foreground}"
                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -452,7 +452,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="ArrowLeft" SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -481,7 +481,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid>
+                            <Grid Background="Transparent">
                                 <materialDesign:PackIcon Name="PhotoIcon" Kind="ArrowRight" SnapsToDevicePixels="True"
                                                          Foreground="{TemplateBinding Foreground}"
                                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
