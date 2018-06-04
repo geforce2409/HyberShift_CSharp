@@ -320,7 +320,8 @@
                                 Header="Settings" />
                             <Separator Margin="8,2" />
                             <MenuItem
-                                Header="Sign out" />
+                                Header="Sign out"
+                                Command="{Binding SignOutCommand, Source={StaticResource ChatViewModel}}"/>
                         </ContextMenu>
                     </Setter.Value>
                 </Setter>
@@ -765,8 +766,7 @@
                        
                         <!--Settings-->
                         <Button Grid.Row="0" Grid.Column="1" 
-                                Style="{StaticResource SettingsButtonStyle}" HorizontalAlignment="Right" 
-                                Command="{Binding SignOutCommand, Source={StaticResource ChatViewModel}}"/>
+                                Style="{StaticResource SettingsButtonStyle}" HorizontalAlignment="Right" />
 
                         <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black"
                                 CornerRadius="3" Height="30" BorderThickness="1" Margin="8,0,0,0">
