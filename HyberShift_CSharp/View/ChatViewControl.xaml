@@ -836,7 +836,7 @@
                           Background="Black"
                           ShowsPreview="True"
                           Width="5"
-                          Visibility="Collapsed" />
+                          Visibility="Visible" />
 
             <!--Presentation-->
             <Border x:Name="PresentationBorder"
