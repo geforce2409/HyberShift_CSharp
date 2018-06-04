@@ -295,7 +295,7 @@ namespace HyberShift_CSharp.ViewModel
             CanvasBackground = null;
             NotifyChanged("CanvasBackground");
 
-            listPointModel.List = null;
+            listPointModel.List.Clear();
         }
 
         private void HandleSocket()
