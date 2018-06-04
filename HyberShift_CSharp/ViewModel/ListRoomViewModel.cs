@@ -42,13 +42,16 @@ namespace HyberShift_CSharp.ViewModel
         // method
         private void HandleSelectedItem(RoomModel obj)
         {
-            //emit to server to get message
-            socket.Emit("room_change", obj.ID);
+                //emit to server to get message
+                socket.Emit("room_change", obj.ID);
 
-            //clear data in list message
-            ListMessageModel.GetInstance().Clear();
-            // clear list task
-            ListTaskModel.GetInstance().Clear();
+                ListRoomModel.GetInstance().GetFirstObjectByValue("ID", obj.ID).DisplayNewMessage = "Hidden";
+                NotifyChanged("ListRoom");
+
+                //clear data in list message
+                ListMessageModel.GetInstance().Clear();
+                // clear list task
+                ListTaskModel.GetInstance().Clear();           
         }
 
         private void HandleSocket()

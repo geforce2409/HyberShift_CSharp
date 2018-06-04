@@ -42,9 +42,9 @@
                    Foreground="Black" FontSize="10"
                    Margin="0,4,0,0"/>
 
-        <materialDesign:PackIcon Grid.Row="0" Grid.Column="1" Margin="135,10,0,0"
+        <!--<materialDesign:PackIcon Grid.Row="0" Grid.Column="1" Margin="135,10,0,0"
                Kind="MessageAlert" Width="30" Height="30"
-               Visibility="{Binding DisplayNewMessage}"/>
+               Visibility="{Binding DisplayNewMessage}"/>-->
     </Grid>
 
     <!--<Grid>

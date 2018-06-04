@@ -7,6 +7,7 @@ namespace HyberShift_CSharp.Model
         public RoomModel()
         {
             Members = new ObservableCollection<string>();
+            DisplayNewMessage = "Hidden";
             //hasNewMessage = false;
         }
 

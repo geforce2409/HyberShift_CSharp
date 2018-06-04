@@ -218,8 +218,9 @@ namespace HyberShift_CSharp.ViewModel
                     }
                     else
                     {
-                        //currentRoom.DisplayNewMessage = "Visible";
-                        //NotifyChanged(currentRoom.DisplayNewMessage);
+                        // find room has the id
+                        RoomModel roomHasMessage = ListRoomModel.GetInstance().GetFirstObjectByValue("ID", id);
+                        roomHasMessage.DisplayNewMessage = "Visible";
                     }
                 });
             });
