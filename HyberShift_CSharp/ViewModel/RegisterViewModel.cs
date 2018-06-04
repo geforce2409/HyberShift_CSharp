@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using HyberShift_CSharp.Model;
+using HyberShift_CSharp.Model.Interface;
 using HyberShift_CSharp.Utilities;
+using Newtonsoft.Json.Linq;
 using Prism.Commands;
 
 namespace HyberShift_CSharp.ViewModel
@@ -12,12 +16,15 @@ namespace HyberShift_CSharp.ViewModel
     {
         private readonly Action<object> navigate;
         private readonly RegisterModel registerModel;
+        private IDialogService dialogService;
 
         // constructor
         public RegisterViewModel()
         {
             registerModel = new RegisterModel();
             RegisterCommand = new DelegateCommand<object>(Register);
+            OpenImageCommand = new DelegateCommand(OpenImage);
+            dialogService = new DialogService();
         }
 
         public RegisterViewModel(Action<object> navigate) : this()
@@ -28,7 +35,9 @@ namespace HyberShift_CSharp.ViewModel
 
         // getter and setter
         public DelegateCommand NavigateCommand { get; set; }
-
+        public DelegateCommand<object> RegisterCommand { get; set; }
+        public DelegateCommand OpenImageCommand { get; set; }
+        public BitmapImage Avatar { get; set; }
         public string Email
         {
             get => registerModel.Info.Email;
@@ -65,8 +74,6 @@ namespace HyberShift_CSharp.ViewModel
             set => registerModel.Info.AvatarRef = Convert.ToString(value);
         }
 
-        public DelegateCommand<object> RegisterCommand { get; set; }
-
         public void Register(object parameter)
         {
             var passwordContainer = parameter as IHavePassword;
@@ -91,6 +98,20 @@ namespace HyberShift_CSharp.ViewModel
             }
 
             //NotifyChanged("attributeX");  // this will automatically update attributeX  
+        }
+
+        public void OpenImage()
+        {
+            string path = dialogService.OpenFile("Choose image file", "Image (.png ,.jpg)|*.png;*.jpg");
+
+            if (path == "")
+                return;
+
+            string encodstring = ImageUtils.CopyImageToBase64String(Image.FromFile(path));
+            registerModel.Info.AvatarRef = encodstring;
+
+            Avatar = ImageUtils.Base64StringToBitmapSource(encodstring);
+            NotifyChanged("Avatar");
         }
 
         public void Navigate()

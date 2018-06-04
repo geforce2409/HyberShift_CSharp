@@ -21,6 +21,8 @@ namespace HyberShift_CSharp.Model
 
         public string Name { get; set; }
 
+        public string DisplayNewMessage { get; set; }
+
         public ObservableCollection<string> Members { get; set; }
 
         public string ListMembers
