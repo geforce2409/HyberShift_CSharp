@@ -679,8 +679,16 @@
                         </Grid.RowDefinitions>
 
                         <!--Profile-->
-                        <Button x:Name="ProfileButton"
+                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                            <Button x:Name="ProfileButton"
                                 Style="{StaticResource ProfileButtonStyle}" Width="30" Height="30" Margin="8,5,0,5" HorizontalAlignment="Left" />
+
+                            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       Margin="8,5,0,5" Text="{Binding UserName, Source={StaticResource ChatViewModel}}"/>
+                        </StackPanel>
+                        
+                        
 
                         <!--Settings-->
                         <Button Grid.Row="0" Grid.Column="1" 

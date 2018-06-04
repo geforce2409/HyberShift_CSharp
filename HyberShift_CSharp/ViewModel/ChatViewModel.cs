@@ -82,6 +82,11 @@ namespace HyberShift_CSharp.ViewModel
             get;
             set;
         }
+
+        public string UserName
+        {
+            get { return UserInfo.GetInstance().FullName; }
+        }
         public string RoomName //Display room's name
         {
             get { return currentRoom.Name; }
