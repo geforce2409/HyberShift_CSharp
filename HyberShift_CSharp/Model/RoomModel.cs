@@ -1,13 +1,14 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace HyberShift_CSharp.Model
 {
-    public class RoomModel
+    public class RoomModel: INotifyPropertyChanged
     {
         public RoomModel()
         {
             Members = new ObservableCollection<string>();
-            DisplayNewMessage = "Hidden";
+            
             //hasNewMessage = false;
         }
 
@@ -16,6 +17,9 @@ namespace HyberShift_CSharp.Model
             ID = id;
             Name = name;
             Members = members;
+
+            DisplayNewMessage = "Hidden";
+            this.NotifyChanged("DisplayNewMessage");
         }
 
         public string ID { get; set; }
@@ -41,6 +45,8 @@ namespace HyberShift_CSharp.Model
 
         public bool HasNewMessage { get; set; }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public void AddMembers(string member)
         {
             Members.Add(member);
@@ -49,6 +55,12 @@ namespace HyberShift_CSharp.Model
         public int GetMemebersCount()
         {
             return Members.Count;
+        }
+
+        public void NotifyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

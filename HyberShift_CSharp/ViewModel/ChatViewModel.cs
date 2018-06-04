@@ -215,13 +215,27 @@ namespace HyberShift_CSharp.ViewModel
                         //NotifyChanged(currentRoom.DisplayNewMessage);
 
                         Debug.LogOutput("Room: " + currentRoom.Name + " Message >> " + msg.Message);
-                    }
-                    else
-                    {
-                        // find room has the id
-                        RoomModel roomHasMessage = ListRoomModel.GetInstance().GetFirstObjectByValue("ID", id);
-                        roomHasMessage.DisplayNewMessage = "Visible";
-                    }
+                    }               
+                });
+            });
+
+            socket.On("new_message", (arg) =>
+            {
+                Application.Current.Dispatcher.Invoke((Action)delegate
+                {
+                    // handle data            
+                    JObject content = (JObject)arg;
+
+                    string id = content.GetValue("id").ToString();
+
+                    if (currentRoom.ID.Equals(id))
+                        return;
+
+                    // find room has the id
+                    int index = ListRoomModel.GetInstance().GetIndexByValue("ID", id);
+                    ListRoomModel.GetInstance().List[index].DisplayNewMessage = "Visible";
+                    ListRoomModel.GetInstance().List[index].NotifyChanged("DisplayNewMessage");
+                    ListRoomModel.GetInstance().NotifyChanged("List");
                 });
             });
 

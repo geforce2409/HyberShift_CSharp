@@ -10,9 +10,11 @@ using Quobject.SocketIoClientDotNet.Client;
 
 namespace HyberShift_CSharp.Model.List
 {
-    public class ListRoomModel : BaseList<RoomModel>
+    public class ListRoomModel : BaseList<RoomModel>, INotifyPropertyChanged
     {
         private static ListRoomModel instance;
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         // constructor
         public ListRoomModel(): base()
@@ -70,6 +72,12 @@ namespace HyberShift_CSharp.Model.List
             }
             return " ";
         }
-        
+
+        public void NotifyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+        }
+
     }
 }
