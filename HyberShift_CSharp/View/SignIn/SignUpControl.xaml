@@ -49,6 +49,7 @@
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
@@ -56,12 +57,15 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
+                    <Image
+                        Grid.ColumnSpan="2" Source="/HyberShift_CSharp;component/Res/img_placeholder.png" Width="100" Margin="0,16,0,0"></Image>
+
                     <materialDesign:PackIcon
-                        Grid.Row="0" Grid.Column="0" VerticalAlignment="Stretch" Margin="10,10,0,0"
+                        Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="10,21,0,21"
                         Kind="Account" Foreground="{Binding BorderBrush, ElementName=EmailTextBox}" Padding="-1,0,0,0" />
                     <TextBox
                         x:Name="EmailTextBox"
-                        Grid.Row="0" Grid.Column="1" Margin="8,16,11,16"
+                        Grid.Row="1" Grid.Column="1" Margin="8,5,11,16"
                         materialDesign:HintAssist.Hint="Email"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                         <!--Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, NotifyOnValidationError=True}">-->
@@ -78,11 +82,11 @@
                     </TextBox>
 
                     <materialDesign:PackIcon
-                        Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,6,0,0"
+                        Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,25,0,19"
                         Kind="Key" Foreground="{Binding ElementName=FloatingPasswordBox, Path=BorderBrush}" />
                     <PasswordBox
                         x:Name="FloatingPasswordBox"
-                        Grid.Row="1" Grid.Column="1" Margin="8,8,11,16"
+                        Grid.Row="2" Grid.Column="1" Margin="8,8,11,16"
                         materialDesign:HintAssist.Hint="Password"
                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
                         <!--<PasswordBox.PasswordChar>
@@ -95,11 +99,11 @@
                     </PasswordBox>
 
                     <materialDesign:PackIcon
-                        Grid.Row="2" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,6,0,0"
+                        Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,25,0,19"
                         Kind="Key" Foreground="{Binding ElementName=FloatingConfirmPasswordBox, Path=BorderBrush}" />
                     <PasswordBox
                         x:Name="FloatingConfirmPasswordBox"
-                        Grid.Row="2" Grid.Column="1" Margin="8,8,11,16"
+                        Grid.Row="3" Grid.Column="1" Margin="8,8,11,16"
                         materialDesign:HintAssist.Hint="Confirm Password"
                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
                         <!--<PasswordBox.PasswordChar>
@@ -112,11 +116,11 @@
                     </PasswordBox>
 
                     <materialDesign:PackIcon
-                        Grid.Row="3" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,6,0,0"
+                        Grid.Row="4" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,25,0,20"
                         Kind="AccountCardDetails" Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" />
                     <TextBox
                         x:Name="NameTextBox"
-                        Grid.Row="3" Grid.Column="1" Margin="8,8,11,16"
+                        Grid.Row="4" Grid.Column="1" Margin="8,8,11,16"
                         materialDesign:HintAssist.Hint="Name"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                         <TextBox.Text>
@@ -132,11 +136,11 @@
                     </TextBox>
 
                     <materialDesign:PackIcon
-                        Grid.Row="4" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,6,0,0"
+                        Grid.Row="5" Grid.Column="0" VerticalAlignment="Stretch" Margin="11,26,0,19"
                         Kind="Phone" Foreground="{Binding ElementName=PhoneTextBox, Path=BorderBrush}" />
                     <TextBox
                         x:Name="PhoneTextBox"
-                        Grid.Row="4" Grid.Column="1" Margin="8,8,11,16"
+                        Grid.Row="5" Grid.Column="1" Margin="8,8,11,16"
                         materialDesign:HintAssist.Hint="Phone (Ex: +841234567890)"
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                         <TextBox.Text>
@@ -152,7 +156,7 @@
                     </TextBox>
 
                     <Button
-                        Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="10"
+                        Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="10"
                         Style="{StaticResource RaisedButton}" Padding="16,4"
                         Command="{Binding RegisterCommand, Source={StaticResource RegisterViewModel}}"
                         CommandParameter="{Binding ElementName=This}">
