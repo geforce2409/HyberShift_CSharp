@@ -53,6 +53,7 @@ namespace HyberShift_CSharp.ViewModel
         public DelegateCommand<Border> ShowPresenationCommand { get; set; }
         public DelegateCommand SendImagePresentationCommand { get; set; }
         public DelegateCommand<object> SaveImageCommand { get; set; }
+        public DelegateCommand ClearBoardCommand { get; set; }
         //Active board
         public BitmapImage CanvasBackground { get; set; }
 
@@ -98,6 +99,7 @@ namespace HyberShift_CSharp.ViewModel
             ShowPresenationCommand= new DelegateCommand<Border>(ShowPresenation);
             SendImagePresentationCommand = new DelegateCommand(SendImagePresentation);
             SaveImageCommand = new DelegateCommand<object>(SaveImage);
+            ClearBoardCommand = new DelegateCommand(ClearBoard);
             HandleSocket();
         }
 
@@ -284,6 +286,16 @@ namespace HyberShift_CSharp.ViewModel
             {
                 pngEncoder.Save(fs);
             }
+        }
+
+        public void ClearBoard()
+        {
+            base64Slide.Clear();
+
+            CanvasBackground = null;
+            NotifyChanged("CanvasBackground");
+
+            listPointModel.List = null;
         }
 
         private void HandleSocket()

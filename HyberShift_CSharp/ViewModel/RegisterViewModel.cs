@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Media;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Windows;
@@ -102,6 +103,8 @@ namespace HyberShift_CSharp.ViewModel
 
         public void OpenImage()
         {
+            SystemSounds.Exclamation.Play();
+
             string path = dialogService.OpenFile("Choose image file", "Image (.png ,.jpg)|*.png;*.jpg");
 
             if (path == "")

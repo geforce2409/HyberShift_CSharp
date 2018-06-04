@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="250">
 
-    <Grid>
+    <!--<Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto" />
@@ -46,10 +46,9 @@
                Kind="MessageAlert" Width="20" Height="20"
                Visibility="{Binding DisplayNewMessage}"
                Foreground="{StaticResource AccentBrush}"/>
-    </Grid>
+    </Grid>-->
 
-    <!--<Grid>
-
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="4*" />
@@ -70,5 +69,10 @@
                                  Margin="5,5,5,5" Foreground="{StaticResource AccentBrush}"/>
         <TextBlock Grid.Column="1" Grid.Row="2" TextWrapping="WrapWithOverflow" Style="{DynamicResource MaterialDesignBody1TextBlock}" 
                    HorizontalAlignment="Left" VerticalAlignment="Center" Text="{Binding ListMembers}" Foreground="Black"/>
-    </Grid>-->
+
+        <materialDesign:PackIcon Grid.Row="0" Grid.Column="1" Margin="135,10,0,0"
+               Kind="MessageAlert" Width="20" Height="20"
+               Visibility="{Binding DisplayNewMessage}"
+               Foreground="{StaticResource AccentBrush}"/>
+    </Grid>
 </UserControl>
