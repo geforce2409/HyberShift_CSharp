@@ -17,9 +17,6 @@ namespace HyberShift_CSharp.Model
             Info.Password = "";
             Info.Phone = "";
             Info.FullName = "";
-            //if (Info.AvatarRef != null)
-            //    Info.AvatarRef = ImageUtils.encodeFileToBase64Binary(Info.AvatarRef);
-            //else
             Info.AvatarRef = "null";
             ConfirmPassword = "";
         }
@@ -39,7 +36,7 @@ namespace HyberShift_CSharp.Model
         public void PushData()
         {
             //if (Info.AvatarRef != null)
-            //    Info.AvatarRef = ImageUtils.encodeFileToBase64Binary(userinfo.AvatarRef);
+            //    Info.AvatarRef = userinfo.AvatarRef;
             //else
             //    Info.AvatarRef = "null";
 

@@ -57,8 +57,25 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <Image
-                        Grid.ColumnSpan="2" Source="/HyberShift_CSharp;component/Res/img_placeholder.png" Width="100" Margin="0,16,0,0"></Image>
+                    <materialDesign:ClockItemButton
+                        Background="BurlyWood" BorderBrush="GhostWhite" 
+                        Grid.ColumnSpan="2" Width="100" Height="100" Margin="0,16,0,0"
+                        Command="{Binding OpenImageCommand, Source={StaticResource RegisterViewModel}}">
+
+                        <Canvas x:Name="Avatar" Height="100" Width="100">
+                            <Canvas.Background>
+                                <ImageBrush
+                                    ImageSource="{Binding Avatar, Source={StaticResource RegisterViewModel}}"/>
+                            </Canvas.Background>
+                        </Canvas>                          
+                        <!--Source="/HyberShift_CSharp;component/Res/img_placeholder.png"/>-->
+                    </materialDesign:ClockItemButton>
+
+                    <!--<Image
+                        Grid.ColumnSpan="2" Width="100" Margin="0,16,0,0"
+                        Source="/HyberShift_CSharp;component/Res/img_placeholder.png" 
+                        MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
+                    </Image>-->
 
                     <materialDesign:PackIcon
                         Grid.Row="1" Grid.Column="0" VerticalAlignment="Stretch" Margin="10,21,0,21"

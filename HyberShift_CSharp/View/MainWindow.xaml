@@ -9,7 +9,7 @@
                          xmlns:system="clr-namespace:System;assembly=mscorlib"
                          xmlns:view="clr-namespace:HyberShift_CSharp.View"
                          mc:Ignorable="d"
-                         Title="MainWindow" Height="584" Width="720"
+                         Title="MainWindow" Height="640" Width="1080"
                          WindowStartupLocation="CenterScreen"
                          TintColor="#FFFFFF"
                          TextElement.Foreground="{DynamicResource MaterialDesignBody}"

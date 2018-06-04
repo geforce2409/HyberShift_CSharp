@@ -27,6 +27,7 @@ namespace HyberShift_CSharp.ViewModel
 
         public DelegateCommand ShowVoiceCallCommand { get; set; }
         public DelegateCommand<RoomModel> RoomChangeCommand { get; set; }
+        public DelegateCommand LoadCommand { get; set; }
         public RoomModel CurrentRoom
         {
             get { return currentRoom; }
@@ -48,6 +49,7 @@ namespace HyberShift_CSharp.ViewModel
             currentRoom = new RoomModel();
             callingModel = CallingModel.GetInstace(currentRoom);
             RoomChangeCommand = new DelegateCommand<RoomModel>(OnRoomChange);
+            LoadCommand = new DelegateCommand(OnLoad);
            
             ShowVoiceCallCommand = new DelegateCommand(ShowVoiceCall);
 
@@ -139,6 +141,12 @@ namespace HyberShift_CSharp.ViewModel
             //        callingModel.SendVoice();
             //    });
             //});
+        }
+
+        private void OnLoad()
+        {
+            //Debug.LogOutput("On load command activated-------------");
+            //callingModel.Receive();
         }
     }
 }

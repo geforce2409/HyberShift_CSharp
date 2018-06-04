@@ -45,6 +45,11 @@ namespace HyberShift_CSharp.ViewModel
             //emit to server to get message
             socket.Emit("room_change", obj.ID);
 
+            int index = ListRoomModel.GetInstance().GetIndexByValue("ID", obj.ID);
+            ListRoomModel.GetInstance().List[index].DisplayNewMessage = "Hidden";
+            ListRoomModel.GetInstance().List[index].NotifyChanged("DisplayNewMessage");
+            ListRoomModel.GetInstance().NotifyChanged("List");
+
             //clear data in list message
             ListMessageModel.GetInstance().Clear();
             // clear list task

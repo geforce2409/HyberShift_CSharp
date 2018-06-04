@@ -708,20 +708,30 @@
                         </Grid.RowDefinitions>
 
                         <!--Profile-->
-                        <Grid HorizontalAlignment="Left" Height="34">
-                            <Grid.OpacityMask>
-                                <VisualBrush Visual="{Binding ElementName=ProfileClipEllipse}" />
-                            </Grid.OpacityMask>
-                            <Ellipse x:Name="ProfileClipEllipse" Fill="White" Margin="4,2,-4,2" />
-                            <Button x:Name="ProfileButton"
-                                    Style="{StaticResource ProfileButtonStyle}" Width="30" Height="30" Margin="4,0,-4,0"
-                                    HorizontalAlignment="Left" />
-                        </Grid>
+                        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal">
+                            <materialDesign:ClockItemButton
+                                x:Name="ProfileButton" Width="30" Height="30" Margin="8,5,0,5" 
+                                Background="BurlyWood" BorderBrush="GhostWhite" 
+                                Command="{Binding ChangeImageCommand, Source={StaticResource ChatViewModel}}">
+                                <Canvas x:Name="Photo" Height="30" Width="30">
+                                    <Canvas.Background>
+                                        <ImageBrush
+                                            ImageSource="{Binding Photo, Source={StaticResource ChatViewModel}}"/>
+                                    </Canvas.Background>
+                                </Canvas>
+                            </materialDesign:ClockItemButton>
+
+                            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       Margin="8,5,0,5" Text="{Binding UserName, Source={StaticResource ChatViewModel}}"/>
+                        </StackPanel>
+                        
+                        
 
                         <!--Settings-->
-                        <Button Grid.Row="0" Grid.Column="1"
-                                Name="SettingsButton"
-                                Style="{StaticResource SettingsButtonStyle}" HorizontalAlignment="Right" />
+                        <Button Grid.Row="0" Grid.Column="1" 
+                                Style="{StaticResource SettingsButtonStyle}" HorizontalAlignment="Right" 
+                                Command="{Binding SignOutCommand, Source={StaticResource ChatViewModel}}"/>
 
                         <Border Grid.Row="1" Grid.Column="0" BorderBrush="Black"
                                 CornerRadius="3" Height="30" BorderThickness="1" Margin="8,0,0,0">
@@ -855,7 +865,7 @@
                           Background="Black"
                           ShowsPreview="True"
                           Width="5"
-                          Visibility="Collapsed" />
+                          Visibility="Visible" />
 
             <!--Presentation-->
             <Border x:Name="PresentationBorder"
@@ -952,13 +962,13 @@
                             Command="{Binding SaveImageCommand, Source={StaticResource BoardViewModel}}"
                             CommandParameter="{Binding ElementName=canvas}" />
 
-                        <!--Open slide btn-->
-                        <!--
+                        <!--Clear active board-->
+                        
                         <Button
                             Grid.Column="1" Grid.Row="2"
                             Foreground="#FF6E6E6E"
                             Style="{DynamicResource PresentationButtonStyle}"
-                            Command="{Binding OpenPresentationCommand, Source={StaticResource BoardViewModel}}" />-->
+                            Command="{Binding ClearBoardCommand, Source={StaticResource BoardViewModel}}" />
 
                         <StackPanel
                             Grid.Column="1" Grid.Row="2"
@@ -1234,13 +1244,13 @@
                     </Ellipse>
                 </StackPanel>
 
-                <Button x:Name="TaskButton" Grid.Column="1"
+                <Button x:Name="TaskButton" Grid.Column="2"
                         Style="{DynamicResource TaskButtonStyle}"
                         Command="{Binding CreateTaskCommand, Source={StaticResource TaskViewModel}}" />
 
-                <Button x:Name="VoiceCallButton" Grid.Column="2"
+                <!--<Button x:Name="VoiceCallButton" Grid.Column="2"
                         Style="{DynamicResource VoiceCallButtonStyle}"
-                        Command="{Binding ShowVoiceCallCommand, Source={StaticResource CallingViewModel}}" />
+                        Command="{Binding ShowVoiceCallCommand, Source={StaticResource CallingViewModel}}" />-->
 
                 <!--<Button x:Name="VideoCallButton" Grid.Column="2" Margin="10"
                         Style="{DynamicResource VideoCallButtonStyle}"/>-->
