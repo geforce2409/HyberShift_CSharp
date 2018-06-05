@@ -5,6 +5,7 @@ using System.Windows;
 using HyberShift_CSharp.Model;
 using HyberShift_CSharp.Model.List;
 using HyberShift_CSharp.Utilities;
+using HyberShift_CSharp.View;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Prism.Commands;
@@ -17,18 +18,21 @@ namespace HyberShift_CSharp.ViewModel
     {
         private readonly ListRoomModel listRoomModel;
         private Socket socket;
+        private RoomModel currentRoom;
         // constructor
         public ListRoomViewModel()
         {
             socket = SocketAPI.GetInstance().GetSocket();
+            currentRoom = new RoomModel();
             listRoomModel = ListRoomModel.GetInstance();      
             ItemSelectedCommand = new DelegateCommand<RoomModel>(HandleSelectedItem);
+            AddMemberCommand = new DelegateCommand(AddMember);
             HandleSocket();
         }
 
         // getter and setter
         public DelegateCommand<RoomModel> ItemSelectedCommand { get; set; } //Command use for SelectedChanged event of listview (or listbox, ...)
-
+        public DelegateCommand AddMemberCommand { get; set; }
         public ObservableCollection<RoomModel> ListRoom
         {
             get { return listRoomModel.List; }
@@ -42,6 +46,8 @@ namespace HyberShift_CSharp.ViewModel
         // method
         private void HandleSelectedItem(RoomModel obj)
         {
+            currentRoom = obj;
+
             //emit to server to get message
             socket.Emit("room_change", obj.ID);
 
@@ -87,6 +93,12 @@ namespace HyberShift_CSharp.ViewModel
                     }
                 });
             });
+        }
+
+        private void AddMember()
+        {
+            AddMemberDialog addMemberDialog = new AddMemberDialog(currentRoom);
+            addMemberDialog.ShowDialog();
         }
     }
 }

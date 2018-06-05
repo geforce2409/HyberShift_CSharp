@@ -1297,7 +1297,8 @@
                         CommandParameter="{Binding ElementName=PresentationBorder}" />
 
                 <Button x:Name="AddMemberButton" Grid.Column="4"
-                        Style="{DynamicResource AddMemberButtonStyle}" />
+                        Style="{DynamicResource AddMemberButtonStyle}" 
+                        Command="{Binding AddMemberCommand, Source={StaticResource ListRoomViewModel}}"/>
             </Grid>
         </Border>
 

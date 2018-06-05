@@ -189,6 +189,9 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\TaskViewModel.cs" />
     <Compile Include="ViewModel\WaitingCallViewModel.cs" />
+    <Compile Include="View\AddMemberDialog.xaml.cs">
+      <DependentUpon>AddMemberDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Calling\CallingWindow.xaml.cs">
       <DependentUpon>CallingWindow.xaml</DependentUpon>
     </Compile>
@@ -250,6 +253,10 @@
     <Compile Include="View\Task\Task.xaml.cs">
       <DependentUpon>Task.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\AddMemberDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Calling\CallingWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
