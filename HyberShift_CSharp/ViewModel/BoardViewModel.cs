@@ -20,6 +20,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using HyberShift_CSharp.View.Dialog;
+using Microsoft.Win32;
 using Xceed.Wpf.Toolkit;
 using Image = System.Drawing.Image;
 
@@ -256,11 +257,18 @@ namespace HyberShift_CSharp.ViewModel
             try
             {
                 System.Windows.Controls.Canvas canvas = obj as System.Windows.Controls.Canvas;
-                CreateSaveBitmap(canvas, @"D:\out.png");
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Title = "Save Image";
+                saveFileDialog.Filter = "JPEG Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.gif|PNG Image|*.png";
 
-                MessageDialog dialog = new MessageDialog("Save Image Complete", "Your image have been saved in D storage!");
-                dialog.Show();
-                Debug.LogOutput("Save image success!");
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    CreateSaveBitmap(canvas, saveFileDialog.FileName);
+                    MessageDialog dialog = new MessageDialog("Save Image Complete", "Your image have been saved!");
+                    dialog.Show();
+                    Debug.LogOutput("Save image success!");
+                }
+
             }
             catch (Exception e)
             {
