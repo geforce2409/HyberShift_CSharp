@@ -29,10 +29,10 @@ namespace HyberShift_CSharp.View
             InitializeComponent();
             currentRoom = new RoomModel();
 
-            SocketAPI.GetInstance().GetSocket().On("add_member_result", () =>
-            {
-                tbNoice.Text = "Add member to room successfully!";
-            });
+            //SocketAPI.GetInstance().GetSocket().On("add_member_result", () =>
+            //{
+            //    tbNoice.Text = "Add member to room successfully!";
+            //});
         }
 
         public AddMemberDialog(RoomModel room): this()

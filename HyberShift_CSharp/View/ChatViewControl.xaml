@@ -674,7 +674,7 @@
                                 </Image>
                             </Grid>
 
-                            <TextBox Grid.Row="1" x:Name="MessageTxtBox" Margin="8"
+                            <TextBox Grid.Row="1" x:Name="MessageTxtBox" Margin="8,6"
                                      IsReadOnly="True" TextWrapping="Wrap"
                                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
                                      Style="{StaticResource MsgTxtBox}"
@@ -799,7 +799,7 @@
             </Border>
 
             <Border BorderThickness="0,0,1,0" SnapsToDevicePixels="True"
-                    BorderBrush="{DynamicResource MaterialDesignDivider}" Height="362" Margin="0,8,0,0">
+                    BorderBrush="{DynamicResource MaterialDesignDivider}" Height="Auto" Margin="0,8,0,0">
                 <ListBox x:Name="ListBoxRoom"
                          ItemsSource="{Binding ListRoom, Source={StaticResource ListRoomViewModel}}">
                     <ListBox.ItemTemplate>
