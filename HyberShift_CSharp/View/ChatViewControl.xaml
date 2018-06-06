@@ -684,7 +684,7 @@
                     </Border>
 
                     <!--Timestamp-->
-                    <TextBlock HorizontalAlignment="Right" VerticalAlignment="Stretch"
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Stretch"
                                Margin="26,8,8,0" FontSize="10" Opacity="0.8"
                                Text="{Binding TimestampDisplay, StringFormat={}{0:t}}"
                                Foreground="#547381" />
