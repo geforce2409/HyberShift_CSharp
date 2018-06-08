@@ -7,6 +7,7 @@ using System.Windows;
 using HyberShift_CSharp.Model.List;
 using HyberShift_CSharp.Utilities;
 using HyberShift_CSharp.View;
+using HyberShift_CSharp.View.Dialog;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;
@@ -23,12 +24,15 @@ namespace HyberShift_CSharp.Model
         //User
         private readonly UserInfo userInfo;
 
+        private bool isCreated;
+
         // constructor
         public CreateRoomModel()
         {
             listRoomModel = ListRoomModel.GetInstance();
             userInfo = UserInfo.GetInstance();
             socket = SocketAPI.GetInstance().GetSocket();
+            isCreated = false;
         }
 
         // getter and setter
@@ -73,63 +77,55 @@ namespace HyberShift_CSharp.Model
         {
             socket.On("create_room_result", args =>
             {
-                var jsoninfo = (JObject)args;
-                JArray invalid;
-                JArray jsarrMembers;
-
-                try
+                Application.Current.Dispatcher.Invoke((Action)delegate
                 {
-                    invalid = (JArray)jsoninfo.GetValue("invalid");
-                    jsarrMembers = (JArray)jsoninfo.GetValue("members");
-                    RoomModel room = new RoomModel();
-                    for (int i = 0; i < jsarrMembers.Count; i++)
-                    {
-                        room.AddMembers(jsarrMembers.ElementAt(i).ToString());
-                    }
+                    if (isCreated == true)
+                        return;
 
-                    //Add to listRoom
-                    room.Name = jsoninfo.GetValue("room_name").ToString();
-                    room.ID = jsoninfo.GetValue("room_id").ToString();
-                    listRoomModel.AddWithCheck(room, "ID");
+                    isCreated = true;
+                    socket.Emit("room_request", UserInfo.GetInstance().UserId);
+                    (new MessageDialog("Notification", "Create room successfully")).ShowDialog();
+                    CloseWindowManager.CloseCreateRoomWindow();
+                    //var jsoninfo = (JObject)args;
+                    //JArray invalid;
+                    //JArray jsarrMembers;
 
-                    if (invalid.Count == 0)
-                    {
-                        MessageBox.Show("Create room successfully!", null, MessageBoxButton.OK,
-                            MessageBoxImage.Information);
-                        CloseWindowManager.CloseCreateRoomWindow();
-                    }
-                    //else
+                    //try
                     //{
-                    //    MessageBox.Show("Create room successfully, emails " + invalid + " is not valid.", null, MessageBoxButton.OK,
-                    //        MessageBoxImage.Warning);
+                    //    invalid = (JArray)jsoninfo.GetValue("invalid");
+                    //    jsarrMembers = (JArray)jsoninfo.GetValue("members");
+                    //    RoomModel room = new RoomModel();
+                    //    for (int i = 0; i < jsarrMembers.Count; i++)
+                    //    {
+                    //        room.AddMembers(jsarrMembers.ElementAt(i).ToString());
+                    //    }
+
+                    //    //Add to listRoom
+                    //    room.Name = jsoninfo.GetValue("room_name").ToString();
+                    //    room.ID = jsoninfo.GetValue("room_id").ToString();
+                    //    listRoomModel.AddWithCheck(room, "ID");
+                    //    NotifyChanged("ListRoom");
+                    //    //listRoomModel.NotifyListChange();
+                    //    //emit room_request to server
+                    //    socket.Emit("room_request", userInfo.UserId);
+
+                    //    if (invalid.Count == 0)
+                    //    {
+                    //        MessageBox.Show("Create room successfully!", null, MessageBoxButton.OK,
+                    //            MessageBoxImage.Information);
+                    //        CloseWindowManager.CloseCreateRoomWindow();
+                    //    }
+
+                    //    CloseWindowManager.CloseCreateRoomWindow();
                     //    return;
                     //}
-                    Application.Current.Dispatcher.Invoke((Action)delegate {
-                        // your code
-                        CloseWindowManager.CloseCreateRoomWindow();
-                        return;
-                    });
-                }
-                catch (JsonException e)
-                {
-                    Debug.Log(e.ToString());
-                }
-            }); //.On("room_created", args =>
-            //{
-            //    var data = (JObject)args;
-            //    try
-            //    {
-            //        string roomId = data.GetValue("room_id").ToString();
-            //        string roomName = data.GetValue("room_name").ToString();
-            //        Debug.Log("roomID: " + roomId + ", roomName: " + roomName);
-            //        listRoomModel.AddWithCheck(new RoomModel(roomId, roomName, null), "ID");
-            //        Debug.Log("Create room from: " + listRoomModel.NameList);
-            //    }
-            //    catch (JsonException e)
-            //    {
-            //        Debug.Log(e.ToString());
-            //    }
-            //});
+                    //catch (JsonException e)
+                    //{
+                    //    Debug.Log(e.ToString());
+                    //}
+                });
+
+            });
         }
 
         public bool IsValidCreateRoom()

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using HyberShift_CSharp.Model;
 using HyberShift_CSharp.Model.List;
 using HyberShift_CSharp.Utilities;
 using HyberShift_CSharp.View;
+using HyberShift_CSharp.View.Dialog;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Prism.Commands;
@@ -78,12 +80,16 @@ namespace HyberShift_CSharp.ViewModel
                         string roomId = obj.GetValue("room_id").ToString();
                         string roomName = obj.GetValue("room_name").ToString();
                         JArray listjson = (JArray)obj.GetValue("members");
+                        if (listjson.Count == 0)
+                            return;
+
                         ObservableCollection<string> members = new ObservableCollection<string>();
                         for (int i = 0; i < listjson.Count; i++)
                         {
                             members.Add(listjson[i].ToString());
                         }
-                        listRoomModel.AddWithCheck(new RoomModel(roomId, roomName, members), "ID");
+                        RoomModel room = new RoomModel(roomId, roomName, members);
+                        listRoomModel.AddWithCheck(room, "ID");
                     }
                     catch (JsonException e)
                     {
@@ -93,6 +99,8 @@ namespace HyberShift_CSharp.ViewModel
                     }
                 });
             });
+
+            
         }
 
         private void AddMember()
