@@ -1,4 +1,5 @@
-﻿using HyberShift_CSharp.Utilities;
+﻿using HyberShift_CSharp.Domain;
+using HyberShift_CSharp.Utilities;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;

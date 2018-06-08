@@ -60,17 +60,5 @@
                         Grid.Column="1"
                         Grid.Row="1"
                         Content="{Binding SelectedViewModel, Source={StaticResource SignInPageViewModel}}" />
-
-        <!--<signIn:SignInControl
-            Visibility="{Binding SignInVisible, Source={StaticResource RegisterViewModel}}"
-            Grid.Column="1"
-            Grid.Row="1"/>-->
-
-        <!--<signIn:SignUpControl
-            Visibility="Visible"
-            Grid.Column="1"
-            Grid.Row="1"/>-->
-        <!--Visibility="{Binding SignUpVisibile, Source={StaticResource LoginViewModel}}"-->
-
     </Grid>
 </fluentWpf:AcrylicWindow>

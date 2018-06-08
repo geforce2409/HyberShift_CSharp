@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace HyberShift_CSharp
+namespace HyberShift_CSharp.Domain
 {
     public static class IsValidInput
     {
