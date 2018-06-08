@@ -26,7 +26,7 @@ namespace HyberShift_CSharp.Model
         // constructor
         public CreateRoomModel()
         {
-            listRoomModel = new ListRoomModel();
+            listRoomModel = ListRoomModel.GetInstance();
             userInfo = UserInfo.GetInstance();
             socket = SocketAPI.GetInstance().GetSocket();
         }
