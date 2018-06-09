@@ -796,7 +796,8 @@
                 x:Name="ListBoxRoom"
                 ItemsSource="{Binding ListRoom, Source={StaticResource ListRoomViewModel}}"
                 Margin="0,8,0,0" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Top"
-                ScrollViewer.CanContentScroll="False">
+                ScrollViewer.CanContentScroll="False"
+                Style="{StaticResource CustomListBox}">
 
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -872,7 +873,7 @@
             </Border>
 
             <!--Messages-->
-            <ItemsControl x:Name="MessagesItemsCtrl" Margin="0,5,0,0"
+            <ItemsControl x:Name="MessagesItemsCtrl" Margin="0,8,8,0"
                           ItemsSource="{Binding ListMessage, Source={StaticResource ChatViewModel}}"
                           ItemTemplate="{DynamicResource MessagesDataTemplate}"
                           ScrollViewer.VerticalScrollBarVisibility="Auto" Grid.ColumnSpan="2">
@@ -1035,7 +1036,8 @@
                 <ListBox x:Name="lbTask"
                          ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
                          ScrollViewer.CanContentScroll="False"
-                         SelectedItem="{Binding SelectedTask, Source={StaticResource TaskViewModel}}">
+                         SelectedItem="{Binding SelectedTask, Source={StaticResource TaskViewModel}}"
+                         Style="{StaticResource CustomListBox}">
 
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}">
@@ -1049,7 +1051,7 @@
 
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <materialDesign:Card Width="200" Height="Auto">
+                            <materialDesign:Card Width="200" Height="Auto" Margin="8">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
