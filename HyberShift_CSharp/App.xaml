@@ -393,7 +393,6 @@
                 </Setter>
             </Style>
 
-
             <BitmapImage x:Key="BlankImage" UriSource="/HyberShift_CSharp;component/Res/blank.png" />
             <utilities:ByteBitmapSourceConverter x:Key="ByteBmpSrcConverter" />
         </ResourceDictionary>

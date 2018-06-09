@@ -795,13 +795,8 @@
             <ListBox
                 x:Name="ListBoxRoom"
                 ItemsSource="{Binding ListRoom, Source={StaticResource ListRoomViewModel}}"
-                Margin="0,8,0,0" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Top">
-
-                <ListBox.Template>
-                    <ControlTemplate>
-                        <ItemsPresenter />
-                    </ControlTemplate>
-                </ListBox.Template>
+                Margin="0,8,0,0" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Top"
+                ScrollViewer.CanContentScroll="False">
 
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -1041,6 +1036,7 @@
                          ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
                          ScrollViewer.CanContentScroll="False"
                          SelectedItem="{Binding SelectedTask, Source={StaticResource TaskViewModel}}">
+
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}">
                             <Style.Triggers>
