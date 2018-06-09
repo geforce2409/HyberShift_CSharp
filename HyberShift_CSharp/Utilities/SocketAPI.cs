@@ -27,6 +27,7 @@ namespace HyberShift_CSharp.Utilities
                 instance = new SocketAPI();
                 instance.Connect();
             }
+
             return instance;
         }
 
@@ -56,13 +57,8 @@ namespace HyberShift_CSharp.Utilities
 
         public void EstablishConnection()
         {
-            socket.
-                On(Socket.EVENT_CONNECT, () => 
-                {
-                    Debug.LogOutput("Client connected to server");                  
-                }).
-                
-                On(Socket.EVENT_DISCONNECT, () => 
+            socket.On(Socket.EVENT_CONNECT, () => { Debug.LogOutput("Client connected to server"); }).On(
+                Socket.EVENT_DISCONNECT, () =>
                 {
                     Debug.Log("Client disconnected to server");
                     //socket.Close();

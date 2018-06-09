@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Windows;
-using HyberShift_CSharp.Utilities;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Quobject.SocketIoClientDotNet.Client;
 
 namespace HyberShift_CSharp.Model.List
 {
@@ -14,13 +7,7 @@ namespace HyberShift_CSharp.Model.List
     {
         private static ListRoomModel instance;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         // constructor
-        public ListRoomModel(): base()
-        {
-           
-        }
 
         // getter and setter
         public ObservableCollection<object> IDList => GetCollectionOfField("ID");
@@ -28,6 +15,8 @@ namespace HyberShift_CSharp.Model.List
         public ObservableCollection<object> NameList => GetCollectionOfField("Name");
 
         public ObservableCollection<object> MemberList => GetCollectionOfField("Members");
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         // singleton method
         public static ListRoomModel GetInstance()
@@ -65,11 +54,9 @@ namespace HyberShift_CSharp.Model.List
 
         public override string ToString()
         {
-            ObservableCollection<string> result = new ObservableCollection<string>();
-            foreach(RoomModel room in List)
-            {
+            var result = new ObservableCollection<string>();
+            foreach (var room in List)
                 result.Add("Room ID: " + room.ID + " | Room Name: " + room.Name + " | Members: " + room.Members);
-            }
             return " ";
         }
 
@@ -83,8 +70,5 @@ namespace HyberShift_CSharp.Model.List
         {
             NotifyChanged("List");
         }
-
-      
-
     }
 }

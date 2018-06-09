@@ -4,8 +4,6 @@ using System.Security;
 using System.Windows;
 using HyberShift_CSharp.Model;
 using HyberShift_CSharp.Model.Interface;
-using HyberShift_CSharp.Utilities;
-using HyberShift_CSharp.View;
 using Prism.Commands;
 
 namespace HyberShift_CSharp.ViewModel
@@ -53,7 +51,7 @@ namespace HyberShift_CSharp.ViewModel
                 FloatingPasswordBox = ConvertToUnsecureString(secureString);
             }
 
-            if (loginModel.IsValidLogin())      
+            if (loginModel.IsValidLogin())
                 loginModel.Authentication();
             else
                 MessageBox.Show("Email or Password is wrong or Server is Offline. Please try again", "ERROR",

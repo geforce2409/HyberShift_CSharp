@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using HyberShift_CSharp.Domain;
 using HyberShift_CSharp.Model.List;
 using HyberShift_CSharp.Utilities;
 using HyberShift_CSharp.View;
-using MaterialDesignThemes.Wpf;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;
@@ -17,10 +11,12 @@ namespace HyberShift_CSharp.Model
 {
     public class LoginModel
     {
-        private bool isAuthenticated;
         private readonly Socket socket;
-        ListRoomModel listRoomModel;
-        UserInfo userInfo = UserInfo.GetInstance();
+        private bool isAuthenticated;
+        private ListRoomModel listRoomModel;
+
+        private readonly UserInfo userInfo = UserInfo.GetInstance();
+
         // constructor
         public LoginModel()
         {
@@ -95,7 +91,7 @@ namespace HyberShift_CSharp.Model
                 if (isAuthenticated) return;
 
                 isAuthenticated = true;
-                var data = (JObject)args;
+                var data = (JObject) args;
                 if (data != null)
                 {
                     Debug.Log("Authentication successed");
@@ -103,17 +99,17 @@ namespace HyberShift_CSharp.Model
 
                     // [IMPORTANT] set info for userinfo
                     userInfo.UserId = data.GetValue("id").ToString();
-                    var content = (JObject)data.GetValue("content");
+                    var content = (JObject) data.GetValue("content");
 
                     userInfo.AvatarRef = content.GetValue("avatarstring").ToString();
                     userInfo.FullName = content.GetValue("fullname").ToString();
                     userInfo.Email = content.GetValue("email").ToString();
                     userInfo.Phone = content.GetValue("phone").ToString();
 
-                    Application.Current.Dispatcher.Invoke((Action)delegate
+                    Application.Current.Dispatcher.Invoke(delegate
                     {
                         // your code
-                        MainWindow mainWindow = new MainWindow();
+                        var mainWindow = new MainWindow();
                         mainWindow.Show();
 
                         CloseWindowManager.CloseLoginWindow();
@@ -123,7 +119,7 @@ namespace HyberShift_CSharp.Model
                 {
                     Debug.Log("Authentication failed");
                 }
-            }); 
+            });
         }
     }
 }

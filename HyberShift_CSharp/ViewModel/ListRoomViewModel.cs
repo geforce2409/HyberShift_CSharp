@@ -1,43 +1,43 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using HyberShift_CSharp.Model;
 using HyberShift_CSharp.Model.List;
 using HyberShift_CSharp.Utilities;
 using HyberShift_CSharp.View;
-using HyberShift_CSharp.View.Dialog;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Prism.Commands;
 using Quobject.SocketIoClientDotNet.Client;
-
 
 namespace HyberShift_CSharp.ViewModel
 {
     public class ListRoomViewModel : BaseViewModel
     {
         private readonly ListRoomModel listRoomModel;
-        private Socket socket;
         private RoomModel currentRoom;
+
+        private readonly Socket socket;
+
         // constructor
         public ListRoomViewModel()
         {
             socket = SocketAPI.GetInstance().GetSocket();
             currentRoom = new RoomModel();
-            listRoomModel = ListRoomModel.GetInstance();      
+            listRoomModel = ListRoomModel.GetInstance();
             ItemSelectedCommand = new DelegateCommand<RoomModel>(HandleSelectedItem);
             AddMemberCommand = new DelegateCommand(AddMember);
             HandleSocket();
         }
 
         // getter and setter
-        public DelegateCommand<RoomModel> ItemSelectedCommand { get; set; } //Command use for SelectedChanged event of listview (or listbox, ...)
+        public DelegateCommand<RoomModel>
+            ItemSelectedCommand { get; set; } //Command use for SelectedChanged event of listview (or listbox, ...)
+
         public DelegateCommand AddMemberCommand { get; set; }
+
         public ObservableCollection<RoomModel> ListRoom
         {
-            get { return listRoomModel.List; }
+            get => listRoomModel.List;
             set
             {
                 listRoomModel.List = value;
@@ -53,7 +53,7 @@ namespace HyberShift_CSharp.ViewModel
             //emit to server to get message
             socket.Emit("room_change", obj.ID);
 
-            int index = ListRoomModel.GetInstance().GetIndexByValue("ID", obj.ID);
+            var index = ListRoomModel.GetInstance().GetIndexByValue("ID", obj.ID);
             ListRoomModel.GetInstance().List[index].DisplayNewMessage = "Hidden";
             ListRoomModel.GetInstance().List[index].NotifyChanged("DisplayNewMessage");
             ListRoomModel.GetInstance().NotifyChanged("List");
@@ -70,25 +70,22 @@ namespace HyberShift_CSharp.ViewModel
             socket.Emit("room_request", UserInfo.GetInstance().UserId);
             Debug.LogOutput("Request room with userid: " + UserInfo.GetInstance().UserId);
 
-            socket.On("room_created", (args) =>
+            socket.On("room_created", args =>
             {
-                Application.Current.Dispatcher.Invoke((Action)delegate
+                Application.Current.Dispatcher.Invoke(delegate
                 {
-                    JObject obj = (JObject)args;
+                    var obj = (JObject) args;
                     try
                     {
-                        string roomId = obj.GetValue("room_id").ToString();
-                        string roomName = obj.GetValue("room_name").ToString();
-                        JArray listjson = (JArray)obj.GetValue("members");
+                        var roomId = obj.GetValue("room_id").ToString();
+                        var roomName = obj.GetValue("room_name").ToString();
+                        var listjson = (JArray) obj.GetValue("members");
                         if (listjson.Count == 0)
                             return;
 
-                        ObservableCollection<string> members = new ObservableCollection<string>();
-                        for (int i = 0; i < listjson.Count; i++)
-                        {
-                            members.Add(listjson[i].ToString());
-                        }
-                        RoomModel room = new RoomModel(roomId, roomName, members);
+                        var members = new ObservableCollection<string>();
+                        for (var i = 0; i < listjson.Count; i++) members.Add(listjson[i].ToString());
+                        var room = new RoomModel(roomId, roomName, members);
                         listRoomModel.AddWithCheck(room, "ID");
                     }
                     catch (JsonException e)
@@ -99,13 +96,11 @@ namespace HyberShift_CSharp.ViewModel
                     }
                 });
             });
-
-            
         }
 
         private void AddMember()
         {
-            AddMemberDialog addMemberDialog = new AddMemberDialog(currentRoom);
+            var addMemberDialog = new AddMemberDialog(currentRoom);
             addMemberDialog.ShowDialog();
         }
     }

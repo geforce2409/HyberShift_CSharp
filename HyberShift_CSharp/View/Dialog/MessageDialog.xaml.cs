@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace HyberShift_CSharp.View.Dialog
 {
     /// <summary>
-    /// Interaction logic for MessageDialog.xaml
+    ///     Interaction logic for MessageDialog.xaml
     /// </summary>
     public partial class MessageDialog : Window
     {
@@ -24,7 +12,7 @@ namespace HyberShift_CSharp.View.Dialog
             InitializeComponent();
         }
 
-        public MessageDialog(string title, string content): this()
+        public MessageDialog(string title, string content) : this()
         {
             tbTitle.Text = title;
             tbContent.Text = content;

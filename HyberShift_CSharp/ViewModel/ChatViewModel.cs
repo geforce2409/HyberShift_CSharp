@@ -1,36 +1,32 @@
-﻿using HyberShift_CSharp.Model;
-using HyberShift_CSharp.Model.List;
-using HyberShift_CSharp.Utilities;
-using Newtonsoft.Json.Linq;
-using Quobject.SocketIoClientDotNet.Client;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Media;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using Newtonsoft.Json;
-using Prism.Commands;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using HyberShift_CSharp.Model;
+using HyberShift_CSharp.Model.List;
+using HyberShift_CSharp.Utilities;
 using HyberShift_CSharp.View.Dialog;
 using HyberShift_CSharp.View.SignIn;
-using Image = System.Drawing.Image;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Prism.Commands;
+using Quobject.SocketIoClientDotNet.Client;
 
 namespace HyberShift_CSharp.ViewModel
 {
     // View Model of ChatView
     public class ChatViewModel : BaseViewModel
     {
-        private ListMessageModel listMessageModel;
-        private ObservableCollection<string> sendersTyping;
         private RoomModel currentRoom;
-        private Socket socket;
-        private UserInfo userInfo;
-        private DialogService dialogService;
-        public ChatViewModel() : base()
+        private readonly DialogService dialogService;
+        private readonly ListMessageModel listMessageModel;
+        private readonly ObservableCollection<string> sendersTyping;
+        private readonly Socket socket;
+        private readonly UserInfo userInfo;
+
+        public ChatViewModel()
         {
             dialogService = new DialogService();
             currentRoom = new RoomModel();
@@ -47,38 +43,16 @@ namespace HyberShift_CSharp.ViewModel
             HandleSocket();
         }
 
-        private void HandleTyping(TextBox textbox)
-        {
-            JObject data = new JObject();
-            data.Add("sender", userInfo.FullName);
-            data.Add("room_id", currentRoom.ID);
-
-            if (textbox.Text.Length > 0)
-            {
-                
-                socket.Emit("is_typing", data);
-            }
-            else
-            {
-                socket.Emit("done_typing", data);
-            }
-        }
-
-        private void HandleItemSelected(RoomModel obj)
-        {
-            currentRoom = obj;
-            RoomName = currentRoom.Name;
-        }
-
         // getter and setter
         public DelegateCommand SendTextMessageCommand { get; set; }
         public DelegateCommand<RoomModel> ItemSelectedCommand { get; set; }
         public DelegateCommand<TextBox> TypingCommand { get; set; }
         public DelegateCommand ChangeImageCommand { get; set; }
         public DelegateCommand SignOutCommand { get; set; }
+
         public ObservableCollection<MessageModel> ListMessage
         {
-            get { return listMessageModel.List; }
+            get => listMessageModel.List;
             set
             {
                 listMessageModel.List = value;
@@ -86,19 +60,13 @@ namespace HyberShift_CSharp.ViewModel
             }
         }
 
-        public string Message
-        {
-            get;
-            set;
-        }
+        public string Message { get; set; }
 
-        public string UserName
-        {
-            get { return UserInfo.GetInstance().FullName; }
-        }
+        public string UserName => UserInfo.GetInstance().FullName;
+
         public string RoomName //Display room's name
         {
-            get { return currentRoom.Name; }
+            get => currentRoom.Name;
             set
             {
                 currentRoom.Name = value;
@@ -108,15 +76,20 @@ namespace HyberShift_CSharp.ViewModel
             // need to emit when setting and handle on server (not implement on server yet)
             // ...
         }
+
         public BitmapImage Photo
         {
             get
             {
                 if (userInfo.AvatarRef == "null")
                     return null;
-                else return ImageUtils.Base64StringToBitmapSource(userInfo.AvatarRef);
+                return ImageUtils.Base64StringToBitmapSource(userInfo.AvatarRef);
             }
-            set { Photo = ImageUtils.Base64StringToBitmapSource(userInfo.AvatarRef); NotifyChanged("Photo");}
+            set
+            {
+                Photo = ImageUtils.Base64StringToBitmapSource(userInfo.AvatarRef);
+                NotifyChanged("Photo");
+            }
         }
 
         public string Members // Display room's members
@@ -124,8 +97,8 @@ namespace HyberShift_CSharp.ViewModel
             get
             {
                 // convert from observablecollection to string
-                string temp = "";
-                foreach (string mem in currentRoom.Members)
+                var temp = "";
+                foreach (var mem in currentRoom.Members)
                     temp += mem + " ";
                 return temp;
             }
@@ -150,12 +123,30 @@ namespace HyberShift_CSharp.ViewModel
                 if (sendersTyping.Count == 1)
                     return sendersTyping[0] + " is typing . . .";
 
-                string rs = string.Empty;
-                for (int i = 0; i < sendersTyping.Count - 1; i++)
+                var rs = string.Empty;
+                for (var i = 0; i < sendersTyping.Count - 1; i++)
                     rs += sendersTyping[i] + ", ";
                 rs += sendersTyping[sendersTyping.Count - 1] + " are typing . . .";
                 return rs;
             }
+        }
+
+        private void HandleTyping(TextBox textbox)
+        {
+            var data = new JObject();
+            data.Add("sender", userInfo.FullName);
+            data.Add("room_id", currentRoom.ID);
+
+            if (textbox.Text.Length > 0)
+                socket.Emit("is_typing", data);
+            else
+                socket.Emit("done_typing", data);
+        }
+
+        private void HandleItemSelected(RoomModel obj)
+        {
+            currentRoom = obj;
+            RoomName = currentRoom.Name;
         }
 
         // method
@@ -185,7 +176,7 @@ namespace HyberShift_CSharp.ViewModel
                 socket.Emit("new_message", msgjson);
             }
             catch (JsonException e)
-            {	
+            {
                 Debug.LogOutput(e.ToString());
             }
 
@@ -197,7 +188,7 @@ namespace HyberShift_CSharp.ViewModel
         {
             SystemSounds.Exclamation.Play();
 
-            string path = dialogService.OpenFile("Choose image file", "Image (.png ,.jpg)|*.png;*.jpg");
+            var path = dialogService.OpenFile("Choose image file", "Image (.png ,.jpg)|*.png;*.jpg");
 
             if (path == "")
                 return;
@@ -214,9 +205,9 @@ namespace HyberShift_CSharp.ViewModel
         public void SignOut()
         {
             // Chưa chạy chuẩn
-            ConfirmDialog confirmDialog = new ConfirmDialog("SIGN OUT", "Are you really want to sign out?", () =>
+            var confirmDialog = new ConfirmDialog("SIGN OUT", "Are you really want to sign out?", () =>
             {
-                SignInPage signInPage = new SignInPage();
+                var signInPage = new SignInPage();
                 signInPage.Show();
                 CloseWindowManager.CloseMainWindow();
             });
@@ -232,48 +223,48 @@ namespace HyberShift_CSharp.ViewModel
             //    Debug.LogOutput("Selected room: " + "room id: " + currentRoom.ID + " room name: " + RoomName);
             //});
 
-            socket.On("init_message", (args) =>
+            socket.On("init_message", args =>
             {
                 // handle data            
-                JObject content = (JObject)args;
+                var content = (JObject) args;
 
-                string id = content.GetValue("id").ToString();
-                string messageid = content.GetValue("message_id").ToString();
-                string sender = content.GetValue("sender").ToString();
-                string message = content.GetValue("message").ToString();
-                string imgstring = content.GetValue("imgstring").ToString();
-                string filename = content.GetValue("filename").ToString();
-                string filestring = content.GetValue("filestring").ToString();
-                long timestamp = Convert.ToInt64(content.GetValue("timestamp"));
+                var id = content.GetValue("id").ToString();
+                var messageid = content.GetValue("message_id").ToString();
+                var sender = content.GetValue("sender").ToString();
+                var message = content.GetValue("message").ToString();
+                var imgstring = content.GetValue("imgstring").ToString();
+                var filename = content.GetValue("filename").ToString();
+                var filestring = content.GetValue("filestring").ToString();
+                var timestamp = Convert.ToInt64(content.GetValue("timestamp"));
 
-                Application.Current.Dispatcher.Invoke((Action) delegate
+                Application.Current.Dispatcher.Invoke(delegate
                 {
                     //if user is in the room that occur event, display message
                     if (currentRoom.ID.Equals(id))
                     {
-                        MessageModel msg = new MessageModel(id, messageid, message, sender, imgstring, filestring, filename,
+                        var msg = new MessageModel(id, messageid, message, sender, imgstring, filestring, filename,
                             timestamp);
                         listMessageModel.AddWithCheck(msg, "MessageID");
 
                         Debug.LogOutput("Room: " + currentRoom.Name + " Message >> " + msg.Message);
-                    }               
+                    }
                 });
             });
 
-            socket.On("new_message", (arg) =>
+            socket.On("new_message", arg =>
             {
-                Application.Current.Dispatcher.Invoke((Action)delegate
+                Application.Current.Dispatcher.Invoke(delegate
                 {
                     // handle data            
-                    JObject content = (JObject)arg;
+                    var content = (JObject) arg;
 
-                    string id = content.GetValue("id").ToString();
+                    var id = content.GetValue("id").ToString();
 
                     if (currentRoom.ID.Equals(id))
                         return;
 
                     // find room has the id
-                    int index = ListRoomModel.GetInstance().GetIndexByValue("ID", id);
+                    var index = ListRoomModel.GetInstance().GetIndexByValue("ID", id);
                     ListRoomModel.GetInstance().List[index].DisplayNewMessage = "Visible";
                     ListRoomModel.GetInstance().List[index].NotifyChanged("DisplayNewMessage");
                     ListRoomModel.GetInstance().NotifyChanged("List");
@@ -282,29 +273,29 @@ namespace HyberShift_CSharp.ViewModel
                 });
             });
 
-            socket.On("is_typing", (arg) =>
+            socket.On("is_typing", arg =>
             {
-                JObject data = (JObject)arg;
-                string sender = data.GetValue("sender").ToString();
-                string roomId = data.GetValue("room_id").ToString();
+                var data = (JObject) arg;
+                var sender = data.GetValue("sender").ToString();
+                var roomId = data.GetValue("room_id").ToString();
 
                 //if user is not in the room that occur event, then return
                 if (!currentRoom.ID.Equals(roomId))
                     return;
 
                 //check and add to senderstyping
-                foreach (string sd in sendersTyping)
+                foreach (var sd in sendersTyping)
                     if (sd.Equals(sender))
                         return;
                 sendersTyping.Add(sender);
                 NotifyChanged("TypingMessage");
             });
 
-            socket.On("done_typing", (arg) =>
+            socket.On("done_typing", arg =>
             {
-                JObject data = (JObject)arg;
-                string sender = data.GetValue("sender").ToString();
-                string roomId = data.GetValue("room_id").ToString();
+                var data = (JObject) arg;
+                var sender = data.GetValue("sender").ToString();
+                var roomId = data.GetValue("room_id").ToString();
 
                 //if user is not in the room that occur event, then return
                 if (!currentRoom.ID.Equals(roomId))

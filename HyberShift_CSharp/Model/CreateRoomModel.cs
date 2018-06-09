@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using HyberShift_CSharp.Model.List;
 using HyberShift_CSharp.Utilities;
-using HyberShift_CSharp.View;
 using HyberShift_CSharp.View.Dialog;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -16,8 +10,6 @@ namespace HyberShift_CSharp.Model
 {
     public class CreateRoomModel
     {
-        private ListRoomModel listRoomModel;
-
         //Socket
         private readonly Socket socket;
 
@@ -25,6 +17,7 @@ namespace HyberShift_CSharp.Model
         private readonly UserInfo userInfo;
 
         private bool isCreated;
+        private ListRoomModel listRoomModel;
 
         // constructor
         public CreateRoomModel()
@@ -47,11 +40,8 @@ namespace HyberShift_CSharp.Model
             //Convert to JSONObject
             var roomjson = new JObject();
 
-            JArray jarrayMember = new JArray();
-            foreach (string member in InputEmailMember)
-            {
-                jarrayMember.Add(member);
-            }
+            var jarrayMember = new JArray();
+            foreach (var member in InputEmailMember) jarrayMember.Add(member);
 
             try
             {
@@ -65,7 +55,8 @@ namespace HyberShift_CSharp.Model
                 Debug.Log(e.ToString());
             }
 
-            Debug.Log("Creator_name: " + userInfo.FullName + ", Creator_email: " + userInfo.Email + ", Room Name: " + InputRoomName + ", Email members: " + jarrayMember);
+            Debug.Log("Creator_name: " + userInfo.FullName + ", Creator_email: " + userInfo.Email + ", Room Name: " +
+                      InputRoomName + ", Email members: " + jarrayMember);
             socket.Emit("create_room", roomjson);
 
             // [SAMPLE] Method for receiving event from socket server
@@ -77,14 +68,14 @@ namespace HyberShift_CSharp.Model
         {
             socket.On("create_room_result", args =>
             {
-                Application.Current.Dispatcher.Invoke((Action)delegate
+                Application.Current.Dispatcher.Invoke(delegate
                 {
-                    if (isCreated == true)
+                    if (isCreated)
                         return;
 
                     isCreated = true;
                     socket.Emit("room_request", UserInfo.GetInstance().UserId);
-                    (new MessageDialog("Notification", "Create room successfully")).ShowDialog();
+                    new MessageDialog("Notification", "Create room successfully").ShowDialog();
                     CloseWindowManager.CloseCreateRoomWindow();
                     //var jsoninfo = (JObject)args;
                     //JArray invalid;
@@ -124,7 +115,6 @@ namespace HyberShift_CSharp.Model
                     //    Debug.Log(e.ToString());
                     //}
                 });
-
             });
         }
 

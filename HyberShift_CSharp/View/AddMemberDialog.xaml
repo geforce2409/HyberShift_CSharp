@@ -10,26 +10,27 @@
         Title="AddMemberDialog" Height="220" Width="600">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Background="{StaticResource PrimaryBrush}">
             <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}" Text="Add members to room"
-                       HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                       HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
         </Border>
 
-        <TextBox 
+        <TextBox
             x:Name="txtMember"
             Grid.Row="1" Grid.Column="1" Margin="8,16,11,16"
             materialDesign:HintAssist.Hint="Email of Members (Ex: a@gmail.com, b@gmail.com"
-            Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+            Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
 
         <TextBlock Grid.Row="2" x:Name="tbNoice" Style="{DynamicResource MaterialDesignSubheadingTextBlock}"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AccentBrush}"/>
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{StaticResource AccentBrush}" />
 
-        <Button x:Name="btnAdd" Grid.Row="3" Style="{StaticResource RaisedButton}" Width="300" Content="ADD" Click="btnAdd_Click"/>
+        <Button x:Name="btnAdd" Grid.Row="3" Style="{StaticResource RaisedButton}" Width="300" Content="ADD"
+                Click="btnAdd_Click" />
     </Grid>
 </Window>

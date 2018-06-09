@@ -1,29 +1,19 @@
-﻿using HyberShift_CSharp.Model;
+﻿using System;
+using System.Windows;
+using HyberShift_CSharp.Model;
 using HyberShift_CSharp.Utilities;
 using HyberShift_CSharp.View.Dialog;
 using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace HyberShift_CSharp.View
 {
     /// <summary>
-    /// Interaction logic for AddMemberDialog.xaml
+    ///     Interaction logic for AddMemberDialog.xaml
     /// </summary>
     public partial class AddMemberDialog : Window
     {
-        private RoomModel currentRoom;
+        private readonly RoomModel currentRoom;
+
         public AddMemberDialog()
         {
             InitializeComponent();
@@ -35,7 +25,7 @@ namespace HyberShift_CSharp.View
             //});
         }
 
-        public AddMemberDialog(RoomModel room): this()
+        public AddMemberDialog(RoomModel room) : this()
         {
             currentRoom = room;
         }
@@ -44,20 +34,17 @@ namespace HyberShift_CSharp.View
         {
             if (txtMember.Text.Length == 0)
             {
-                (new MessageDialog("Empty member", "Insert at least one member")).ShowDialog();
+                new MessageDialog("Empty member", "Insert at least one member").ShowDialog();
                 return;
             }
 
-            string[] separators = { ",", "!", "?", ";", ":", " " };
-            string[] members = txtMember.Text.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            string[] separators = {",", "!", "?", ";", ":", " "};
+            var members = txtMember.Text.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
-            JArray jarrayMember = new JArray();
-            foreach (string mem in members)
-            {
-                jarrayMember.Add(mem);
-            }
+            var jarrayMember = new JArray();
+            foreach (var mem in members) jarrayMember.Add(mem);
 
-            JObject data = new JObject();
+            var data = new JObject();
             data.Add("room_id", currentRoom.ID);
             data.Add("room_name", currentRoom.Name);
             data.Add("members", jarrayMember);

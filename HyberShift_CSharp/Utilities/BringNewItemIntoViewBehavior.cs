@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
@@ -17,7 +12,7 @@ namespace HyberShift_CSharp.Utilities
         protected override void OnAttached()
         {
             base.OnAttached();
-            _notifier = AssociatedObject.Items as INotifyCollectionChanged;
+            _notifier = AssociatedObject.Items;
             _notifier.CollectionChanged += ItemsControl_CollectionChanged;
         }
 
@@ -33,7 +28,7 @@ namespace HyberShift_CSharp.Utilities
             {
                 var newIndex = e.NewStartingIndex;
                 var newElement = AssociatedObject.ItemContainerGenerator.ContainerFromIndex(newIndex);
-                var item = (FrameworkElement)newElement;
+                var item = (FrameworkElement) newElement;
                 item?.BringIntoView();
             }
         }

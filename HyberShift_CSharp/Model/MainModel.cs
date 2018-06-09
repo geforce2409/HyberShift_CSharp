@@ -1,12 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using HyberShift_CSharp.Model.List;
-using HyberShift_CSharp.Utilities;
+﻿using HyberShift_CSharp.Utilities;
 using HyberShift_CSharp.View.SignIn;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Quobject.SocketIoClientDotNet.Client;
-
 
 namespace HyberShift_CSharp.Model
 {
@@ -25,7 +19,7 @@ namespace HyberShift_CSharp.Model
         //methods of model
         public void SignOut()
         {
-            SignInPage signInPage = new SignInPage();
+            var signInPage = new SignInPage();
             signInPage.Show();
             CloseWindowManager.CloseMainWindow();
         }

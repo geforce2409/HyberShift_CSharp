@@ -1,25 +1,19 @@
-﻿using HyberShift_CSharp.Model;
+﻿using System;
+using System.Windows;
+using HyberShift_CSharp.Model;
+using HyberShift_CSharp.Model.Enum;
 using HyberShift_CSharp.Utilities;
 using Prism.Commands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    public class OnGoingCallViewModel: BaseViewModel
+    public class OnGoingCallViewModel : BaseViewModel
     {
-        private RoomModel currentRoom;
-        private CallingModel callingModel;
         private readonly Action<object, object[]> navigate;
+        private readonly CallingModel callingModel;
+        private readonly RoomModel currentRoom;
 
-        public DelegateCommand MuteCommand { get; set; }
-        public DelegateCommand HangupCommand { get; set; }
-        public DelegateCommand LoadCommand { get; set; }
-        public OnGoingCallViewModel(): base()
+        public OnGoingCallViewModel()
         {
             currentRoom = new RoomModel();
             MuteCommand = new DelegateCommand(Mute);
@@ -27,15 +21,16 @@ namespace HyberShift_CSharp.ViewModel
             LoadCommand = new DelegateCommand(OnLoad);
         }
 
-        public OnGoingCallViewModel(Action<object, object[]> navigate, params object[] parameters): this()
+        public OnGoingCallViewModel(Action<object, object[]> navigate, params object[] parameters) : this()
         {
             this.navigate = navigate;
-            currentRoom = (RoomModel)parameters[0];
+            currentRoom = (RoomModel) parameters[0];
             callingModel = CallingModel.GetInstace(currentRoom);
-
-            
-            
         }
+
+        public DelegateCommand MuteCommand { get; set; }
+        public DelegateCommand HangupCommand { get; set; }
+        public DelegateCommand LoadCommand { get; set; }
 
         private void Mute()
         {
@@ -51,7 +46,7 @@ namespace HyberShift_CSharp.ViewModel
                 if (window.Title == "ReceiveCallWindow")
                     window.Close();
 
-            callingModel.State = Model.Enum.CallingState.FREE;
+            callingModel.State = CallingState.FREE;
             callingModel.StopSending();
             callingModel.StopReceiving();
         }

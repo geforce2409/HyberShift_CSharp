@@ -1,15 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HyberShift_CSharp.Utilities;
 
 namespace HyberShift_CSharp.Model
 {
     public class MessageModel
     {
+        public MessageModel()
+        {
+        }
+
+        public MessageModel(string id, string messageid, string message, string sender, string imgstring,
+            string filestring,
+            string filename, long timestamp)
+        {
+            ID = id;
+            MessageID = messageid;
+            Message = message;
+            Sender = sender;
+            ImgString = imgstring;
+            FileString = filestring;
+            FileName = filename;
+            Timestamp = timestamp;
+        }
+
         public string ID { get; set; }
         public string MessageID { get; set; }
         public string Message { get; set; }
@@ -22,26 +34,8 @@ namespace HyberShift_CSharp.Model
         // TO-DO: Timestamp Property needs to be convert from long to some kind of date (E.g: 19:25 Friday)
         public string TimestampDisplay
         {
-            get { return new DateTime(Timestamp).ToString(); }
-            set { Timestamp = DateTime.Now.Ticks; }
-        }
-
-        public MessageModel()
-        {
-
-        }
-
-        public MessageModel(string id, string messageid, string message, string sender, string imgstring, string filestring,
-                            string filename, long timestamp)
-        {
-            ID = id;
-            MessageID = messageid;
-            Message = message;
-            Sender = sender;
-            ImgString = imgstring;
-            FileString = filestring;
-            FileName = filename;
-            Timestamp = timestamp;
+            get => new DateTime(Timestamp).ToString();
+            set => Timestamp = DateTime.Now.Ticks;
         }
     }
 }

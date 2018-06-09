@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HyberShift_CSharp.Model.Interface
+﻿namespace HyberShift_CSharp.Model.Interface
 {
     public interface IDialogService
     {

@@ -11,17 +11,17 @@
                          mc:Ignorable="d"
                          Title="MainWindow" Height="640" Width="1080"
                          WindowStartupLocation="CenterScreen"
-                         TintColor="#FFFFFF"
                          TextElement.Foreground="{DynamicResource MaterialDesignBody}"
                          TextElement.FontWeight="Regular"
                          TextElement.FontSize="12"
                          TextOptions.TextFormattingMode="Ideal"
                          TextOptions.TextRenderingMode="Auto"
                          FontFamily="{DynamicResource MaterialDesignFont}"
-                         SnapsToDevicePixels="True">
+                         SnapsToDevicePixels="True"
+                         TintColor="LightGray">
     <fluentWpf:AcrylicWindow.Resources>
         <viewmodel:MainViewModel x:Key="MainViewModel" />
     </fluentWpf:AcrylicWindow.Resources>
 
-    <view:ChatViewControl/>
+    <view:ChatViewControl />
 </fluentWpf:AcrylicWindow>

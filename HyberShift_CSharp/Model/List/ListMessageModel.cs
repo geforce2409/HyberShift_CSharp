@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace HyberShift_CSharp.Model.List
 {
-    public class ListMessageModel: BaseList<MessageModel>
+    public class ListMessageModel : BaseList<MessageModel>
     {
-        private static ListMessageModel instance = null;
+        private static ListMessageModel instance;
 
         // constructor
-        public ListMessageModel(): base()
-        {
-          
-        }
+
+        public ObservableCollection<object> ListMessage => GetCollectionOfField("Message");
+        public ObservableCollection<object> ListSender => GetCollectionOfField("Sender");
 
         // singleton
         public static ListMessageModel GetInstance()
@@ -25,17 +19,14 @@ namespace HyberShift_CSharp.Model.List
             return instance;
         }
 
-        public ObservableCollection<object> ListMessage => GetCollectionOfField("Message");
-        public ObservableCollection<object> ListSender => GetCollectionOfField("Sender");
-
         public MessageModel GetMessageFromId(string id)
         {
-            return this.GetFirstObjectByValue("ID", id);
+            return GetFirstObjectByValue("ID", id);
         }
 
         public MessageModel GetMessageFromSender(string sender)
         {
-            return this.GetFirstObjectByValue("Sender", sender);
+            return GetFirstObjectByValue("Sender", sender);
         }
 
         public void Clear()

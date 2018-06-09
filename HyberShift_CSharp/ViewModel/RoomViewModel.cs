@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using HyberShift_CSharp.Model;
 
 namespace HyberShift_CSharp.ViewModel
 {
     public class RoomViewModel : BaseViewModel
     {
-        private RoomModel roomModel;
+        private readonly RoomModel roomModel;
+
         // constructor
         public RoomViewModel()
         {
@@ -27,13 +23,17 @@ namespace HyberShift_CSharp.ViewModel
         // getter and setter
         public string ID
         {
-            get { return roomModel.ID; }
-            set { roomModel.ID = value; NotifyChanged("ID"); }
+            get => roomModel.ID;
+            set
+            {
+                roomModel.ID = value;
+                NotifyChanged("ID");
+            }
         }
 
         public string Name
         {
-            get { return roomModel.Name; }
+            get => roomModel.Name;
             set
             {
                 if (Name == null)
@@ -48,18 +48,11 @@ namespace HyberShift_CSharp.ViewModel
         {
             get
             {
-                string temp = "";
-                foreach(string mem in roomModel.Members)
-                {
-                    temp += mem + " ";
-                }
+                var temp = "";
+                foreach (var mem in roomModel.Members) temp += mem + " ";
                 return temp;
             }
-            set
-            {
-
-            }
+            set { }
         }
-
     }
 }

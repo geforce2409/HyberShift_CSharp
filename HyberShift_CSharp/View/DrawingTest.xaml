@@ -10,41 +10,41 @@
         mc:Ignorable="d"
         Title="DrawingTest" Height="450" Width="800">
     <Window.Resources>
-        <viewModel:DrawingTestVM x:Key="BoardViewModel"/>
+        <viewModel:DrawingTestVM x:Key="BoardViewModel" />
     </Window.Resources>
     <Grid>
         <Border>
             <Canvas x:Name="canvas" Margin="0,0,161.6,0">
                 <Canvas.Background>
-                    <ImageBrush ImageSource=""/>
+                    <ImageBrush ImageSource="" />
                 </Canvas.Background>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDown">
-                        <i:InvokeCommandAction 
-                        Command="{Binding MouseDownCommand, Source={StaticResource BoardViewModel}}" 
-                        CommandParameter="{Binding ElementName=canvas}"/>
+                        <i:InvokeCommandAction
+                            Command="{Binding MouseDownCommand, Source={StaticResource BoardViewModel}}"
+                            CommandParameter="{Binding ElementName=canvas}" />
                     </i:EventTrigger>
                     <i:EventTrigger EventName="MouseMove">
-                        <i:InvokeCommandAction 
-                        Command="{Binding MouseMoveCommand, Source={StaticResource BoardViewModel}}" 
-                        CommandParameter="{Binding ElementName=canvas}"/>
+                        <i:InvokeCommandAction
+                            Command="{Binding MouseMoveCommand, Source={StaticResource BoardViewModel}}"
+                            CommandParameter="{Binding ElementName=canvas}" />
                     </i:EventTrigger>
                     <i:EventTrigger EventName="MouseUp">
-                        <i:InvokeCommandAction 
-                        Command="{Binding MouseUpCommand, Source={StaticResource BoardViewModel}}" 
-                        CommandParameter="{Binding ElementName=canvas}"/>
+                        <i:InvokeCommandAction
+                            Command="{Binding MouseUpCommand, Source={StaticResource BoardViewModel}}"
+                            CommandParameter="{Binding ElementName=canvas}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
                 <ItemsControl ItemsSource="{Binding ListLine, Source={StaticResource BoardViewModel}}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
-                            <Canvas IsItemsHost="True"/>
+                            <Canvas IsItemsHost="True" />
                         </ItemsPanelTemplate>
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemContainerStyle>
                         <Style>
-                            <Setter Property="Canvas.Left" Value="{Binding X1}"/>
-                            <Setter Property="Canvas.Top" Value="{Binding Y1}"/>
+                            <Setter Property="Canvas.Left" Value="{Binding X1}" />
+                            <Setter Property="Canvas.Top" Value="{Binding Y1}" />
                         </Style>
                     </ItemsControl.ItemContainerStyle>
                     <ItemsControl.ItemTemplate>
@@ -55,24 +55,23 @@
                                 Fill="{Binding BrushColor, Source={StaticResource BoardViewModel}}" 
                                 Stroke="{Binding BrushColor, Source={StaticResource BoardViewModel}}" 
                                 StrokeThickness ="1"/>-->
-                            <Line 
-                                X2="{Binding X2}" 
-                                Y2="{Binding Y2}" 
-                                X1="{Binding X1}" 
-                                Y1="{Binding Y1}" 
+                            <Line
+                                X2="{Binding X2}"
+                                Y2="{Binding Y2}"
+                                X1="{Binding X1}"
+                                Y1="{Binding Y1}"
                                 Stroke="Black"
-                                StrokeThickness="5"/>
+                                StrokeThickness="5" />
 
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </Canvas>
-     
+
         </Border>
-        <xctk:ColorPicker 
-            x:Name="colorPicker" 
-            Margin="644,10,-0.4,381" 
-            SelectedColor="{Binding SelectedColor, Source={StaticResource BoardViewModel}}">
-        </xctk:ColorPicker>
+        <xctk:ColorPicker
+            x:Name="colorPicker"
+            Margin="644,10,-0.4,381"
+            SelectedColor="{Binding SelectedColor, Source={StaticResource BoardViewModel}}" />
     </Grid>
 </Window>

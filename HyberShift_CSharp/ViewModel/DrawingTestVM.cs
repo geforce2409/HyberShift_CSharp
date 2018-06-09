@@ -1,55 +1,24 @@
-﻿using HyberShift_CSharp.Model.List;
-using HyberShift_CSharp.Utilities;
-using Newtonsoft.Json.Linq;
-using Prism.Commands;
-using Quobject.SocketIoClientDotNet.Client;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using HyberShift_CSharp.Utilities;
+using Newtonsoft.Json.Linq;
+using Prism.Commands;
+using Quobject.SocketIoClientDotNet.Client;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    public class DrawingTestVM: BaseViewModel
+    public class DrawingTestVM : BaseViewModel
     {
-        private Socket socket;
-        private ObservableCollection<Line> lines;
-        private bool isNewLine = false;
+        private bool isNewLine;
         private double lastX, lastY;
+        private ObservableCollection<Line> lines;
+        private readonly Socket socket;
 
-        //getter and setter
-        public DelegateCommand<object> MouseDownCommand { get; set; }
-        public DelegateCommand<object> MouseMoveCommand { get; set; }
-        public DelegateCommand<object> MouseUpCommand { get; set; }
-
-        public int Thickness { get; set; }
-
-        public Color SelectedColor { get; set; }
-
-        public SolidColorBrush BrushColor
-        {
-            get { return new SolidColorBrush(SelectedColor); }
-        }
-
-
-        public ObservableCollection<Line> ListLine
-        {
-            get { return lines; }
-            set
-            {
-                lines = value;
-                NotifyChanged("ListLine");
-            }
-        }
-
-        public DrawingTestVM() : base()
+        public DrawingTestVM()
         {
             socket = SocketAPI.GetInstance().GetSocket();
 
@@ -64,10 +33,31 @@ namespace HyberShift_CSharp.ViewModel
             HandleSocket();
         }
 
+        //getter and setter
+        public DelegateCommand<object> MouseDownCommand { get; set; }
+        public DelegateCommand<object> MouseMoveCommand { get; set; }
+        public DelegateCommand<object> MouseUpCommand { get; set; }
+
+        public int Thickness { get; set; }
+
+        public Color SelectedColor { get; set; }
+
+        public SolidColorBrush BrushColor => new SolidColorBrush(SelectedColor);
+
+
+        public ObservableCollection<Line> ListLine
+        {
+            get => lines;
+            set
+            {
+                lines = value;
+                NotifyChanged("ListLine");
+            }
+        }
+
 
         private void OnMouseDown(object obj)
         {
-          
         }
 
         private void OnMouseMove(object obj)
@@ -76,15 +66,13 @@ namespace HyberShift_CSharp.ViewModel
                 return;
 
 
+            var canvas = obj as Canvas;
+            var currentPoint = Mouse.GetPosition(canvas);
 
-            Canvas canvas = obj as Canvas;
-            Point currentPoint = Mouse.GetPosition(canvas);
+            var line = new Line();
 
-            Line line = new Line();
+            var data = new JObject();
 
-            JObject data = new JObject();
-            
-            
 
             if (lines.Count == 0 || isNewLine)
             {
@@ -115,10 +103,7 @@ namespace HyberShift_CSharp.ViewModel
 
             Debug.LogOutput("Emit new drawing to server");
 
-            Application.Current.Dispatcher.Invoke((Action)delegate
-            {
-                lines.Add(line);
-            });
+            Application.Current.Dispatcher.Invoke(delegate { lines.Add(line); });
         }
 
         private void OnMouseUp(object obj)
@@ -128,24 +113,21 @@ namespace HyberShift_CSharp.ViewModel
 
         private void HandleSocket()
         {
-            socket.On("new_drawing", (arg) =>
-            {
+            socket.On("new_drawing", arg => { });
 
-            });
-
-            socket.On("test_drawing_line", (arg) =>
+            socket.On("test_drawing_line", arg =>
             {
-                Application.Current.Dispatcher.Invoke((Action)delegate
+                Application.Current.Dispatcher.Invoke(delegate
                 {
                     Debug.LogOutput("On test drawing line to server");
-                    JObject obj = (JObject)arg;
-                    Line newLine = new Line();
+                    var obj = (JObject) arg;
+                    var newLine = new Line();
                     newLine.Stroke = Brushes.Black;
                     newLine.StrokeThickness = 5;
-                    newLine.X1 = (double)obj.GetValue("x1");
-                    newLine.Y1 = (double)obj.GetValue("y1");
-                    newLine.X2 = (double)obj.GetValue("x2");
-                    newLine.Y2 = (double)obj.GetValue("y2");
+                    newLine.X1 = (double) obj.GetValue("x1");
+                    newLine.Y1 = (double) obj.GetValue("y1");
+                    newLine.X2 = (double) obj.GetValue("x2");
+                    newLine.Y2 = (double) obj.GetValue("y2");
 
                     if (newLine.X1 == newLine.X2 && newLine.Y1 == newLine.Y2)
                     {

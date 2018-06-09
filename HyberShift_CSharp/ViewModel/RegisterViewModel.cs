@@ -8,7 +8,6 @@ using System.Windows.Media.Imaging;
 using HyberShift_CSharp.Model;
 using HyberShift_CSharp.Model.Interface;
 using HyberShift_CSharp.Utilities;
-using Newtonsoft.Json.Linq;
 using Prism.Commands;
 
 namespace HyberShift_CSharp.ViewModel
@@ -17,7 +16,7 @@ namespace HyberShift_CSharp.ViewModel
     {
         private readonly Action<object> navigate;
         private readonly RegisterModel registerModel;
-        private IDialogService dialogService;
+        private readonly IDialogService dialogService;
 
         // constructor
         public RegisterViewModel()
@@ -39,6 +38,7 @@ namespace HyberShift_CSharp.ViewModel
         public DelegateCommand<object> RegisterCommand { get; set; }
         public DelegateCommand OpenImageCommand { get; set; }
         public BitmapImage Avatar { get; set; }
+
         public string Email
         {
             get => registerModel.Info.Email;
@@ -105,12 +105,12 @@ namespace HyberShift_CSharp.ViewModel
         {
             SystemSounds.Exclamation.Play();
 
-            string path = dialogService.OpenFile("Choose image file", "Image (.png ,.jpg)|*.png;*.jpg");
+            var path = dialogService.OpenFile("Choose image file", "Image (.png ,.jpg)|*.png;*.jpg");
 
             if (path == "")
                 return;
 
-            string encodstring = ImageUtils.CopyImageToBase64String(Image.FromFile(path));
+            var encodstring = ImageUtils.CopyImageToBase64String(Image.FromFile(path));
             registerModel.Info.AvatarRef = encodstring;
 
             Avatar = ImageUtils.Base64StringToBitmapSource(encodstring);

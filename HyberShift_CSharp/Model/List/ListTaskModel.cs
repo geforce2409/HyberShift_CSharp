@@ -1,20 +1,23 @@
-﻿using HyberShift_CSharp.Model.Enum;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
+using HyberShift_CSharp.Model.Enum;
 
 namespace HyberShift_CSharp.Model.List
 {
-    public class ListTaskModel: BaseList<TaskModel>
+    public class ListTaskModel : BaseList<TaskModel>
     {
-        private static ListTaskModel instance = null;
-        public ListTaskModel(): base()
-        {
+        private static ListTaskModel instance;
 
-        }
+        public ObservableCollection<object> ListTaskName => GetCollectionOfField("Name");
+
+        public ObservableCollection<object> ListStartDay => GetCollectionOfField("StartDay");
+
+        public ObservableCollection<object> ListEndDay => GetCollectionOfField("EndDay");
+
+        public ObservableCollection<object> ListTag => GetCollectionOfField("Tag");
+
+        public ObservableCollection<object> ListPerformer => GetCollectionOfField("Performer");
+
+        public ObservableCollection<object> ListProgress => GetCollectionOfField("Progress");
 
         public static ListTaskModel GetInstance()
         {
@@ -23,83 +26,34 @@ namespace HyberShift_CSharp.Model.List
             return instance;
         }
 
-        public ObservableCollection<object> ListTaskName
-        {
-            get
-            {
-                return this.GetCollectionOfField("Name");
-            }
-        }
-
-        public ObservableCollection<object> ListStartDay
-        {
-            get
-            {
-                return this.GetCollectionOfField("StartDay");
-            }
-        }
-
-        public ObservableCollection<object> ListEndDay
-        {
-            get
-            {
-                return this.GetCollectionOfField("EndDay");
-            }
-        }
-
-        public ObservableCollection<object> ListTag
-        {
-            get
-            {
-                return this.GetCollectionOfField("Tag");
-            }
-        }
-
-        public ObservableCollection<object> ListPerformer
-        {
-            get
-            {
-                return this.GetCollectionOfField("Performer");
-            }
-        }
-
-        public ObservableCollection<object> ListProgress
-        {
-            get
-            {
-                return this.GetCollectionOfField("Progress");
-            }
-        }
-
         public TaskModel GetTaskFromID(string id)
         {
-            return this.GetFirstObjectByValue("ID", id);
+            return GetFirstObjectByValue("ID", id);
         }
 
         public TaskModel GetTaskFromName(string name)
         {
-            return this.GetFirstObjectByValue("Name", name);
+            return GetFirstObjectByValue("Name", name);
         }
 
         public ObservableCollection<TaskModel> GetTaskFromPerformer(string performer)
         {
-            return this.GetCollectionByValue("Performer", performer);
+            return GetCollectionByValue("Performer", performer);
         }
 
         public ObservableCollection<TaskModel> GetTaskFromProgress(string progress)
         {
-            return this.GetCollectionByValue("Progress", progress);
+            return GetCollectionByValue("Progress", progress);
         }
 
         public ObservableCollection<TaskModel> GetTaskFromTag(TaskType tag)
         {
-            return this.GetCollectionByValue("Tag", tag);
+            return GetCollectionByValue("Tag", tag);
         }
 
         public void Clear()
         {
-            this.List.Clear();
+            List.Clear();
         }
-
     }
 }

@@ -1,25 +1,21 @@
-﻿using HyberShift_CSharp.Model;
+﻿using System;
+using System.Windows;
+using HyberShift_CSharp.Model;
+using HyberShift_CSharp.Model.Enum;
 using HyberShift_CSharp.Utilities;
 using Newtonsoft.Json.Linq;
 using Prism.Commands;
 using Quobject.SocketIoClientDotNet.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace HyberShift_CSharp.ViewModel
 {
-    public class WaitingCallViewModel: BaseViewModel
+    public class WaitingCallViewModel : BaseViewModel
     {
         private readonly Action<object, object[]> navigate;
-        private Socket socket;
-        private RoomModel currentRoom;
-        public DelegateCommand HangupCommand { get; set; }
-        public DelegateCommand AcceptCommand { get; set; }
-        public WaitingCallViewModel(): base()
+        private readonly RoomModel currentRoom;
+        private readonly Socket socket;
+
+        public WaitingCallViewModel()
         {
             socket = SocketAPI.GetInstance().GetSocket();
             currentRoom = new RoomModel();
@@ -29,28 +25,31 @@ namespace HyberShift_CSharp.ViewModel
             HandleSocket();
         }
 
-        public WaitingCallViewModel(Action<object, object[]> navigate, params object[] parameters): this()
+        public WaitingCallViewModel(Action<object, object[]> navigate, params object[] parameters) : this()
         {
             this.navigate = navigate;
 
-            currentRoom = (RoomModel)parameters[0];
+            currentRoom = (RoomModel) parameters[0];
         }
+
+        public DelegateCommand HangupCommand { get; set; }
+        public DelegateCommand AcceptCommand { get; set; }
 
         private void HandleSocket()
         {
             socket.On("end_call", () =>
             {
-                Application.Current.Dispatcher.Invoke((Action)delegate
+                Application.Current.Dispatcher.Invoke(delegate
                 {
                     Exit();
-                    CallingModel.GetInstace().State = Model.Enum.CallingState.FREE;
+                    CallingModel.GetInstace().State = CallingState.FREE;
                 });
             });
         }
 
         private void Exit()
         {
-            CallingModel.GetInstace().State = Model.Enum.CallingState.FREE;
+            CallingModel.GetInstace().State = CallingState.FREE;
 
             foreach (Window window in Application.Current.Windows)
                 if (window.Title == "ReceiveCallWindow")
@@ -59,17 +58,17 @@ namespace HyberShift_CSharp.ViewModel
 
         private void AcceptCall()
         {
-            Application.Current.Dispatcher.Invoke((Action)delegate
+            Application.Current.Dispatcher.Invoke(delegate
             {
                 // emit to server accept call
-                JObject data = new JObject();
+                var data = new JObject();
                 data.Add("room_id", currentRoom.ID);
                 data.Add("user", JObject.FromObject(UserInfo.GetInstance()));
                 socket.Emit("accept_call", data);
 
-                CallingModel.GetInstace().State = Model.Enum.CallingState.BUSY;
-                navigate.Invoke("OnGoingCallViewModel", new object[] { currentRoom });
-            });            
+                CallingModel.GetInstace().State = CallingState.BUSY;
+                navigate.Invoke("OnGoingCallViewModel", new object[] {currentRoom});
+            });
         }
     }
 }

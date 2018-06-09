@@ -10,36 +10,36 @@
         Title="MessageDialog" Height="200" Width="400">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="3*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Border Grid.Row="0" Background="{StaticResource PrimaryBrush}">
             <TextBlock x:Name="tbTitle" Style="{DynamicResource MaterialDesignTitleTextBlock}"
                        VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Foreground="White"/>
+                       Foreground="White" />
         </Border>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
 
-            <materialDesign:PackIcon Grid.Column="0" Kind="Alert" 
+            <materialDesign:PackIcon Grid.Column="0" Kind="Alert"
                                      Foreground="{StaticResource AccentBrush}"
                                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                     Width="70" Height="70"/>
+                                     Width="70" Height="70" />
 
             <TextBlock x:Name="tbContent" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-                       Style="{DynamicResource MaterialDesignBody1TextBlock}"/>
+                       Style="{DynamicResource MaterialDesignBody1TextBlock}" />
         </Grid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="btnOk" Style="{StaticResource RaisedButton}" Content="OK"
                     HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Margin="5,5,5,5" Click="btnYes_Click"/>
+                    Margin="5,5,5,5" Click="btnYes_Click" />
         </StackPanel>
     </Grid>
 </Window>

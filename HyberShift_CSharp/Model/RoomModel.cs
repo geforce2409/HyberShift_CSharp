@@ -3,12 +3,12 @@ using System.ComponentModel;
 
 namespace HyberShift_CSharp.Model
 {
-    public class RoomModel: INotifyPropertyChanged
+    public class RoomModel : INotifyPropertyChanged
     {
         public RoomModel()
         {
             Members = new ObservableCollection<string>();
-            
+
             //hasNewMessage = false;
         }
 
@@ -19,7 +19,7 @@ namespace HyberShift_CSharp.Model
             Members = members;
 
             DisplayNewMessage = "Hidden";
-            this.NotifyChanged("DisplayNewMessage");
+            NotifyChanged("DisplayNewMessage");
         }
 
         public string ID { get; set; }
@@ -34,11 +34,8 @@ namespace HyberShift_CSharp.Model
         {
             get
             {
-                string temp = "";
-                foreach(string mem in Members)
-                {
-                    temp += mem + " ";
-                }
+                var temp = "";
+                foreach (var mem in Members) temp += mem + " ";
                 return temp;
             }
         }

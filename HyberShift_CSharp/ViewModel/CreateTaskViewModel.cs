@@ -1,24 +1,20 @@
-﻿using HyberShift_CSharp.Model;
-using HyberShift_CSharp.Model.Enum;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Windows;
+using HyberShift_CSharp.Model;
 using HyberShift_CSharp.Model.List;
 using HyberShift_CSharp.Utilities;
 using Prism.Commands;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 
 namespace HyberShift_CSharp.ViewModel
 {
     public class CreateTaskViewModel : BaseViewModel
     {
         private RoomModel currentRoom;
-        private TaskModel taskModel;
-        private ListTaskTypeModel listTaskTypeModel;
-        public CreateTaskViewModel() : base()
+        private readonly ListTaskTypeModel listTaskTypeModel;
+        private readonly TaskModel taskModel;
+
+        public CreateTaskViewModel()
         {
             currentRoom = new RoomModel();
             listTaskTypeModel = new ListTaskTypeModel();
@@ -33,45 +29,81 @@ namespace HyberShift_CSharp.ViewModel
         public DelegateCommand CancelCommand { get; set; }
         public DelegateCommand SubmitCommand { get; set; }
         public int SelectedIndexTag { get; set; }
+
         public RoomModel CurrentRoom
         {
-            get { return currentRoom; }
-            set { currentRoom = value; NotifyChanged("CurrentRoom"); }
+            get => currentRoom;
+            set
+            {
+                currentRoom = value;
+                NotifyChanged("CurrentRoom");
+            }
         }
+
         public ObservableCollection<string> ListMembers
         {
-            get { return currentRoom.Members; }
-            set { currentRoom.Members = value;NotifyChanged("ListMembers"); }
+            get => currentRoom.Members;
+            set
+            {
+                currentRoom.Members = value;
+                NotifyChanged("ListMembers");
+            }
         }
+
         public string Name
         {
-            get { return taskModel.Name; }
-            set { taskModel.Name = value; NotifyChanged("Name"); }
+            get => taskModel.Name;
+            set
+            {
+                taskModel.Name = value;
+                NotifyChanged("Name");
+            }
         }
+
         public string Description
         {
-            get { return taskModel.Description; }
-            set { taskModel.Description = value; NotifyChanged("Description"); }
+            get => taskModel.Description;
+            set
+            {
+                taskModel.Description = value;
+                NotifyChanged("Description");
+            }
         }
+
         public DateTime StartDay
         {
-            get { return taskModel.StartDay; }
-            set { taskModel.StartDay = value; NotifyChanged("StartDay"); }
+            get => taskModel.StartDay;
+            set
+            {
+                taskModel.StartDay = value;
+                NotifyChanged("StartDay");
+            }
         }
+
         public DateTime EndDay
         {
-            get { return taskModel.EndDay; }
-            set { taskModel.EndDay = value; NotifyChanged("EndDay"); }
+            get => taskModel.EndDay;
+            set
+            {
+                taskModel.EndDay = value;
+                NotifyChanged("EndDay");
+            }
         }
+
         public string Performer { get; set; }
+
         //{
         //    get { return taskModel.Performer; }
         //    set { taskModel.Performer = value; NotifyChanged("Performer"); }
         //}
         public ObservableCollection<TaskTypeModel> ListTag
         {
-            get { return listTaskTypeModel.List; }
-            set { listTaskTypeModel.List = value; NotifyChanged("ListTag"); }
+            get => listTaskTypeModel.List;
+            set
+            {
+                listTaskTypeModel.List = value;
+                NotifyChanged("ListTag");
+            }
         }
         //public TaskType Tag
         //{
@@ -121,7 +153,5 @@ namespace HyberShift_CSharp.ViewModel
             taskModel.EmitToServer(CurrentRoom.ID);
             Cancel();
         }
-
-       
     }
 }

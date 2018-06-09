@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using HyberShift_CSharp.Utilities;
+﻿using HyberShift_CSharp.Utilities;
 
 namespace HyberShift_CSharp.View.SignIn
 {

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using HyberShift_CSharp.Model;
 using HyberShift_CSharp.Utilities;
@@ -10,11 +9,11 @@ namespace HyberShift_CSharp.ViewModel
 {
     internal class CreateRoomViewModel : BaseViewModel
     {
-        private int flagShowCreateRoom = 0; //flag for open, close CreateRoom View
-        private readonly RoomModel room;
         private readonly CreateRoomModel createRoomModel;
+        private readonly RoomModel room;
+        private int flagShowCreateRoom; //flag for open, close CreateRoom View
 
-        private string[] separators = {",", "!", "?", ";", ":", " "};
+        private readonly string[] separators = {",", "!", "?", ";", ":", " "};
 
         // constructor
         public CreateRoomViewModel()
@@ -27,7 +26,9 @@ namespace HyberShift_CSharp.ViewModel
 
         // getter and setter
         public DelegateCommand CreateRoomCommand { get; set; }
+
         public DelegateCommand ShowCreateRoomCommand { get; set; }
+
         //public string ID
         //{
         //    get { return room.ID; }
@@ -35,7 +36,7 @@ namespace HyberShift_CSharp.ViewModel
         //}
         public string RoomName
         {
-            get { return createRoomModel.InputRoomName; }
+            get => createRoomModel.InputRoomName;
             set
             {
                 createRoomModel.InputRoomName = value;
@@ -53,17 +54,15 @@ namespace HyberShift_CSharp.ViewModel
             if (createRoomModel.IsValidCreateRoom())
                 createRoomModel.CreateRoom();
             else
-            {
                 MessageBox.Show("Something is wrong. Please try again", "Create room failed",
                     MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
         }
 
         public void ShowCreateRoom()
         {
             if (flagShowCreateRoom == 0)
             {
-                View.CreateRoom createRoom = new CreateRoom();
+                var createRoom = new CreateRoom();
                 createRoom.Show();
                 flagShowCreateRoom = 1;
             }

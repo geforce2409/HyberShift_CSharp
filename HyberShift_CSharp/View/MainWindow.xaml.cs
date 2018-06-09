@@ -1,9 +1,7 @@
-﻿using HyberShift_CSharp.Utilities;
-using Quobject.SocketIoClientDotNet.Client;
-using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Windows;
 using System.Windows.Media.Animation;
+using HyberShift_CSharp.Utilities;
 
 namespace HyberShift_CSharp.View
 {
@@ -12,7 +10,7 @@ namespace HyberShift_CSharp.View
     /// </summary>
     public partial class MainWindow
     {
-        bool _stateClosed = true;
+        private bool _stateClosed = true;
 
         public MainWindow()
         {
@@ -25,26 +23,26 @@ namespace HyberShift_CSharp.View
         {
             if (_stateClosed)
             {
-                Storyboard sb = this.FindResource("OpenMenu") as Storyboard;
+                var sb = FindResource("OpenMenu") as Storyboard;
                 sb.Begin();
             }
             else
             {
-                Storyboard sb = this.FindResource("CloseMenu") as Storyboard;
+                var sb = FindResource("CloseMenu") as Storyboard;
                 sb.Begin();
             }
 
             _stateClosed = !_stateClosed;
         }
 
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
             e.Cancel = true;
-            Socket socket = SocketAPI.GetInstance().GetSocket();
-            SocketAPI socketAPI = SocketAPI.GetInstance();
+            var socket = SocketAPI.GetInstance().GetSocket();
+            var socketAPI = SocketAPI.GetInstance();
             socketAPI.Disconnect();
             base.OnClosing(e);
-            App.Current.Shutdown();
+            Application.Current.Shutdown();
         }
     }
 }

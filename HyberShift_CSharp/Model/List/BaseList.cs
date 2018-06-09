@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace HyberShift_CSharp.Model.List
 {
@@ -155,22 +154,20 @@ namespace HyberShift_CSharp.Model.List
         public void UpdateWithCheck(T obj, string checkProperty)
         {
             foreach (var element in list)
-            {
                 if (GetPropertyValue(element, checkProperty).Equals(GetPropertyValue(obj, checkProperty)))
                 {
                     list.Remove(element);
                     list.Add(obj);
                 }
-            }
         }
 
         public void AddWithCheck(T obj, params string[] propertyNames)
         {
             foreach (var element in list)
                 // if duplicated
-                foreach(string property in propertyNames)
-                    if (GetPropertyValue(element, property).Equals(GetPropertyValue(obj, property)))
-                        return;
+            foreach (var property in propertyNames)
+                if (GetPropertyValue(element, property).Equals(GetPropertyValue(obj, property)))
+                    return;
             list.Add(obj);
         }
 

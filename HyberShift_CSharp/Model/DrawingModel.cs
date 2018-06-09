@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -16,17 +11,12 @@ namespace HyberShift_CSharp.Model
         //getter and setter
         //public Color Color {get;set;}
         //public int Thickness { get; set; }
-        
-        public DrawingModel()
-        {
-            
-        }
 
         public void Draw(Canvas canvas, ObservableCollection<Point> points, int thickness, Color color)
         {
-            for (int i = 0; i < points.Count - 1; i++)
+            for (var i = 0; i < points.Count - 1; i++)
             {
-                Line line = new Line();
+                var line = new Line();
                 line.Stroke = new SolidColorBrush(color);
                 line.StrokeThickness = thickness;
                 line.X1 = points[i].X;
