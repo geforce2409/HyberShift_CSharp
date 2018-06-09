@@ -79,5 +79,12 @@ namespace HyberShift_CSharp.Model.List
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        public void NotifyListChange()
+        {
+            NotifyChanged("List");
+        }
+
+      
+
     }
 }

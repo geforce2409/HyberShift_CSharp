@@ -152,6 +152,18 @@ namespace HyberShift_CSharp.Model.List
             list.Add(obj);
         }
 
+        public void UpdateWithCheck(T obj, string checkProperty)
+        {
+            foreach (var element in list)
+            {
+                if (GetPropertyValue(element, checkProperty).Equals(GetPropertyValue(obj, checkProperty)))
+                {
+                    list.Remove(element);
+                    list.Add(obj);
+                }
+            }
+        }
+
         public void AddWithCheck(T obj, params string[] propertyNames)
         {
             foreach (var element in list)

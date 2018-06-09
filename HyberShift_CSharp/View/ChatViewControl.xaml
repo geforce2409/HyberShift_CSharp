@@ -799,9 +799,12 @@
             </Border>
 
             <Border BorderThickness="0,0,1,0" SnapsToDevicePixels="True"
-                    BorderBrush="{DynamicResource MaterialDesignDivider}" Height="Auto" Margin="0,8,0,0">
+                    BorderBrush="{DynamicResource MaterialDesignDivider}" Height="Auto" Margin="0,8,0,0"
+                    >
                 <ListBox x:Name="ListBoxRoom"
-                         ItemsSource="{Binding ListRoom, Source={StaticResource ListRoomViewModel}}">
+                         ItemsSource="{Binding ListRoom, Source={StaticResource ListRoomViewModel}}"
+                         ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <local:RoomItem />
