@@ -1042,7 +1042,7 @@
 
                          ItemsSource="{Binding ListTask, Source={StaticResource TaskViewModel}}"
                          ScrollViewer.CanContentScroll="False"
-                         ScrollViewer.VerticalScrollBarVisibility="Visible"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                          SelectedItem="{Binding SelectedTask, Source={StaticResource TaskViewModel}}">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="{x:Type ListBoxItem}">
